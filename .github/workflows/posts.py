@@ -23,7 +23,7 @@ def test_diff(page: Page):
         blog = BeautifulSoup(page.content(), "html.parser")
         links.extend(blog.select(".s-lg-blog-header a"))
         if blog.find(class_="next"):
-            if blog.find("a", text="Older Posts"):
+            if blog.find("a", string="Older Posts"):
                 page.click(".next a:text('Older Posts')")
             else:
                 break
@@ -38,7 +38,7 @@ def test_diff(page: Page):
             page.wait_for_load_state("networkidle")
             soup = BeautifulSoup(page.content(), "html.parser")
             # select blogpost content only
-            blogpost = soup.find(id=re.compile("^comment-\d+$"))
+            blogpost = soup.find(id=re.compile(r"^comment-\d+$"))
         except PlaywrightTimeoutError as e:
             # write error to file
             with open(filename, "w") as file:
