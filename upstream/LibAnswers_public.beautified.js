@@ -3305,7 +3305,7 @@ springSpace.sui = springSpace.sui || {}, springSpace.sui.icontip = function(t) {
         n.attr("id", s), n.parent().hasClass("active") ? (n.attr({
             tabIndex: "0",
             "aria-selected": "true",
-            "aria-controls": n.attr("href").substr(1)
+            "aria-controls": n.attr("href").substring(1)
         }), null !== i && i.attr({
             role: "tabpanel",
             tabIndex: "0",
@@ -3314,7 +3314,7 @@ springSpace.sui = springSpace.sui || {}, springSpace.sui.icontip = function(t) {
         })) : (n.attr({
             tabIndex: "-1",
             "aria-selected": "false",
-            "aria-controls": n.attr("href").substr(1)
+            "aria-controls": n.attr("href").substring(1)
         }), null !== i && i.attr({
             role: "tabpanel",
             tabIndex: "-1",
