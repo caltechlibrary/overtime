@@ -9075,7 +9075,6 @@ li.s-la-faq-listing {
     margin-top: 1rem
 }
 
-.s-la-askform-intro,
 .s-la-askform-reqnote {
     margin-bottom: 10px
 }
@@ -11129,6 +11128,12 @@ dl.deflist-horizontal dt {
     margin-inline-end: 1rem
 }
 
+.flex-spacebetween {
+    display: flex;
+    justify-content: space-between;
+    align-items: center
+}
+
 ul.sort_list {
     min-height: 20px;
     padding: 19px 19px 19px 25px;
@@ -12142,6 +12147,10 @@ caption {
     border-inline: 6px solid #424242;
     padding: 8px;
     border-radius: .5rem
+}
+
+table.s-lc-whw {
+    table-layout: auto
 }
 
 .s-srch-top-header {
