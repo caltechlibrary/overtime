@@ -274,6 +274,7 @@ springSpace.public = {}, springSpace.public._construct = function() {
                 bootstrap5: is_bootstrap,
                 page_size: o,
                 preview: springSpace.azList.az_preview,
+                sublist_id: springSpace.azList.az_sublist_id,
                 alpha: e.first
             },
             success: function(l, o) {
@@ -354,9 +355,9 @@ springSpace.public = {}, springSpace.public._construct = function() {
             "" !== t && "0" !== t && s.push(e + "=" + t)
         })), "" !== springSpace.azList.az_preview && s.push("preview=" + springSpace.azList.az_preview), 0 == s.length ? "" : "?" + s.join("&")
     }, e.prototype.transformAzLinks = function(e) {
-        jQuery(".s-lg-az-result-title a, .s-lib-featured-profile-image a, #s-lg-az-guides-div a").each((function() {
+        jQuery(".s-lg-az-result-title a, .s-lib-featured-profile-image a, .s-lib-profile-container a, .s-lib-featured-profile-container a, #s-lg-az-guides-div a").each((function() {
             jQuery(this).attr("target", "_blank")
-        })), jQuery(".s-lg-az-result-title a, .s-lib-featured-profile-image a").each((function() {
+        })), jQuery(".s-lg-az-result-title a, .s-lib-featured-profile-image a, .s-lib-profile-container a, .s-lib-featured-profile-container a").each((function() {
             var e = jQuery(this).attr("href");
             0 == /^https?:\/\/|^\/\//i.test(e) && jQuery(this).attr("href", "http://" + springSpace.azList.site_domain + e)
         }))
