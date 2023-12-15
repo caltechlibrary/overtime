@@ -962,6 +962,7 @@ textarea {
     display: inline
 }
 
+.s-lg-widget-content-inner img,
 .s-lib-box iframe,
 .s-lib-box img,
 .s-lib-box object {
