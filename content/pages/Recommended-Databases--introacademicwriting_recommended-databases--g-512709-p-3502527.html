@@ -80,32 +80,32 @@
          <div class="s-lib-jqtabs" id="s-lib-ctabs-12620562">
           <ul class="nav nav-tabs" role="tablist">
            <li class="active" role="presentation">
-            <a data-toggle="tab" href="#s-lib-ctab-12620562-0" role="tab">
+            <a data-toggle="tab" href="#s-lib-ctab-12620562-0" role="tab" tabindex="0">
              Caltech LibSearch
             </a>
            </li>
            <li role="presentation">
-            <a data-toggle="tab" href="#s-lib-ctab-12620562-1" role="tab">
+            <a data-toggle="tab" href="#s-lib-ctab-12620562-1" role="tab" tabindex="-1">
              Google Scholar
             </a>
            </li>
            <li role="presentation">
-            <a data-toggle="tab" href="#s-lib-ctab-12620562-2" role="tab">
+            <a data-toggle="tab" href="#s-lib-ctab-12620562-2" role="tab" tabindex="-1">
              Web of Science
             </a>
            </li>
            <li role="presentation">
-            <a data-toggle="tab" href="#s-lib-ctab-12620562-3" role="tab">
+            <a data-toggle="tab" href="#s-lib-ctab-12620562-3" role="tab" tabindex="-1">
              Humanities
             </a>
            </li>
            <li role="presentation">
-            <a data-toggle="tab" href="#s-lib-ctab-12620562-4" role="tab">
+            <a data-toggle="tab" href="#s-lib-ctab-12620562-4" role="tab" tabindex="-1">
              Other Databases
             </a>
            </li>
            <li role="presentation">
-            <a data-toggle="tab" href="#s-lib-ctab-12620562-5" role="tab">
+            <a data-toggle="tab" href="#s-lib-ctab-12620562-5" role="tab" tabindex="-1">
              Citation Linker
             </a>
            </li>
@@ -313,12 +313,7 @@
           </div>
          </div>
          <script>
-          // Every time a tab is switched, remove the tabindex for accessibility and keyboard nav
-    jQuery('#s-lib-ctabs-12620562 ul.nav-tabs li a').on('shown.bs.tab', function (e) {
-        jQuery('#s-lib-ctabs-12620562 ul.nav-tabs li a').removeAttr('tabindex');
-    });
-
-    // Support direct linking to tabs
+          // Support direct linking to tabs
     jQuery(function() {
         var hash = window.location.hash;
 

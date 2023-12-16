@@ -13,17 +13,17 @@
          <div class="s-lib-jqtabs" id="s-lib-ctabs-22565726">
           <ul class="nav nav-tabs" role="tablist">
            <li class="active" role="presentation">
-            <a data-toggle="tab" href="#s-lib-ctab-22565726-0" role="tab">
+            <a data-toggle="tab" href="#s-lib-ctab-22565726-0" role="tab" tabindex="0">
              Newsletter 2022-12
             </a>
            </li>
            <li role="presentation">
-            <a data-toggle="tab" href="#s-lib-ctab-22565726-1" role="tab">
+            <a data-toggle="tab" href="#s-lib-ctab-22565726-1" role="tab" tabindex="-1">
              Newsletter 2023-11-13
             </a>
            </li>
            <li role="presentation">
-            <a data-toggle="tab" href="#s-lib-ctab-22565726-2" role="tab">
+            <a data-toggle="tab" href="#s-lib-ctab-22565726-2" role="tab" tabindex="-1">
              Newsletter 2023-10-30
             </a>
            </li>
@@ -140,12 +140,7 @@
           </div>
          </div>
          <script>
-          // Every time a tab is switched, remove the tabindex for accessibility and keyboard nav
-    jQuery('#s-lib-ctabs-22565726 ul.nav-tabs li a').on('shown.bs.tab', function (e) {
-        jQuery('#s-lib-ctabs-22565726 ul.nav-tabs li a').removeAttr('tabindex');
-    });
-
-    // Support direct linking to tabs
+          // Support direct linking to tabs
     jQuery(function() {
         var hash = window.location.hash;
 
