@@ -13,32 +13,32 @@
          <div class="s-lib-jqtabs" id="s-lib-ctabs-15415493">
           <ul class="nav nav-tabs" role="tablist">
            <li class="active" role="presentation">
-            <a data-toggle="tab" href="#s-lib-ctab-15415493-0" role="tab">
+            <a data-toggle="tab" href="#s-lib-ctab-15415493-0" role="tab" tabindex="0">
              Using Zotero Connector
             </a>
            </li>
            <li role="presentation">
-            <a data-toggle="tab" href="#s-lib-ctab-15415493-1" role="tab">
+            <a data-toggle="tab" href="#s-lib-ctab-15415493-1" role="tab" tabindex="-1">
              Adding PDFs
             </a>
            </li>
            <li role="presentation">
-            <a data-toggle="tab" href="#s-lib-ctab-15415493-2" role="tab">
+            <a data-toggle="tab" href="#s-lib-ctab-15415493-2" role="tab" tabindex="-1">
              Using DOIs or ISBNs
             </a>
            </li>
            <li role="presentation">
-            <a data-toggle="tab" href="#s-lib-ctab-15415493-3" role="tab">
+            <a data-toggle="tab" href="#s-lib-ctab-15415493-3" role="tab" tabindex="-1">
              Importing Files
             </a>
            </li>
            <li role="presentation">
-            <a data-toggle="tab" href="#s-lib-ctab-15415493-4" role="tab">
+            <a data-toggle="tab" href="#s-lib-ctab-15415493-4" role="tab" tabindex="-1">
              Adding Manually
             </a>
            </li>
            <li role="presentation">
-            <a data-toggle="tab" href="#s-lib-ctab-15415493-5" role="tab">
+            <a data-toggle="tab" href="#s-lib-ctab-15415493-5" role="tab" tabindex="-1">
              Video: Collecting Citations
             </a>
            </li>
@@ -613,12 +613,7 @@
           </div>
          </div>
          <script>
-          // Every time a tab is switched, remove the tabindex for accessibility and keyboard nav
-    jQuery('#s-lib-ctabs-15415493 ul.nav-tabs li a').on('shown.bs.tab', function (e) {
-        jQuery('#s-lib-ctabs-15415493 ul.nav-tabs li a').removeAttr('tabindex');
-    });
-
-    // Support direct linking to tabs
+          // Support direct linking to tabs
     jQuery(function() {
         var hash = window.location.hash;
 
