@@ -1414,6 +1414,15 @@ body {
     line-height: 1.5em
 }
 
+h1 {
+    font-size: 2em
+}
+
+h2,
+h3 {
+    font-size: 1.6em
+}
+
 select {
     cursor: pointer;
     padding: 2px 4px;
@@ -3241,6 +3250,10 @@ h6 small {
     font-weight: 400
 }
 
+.s-lc-checkbox-alignment-fix {
+    margin-top: 2px !important
+}
+
 @media (max-width:530px) {
     #index_php .fc-toolbar {
         font-size: 12px !important
@@ -3814,6 +3827,7 @@ h6 small {
 }
 
 .s-lc-catalog-item-content:hover {
+    border: 1px solid #858585;
     background: #fff;
     box-shadow: 0 14px 28px rgba(0, 0, 0, .25), 0 10px 10px rgba(0, 0, 0, .22)
 }
@@ -4549,16 +4563,6 @@ h4 .s-lc-eventcard-pill {
     font-size: 14px
 }
 
-h1 {
-    font-size: 2em
-}
-
-h1,
-h2,
-h3 {
-    line-height: normal
-}
-
 a {
     color: #2954d1
 }
@@ -5282,10 +5286,6 @@ table.s-lc-export-table th {
 
 .s-lc-pattern-horizontal {
     background-image: linear-gradient(0deg, rgba(255, 255, 255, .2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%, transparent 75%, transparent)
-}
-
-.s-lc-checkbox-alignment-fix {
-    margin-top: 2px !important
 }
 
 .ui-timepicker-table td a {
