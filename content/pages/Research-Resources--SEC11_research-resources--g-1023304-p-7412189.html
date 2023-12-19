@@ -101,27 +101,27 @@
          <div class="s-lib-jqtabs" id="s-lib-ctabs-23520067">
           <ul class="nav nav-tabs" role="tablist">
            <li class="active" role="presentation">
-            <a data-toggle="tab" href="#s-lib-ctab-23520067-0" role="tab">
+            <a data-toggle="tab" href="#s-lib-ctab-23520067-0" role="tab" tabindex="0">
              Web of Science
             </a>
            </li>
            <li role="presentation">
-            <a data-toggle="tab" href="#s-lib-ctab-23520067-1" role="tab">
+            <a data-toggle="tab" href="#s-lib-ctab-23520067-1" role="tab" tabindex="-1">
              PubMed
             </a>
            </li>
            <li role="presentation">
-            <a data-toggle="tab" href="#s-lib-ctab-23520067-2" role="tab">
+            <a data-toggle="tab" href="#s-lib-ctab-23520067-2" role="tab" tabindex="-1">
              Google Scholar
             </a>
            </li>
            <li role="presentation">
-            <a data-toggle="tab" href="#s-lib-ctab-23520067-3" role="tab">
+            <a data-toggle="tab" href="#s-lib-ctab-23520067-3" role="tab" tabindex="-1">
              Other Databases
             </a>
            </li>
            <li role="presentation">
-            <a data-toggle="tab" href="#s-lib-ctab-23520067-4" role="tab">
+            <a data-toggle="tab" href="#s-lib-ctab-23520067-4" role="tab" tabindex="-1">
              Subject Guides
             </a>
            </li>
@@ -323,12 +323,7 @@
           </div>
          </div>
          <script>
-          // Every time a tab is switched, remove the tabindex for accessibility and keyboard nav
-    jQuery('#s-lib-ctabs-23520067 ul.nav-tabs li a').on('shown.bs.tab', function (e) {
-        jQuery('#s-lib-ctabs-23520067 ul.nav-tabs li a').removeAttr('tabindex');
-    });
-
-    // Support direct linking to tabs
+          // Support direct linking to tabs
     jQuery(function() {
         var hash = window.location.hash;
 
