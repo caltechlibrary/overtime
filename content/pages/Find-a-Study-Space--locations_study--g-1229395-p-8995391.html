@@ -39,27 +39,27 @@
           <div class="s-lib-jqtabs" id="s-lib-ctabs-28533066">
            <ul class="nav nav-tabs" role="tablist">
             <li class="active" role="presentation">
-             <a data-toggle="tab" href="#s-lib-ctab-28533066-0" role="tab">
+             <a data-toggle="tab" href="#s-lib-ctab-28533066-0" role="tab" tabindex="0">
               Study Rooms
              </a>
             </li>
             <li role="presentation">
-             <a data-toggle="tab" href="#s-lib-ctab-28533066-1" role="tab">
+             <a data-toggle="tab" href="#s-lib-ctab-28533066-1" role="tab" tabindex="-1">
               Tables
              </a>
             </li>
             <li role="presentation">
-             <a data-toggle="tab" href="#s-lib-ctab-28533066-2" role="tab">
+             <a data-toggle="tab" href="#s-lib-ctab-28533066-2" role="tab" tabindex="-1">
               Computers
              </a>
             </li>
             <li role="presentation">
-             <a data-toggle="tab" href="#s-lib-ctab-28533066-3" role="tab">
+             <a data-toggle="tab" href="#s-lib-ctab-28533066-3" role="tab" tabindex="-1">
               Multimedia Room
              </a>
             </li>
             <li role="presentation">
-             <a data-toggle="tab" href="#s-lib-ctab-28533066-4" role="tab">
+             <a data-toggle="tab" href="#s-lib-ctab-28533066-4" role="tab" tabindex="-1">
               Amphitheater
              </a>
             </li>
@@ -86,16 +86,23 @@
                </li>
                <li>
                 <strong>
-                 Advance reservations recommended.
+                 Reservations are required
                 </strong>
-                Patrons using a group study room without a reservation will be asked to move to another space to accommodate advance reservations.
+                during Fall, Winter, and Spring terms
+                <b>
+                 .
+                </b>
+                We highly recommend making reservation in advance.
+               </li>
+               <li>
+                Patrons using a group study room without a reservation may be asked to move to another space.
                 <ul>
                  <li>
                   Reservations available weekdays (Monday to Friday) between 8am and 12am.
                  </li>
                  <li>
                   <strong>
-                   Between 12am and 7am and over the weekend (Saturday and Sunday), group study rooms are first-come, first-serve only.
+                   Between 12am and 7am, over the weekend (Saturday and Sunday), and in the off-term, group study rooms are first-come, first-serve only.
                   </strong>
                  </li>
                  <li>
@@ -353,12 +360,7 @@
            </div>
           </div>
           <script>
-           // Every time a tab is switched, remove the tabindex for accessibility and keyboard nav
-    jQuery('#s-lib-ctabs-28533066 ul.nav-tabs li a').on('shown.bs.tab', function (e) {
-        jQuery('#s-lib-ctabs-28533066 ul.nav-tabs li a').removeAttr('tabindex');
-    });
-
-    // Support direct linking to tabs
+           // Support direct linking to tabs
     jQuery(function() {
         var hash = window.location.hash;
 
