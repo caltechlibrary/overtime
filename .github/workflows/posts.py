@@ -40,10 +40,18 @@ def test_diff(page: Page):
             # select blogpost content only
             blogpost = soup.find(id=re.compile(r"^comment-\d+$"))
         except PlaywrightTimeoutError as e:
-            # write error to file
-            with open(filename, "w") as file:
-                file.write(str(e))
-            continue
+            try:
+                # try again to open the page in a browser
+                page.goto(link["href"])
+                page.wait_for_load_state("networkidle")
+                soup = BeautifulSoup(page.content(), "html.parser")
+                # select blogpost content only
+                blogpost = soup.find(id=re.compile(r"^comment-\d+$"))
+            except PlaywrightTimeoutError as e:
+                # write error to file
+                with open(filename, "w") as file:
+                    file.write(str(e))
+                continue
         except PlaywrightError as error:
             # NS_ERROR_ABORT seems like a browser issue of some kind
             if error.message == "NS_ERROR_ABORT":

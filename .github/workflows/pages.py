@@ -82,10 +82,15 @@ def test_diff(page: Page):
                 page.goto(guide_page["url"])
                 page.wait_for_load_state("networkidle")
             except PlaywrightTimeoutError as e:
-                # write error to file
-                with open(f"content/pages/{filename}", "w") as file:
-                    file.write(str(e))
-                continue
+                try:
+                    # try again to open the page in a browser
+                    page.goto(guide_page["url"])
+                    page.wait_for_load_state("networkidle")
+                except PlaywrightTimeoutError as e:
+                    # write error to file
+                    with open(f"content/pages/{filename}", "w") as file:
+                        file.write(str(e))
+                    continue
             except PlaywrightError as error:
                 # NS_ERROR_ABORT seems like a browser issue of some kind
                 if error.message == "NS_ERROR_ABORT":
