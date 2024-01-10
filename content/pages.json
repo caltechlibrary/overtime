@@ -4524,7 +4524,7 @@
         "thumbnail_url": "",
         "type_id": 1,
         "type_label": "General Purpose Guide",
-        "updated": "2023-12-08 23:33:21",
+        "updated": "2024-01-10 00:45:25",
         "url": "https://library.caltech.edu/c.php?g=1229405"
     },
     {
@@ -8976,7 +8976,7 @@
         "thumbnail_url": "",
         "type_id": 4,
         "type_label": "Topic Guide",
-        "updated": "2023-12-14 18:26:59",
+        "updated": "2024-01-09 19:14:53",
         "url": "https://library.caltech.edu/c.php?g=1237965"
     },
     {
@@ -14688,7 +14688,7 @@
         "thumbnail_url": "",
         "type_id": 3,
         "type_label": "Subject Guide",
-        "updated": "2023-12-05 17:10:10",
+        "updated": "2024-01-09 18:29:13",
         "url": "https://library.caltech.edu/c.php?g=512638"
     },
     {
@@ -16343,23 +16343,23 @@
             },
             {
                 "column_layout": "{\"1\":{\"span\":12}}",
-                "created": "2024-01-03 18:59:41",
+                "created": "2024-01-09 23:59:06",
                 "description": "",
                 "enable_display": "1",
                 "enable_newwin": "0",
                 "er_course_id": "0",
                 "friendly_url": "https://library.caltech.edu/equipment/bikeshare",
-                "id": "10129474",
+                "id": "10140889",
                 "name": "Caltech Bikeshare",
                 "num_cols": "1",
                 "parent_id": "0",
                 "position": "8",
                 "redirect_url": "",
-                "slug_id": "2962579",
+                "slug_id": "2966248",
                 "source_id": "0",
                 "type_id": "1",
-                "updated": "2024-01-03 19:02:44",
-                "url": "https://library.caltech.edu/c.php?g=1321246&p=10129474"
+                "updated": "2024-01-09 23:59:06",
+                "url": "https://library.caltech.edu/c.php?g=1321246&p=10140889"
             }
         ],
         "published": "2023-10-18 17:35:34",
@@ -16372,7 +16372,7 @@
         "thumbnail_url": "",
         "type_id": 1,
         "type_label": "General Purpose Guide",
-        "updated": "2024-01-03 19:02:44",
+        "updated": "2024-01-10 00:28:12",
         "url": "https://library.caltech.edu/c.php?g=1321246"
     },
     {
