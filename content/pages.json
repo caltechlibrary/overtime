@@ -1160,7 +1160,7 @@
         "thumbnail_url": "",
         "type_id": 3,
         "type_label": "Subject Guide",
-        "updated": "2024-01-11 00:02:54",
+        "updated": "2024-01-19 02:10:15",
         "url": "https://library.caltech.edu/c.php?g=512661"
     },
     {
@@ -4908,7 +4908,7 @@
         "thumbnail_url": "",
         "type_id": 1,
         "type_label": "General Purpose Guide",
-        "updated": "2024-01-11 19:41:09",
+        "updated": "2024-01-18 23:49:27",
         "url": "https://library.caltech.edu/c.php?g=1231408"
     },
     {
@@ -5398,7 +5398,7 @@
                 "er_course_id": "0",
                 "friendly_url": "https://library.caltech.edu/learn/classes",
                 "id": "9116834",
-                "name": "All Upcoming Classes",
+                "name": "All Upcoming Workshops",
                 "num_cols": "1",
                 "parent_id": "0",
                 "position": "4",
@@ -5406,7 +5406,7 @@
                 "slug_id": "2601083",
                 "source_id": "0",
                 "type_id": "1",
-                "updated": "2022-06-14 17:48:32",
+                "updated": "2024-01-18 23:25:24",
                 "url": "https://library.caltech.edu/c.php?g=1231526&p=9116834"
             },
             {
@@ -5458,7 +5458,7 @@
                 "er_course_id": "0",
                 "friendly_url": "https://library.caltech.edu/learn/class-catalog",
                 "id": "9654314",
-                "name": "Library Class Catalog",
+                "name": "Library Workshop Catalog",
                 "num_cols": "1",
                 "parent_id": "0",
                 "position": "3",
@@ -5466,7 +5466,7 @@
                 "slug_id": "2895449",
                 "source_id": "0",
                 "type_id": "1",
-                "updated": "2023-09-06 20:06:46",
+                "updated": "2024-01-18 23:24:40",
                 "url": "https://library.caltech.edu/c.php?g=1231526&p=9654314"
             }
         ],
@@ -5480,7 +5480,7 @@
         "thumbnail_url": "",
         "type_id": 1,
         "type_label": "General Purpose Guide",
-        "updated": "2023-12-12 18:31:03",
+        "updated": "2024-01-18 23:25:24",
         "url": "https://library.caltech.edu/c.php?g=1231526"
     },
     {
@@ -6476,7 +6476,7 @@
         "thumbnail_url": "",
         "type_id": 1,
         "type_label": "General Purpose Guide",
-        "updated": "2023-10-12 22:04:53",
+        "updated": "2024-01-18 22:24:42",
         "url": "https://library.caltech.edu/c.php?g=512644"
     },
     {
@@ -9706,7 +9706,7 @@
                 "slug_id": "2599034",
                 "source_id": "0",
                 "type_id": "1",
-                "updated": "2022-06-07 16:51:16",
+                "updated": "2024-01-19 00:04:23",
                 "url": "https://library.caltech.edu/c.php?g=1231280&p=9112462"
             },
             {
@@ -9900,7 +9900,7 @@
         "thumbnail_url": "",
         "type_id": 1,
         "type_label": "General Purpose Guide",
-        "updated": "2024-01-04 21:53:09",
+        "updated": "2024-01-19 00:05:40",
         "url": "https://library.caltech.edu/c.php?g=1231280"
     },
     {
@@ -16372,7 +16372,7 @@
         "thumbnail_url": "",
         "type_id": 1,
         "type_label": "General Purpose Guide",
-        "updated": "2024-01-16 18:32:56",
+        "updated": "2024-01-18 21:52:24",
         "url": "https://library.caltech.edu/c.php?g=1321246"
     },
     {
