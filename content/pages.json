@@ -4908,7 +4908,7 @@
         "thumbnail_url": "",
         "type_id": 1,
         "type_label": "General Purpose Guide",
-        "updated": "2024-01-23 20:59:37",
+        "updated": "2024-01-29 23:31:24",
         "url": "https://library.caltech.edu/c.php?g=1231408"
     },
     {
@@ -5396,14 +5396,14 @@
                 "enable_display": "1",
                 "enable_newwin": "0",
                 "er_course_id": "0",
-                "friendly_url": "https://library.caltech.edu/learn/classes",
+                "friendly_url": null,
                 "id": "9116834",
                 "name": "All Upcoming Workshops",
                 "num_cols": "1",
                 "parent_id": "0",
                 "position": "4",
                 "redirect_url": "https://libcal.caltech.edu/",
-                "slug_id": "2601083",
+                "slug_id": "0",
                 "source_id": "0",
                 "type_id": "1",
                 "updated": "2024-01-18 23:25:24",
@@ -5456,7 +5456,7 @@
                 "enable_display": "1",
                 "enable_newwin": "0",
                 "er_course_id": "0",
-                "friendly_url": "https://library.caltech.edu/learn/class-catalog",
+                "friendly_url": "https://library.caltech.edu/learn/workshop-catalog",
                 "id": "9654314",
                 "name": "Library Workshop Catalog",
                 "num_cols": "1",
@@ -5480,7 +5480,7 @@
         "thumbnail_url": "",
         "type_id": 1,
         "type_label": "General Purpose Guide",
-        "updated": "2024-01-25 18:41:55",
+        "updated": "2024-01-29 16:41:07",
         "url": "https://library.caltech.edu/c.php?g=1231526"
     },
     {
@@ -7292,7 +7292,7 @@
         "thumbnail_url": "",
         "type_id": 3,
         "type_label": "Subject Guide",
-        "updated": "2024-01-24 23:12:43",
+        "updated": "2024-01-29 15:29:04",
         "url": "https://library.caltech.edu/c.php?g=512630"
     },
     {
