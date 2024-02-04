@@ -15769,7 +15769,7 @@
                 "column_layout": "{\"1\":{\"span\":12}}",
                 "created": "2024-02-02 06:37:53",
                 "description": "",
-                "enable_display": "0",
+                "enable_display": "1",
                 "enable_newwin": "0",
                 "er_course_id": "0",
                 "friendly_url": "https://library.caltech.edu/bookdisplay/February2024BlackHistoryMonth",
@@ -15782,7 +15782,7 @@
                 "slug_id": "2982446",
                 "source_id": "0",
                 "type_id": "1",
-                "updated": "2024-02-02 06:37:53",
+                "updated": "2024-02-04 08:01:30",
                 "url": "https://library.caltech.edu/c.php?g=1216793&p=10189735"
             }
         ],
@@ -15796,7 +15796,7 @@
         "thumbnail_url": "",
         "type_id": 4,
         "type_label": "Topic Guide",
-        "updated": "2024-02-02 08:42:40",
+        "updated": "2024-02-04 08:10:16",
         "url": "https://library.caltech.edu/c.php?g=1216793"
     },
     {
