@@ -1123,7 +1123,7 @@ function(t) {
             },
             selectOption: function() {
                 const t = this.list.querySelector("li[aria-selected=true]");
-                this.input.value = t.textContent, null !== this.selectCallback && this.selectCallback(t), this.closeList()
+                this.input.dataset.oldvalue = this.input.value, this.input.value = t.textContent, null !== this.selectCallback && this.selectCallback(t), this.closeList()
             },
             processData: function(t) {
                 return null !== this.dataProcessor ? this.dataProcessor(t) : t
@@ -2710,14 +2710,18 @@ class QueryLog {
                 })), e
             },
             autocompleteSelectCb: function(t) {
-                var e = this.form.querySelector("input[name=faqid]");
-                null === e && ((e = document.createElement("input")).setAttribute("type", "hidden"), e.setAttribute("name", "faqid"), this.form.insertBefore(e, this.form.firstChild)), e.value = t.getAttribute("data-faqid"), this.form.submit()
+                let e = this.form.querySelector("input[name=originalq]");
+                null === e && (e = document.createElement("input"), e.setAttribute("type", "hidden"), e.setAttribute("name", "originalq"), this.form.insertBefore(e, this.form.firstChild));
+                const i = this.form.querySelector("#s-la-content-search-query-" + this.id);
+                e.value = i.dataset.oldvalue || "";
+                var n = this.form.querySelector("input[name=faqid]");
+                null === n && ((n = document.createElement("input")).setAttribute("type", "hidden"), n.setAttribute("name", "faqid"), this.form.insertBefore(n, this.form.firstChild)), n.value = t.getAttribute("data-faqid"), this.form.submit()
             },
             enableAutocomplete: function() {
                 try {
                     this.autocomplete = e({
                         inputSelector: "#s-la-content-search-query-" + this.id,
-                        queryUrl: "https://" + this.apiDomain + "/1.0/faqsearch/",
+                        queryUrl: "https://" + this.apiDomain + "/faq/searchpublic",
                         dataProcessor: this.autcompleteDataFormatCb.bind(this),
                         selectCallback: this.autocompleteSelectCb.bind(this),
                         queryData: {
