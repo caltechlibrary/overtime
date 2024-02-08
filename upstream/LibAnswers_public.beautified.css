@@ -11128,6 +11128,21 @@ dl.deflist-horizontal dt {
     margin-inline-end: 1rem
 }
 
+dl.deflist-horizontal-left>div {
+    display: flex;
+    justify-content: flex-start
+}
+
+dl.deflist-horizontal-left dt {
+    flex: 0 1 auto;
+    margin-inline-end: 1rem
+}
+
+dl.deflist-horizontal-left dd {
+    flex: 1 1 auto;
+    margin-inline-end: 1rem
+}
+
 .flex-spacebetween {
     display: flex;
     justify-content: space-between;
