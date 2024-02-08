@@ -1886,7 +1886,7 @@ a.s-lc-color-links:hover {
 #s-lc-c-dp-d,
 #s-lc-c-dp-m,
 .s-lc-c-datepicker {
-    width: 200px;
+    min-height: 200px;
     margin: 20px auto
 }
 
@@ -2073,6 +2073,10 @@ a.s-lc-color-links:hover {
     margin-top: 20px
 }
 
+#s-lc-event-desc img {
+    max-width: 100%
+}
+
 .s-lc-event-fi {
     max-width: 250px !important;
     max-height: 300px !important;
@@ -2183,7 +2187,7 @@ a.s-lc-color-links:hover {
     background-color: #3a6e96;
     padding: 0;
     margin: 0;
-    background-image: url(//lcimages.s3.amazonaws.com/room-hour-cell.gif)
+    background-image: url(//d68g328n4ug0e.cloudfront.net/room-hour-cell.gif)
 }
 
 .lc_rm_a {
@@ -2192,7 +2196,7 @@ a.s-lc-color-links:hover {
     color: #22b14c;
     padding: 0;
     margin: 0;
-    background-image: url(//lcimages.s3.amazonaws.com/room-hour-cell.gif);
+    background-image: url(//d68g328n4ug0e.cloudfront.net/room-hour-cell.gif);
     cursor: pointer
 }
 
@@ -2201,7 +2205,7 @@ a.s-lc-color-links:hover {
     background-color: #f59f16;
     padding: 0;
     margin: 0;
-    background-image: url(//lcimages.s3.amazonaws.com/room-hour-cell.gif);
+    background-image: url(//d68g328n4ug0e.cloudfront.net/room-hour-cell.gif);
     cursor: pointer
 }
 
@@ -2211,7 +2215,7 @@ a.s-lc-color-links:hover {
     color: transparent;
     padding: 0;
     margin: 0;
-    background-image: url(//lcimages.s3.amazonaws.com/room-hour-cell.gif)
+    background-image: url(//d68g328n4ug0e.cloudfront.net/room-hour-cell.gif)
 }
 
 .lc_rm_a:hover,
@@ -4776,19 +4780,13 @@ textarea {
     overflow: visible
 }
 
-#s-lc-public-banner {
-    padding: 0;
-    margin: 0
-}
-
 .s-lc-public-footer {
     font-size: .9em;
     text-align: center;
     padding-top: 5px;
     padding-bottom: 5px;
     border-top: 1px solid #bbb;
-    background-color: #f5f5f5;
-    margin: 0
+    background-color: #f5f5f5
 }
 
 #s-lc-public-footer-admin-links,
