@@ -2668,7 +2668,7 @@ jQuery(function() {
                     r.width > e && (r.width = e - 30, r.width < 0 || r.width < 250) && (r.width = r.redirectViewport);
                     r.height > t && (r.height = t - 30, r.height < 0 || r.height < 250) && (r.height = 250);
                     c(r.close).after('<iframe id="' + r.triggerid + '-iframe" src="' + i + "&ncache=" + n + '" height="' + r.height + '" width="' + r.width + '" style="padding:0; margin:0; border:0; overflow-x: hidden; overflow-y: scroll;" title="' + r.title + '"><a href="' + i + '">Go to scheduling widget.</a></iframe>'), c(r.close).css({
-                        background: "url(//lcimages.s3.amazonaws.com/ms-x.png) no-repeat",
+                        background: "url(//d68g328n4ug0e.cloudfront.net/ms-x.png) no-repeat",
                         width: "25px",
                         height: "29px",
                         "z-index": "1002",
@@ -2802,10 +2802,16 @@ var springyCommon = {
     closeAllPopups: function() {
         jQuery(".tooltip, .popover").hide()
     },
+    removeAllPopups: function() {
+        jQuery(".popover").remove()
+    },
     appendHiddenInput: function(e, t, n) {
         jQuery("<input />").attr("type", "hidden").attr("name", e).attr("value", t).appendTo(n)
     },
     isArraysEqual: function(e, n) {
         return e.length === n.length && e.every((e, t) => e === n[t])
+    },
+    getTrimmedValue: function(e) {
+        return (jQuery(e).val() || "").trim()
     }
 };
