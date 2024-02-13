@@ -1417,10 +1417,18 @@ springSpace.util = {}, springSpace.common = {}, springSpace.validation = {}, spr
         jQuery("[data-toggle='help-popover-info']").popover({
             container: "body",
             placement: "auto right",
-            trigger: "hover click",
+            trigger: "hover click focus",
             html: !0,
             template: '<div class="popover s-lib-help-popover" role="tooltip"><div class="popover-content"></div></div>'
-        })
+        }), springSpace.UI.escapeTooltips()
+    }, t.prototype.escapeTooltips = function() {
+        document.addEventListener("keydown", (function(t) {
+            if ("Escape" === t.key) {
+                document.querySelectorAll("a.help-icon-button[aria-describedby]").forEach((function(t) {
+                    jQuery(t).popover("hide")
+                }))
+            }
+        }))
     }, t.prototype.initChosen = function() {
         jQuery(".chosen-select").chosen(), jQuery(".chosen-select-deselect").chosen({
             allow_single_deselect: !0
