@@ -21,11 +21,11 @@
        <div class="s-lib-box s-lib-box-std s-lib-floating-box" id="s-lg-box-28903527">
         <div id="s-lg-box-collapse-28903527">
          <div class="s-lib-box-content s-lib-floating-box-content" style="opacity: 1; position: relative;">
-          <div class="slick-initialized slick-slider" id="s-lib-cpane-33986384">
+          <div aria-label="" class="slick-initialized slick-slider" id="s-lib-cpane-33986384">
            <div class="slick-list draggable">
             <div aria-label="slideshow" class="slick-track" style="opacity: 1; width: 710px; transform: translate3d(0px, 0px, 0px);">
              <div aria-hidden="false" class="slick-slide slick-current slick-active" data-slick-index="0" style="width: 710px;" tabindex="0">
-              <img alt="" class="" loading="lazy" src="https://libapps.s3.amazonaws.com/customers/64/images/feynman-nanotech2.jpg" style="max-height: auto;margin: 0 auto; min-width: 0; width: auto"/>
+              <img alt="" class="" loading="lazy" src="https://libapps.s3.amazonaws.com/customers/64/images/feynman-nanotech2.jpg" style="max-height: auto; margin: 0 auto; min-width: 0; width: auto"/>
               <div class="s-lib-cpane-caption">
                <p>
                </p>
@@ -70,6 +70,7 @@
                     display: inline-block;
                     min-width: 100%;
                 }
+                
                 #s-lib-cpane-33986384 .s-lib-cpane-caption {
                     
                     
@@ -109,6 +110,22 @@
                 .dl-horizontal dt {
                     width: 30%;
                 }
+
+                .slick_play_pause button{
+                    color: #2F5EA2;
+                    font-size: 24px;
+                    border: none;
+                    outline: none;
+                    background: transparent;
+                }
+
+                .slick-dots button:focus {
+                    outline: -webkit-focus-ring-color auto 1px !important;
+                }
+
+                .slick_play_pause button:focus {
+                    outline: -webkit-focus-ring-color auto 1px;
+                }
           </style>
           <script src="//lgapi-us.libapps.com/web/slick-1.8.1/slick/slick.min.js" type="text/javascript">
           </script>
@@ -135,6 +152,18 @@
                     } else {
                         jQuery("#s-lib-cpane-33986384").slick({"max_height":"auto","pane_id_list":["5154188"],"responsive":[{"breakpoint":600,"settings":{"slidesToShow":1,"slidesPerRow":1,"slidesToScroll":1,"dots":false}}]});
                     }
+
+                    jQuery("#toggle_s-lib-cpane-33986384").click( function() {
+                        if (jQuery(this).attr("aria-label") == "Pause"){
+                            jQuery("#s-lib-cpane-33986384").slick("slickPause");
+                            jQuery(this).attr("aria-label", "Play");
+                            jQuery(this).html("<i class=\"fa fa-solid fa-play-circle-o\"></i>");
+                        } else {
+                            jQuery("#s-lib-cpane-33986384").slick("slickPlay");
+                            jQuery(this).attr("aria-label", "Pause");
+                            jQuery(this).html("<i class=\"fa fa-solid fa-pause-circle-o\"></i>");
+                        }
+                    });
 
                     // Attach an aria-label to div.slick-track for a11y reasons. (LibApps#1338)
                     jQuery("div.slick-track").each(function() {
@@ -178,11 +207,11 @@
        <div class="s-lib-box s-lib-box-std s-lib-floating-box" id="s-lg-box-28903529">
         <div id="s-lg-box-collapse-28903529">
          <div class="s-lib-box-content s-lib-floating-box-content" style="opacity: 1; position: relative;">
-          <div class="slick-initialized slick-slider" id="s-lib-cpane-33986386">
+          <div aria-label="" class="slick-initialized slick-slider" id="s-lib-cpane-33986386">
            <div class="slick-list draggable">
             <div aria-label="slideshow" class="slick-track" style="opacity: 1; width: 710px; transform: translate3d(0px, 0px, 0px);">
              <div aria-hidden="false" class="slick-slide slick-current slick-active" data-slick-index="0" style="width: 710px;" tabindex="0">
-              <img alt="" class="" loading="lazy" src="https://libapps.s3.amazonaws.com/customers/64/images/feynman-nano-motor.jpg" style="max-height: auto;margin: 0 auto; min-width: 0; width: auto"/>
+              <img alt="" class="" loading="lazy" src="https://libapps.s3.amazonaws.com/customers/64/images/feynman-nano-motor.jpg" style="max-height: auto; margin: 0 auto; min-width: 0; width: auto"/>
               <div class="s-lib-cpane-caption">
                <p>
                </p>
@@ -230,6 +259,7 @@
                     display: inline-block;
                     min-width: 100%;
                 }
+                
                 #s-lib-cpane-33986386 .s-lib-cpane-caption {
                     
                     
@@ -269,6 +299,22 @@
                 .dl-horizontal dt {
                     width: 30%;
                 }
+
+                .slick_play_pause button{
+                    color: #2F5EA2;
+                    font-size: 24px;
+                    border: none;
+                    outline: none;
+                    background: transparent;
+                }
+
+                .slick-dots button:focus {
+                    outline: -webkit-focus-ring-color auto 1px !important;
+                }
+
+                .slick_play_pause button:focus {
+                    outline: -webkit-focus-ring-color auto 1px;
+                }
           </style>
           <script src="//lgapi-us.libapps.com/web/slick-1.8.1/slick/slick.min.js" type="text/javascript">
           </script>
@@ -296,6 +342,18 @@
                         jQuery("#s-lib-cpane-33986386").slick({"pane_id_list":["5154187"],"max_height":"auto","responsive":[{"breakpoint":600,"settings":{"slidesToShow":1,"slidesPerRow":1,"slidesToScroll":1,"dots":false}}]});
                     }
 
+                    jQuery("#toggle_s-lib-cpane-33986386").click( function() {
+                        if (jQuery(this).attr("aria-label") == "Pause"){
+                            jQuery("#s-lib-cpane-33986386").slick("slickPause");
+                            jQuery(this).attr("aria-label", "Play");
+                            jQuery(this).html("<i class=\"fa fa-solid fa-play-circle-o\"></i>");
+                        } else {
+                            jQuery("#s-lib-cpane-33986386").slick("slickPlay");
+                            jQuery(this).attr("aria-label", "Pause");
+                            jQuery(this).html("<i class=\"fa fa-solid fa-pause-circle-o\"></i>");
+                        }
+                    });
+
                     // Attach an aria-label to div.slick-track for a11y reasons. (LibApps#1338)
                     jQuery("div.slick-track").each(function() {
                         jQuery(this).attr("aria-label", "slideshow");
@@ -313,54 +371,54 @@
     <div class="s-lg-col-boxes">
      <div id="c3-sidenav">
       <ul class="list-unstyled">
-       <li class="" role="menuitem">
+       <li class="">
         <span>
          Engineering &amp; Applied Science
         </span>
        </li>
-       <li class="" role="menuitem">
+       <li class="">
         <a class="" href="https://library.caltech.edu/c.php?g=1245983&amp;p=9121115" title="">
          <span>
           Rocket Men
          </span>
         </a>
        </li>
-       <li class="" role="menuitem">
+       <li class="">
         <a class="" href="https://library.caltech.edu/c.php?g=1245983&amp;p=9121116" title="">
          <span>
           Teenage engineer MacCready
          </span>
         </a>
        </li>
-       <li class="" role="menuitem">
+       <li class="">
         <a class="" href="https://library.caltech.edu/c.php?g=1245983&amp;p=9121118" title="">
          <span>
           Is it a toy?
          </span>
         </a>
        </li>
-       <li class="" role="menuitem">
+       <li class="">
         <a class="" href="https://library.caltech.edu/c.php?g=1245983&amp;p=9121119" title="">
          <span>
           The Space Race Takes Off
          </span>
         </a>
        </li>
-       <li class="active" role="menuitem">
+       <li class="active">
         <a class="active" href="https://library.caltech.edu/c.php?g=1245983&amp;p=9121120" title="">
          <span>
           Room at the Bottom
          </span>
         </a>
        </li>
-       <li class="" role="menuitem">
+       <li class="">
         <a class="" href="https://library.caltech.edu/c.php?g=1245983&amp;p=9125566" title="">
          <span>
           Remembering JPL co-founder
          </span>
         </a>
        </li>
-       <li class="" role="menuitem">
+       <li class="">
         <a class="" href="https://library.caltech.edu/c.php?g=1245983&amp;p=9125763" title="">
          <span>
           The Encyclopedia Britannica on the Head of a Pin?

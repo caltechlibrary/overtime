@@ -7,12 +7,12 @@
       <div class="s-lib-box s-lib-box-std s-lib-floating-box" id="s-lg-box-30668655">
        <div id="s-lg-box-collapse-30668655">
         <div class="s-lib-box-content s-lib-floating-box-content" style="opacity: 1; position: relative;">
-         <div class="slick-initialized slick-slider" id="s-lib-cpane-36067479">
+         <div aria-label="" class="slick-initialized slick-slider" id="s-lib-cpane-36067479">
           <div class="slick-list draggable">
            <div aria-label="slideshow" class="slick-track" style="opacity: 1; width: 1100px; transform: translate3d(0px, 0px, 0px);">
             <div aria-hidden="false" class="slick-slide slick-current slick-active" data-slick-index="0" style="width: 1100px;" tabindex="0">
              <a class="" href="https://www.vecteezy.com/free-vector/data-visualization" tabindex="0">
-              <img alt="Data Visualization Vectors by Vecteezy" class="" loading="lazy" src="https://libapps.s3.amazonaws.com/accounts/207035/images/Portion_of_Data_Illo.png"/>
+              <img alt="Data Visualization Vectors by Vecteezy" class="" loading="lazy" src="https://libapps.s3.amazonaws.com/accounts/207035/images/Portion_of_Data_Illo.png" style=""/>
              </a>
              <div class="s-lib-cpane-caption">
               <p>
@@ -58,6 +58,7 @@
                     display: inline-block;
                     min-width: 100%;
                 }
+                
                 #s-lib-cpane-36067479 .s-lib-cpane-caption {
                     
                     
@@ -97,6 +98,22 @@
                 .dl-horizontal dt {
                     width: 30%;
                 }
+
+                .slick_play_pause button{
+                    color: #2F5EA2;
+                    font-size: 24px;
+                    border: none;
+                    outline: none;
+                    background: transparent;
+                }
+
+                .slick-dots button:focus {
+                    outline: -webkit-focus-ring-color auto 1px !important;
+                }
+
+                .slick_play_pause button:focus {
+                    outline: -webkit-focus-ring-color auto 1px;
+                }
          </style>
          <script src="//lgapi-us.libapps.com/web/slick-1.8.1/slick/slick.min.js" type="text/javascript">
          </script>
@@ -123,6 +140,18 @@
                     } else {
                         jQuery("#s-lib-cpane-36067479").slick({"pane_id_list":["5892396"],"background_color":"","text_color":"","responsive":[{"breakpoint":600,"settings":{"slidesToShow":1,"slidesPerRow":1,"slidesToScroll":1,"dots":false}}]});
                     }
+
+                    jQuery("#toggle_s-lib-cpane-36067479").click( function() {
+                        if (jQuery(this).attr("aria-label") == "Pause"){
+                            jQuery("#s-lib-cpane-36067479").slick("slickPause");
+                            jQuery(this).attr("aria-label", "Play");
+                            jQuery(this).html("<i class=\"fa fa-solid fa-play-circle-o\"></i>");
+                        } else {
+                            jQuery("#s-lib-cpane-36067479").slick("slickPlay");
+                            jQuery(this).attr("aria-label", "Pause");
+                            jQuery(this).html("<i class=\"fa fa-solid fa-pause-circle-o\"></i>");
+                        }
+                    });
 
                     // Attach an aria-label to div.slick-track for a11y reasons. (LibApps#1338)
                     jQuery("div.slick-track").each(function() {
