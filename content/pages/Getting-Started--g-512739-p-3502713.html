@@ -16,12 +16,12 @@
        </h2>
        <div id="s-lg-box-collapse-19787513">
         <div class="s-lib-box-content" max-width="269px" style="opacity: 1; position: relative;">
-         <div class="slick-initialized slick-slider" id="s-lib-cpane-23221647">
+         <div aria-label="" class="slick-initialized slick-slider" id="s-lib-cpane-23221647">
           <div class="slick-list draggable">
            <div aria-label="slideshow" class="slick-track" style="opacity: 1; width: 201px; transform: translate3d(0px, 0px, 0px);">
             <div aria-hidden="false" class="slick-slide slick-current slick-active" data-slick-index="0" style="width: 201px;" tabindex="0">
              <a class="" href="https://libapps.s3.amazonaws.com/accounts/76473/images/overleaf-v2-editor.png" tabindex="0">
-              <img alt="" class="" loading="lazy" src="https://libapps.s3.amazonaws.com/accounts/76473/images/overleaf-v2-editor.png" style="max-height: 200vh;margin: 0 auto; min-width: 0; width: auto"/>
+              <img alt="" class="" loading="lazy" src="https://libapps.s3.amazonaws.com/accounts/76473/images/overleaf-v2-editor.png" style="max-height: 200vh; margin: 0 auto; min-width: 0; width: auto"/>
              </a>
              <div class="s-lib-cpane-caption">
               <h3>
@@ -75,6 +75,7 @@
                     display: inline-block;
                     min-width: 100%;
                 }
+                
                 #s-lib-cpane-23221647 .s-lib-cpane-caption {
                     
                     
@@ -114,6 +115,22 @@
                 .dl-horizontal dt {
                     width: 30%;
                 }
+
+                .slick_play_pause button{
+                    color: #2F5EA2;
+                    font-size: 24px;
+                    border: none;
+                    outline: none;
+                    background: transparent;
+                }
+
+                .slick-dots button:focus {
+                    outline: -webkit-focus-ring-color auto 1px !important;
+                }
+
+                .slick_play_pause button:focus {
+                    outline: -webkit-focus-ring-color auto 1px;
+                }
          </style>
          <script src="//lgapi-us.libapps.com/web/slick-1.8.1/slick/slick.min.js" type="text/javascript">
          </script>
@@ -132,14 +149,26 @@
                     if (jQuery("#s-lg-box-19787513").parent().parent().attr("id")	!= undefined) {
                         if(jQuery("#s-lg-box-19787513").parent().parent().attr("id").indexOf("widget") !== -1) {
                             setTimeout(function() {
-                                jQuery("#s-lib-cpane-23221647").slick({"pane_id_list":["2235138"],"max_height":"200%","text_color":""});
+                                jQuery("#s-lib-cpane-23221647").slick({"pane_id_list":["2235138"],"max_height":"200%","text_color":"","responsive":[{"breakpoint":600,"settings":{"slidesToShow":1,"slidesPerRow":1,"slidesToScroll":1,"dots":false}}]});
                             }, 500);
                         } else {
-                            jQuery("#s-lib-cpane-23221647").slick({"pane_id_list":["2235138"],"max_height":"200%","text_color":""});
+                            jQuery("#s-lib-cpane-23221647").slick({"pane_id_list":["2235138"],"max_height":"200%","text_color":"","responsive":[{"breakpoint":600,"settings":{"slidesToShow":1,"slidesPerRow":1,"slidesToScroll":1,"dots":false}}]});
                         }
                     } else {
-                        jQuery("#s-lib-cpane-23221647").slick({"pane_id_list":["2235138"],"max_height":"200%","text_color":""});
+                        jQuery("#s-lib-cpane-23221647").slick({"pane_id_list":["2235138"],"max_height":"200%","text_color":"","responsive":[{"breakpoint":600,"settings":{"slidesToShow":1,"slidesPerRow":1,"slidesToScroll":1,"dots":false}}]});
                     }
+
+                    jQuery("#toggle_s-lib-cpane-23221647").click( function() {
+                        if (jQuery(this).attr("aria-label") == "Pause"){
+                            jQuery("#s-lib-cpane-23221647").slick("slickPause");
+                            jQuery(this).attr("aria-label", "Play");
+                            jQuery(this).html("<i class=\"fa fa-solid fa-play-circle-o\"></i>");
+                        } else {
+                            jQuery("#s-lib-cpane-23221647").slick("slickPlay");
+                            jQuery(this).attr("aria-label", "Pause");
+                            jQuery(this).html("<i class=\"fa fa-solid fa-pause-circle-o\"></i>");
+                        }
+                    });
 
                     // Attach an aria-label to div.slick-track for a11y reasons. (LibApps#1338)
                     jQuery("div.slick-track").each(function() {
