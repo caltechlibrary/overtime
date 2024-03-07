@@ -13,22 +13,22 @@
          <div class="s-lib-jqtabs" id="s-lib-ctabs-26027068">
           <ul class="nav nav-tabs" role="tablist">
            <li class="active" role="presentation">
-            <a data-toggle="tab" href="#s-lib-ctab-26027068-0" role="tab">
+            <a data-toggle="tab" href="#s-lib-ctab-26027068-0" role="tab" tabindex="0">
              About Zotero
             </a>
            </li>
            <li role="presentation">
-            <a data-toggle="tab" href="#s-lib-ctab-26027068-1" role="tab">
+            <a data-toggle="tab" href="#s-lib-ctab-26027068-1" role="tab" tabindex="-1">
              Classes
             </a>
            </li>
            <li role="presentation">
-            <a data-toggle="tab" href="#s-lib-ctab-26027068-2" role="tab">
+            <a data-toggle="tab" href="#s-lib-ctab-26027068-2" role="tab" tabindex="-1">
              Download and Install
             </a>
            </li>
            <li role="presentation">
-            <a data-toggle="tab" href="#s-lib-ctab-26027068-3" role="tab">
+            <a data-toggle="tab" href="#s-lib-ctab-26027068-3" role="tab" tabindex="-1">
              Video Playlist: Zotero
             </a>
            </li>
@@ -278,12 +278,7 @@
           </div>
          </div>
          <script>
-          // Every time a tab is switched, remove the tabindex for accessibility and keyboard nav
-    jQuery('#s-lib-ctabs-26027068 ul.nav-tabs li a').on('shown.bs.tab', function (e) {
-        jQuery('#s-lib-ctabs-26027068 ul.nav-tabs li a').removeAttr('tabindex');
-    });
-
-    // Support direct linking to tabs
+          // Support direct linking to tabs
     jQuery(function() {
         var hash = window.location.hash;
 
