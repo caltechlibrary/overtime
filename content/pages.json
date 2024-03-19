@@ -1160,7 +1160,7 @@
         "thumbnail_url": "",
         "type_id": 3,
         "type_label": "Subject Guide",
-        "updated": "2024-02-20 17:18:50",
+        "updated": "2024-03-18 17:50:41",
         "url": "https://library.caltech.edu/c.php?g=512661"
     },
     {
@@ -6282,7 +6282,7 @@
         "owner_id": 82848,
         "pages": [
             {
-                "column_layout": "{\"1\":{\"span\":3},\"2\":{\"span\":6},\"3\":{\"span\":3}}",
+                "column_layout": "{\"1\":{\"span\":\"4\"},\"2\":{\"span\":\"4\"},\"3\":{\"span\":\"4\"}}",
                 "created": "2009-02-03 18:14:58",
                 "description": "",
                 "enable_display": "1",
@@ -6298,7 +6298,7 @@
                 "slug_id": "0",
                 "source_id": "0",
                 "type_id": "1",
-                "updated": "2016-03-02 22:46:50",
+                "updated": "2024-03-18 17:07:21",
                 "url": "https://library.caltech.edu/c.php?g=512637&p=3503003"
             },
             {
@@ -6352,7 +6352,7 @@
         "thumbnail_url": "",
         "type_id": 3,
         "type_label": "Subject Guide",
-        "updated": "2024-01-22 18:00:22",
+        "updated": "2024-03-18 17:37:58",
         "url": "https://library.caltech.edu/c.php?g=512637"
     },
     {
@@ -7292,7 +7292,7 @@
         "thumbnail_url": "",
         "type_id": 3,
         "type_label": "Subject Guide",
-        "updated": "2024-03-15 17:48:57",
+        "updated": "2024-03-18 18:21:53",
         "url": "https://library.caltech.edu/c.php?g=512630"
     },
     {
@@ -14932,7 +14932,7 @@
         "thumbnail_url": "",
         "type_id": 3,
         "type_label": "Subject Guide",
-        "updated": "2024-03-15 16:24:40",
+        "updated": "2024-03-18 17:50:41",
         "url": "https://library.caltech.edu/c.php?g=512638"
     },
     {
@@ -16060,7 +16060,7 @@
         "thumbnail_url": "",
         "type_id": 4,
         "type_label": "Topic Guide",
-        "updated": "2024-03-15 18:16:50",
+        "updated": "2024-03-18 16:32:49",
         "url": "https://library.caltech.edu/c.php?g=1216793"
     },
     {
