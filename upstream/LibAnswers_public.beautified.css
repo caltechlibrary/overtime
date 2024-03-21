@@ -10836,16 +10836,40 @@ label.itemchecklabel {
     border-radius: 5px
 }
 
-.s-la-ra-metabox {
-    background-color: #d8e0e8;
-    padding: 4px;
-    border-radius: 5px;
-    margin-bottom: 10px
+#s-la-ra-submitdiv {
+    padding: 15px;
+    display: flex;
+    justify-content: space-around;
+    align-items: stretch;
+    flex-direction: column;
+    height: auto;
+    max-width: 230px
 }
 
-.s-la-ra-metabox-col {
-    padding-left: 5px;
-    padding-right: 5px
+#s-la-ra-submitdiv .btn {
+    margin: 4px;
+    flex: 1
+}
+
+.s-la-ra-metabox {
+    background-color: #d8e0e8;
+    padding: 8px 6px;
+    border-radius: 5px
+}
+
+.s-la-ra-metabox-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    grid-auto-rows: minmax(100px, auto);
+    gap: 8px;
+    margin-bottom: 8px
+}
+
+.s-la-ra-field-reset>label {
+    white-space: nowrap;
+    overflow-x: clip;
+    max-width: 90%;
+    text-overflow: ellipsis
 }
 
 .s-la-ra-metabox select.form-control {
@@ -10862,9 +10886,8 @@ label.itemchecklabel {
 
 .s-la-ra-metabox-error {
     background-color: #c41339;
-    padding: 4px;
-    border-radius: 5px;
-    margin-bottom: 10px
+    padding: 8px 6px;
+    border-radius: 5px
 }
 
 .s-la-ra-metabox-error a {
@@ -10877,15 +10900,6 @@ label.itemchecklabel {
 
 .s-la-ra-metabox-error .required:before {
     color: #fff
-}
-
-#s-la-ra-submitdiv {
-    padding: 15px
-}
-
-#s-la-ra-submitdiv .btn {
-    margin-bottom: 15px;
-    white-space: normal
 }
 
 #adminqlist_php #s-la-admin-header-title,
@@ -11596,6 +11610,10 @@ input[type=checkbox][disabled]+span {
     padding-left: 0
 }
 
+.btn.btn-success {
+    background-color: #367c36
+}
+
 .nav-pills.nav-plain>li.active>a {
     background-color: rgba(0, 0, 0, 0);
     color: #555;
@@ -12166,6 +12184,17 @@ caption {
 
 table.s-lc-whw {
     table-layout: auto
+}
+
+.table-vresponsive {
+    max-height: 400px;
+    overflow: auto
+}
+
+.table-vresponsive th {
+    position: sticky;
+    top: 0;
+    background: #fff
 }
 
 .s-srch-top-header {
