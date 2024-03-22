@@ -1417,7 +1417,7 @@ springSpace.util = {}, springSpace.common = {}, springSpace.validation = {}, spr
         jQuery("[data-toggle='help-popover-info']").popover({
             container: "body",
             placement: "auto right",
-            trigger: "hover click focus",
+            trigger: "hover focus",
             html: !0,
             template: '<div class="popover s-lib-help-popover" role="tooltip"><div class="popover-content"></div></div>'
         }), springSpace.UI.escapeTooltips()
