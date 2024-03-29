@@ -10217,11 +10217,11 @@
     },
     {
         "created": "2022-03-28 22:19:05",
-        "description": "This guide represents the steps the Caltech Library is taking toward promoting and sustaining inclusion, diversity, equity, and accessibility",
+        "description": "This guide represents the steps the Caltech Library is taking toward promoting and sustaining inclusion, diversity, equity, and accessibility.",
         "friendly_url": "https://library.caltech.edu/equity",
         "group_id": 10729,
         "id": 1228721,
-        "name": "Diversity and Inclusion Guide",
+        "name": "Inclusion, Diversity, Equity, and Accessibility (IDEA) Guide",
         "nav_type": 2,
         "owner_id": 108235,
         "pages": [
@@ -10396,7 +10396,7 @@
         "thumbnail_url": "",
         "type_id": 1,
         "type_label": "General Purpose Guide",
-        "updated": "2024-03-12 20:38:48",
+        "updated": "2024-03-29 00:56:17",
         "url": "https://library.caltech.edu/c.php?g=1228721"
     },
     {
@@ -11012,7 +11012,7 @@
         "thumbnail_url": "",
         "type_id": 1,
         "type_label": "General Purpose Guide",
-        "updated": "2024-03-08 18:35:23",
+        "updated": "2024-03-28 19:44:34",
         "url": "https://library.caltech.edu/c.php?g=1230813"
     },
     {
