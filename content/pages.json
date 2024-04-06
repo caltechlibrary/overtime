@@ -368,7 +368,7 @@
         "thumbnail_url": "",
         "type_id": 3,
         "type_label": "Subject Guide",
-        "updated": "2024-01-22 23:25:07",
+        "updated": "2024-04-05 21:20:00",
         "url": "https://library.caltech.edu/c.php?g=512646"
     },
     {
@@ -3068,7 +3068,7 @@
         "thumbnail_url": "",
         "type_id": 3,
         "type_label": "Subject Guide",
-        "updated": "2024-04-03 20:31:21",
+        "updated": "2024-04-05 23:02:04",
         "url": "https://library.caltech.edu/c.php?g=512724"
     },
     {
@@ -3852,7 +3852,7 @@
         "thumbnail_url": "",
         "type_id": 2,
         "type_label": "Course Guide",
-        "updated": "2023-10-27 16:56:42",
+        "updated": "2024-04-05 22:52:37",
         "url": "https://library.caltech.edu/c.php?g=1023304"
     },
     {
@@ -5872,7 +5872,7 @@
         "thumbnail_url": "",
         "type_id": 3,
         "type_label": "Subject Guide",
-        "updated": "2024-04-03 16:17:53",
+        "updated": "2024-04-05 21:32:16",
         "url": "https://library.caltech.edu/c.php?g=512624"
     },
     {
@@ -6888,7 +6888,7 @@
         "thumbnail_url": "",
         "type_id": 3,
         "type_label": "Subject Guide",
-        "updated": "2024-04-03 16:17:53",
+        "updated": "2024-04-05 21:32:15",
         "url": "https://library.caltech.edu/c.php?g=512627"
     },
     {
@@ -7292,7 +7292,7 @@
         "thumbnail_url": "",
         "type_id": 3,
         "type_label": "Subject Guide",
-        "updated": "2024-04-03 21:15:29",
+        "updated": "2024-04-05 21:48:35",
         "url": "https://library.caltech.edu/c.php?g=512630"
     },
     {
@@ -7376,7 +7376,7 @@
         "thumbnail_url": "",
         "type_id": 3,
         "type_label": "Subject Guide",
-        "updated": "2024-04-03 21:19:36",
+        "updated": "2024-04-05 21:49:05",
         "url": "https://library.caltech.edu/c.php?g=512642"
     },
     {
@@ -7520,7 +7520,7 @@
         "thumbnail_url": "",
         "type_id": 3,
         "type_label": "Subject Guide",
-        "updated": "2024-03-01 23:21:40",
+        "updated": "2024-04-05 21:43:53",
         "url": "https://library.caltech.edu/c.php?g=512664"
     },
     {
@@ -10218,7 +10218,7 @@
     {
         "created": "2022-03-28 22:19:05",
         "description": "This guide represents the steps the Caltech Library is taking toward promoting and sustaining inclusion, diversity, equity, and accessibility.",
-        "friendly_url": "https://library.caltech.edu/equity",
+        "friendly_url": "https://library.caltech.edu/idea",
         "group_id": 10729,
         "id": 1228721,
         "name": "Inclusion, Diversity, Equity, and Accessibility (IDEA) Guide",
@@ -10232,7 +10232,7 @@
                 "enable_display": "1",
                 "enable_newwin": "0",
                 "er_course_id": "0",
-                "friendly_url": "https://library.caltech.edu/equity/welcome",
+                "friendly_url": "https://library.caltech.edu/idea/welcome",
                 "id": "8989800",
                 "name": "Welcome",
                 "num_cols": "2",
@@ -10252,7 +10252,7 @@
                 "enable_display": "1",
                 "enable_newwin": "0",
                 "er_course_id": "0",
-                "friendly_url": "https://library.caltech.edu/equity/action-all",
+                "friendly_url": "https://library.caltech.edu/idea/action-all",
                 "id": "8989801",
                 "name": "What we're doing for us all",
                 "num_cols": "2",
@@ -10272,7 +10272,7 @@
                 "enable_display": "1",
                 "enable_newwin": "0",
                 "er_course_id": "0",
-                "friendly_url": "https://library.caltech.edu/equity/library-resources",
+                "friendly_url": "https://library.caltech.edu/idea/library-resources",
                 "id": "8989823",
                 "name": "Library resources",
                 "num_cols": "3",
@@ -10292,7 +10292,7 @@
                 "enable_display": "1",
                 "enable_newwin": "0",
                 "er_course_id": "0",
-                "friendly_url": "https://library.caltech.edu/equity/special-topics",
+                "friendly_url": "https://library.caltech.edu/idea/special-topics",
                 "id": "9005816",
                 "name": "Caltech-specific equity topics",
                 "num_cols": "3",
@@ -10312,7 +10312,7 @@
                 "enable_display": "1",
                 "enable_newwin": "0",
                 "er_course_id": "0",
-                "friendly_url": "https://library.caltech.edu/equity/campus-resources",
+                "friendly_url": "https://library.caltech.edu/idea/campus-resources",
                 "id": "9464207",
                 "name": "Campus resources",
                 "num_cols": "1",
@@ -10332,7 +10332,7 @@
                 "enable_display": "1",
                 "enable_newwin": "0",
                 "er_course_id": "0",
-                "friendly_url": "https://library.caltech.edu/equity/action-staff",
+                "friendly_url": "https://library.caltech.edu/idea/action-staff",
                 "id": "9467742",
                 "name": "What we're doing for our staff",
                 "num_cols": "1",
@@ -10352,7 +10352,7 @@
                 "enable_display": "1",
                 "enable_newwin": "0",
                 "er_course_id": "0",
-                "friendly_url": "https://library.caltech.edu/equity/writing-diversity-statements",
+                "friendly_url": "https://library.caltech.edu/idea/writing-diversity-statements",
                 "id": "9610879",
                 "name": "Writing diversity statements",
                 "num_cols": "1",
@@ -10389,14 +10389,14 @@
         "published": "2023-03-10 22:21:32",
         "redirect_url": "",
         "site_id": 64,
-        "slug": "equity",
+        "slug": "idea",
         "slug_id": 2556467,
         "status": 1,
         "status_label": "Published",
         "thumbnail_url": "",
         "type_id": 1,
         "type_label": "General Purpose Guide",
-        "updated": "2024-04-02 20:53:48",
+        "updated": "2024-04-05 16:57:29",
         "url": "https://library.caltech.edu/c.php?g=1228721"
     },
     {
@@ -14728,7 +14728,7 @@
         "thumbnail_url": "",
         "type_id": 3,
         "type_label": "Subject Guide",
-        "updated": "2023-10-27 16:56:41",
+        "updated": "2024-04-05 21:17:04",
         "url": "https://library.caltech.edu/c.php?g=512629"
     },
     {
@@ -14932,7 +14932,7 @@
         "thumbnail_url": "",
         "type_id": 3,
         "type_label": "Subject Guide",
-        "updated": "2024-04-03 20:40:11",
+        "updated": "2024-04-05 22:47:13",
         "url": "https://library.caltech.edu/c.php?g=512638"
     },
     {
@@ -16060,7 +16060,7 @@
         "thumbnail_url": "",
         "type_id": 4,
         "type_label": "Topic Guide",
-        "updated": "2024-03-22 16:12:34",
+        "updated": "2024-04-05 20:22:11",
         "url": "https://library.caltech.edu/c.php?g=1216793"
     },
     {
