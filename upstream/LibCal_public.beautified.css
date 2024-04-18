@@ -22,17 +22,19 @@ table.dataTable td.dt-control {
 table.dataTable td.dt-control:before {
     display: inline-block;
     color: rgba(0, 0, 0, .5);
-    content: "âº"
+    content: "â¶"
 }
 
 table.dataTable tr.dt-hasChild td.dt-control:before {
     content: "â¼"
 }
 
+:root[data-bs-theme=dark] table.dataTable td.dt-control:before,
 html.dark table.dataTable td.dt-control:before {
     color: rgba(255, 255, 255, .5)
 }
 
+:root[data-bs-theme=dark] table.dataTable tr.dt-hasChild td.dt-control:before,
 html.dark table.dataTable tr.dt-hasChild td.dt-control:before {
     color: rgba(255, 255, 255, .5)
 }
@@ -144,7 +146,8 @@ div.dataTables_processing {
     margin-left: -100px;
     margin-top: -26px;
     text-align: center;
-    padding: 2px
+    padding: 2px;
+    z-index: 10
 }
 
 div.dataTables_processing>div:last-child {
