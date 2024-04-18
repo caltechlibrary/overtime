@@ -1822,12 +1822,13 @@ springSpace.regex = {
                 start: e = null,
                 end: i = null,
                 offhours: n = null,
-                captchaAlwaysOn: s = !1
+                captchaAlwaysOn: s = !1,
+                libauth_enabled: a = !1
             }) {
-                this.type = t, this.start = e, this.end = i, this.offhours = n, this.captchaAlwaysOn = s
+                this.type = t, this.start = e, this.end = i, this.offhours = n, this.captchaAlwaysOn = s, this.libauth_enabled = a
             }
             isCaptchaEnabled() {
-                return !!this.captchaAlwaysOn || this.isAutoReplyEnabled()
+                return !this.libauth_enabled && (!!this.captchaAlwaysOn || this.isAutoReplyEnabled())
             }
             isAutoReplyEnabled() {
                 return 0 !== this.type && (1 === this.type || (3 === this.type ? this._isBetweenDates() : 2 === this.type && this._isNowOffHours()))
