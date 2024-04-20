@@ -11464,6 +11464,34 @@ table.table thead .sorting_desc:after {
     color: #fff
 }
 
+a.btn-confirm {
+    text-decoration: none
+}
+
+.btn-confirm>span:first-of-type {
+    display: inline-block
+}
+
+.btn-confirm>span:last-of-type {
+    display: none
+}
+
+a.btn-confirm>span:last-of-type {
+    background-color: #d2322d;
+    color: #fff;
+    padding: .25rem .5rem;
+    border-radius: 5px;
+    font-size: 1rem
+}
+
+.btn-confirm[data-confirm="1"]>span:first-of-type {
+    display: none
+}
+
+.btn-confirm[data-confirm="1"]>span:last-of-type {
+    display: inline-block
+}
+
 .badge {
     background-color: #666
 }
