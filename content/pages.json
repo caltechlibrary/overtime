@@ -14672,6 +14672,26 @@
                 "type_id": "1",
                 "updated": "2023-03-15 18:41:34",
                 "url": "https://library.caltech.edu/c.php?g=1229395&p=9618253"
+            },
+            {
+                "column_layout": "{\"1\":{\"span\":12}}",
+                "created": "2024-06-05 20:12:15",
+                "description": "Quick Guide updated May 2024",
+                "enable_display": "1",
+                "enable_newwin": "0",
+                "er_course_id": "0",
+                "friendly_url": "https://library.caltech.edu/locations/quick-guide",
+                "id": "10392556",
+                "name": "Locations & Services Quick Guide",
+                "num_cols": "1",
+                "parent_id": "0",
+                "position": "11",
+                "redirect_url": "",
+                "slug_id": "3054254",
+                "source_id": "0",
+                "type_id": "1",
+                "updated": "2024-06-05 20:52:52",
+                "url": "https://library.caltech.edu/c.php?g=1229395&p=10392556"
             }
         ],
         "published": "2023-10-06 18:00:23",
@@ -14684,7 +14704,7 @@
         "thumbnail_url": "",
         "type_id": 1,
         "type_label": "General Purpose Guide",
-        "updated": "2024-04-23 02:08:59",
+        "updated": "2024-06-05 20:53:49",
         "url": "https://library.caltech.edu/c.php?g=1229395"
     },
     {
