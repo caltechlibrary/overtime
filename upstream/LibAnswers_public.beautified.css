@@ -8637,7 +8637,7 @@ h1#s-la-public-header-title {
     padding: 8px 15px
 }
 
-@media (max-width:768px) {
+@media (width < 768px) {
     .s-la-breadcrumbs {
         padding: 8px 0
     }
@@ -8748,7 +8748,7 @@ h1#s-la-public-header-title {
     margin: 17px 15px
 }
 
-@media (max-width:768px) {
+@media (width < 768px) {
     #s-la-header-public .s-la-public-header-1 {
         padding: 15px 0
     }
@@ -9266,7 +9266,7 @@ li.s-la-faq-listing {
     bottom: auto
 }
 
-@media (max-width:768px) {
+@media (width < 768px) {
     .s-la-contact-tab-3 {
         left: 0
     }
@@ -9416,7 +9416,7 @@ button#s-la-vote-yes:hover span.fa-thumbs-up {
     margin-right: 15px
 }
 
-@media (max-width:768px) {
+@media (width < 768px) {
     .s-la-faq-meta-label {
         display: inline-block;
         margin-right: 10px
@@ -9924,7 +9924,7 @@ h1#s-la-admin-header-title {
     box-shadow: -.25em .25em .25em 0 rgba(0, 0, 0, .5)
 }
 
-@media (max-width:768px) {
+@media (width < 768px) {
     #home_php h1#s-la-admin-header-title {
         float: none
     }
@@ -10618,7 +10618,7 @@ li.s-la-social-item.owned {
     font-size: .9em
 }
 
-@media (max-width:768px) {
+@media (width < 768px) {
     .social-tstamp {
         float: none;
         margin-bottom: 5px;
@@ -11315,7 +11315,7 @@ input[type=checkbox].mg-right {
     text-align: center
 }
 
-@media (max-width:768px) {
+@media (width < 768px) {
     .mg-sm-bottom {
         margin-bottom: 15px
     }
@@ -11679,7 +11679,7 @@ input[type=checkbox][disabled]+span {
     display: none
 }
 
-@media (min-width:769px) {
+@media (min-width:768px) {
     .s-la-page-admin .container {
         width: calc(100% - 30px);
         padding-left: 0;
@@ -11704,7 +11704,7 @@ input[type=checkbox][disabled]+span {
     }
 }
 
-@media (max-width:768px) {
+@media (width < 768px) {
     select.form-control.small {
         max-width: 100%
     }
@@ -11719,7 +11719,7 @@ input[type=checkbox][disabled]+span {
         width: 100%
     }
 
-    .navbar-default .navbar-toggle {
+    .navbar .navbar-toggle {
         padding: 6px 10px
     }
 
@@ -11744,10 +11744,6 @@ input[type=checkbox][disabled]+span {
 
     .s-la-page-admin {
         padding-top: 59px
-    }
-
-    .s-la-cmd-bar {
-        font-size: 16px
     }
 
     .s-la-cmd-bar .navbar-btn {
@@ -12019,6 +12015,12 @@ input[type=checkbox][disabled]+span {
         overflow: hidden;
         clip: rect(0, 0, 0, 0);
         border: 0
+    }
+}
+
+@media (max-width:1300px) {
+    li#acctlinks>a>span {
+        display: none
     }
 }
 
