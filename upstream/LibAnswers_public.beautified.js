@@ -1789,7 +1789,7 @@ var errorAlert = function(t = "") {
         var n = document.createElement("div");
         "" !== i && (n.id = i), n.classList.add("alert", "alert-" + e, "alert-dismissable", "mg-top"), n.setAttribute("role", "alert");
         var s = document.createElement("button");
-        return s.type = "button", s.classList.add("close"), s.setAttribute("aria-label", "close"), s.innerHTML = '<span aria-hidden="true">&times;</span>', n.appendChild(s), n.insertAdjacentHTML("beforeend", t), n
+        return s.type = "button", s.classList.add("close"), s.setAttribute("aria-label", "close"), s.setAttribute("data-dismiss", "alert"), s.innerHTML = '<span aria-hidden="true">&times;</span>', n.appendChild(s), n.insertAdjacentHTML("beforeend", t), n
     },
     enableMultiSelect = function(t, e) {
         if (0 !== t.length) {
