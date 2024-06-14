@@ -154,13 +154,13 @@
                     }
 
                     jQuery("#toggle_s-lib-cpane-33887159").click( function() {
-                        if (jQuery(this).attr("aria-label") == "~[456]~"){
+                        if (jQuery(this).attr("aria-label") == "Pause"){
                             jQuery("#s-lib-cpane-33887159").slick("slickPause");
-                            jQuery(this).attr("aria-label", "~[455]~");
+                            jQuery(this).attr("aria-label", "Play");
                             jQuery(this).html("<i class=\"fa fa-solid fa-play-circle-o\"></i>");
                         } else {
                             jQuery("#s-lib-cpane-33887159").slick("slickPlay");
-                            jQuery(this).attr("aria-label", "~[456]~");
+                            jQuery(this).attr("aria-label", "Pause");
                             jQuery(this).html("<i class=\"fa fa-solid fa-pause-circle-o\"></i>");
                         }
                     });
