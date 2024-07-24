@@ -11218,6 +11218,10 @@ ul.sort_list li {
     margin-bottom: 30px
 }
 
+.mg-bottom-none {
+    margin-bottom: 0
+}
+
 .mg-right {
     margin-right: 15px
 }
@@ -11542,6 +11546,16 @@ a.btn-confirm>span:last-of-type {
     margin-top: 20px;
     background-color: #f5f5f5;
     border-top: 1px solid #e5e5e5
+}
+
+.form-actions-flex {
+    padding: 19px 20px 20px;
+    margin-top: 20px;
+    background-color: #f5f5f5;
+    border-top: 1px solid #e5e5e5;
+    display: flex;
+    align-items: center;
+    justify-content: space-between
 }
 
 .form-actions:after,
@@ -12227,6 +12241,72 @@ table.s-lc-whw {
     background: #fff
 }
 
+la-faq-file,
+la-faq-link,
+la-faq-media {
+    display: block
+}
+
+la-faq-file .btn-itemRestore,
+la-faq-keyword .btn-itemRestore,
+la-faq-link .btn-itemRestore,
+la-faq-media .btn-itemRestore,
+la-faq-topic .btn-itemRestore {
+    display: none
+}
+
+la-faq-file[data-action="2"]>a,
+la-faq-keyword[data-action="2"]>span:first-of-type,
+la-faq-link[data-action="2"]>a,
+la-faq-media[data-action="2"]>a,
+la-faq-topic[data-action="2"]>span:first-of-type {
+    text-decoration: line-through;
+    color: #8a1915;
+    background-color: transparent
+}
+
+la-faq-file[data-action="2"] .btn-fileEdit,
+la-faq-keyword[data-action="2"] .btn-keywordEdit,
+la-faq-link[data-action="2"] .btn-linkEdit,
+la-faq-media[data-action="2"] .btn-mediaEdit,
+la-faq-topic[data-action="2"] .btn-topicEdit {
+    display: none
+}
+
+la-faq-file[data-action="2"] .btn-itemDelete,
+la-faq-keyword[data-action="2"] .btn-itemDelete,
+la-faq-link[data-action="2"] .btn-itemDelete,
+la-faq-media[data-action="2"] .btn-itemDelete,
+la-faq-topic[data-action="2"] .btn-itemDelete {
+    display: none
+}
+
+la-faq-file[data-action="2"] .btn-itemRestore,
+la-faq-keyword[data-action="2"] .btn-itemRestore,
+la-faq-link[data-action="2"] .btn-itemRestore,
+la-faq-media[data-action="2"] .btn-itemRestore,
+la-faq-topic[data-action="2"] .btn-itemRestore {
+    display: inline-block
+}
+
+ul.sorting la-faq-file .actions,
+ul.sorting la-faq-link .actions,
+ul.sorting la-faq-media .actions {
+    display: none
+}
+
+.form-control {
+    border-color: #919191
+}
+
+.form-control~.input-group-btn>.btn-default {
+    border-color: #919191
+}
+
+button.multiselect.dropdown-toggle {
+    border-color: #919191
+}
+
 .s-srch-top-header {
     font-weight: 700;
     font-size: 16px
@@ -12457,7 +12537,7 @@ aeon-datepicker>input {
     padding: 6px 12px;
     color: #2c2c2c;
     background-color: #fff;
-    border: 1px solid #ccc;
+    border: 1px solid #919191;
     border-radius: 4px;
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
     transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s
