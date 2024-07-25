@@ -10721,7 +10721,7 @@ label.itemchecklabel {
     margin-bottom: 0
 }
 
-.settingform .input-group {
+.settingform .input-group:not(:has(>.multiselect-search)) {
     width: 50%
 }
 
