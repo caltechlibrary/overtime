@@ -1,3 +1,7 @@
+.cke_editable {
+    color: #000
+}
+
 #s-lib-public-header {
     padding-bottom: 10px
 }
@@ -549,7 +553,7 @@ a {
 #s-lib-admin-main .dataTables_paginate .paginate_button.disabled a,
 #s-lib-public-main .dataTables_paginate .paginate_button.disabled a,
 .s-lg-disabled-text-contrast {
-    color: #333
+    color: #000
 }
 
 .s-lg-link-weight-contrast {
@@ -563,7 +567,7 @@ button.slick-prev.slick-arrow:focus {
 }
 
 .discussion_file_parent_focused {
-    color: #333;
+    color: #000;
     background-color: #e6e6e6;
     border-color: #8c8c8c
 }
@@ -912,6 +916,7 @@ textarea {
 }
 
 .s-lib-main {
+    color: #000;
     padding-top: 10px;
     padding-bottom: 10px
 }
