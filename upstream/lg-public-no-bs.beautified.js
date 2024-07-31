@@ -30,12 +30,16 @@ springSpace.public = {}, springSpace.public._construct = function() {
                                 placement: "right"
                             }), e.action == springSpace.publicObj.constant.PROCESSING.ACTION_LOAD_GUIDE_LIST) guide_text = springSpace.publicObj.homeNavButtons[e.action] + " " + jQuery("#s-lg-guide-order option:selected").text();
                         else {
-                            var i = springSpace.publicObj.constant.CONTENT.HOME_GUIDES_TITLE || "Guides";
-                            guide_text = i + " " + springSpace.publicObj.homeNavButtons[e.action]
+                            var a = springSpace.publicObj.constant.CONTENT.HOME_GUIDES_TITLE || "Guides";
+                            guide_text = a + " " + springSpace.publicObj.homeNavButtons[e.action]
                         }
                         document.title = guide_text + " - " + springSpace.publicObj.system_name + " at " + springSpace.publicObj.customer.name, springSpace.homepage.default_list_order = springSpace.homepage.mapGuideSortIdToQSId(e.order), jQuery("#s-lg-guide-order > option[value='" + e.order + "']").prop("selected", !0), springSpace.homepage.processPushState({
                             nav: e.nav
-                        })
+                        }), 172 === e.action && (jQuery(".panel-collapse").on("shown.bs.collapse", (function() {
+                            jQuery(".panel-default .panel-heading a").removeAttr("tabindex")
+                        })), jQuery(".panel-collapse").on("hidden.bs.collapse", (function() {
+                            jQuery(".panel-default .panel-heading a").removeAttr("tabindex")
+                        })))
                     }
                 else jQuery("#" + e.elt_id).html('<div class="alert alert-danger"><div>Sorry, there was a problem loading the list. ' + errorThrown + "</div><div>Please try again. If the problem persists contact support@springshare.com.</div></div>")
             },
@@ -140,13 +144,13 @@ springSpace.public = {}, springSpace.public._construct = function() {
                 t = this.getSelectTexts(".s-lg-sel-subjects"),
                 s = this.getSelectTexts(".s-lg-sel-az-types"),
                 r = this.getSelectTexts(".s-lg-sel-az-vendors"),
-                i = this.getSelectTexts(".s-lg-sel-az-access-modes"),
-                a = e + t + s + r + i;
-            if ("" === a || "*:*" === a) return;
+                a = this.getSelectTexts(".s-lg-sel-az-access-modes"),
+                i = e + t + s + r + a;
+            if ("" === i || "*:*" === i) return;
             springSpace.springTrack.trackSearch({
                 _st_group_id: 0,
                 _st_guide_id: 0,
-                _st_search_az_access_modes: i,
+                _st_search_az_access_modes: a,
                 _st_search_az_types: s,
                 _st_search_az_vendors: r,
                 _st_search_subjects: t,
@@ -247,15 +251,15 @@ springSpace.public = {}, springSpace.public._construct = function() {
             site_id: e.site_id
         });
         var r = this,
-            i = function(e, t) {
+            a = function(e, t) {
                 if (!t.length) return;
                 let s = [];
                 t.forEach((function(e, t) {
                     e = (e = e.replace(/ \(\d+\)/i, "")).replace("↳", "").trim(), s.push(springSpace.Util.escapeHtml(e))
                 })), e.push(s.join(", "))
             },
-            a = "" !== this.getSearchTerm(),
-            l = a ? "/process/az/dbsearch" : "/process/az/dblist";
+            i = "" !== this.getSearchTerm(),
+            l = i ? "/process/az/dbsearch" : "/process/az/dblist";
         let o = window.innerWidth <= 575.98 ? 10 : 0;
         xhr = jQuery.ajax({
             url: l,
@@ -293,9 +297,9 @@ springSpace.public = {}, springSpace.public._construct = function() {
                         }), jQuery("#s-lg-az-filter-cols .s-lg-sel-az-access-modes").select2({
                             placeholder: l.data.label_all_access_modes ?? "Access Modes",
                             theme: "bootstrap5"
-                        })), jQuery("#s-lg-az-index").toggle(!a);
+                        })), jQuery("#s-lg-az-index").toggle(!i);
                         var n = [];
-                        i(n, r.getAZFilterData("s-lg-sel-subjects")), i(n, r.getAZFilterData("s-lg-sel-az-types")), i(n, r.getAZFilterData("s-lg-sel-az-vendors")), i(n, a ? [r.getSearchTerm()] : []);
+                        a(n, r.getAZFilterData("s-lg-sel-subjects")), a(n, r.getAZFilterData("s-lg-sel-az-types")), a(n, r.getAZFilterData("s-lg-sel-az-vendors")), a(n, i ? [r.getSearchTerm()] : []);
                         var c = (n.length > 0 ? ": " : "") + n.join("; "),
                             p = n.join("; ");
                         total_db_count = l.data.count ?? 0, is_bootstrap ? (r.writeMobileAzFilters(l.data), r.setMobileAzFormValues(l.data), 0 === (l.data.subjects ?? []).length && 0 === (l.data.types ?? []).length && 0 === (l.data.vendors ?? []).length && "" === (l.data.q ?? "") && (jQuery(".s-lg-az-search").val(""), jQuery(".s-lg-sel-subjects").val([]), jQuery(".s-lg-sel-az-types").val([]), jQuery(".s-lg-sel-az-vendors").val([]), jQuery("#az-public-mobile-filters").show())) : jQuery("#s-lg-az-result-count").html(l.data.list_count + (p.length > 0 ? " " + l.data.list_count_for + " " + p : "")), t && "" !== springSpace.azList.init_filters.alpha && r.quickFilterAzByFirst(springSpace.azList.init_filters.alpha, e.site_id), is_bootstrap || jQuery("#s-lib-public-header-title").html(title_base + c), jQuery("title").html(title_base + c)
@@ -374,7 +378,7 @@ springSpace.public = {}, springSpace.public._construct = function() {
     })), jQuery("#s-lib-scroll-top").click((function(e) {
         return e.preventDefault(), jQuery("html, body").animate({
             scrollTop: 0
-        }, 750), !1
+        }, 750), jQuery("body").find("a:focusable:first").focus(), !1
     })), jQuery(".az-bs-tooltip").tooltip()
 }));
 /*! springshare 1.11.0 */
