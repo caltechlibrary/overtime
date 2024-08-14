@@ -1176,7 +1176,7 @@
         "thumbnail_url": "",
         "type_id": 3,
         "type_label": "Subject Guide",
-        "updated": "2024-07-25 15:51:41",
+        "updated": "2024-08-13 22:19:19",
         "url": "https://library.caltech.edu/c.php?g=512661"
     },
     {
@@ -6356,7 +6356,7 @@
         "thumbnail_url": "",
         "type_id": 3,
         "type_label": "Subject Guide",
-        "updated": "2024-08-12 22:15:12",
+        "updated": "2024-08-13 18:21:09",
         "url": "https://library.caltech.edu/c.php?g=512630"
     },
     {
@@ -15669,12 +15669,12 @@
                 "column_layout": "{\"1\":{\"span\":12}}",
                 "created": "2024-07-17 22:30:00",
                 "description": "",
-                "enable_display": "0",
+                "enable_display": "1",
                 "enable_newwin": "0",
                 "er_course_id": "0",
-                "friendly_url": "https://library.caltech.edu/crossing-over/map",
+                "friendly_url": "https://library.caltech.edu/crossing-over/visit",
                 "id": "10456314",
-                "name": "Crossing Over Campus Map",
+                "name": "Visit",
                 "num_cols": "1",
                 "parent_id": "0",
                 "position": "3",
@@ -15682,7 +15682,7 @@
                 "slug_id": "3080633",
                 "source_id": "0",
                 "type_id": "1",
-                "updated": "2024-08-12 19:03:54",
+                "updated": "2024-08-13 20:32:48",
                 "url": "https://library.caltech.edu/c.php?g=1411834&p=10456314"
             },
             {
@@ -15796,7 +15796,7 @@
         "thumbnail_url": "",
         "type_id": 1,
         "type_label": "General Purpose Guide",
-        "updated": "2024-08-12 22:32:41",
+        "updated": "2024-08-13 20:32:48",
         "url": "https://library.caltech.edu/c.php?g=1411834"
     },
     {
