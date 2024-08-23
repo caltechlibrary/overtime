@@ -6022,7 +6022,7 @@
                 "slug_id": "2151189",
                 "source_id": "0",
                 "type_id": "1",
-                "updated": "2022-09-20 23:16:15",
+                "updated": "2024-08-22 22:32:26",
                 "url": "https://library.caltech.edu/c.php?g=512630&p=3502740"
             },
             {
@@ -6356,7 +6356,7 @@
         "thumbnail_url": "",
         "type_id": 3,
         "type_label": "Subject Guide",
-        "updated": "2024-08-21 18:49:04",
+        "updated": "2024-08-22 22:32:26",
         "url": "https://library.caltech.edu/c.php?g=512630"
     },
     {
@@ -6401,7 +6401,7 @@
                 "name": "PMA Journal Cancellations 2015+",
                 "num_cols": "2",
                 "parent_id": "0",
-                "position": "7",
+                "position": "8",
                 "redirect_url": "",
                 "slug_id": "0",
                 "source_id": "0",
@@ -6461,7 +6461,7 @@
                 "name": "Planetary Sciences",
                 "num_cols": "1",
                 "parent_id": "0",
-                "position": "6",
+                "position": "7",
                 "redirect_url": "",
                 "slug_id": "3067067",
                 "source_id": "0",
@@ -6521,7 +6521,7 @@
                 "name": "Additional Resources",
                 "num_cols": "1",
                 "parent_id": "0",
-                "position": "8",
+                "position": "9",
                 "redirect_url": "",
                 "slug_id": "0",
                 "source_id": "0",
@@ -6628,6 +6628,26 @@
                 "type_id": "1",
                 "updated": "2024-08-15 21:59:54",
                 "url": "https://library.caltech.edu/c.php?g=512637&p=10507517"
+            },
+            {
+                "column_layout": "{\"1\":{\"span\":12}}",
+                "created": "2024-08-22 21:01:18",
+                "description": "",
+                "enable_display": "0",
+                "enable_newwin": "0",
+                "er_course_id": "0",
+                "friendly_url": null,
+                "id": "10520838",
+                "name": "Physics",
+                "num_cols": "1",
+                "parent_id": "0",
+                "position": "6",
+                "redirect_url": "",
+                "slug_id": "0",
+                "source_id": "0",
+                "type_id": "1",
+                "updated": "2024-08-22 21:01:18",
+                "url": "https://library.caltech.edu/c.php?g=512637&p=10520838"
             }
         ],
         "published": "2019-01-29 22:20:11",
@@ -6640,7 +6660,7 @@
         "thumbnail_url": "",
         "type_id": 3,
         "type_label": "Subject Guide",
-        "updated": "2024-08-20 23:33:09",
+        "updated": "2024-08-22 22:41:42",
         "url": "https://library.caltech.edu/c.php?g=512637"
     },
     {
@@ -9764,7 +9784,7 @@
         "thumbnail_url": "",
         "type_id": 1,
         "type_label": "General Purpose Guide",
-        "updated": "2024-08-22 00:13:49",
+        "updated": "2024-08-22 20:50:54",
         "url": "https://library.caltech.edu/c.php?g=1228721"
     },
     {
@@ -15400,7 +15420,7 @@
         "thumbnail_url": "",
         "type_id": 4,
         "type_label": "Topic Guide",
-        "updated": "2024-08-21 23:57:26",
+        "updated": "2024-08-22 22:49:59",
         "url": "https://library.caltech.edu/c.php?g=1216793"
     },
     {
