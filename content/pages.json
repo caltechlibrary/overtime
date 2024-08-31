@@ -5964,7 +5964,7 @@
         "thumbnail_url": "",
         "type_id": 3,
         "type_label": "Subject Guide",
-        "updated": "2024-08-23 23:48:26",
+        "updated": "2024-08-30 21:36:36",
         "url": "https://library.caltech.edu/c.php?g=512630"
     },
     {
@@ -5978,7 +5978,7 @@
         "owner_id": 84549,
         "pages": [
             {
-                "column_layout": "{\"1\":{\"span\":\"4\"},\"2\":{\"span\":\"4\"},\"3\":{\"span\":\"4\"}}",
+                "column_layout": "{\"1\":{\"span\":\"5\"},\"2\":{\"span\":\"4\"},\"3\":{\"span\":\"3\"}}",
                 "created": "2009-02-03 18:14:58",
                 "description": "",
                 "enable_display": "1",
@@ -5994,7 +5994,7 @@
                 "slug_id": "3066316",
                 "source_id": "0",
                 "type_id": "1",
-                "updated": "2024-06-24 21:59:54",
+                "updated": "2024-08-30 22:02:59",
                 "url": "https://library.caltech.edu/c.php?g=512637&p=3503003"
             },
             {
@@ -6018,7 +6018,7 @@
                 "url": "https://library.caltech.edu/c.php?g=512637&p=5898680"
             },
             {
-                "column_layout": "{\"1\":{\"span\":12}}",
+                "column_layout": "{\"1\":{\"span\":\"6\"},\"2\":{\"span\":\"6\"}}",
                 "created": "2024-06-24 21:00:52",
                 "description": "",
                 "enable_display": "1",
@@ -6027,18 +6027,18 @@
                 "friendly_url": "https://library.caltech.edu/pma/databases",
                 "id": "10419509",
                 "name": "Databases in PMA",
-                "num_cols": "1",
+                "num_cols": "2",
                 "parent_id": "0",
                 "position": "3",
                 "redirect_url": "",
                 "slug_id": "3066318",
                 "source_id": "0",
                 "type_id": "1",
-                "updated": "2024-06-24 21:31:20",
+                "updated": "2024-08-30 21:22:02",
                 "url": "https://library.caltech.edu/c.php?g=512637&p=10419509"
             },
             {
-                "column_layout": "{\"1\":{\"span\":9},\"2\":{\"span\":3}}",
+                "column_layout": "{\"1\":{\"span\":\"6\"},\"2\":{\"span\":\"6\"}}",
                 "created": "2024-06-24 21:42:14",
                 "description": "",
                 "enable_display": "1",
@@ -6046,7 +6046,7 @@
                 "er_course_id": "0",
                 "friendly_url": "https://library.caltech.edu/pma/papers",
                 "id": "10419725",
-                "name": "Conference Papers, Reports, Preprints and Abstracts in PMA",
+                "name": "Conferences, Reports, Preprints and Abstracts in PMA",
                 "num_cols": "2",
                 "parent_id": "0",
                 "position": "4",
@@ -6054,7 +6054,7 @@
                 "slug_id": "3066319",
                 "source_id": "0",
                 "type_id": "1",
-                "updated": "2024-06-24 21:42:43",
+                "updated": "2024-08-30 21:22:42",
                 "url": "https://library.caltech.edu/c.php?g=512637&p=10419725"
             },
             {
@@ -6121,7 +6121,7 @@
                 "column_layout": "{\"1\":{\"span\":12}}",
                 "created": "2024-08-15 21:53:53",
                 "description": "More helpful resources to help you with your research including open access, preprints, publishers and societies, research data, and using Zotero.",
-                "enable_display": "0",
+                "enable_display": "1",
                 "enable_newwin": "0",
                 "er_course_id": "0",
                 "friendly_url": null,
@@ -6134,7 +6134,7 @@
                 "slug_id": "0",
                 "source_id": "0",
                 "type_id": "1",
-                "updated": "2024-08-15 21:55:28",
+                "updated": "2024-08-30 21:25:23",
                 "url": "https://library.caltech.edu/c.php?g=512637&p=10507504"
             },
             {
@@ -6161,7 +6161,7 @@
                 "column_layout": "{\"1\":{\"span\":12}}",
                 "created": "2024-08-15 21:55:47",
                 "description": "",
-                "enable_display": "0",
+                "enable_display": "1",
                 "enable_newwin": "0",
                 "er_course_id": "0",
                 "friendly_url": null,
@@ -6174,7 +6174,7 @@
                 "slug_id": "0",
                 "source_id": "0",
                 "type_id": "1",
-                "updated": "2024-08-15 21:55:47",
+                "updated": "2024-08-30 21:25:52",
                 "url": "https://library.caltech.edu/c.php?g=512637&p=10507509"
             },
             {
@@ -6194,14 +6194,14 @@
                 "slug_id": "0",
                 "source_id": "0",
                 "type_id": "1",
-                "updated": "2024-08-15 21:56:15",
+                "updated": "2024-08-30 21:38:46",
                 "url": "https://library.caltech.edu/c.php?g=512637&p=10507510"
             },
             {
                 "column_layout": "{\"1\":{\"span\":12}}",
                 "created": "2024-08-15 21:56:26",
                 "description": "",
-                "enable_display": "0",
+                "enable_display": "1",
                 "enable_newwin": "0",
                 "er_course_id": "0",
                 "friendly_url": null,
@@ -6214,14 +6214,14 @@
                 "slug_id": "0",
                 "source_id": "0",
                 "type_id": "1",
-                "updated": "2024-08-15 21:56:26",
+                "updated": "2024-08-30 21:25:15",
                 "url": "https://library.caltech.edu/c.php?g=512637&p=10507511"
             },
             {
                 "column_layout": "",
                 "created": "2024-08-15 21:59:54",
                 "description": "",
-                "enable_display": "0",
+                "enable_display": "1",
                 "enable_newwin": "0",
                 "er_course_id": "0",
                 "friendly_url": null,
@@ -6234,7 +6234,7 @@
                 "slug_id": "0",
                 "source_id": "9310819",
                 "type_id": "1",
-                "updated": "2024-08-15 21:59:54",
+                "updated": "2024-08-30 21:25:57",
                 "url": "https://library.caltech.edu/c.php?g=512637&p=10507517"
             },
             {
@@ -6268,7 +6268,7 @@
         "thumbnail_url": "",
         "type_id": 3,
         "type_label": "Subject Guide",
-        "updated": "2024-08-29 23:35:57",
+        "updated": "2024-08-31 04:37:28",
         "url": "https://library.caltech.edu/c.php?g=512637"
     },
     {
@@ -9000,7 +9000,7 @@
         "thumbnail_url": "",
         "type_id": 1,
         "type_label": "General Purpose Guide",
-        "updated": "2024-08-28 23:48:02",
+        "updated": "2024-08-30 20:14:22",
         "url": "https://library.caltech.edu/c.php?g=1231280"
     },
     {
