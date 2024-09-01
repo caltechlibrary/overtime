@@ -5614,7 +5614,7 @@
                 "url": "https://library.caltech.edu/c.php?g=512630&p=3502738"
             },
             {
-                "column_layout": "{\"1\":{\"span\":12}}",
+                "column_layout": "{\"1\":{\"span\":\"6\"},\"2\":{\"span\":\"6\"}}",
                 "created": "2008-11-07 23:02:49",
                 "description": "Field- and laboratory-based approach to understanding tectonic, petrologic, climatic, and surface processes.",
                 "enable_display": "1",
@@ -5623,14 +5623,14 @@
                 "friendly_url": "https://library.caltech.edu/geology/geology",
                 "id": "3502740",
                 "name": "Geology",
-                "num_cols": "1",
+                "num_cols": "2",
                 "parent_id": "0",
                 "position": "9",
                 "redirect_url": "",
                 "slug_id": "2151189",
                 "source_id": "0",
                 "type_id": "1",
-                "updated": "2024-08-22 22:32:26",
+                "updated": "2024-08-31 16:32:05",
                 "url": "https://library.caltech.edu/c.php?g=512630&p=3502740"
             },
             {
@@ -5964,7 +5964,7 @@
         "thumbnail_url": "",
         "type_id": 3,
         "type_label": "Subject Guide",
-        "updated": "2024-08-30 21:36:36",
+        "updated": "2024-08-31 16:36:48",
         "url": "https://library.caltech.edu/c.php?g=512630"
     },
     {
@@ -6268,7 +6268,7 @@
         "thumbnail_url": "",
         "type_id": 3,
         "type_label": "Subject Guide",
-        "updated": "2024-08-31 04:37:28",
+        "updated": "2024-08-31 16:14:50",
         "url": "https://library.caltech.edu/c.php?g=512637"
     },
     {
