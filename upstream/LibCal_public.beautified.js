@@ -116,7 +116,7 @@ function(e, t) {
     }
 
     function u(e, t, n, i) {
-        return jt(e, t, n, i, !0).utc()
+        return Ft(e, t, n, i, !0).utc()
     }
 
     function v(e) {
@@ -411,7 +411,7 @@ function(e, t) {
         Ce = 7,
         Oe = 8;
 
-    function je(e) {
+    function Fe(e) {
         return Te(e) ? 366 : 365
     }
     i("Y", 0, 0, function() {
@@ -428,7 +428,7 @@ function(e, t) {
     }), p.parseTwoDigitYear = function(e) {
         return b(e) + (68 < b(e) ? 1900 : 2e3)
     };
-    var C, Fe = Pe("FullYear", !0);
+    var C, je = Pe("FullYear", !0);
 
     function Pe(t, n) {
         return function(e) {
@@ -554,7 +554,7 @@ function(e, t) {
 
     function Be(e, t, n, i, r) {
         var a, t = 1 + 7 * (t - 1) + (7 + n - i) % 7 + Ge(e, i, r),
-            n = t <= 0 ? je(a = e - 1) + t : t > je(e) ? (a = e + 1, t - je(e)) : (a = e, t);
+            n = t <= 0 ? Fe(a = e - 1) + t : t > Fe(e) ? (a = e + 1, t - Fe(e)) : (a = e, t);
         return {
             year: a,
             dayOfYear: n
@@ -573,7 +573,7 @@ function(e, t) {
     function O(e, t, n) {
         var i = Ge(e, t, n),
             t = Ge(e + 1, t, n);
-        return (je(e) - i + t) / 7
+        return (Fe(e) - i + t) / 7
     }
     i("w", ["ww", 2], "wo", "week"), i("W", ["WW", 2], "Wo", "isoWeek"), c("w", n, l), c("ww", n, t), c("W", n, l), c("WW", n, t), xe(["w", "ww", "W", "WW"], function(e, t, n, i) {
         t[i.substr(0, 1)] = b(e)
@@ -710,7 +710,7 @@ function(e, t) {
             weekdaysShort: Xe,
             meridiemParse: /[ap]\.?m?\.?/i
         },
-        j = {},
+        F = {},
         ut = {};
 
     function dt(e) {
@@ -735,36 +735,36 @@ function(e, t) {
 
     function ht(t) {
         var e, n;
-        if (void 0 === j[t] && "undefined" != typeof module && module && module.exports && (n = t) && n.match("^[^/\\\\]*$")) try {
+        if (void 0 === F[t] && "undefined" != typeof module && module && module.exports && (n = t) && n.match("^[^/\\\\]*$")) try {
             e = ot._abbr, require("./locale/" + t), ft(e)
         } catch (e) {
-            j[t] = null
+            F[t] = null
         }
-        return j[t]
+        return F[t]
     }
 
     function ft(e, t) {
-        return e && ((t = y(t) ? F(e) : mt(e, t)) ? ot = t : "undefined" != typeof console && console.warn && console.warn("Locale " + e + " not found. Did you forget to load it?")), ot._abbr
+        return e && ((t = y(t) ? j(e) : mt(e, t)) ? ot = t : "undefined" != typeof console && console.warn && console.warn("Locale " + e + " not found. Did you forget to load it?")), ot._abbr
     }
 
     function mt(e, t) {
-        if (null === t) return delete j[e], null;
+        if (null === t) return delete F[e], null;
         var n, i = lt;
-        if (t.abbr = e, null != j[e]) J("defineLocaleOverride", "use moment.updateLocale(localeName, config) to change an existing locale. moment.defineLocale(localeName, config) should only be used for creating a new locale See http://momentjs.com/guides/#/warnings/define-locale/ for more info."), i = j[e]._config;
+        if (t.abbr = e, null != F[e]) J("defineLocaleOverride", "use moment.updateLocale(localeName, config) to change an existing locale. moment.defineLocale(localeName, config) should only be used for creating a new locale See http://momentjs.com/guides/#/warnings/define-locale/ for more info."), i = F[e]._config;
         else if (null != t.parentLocale)
-            if (null != j[t.parentLocale]) i = j[t.parentLocale]._config;
+            if (null != F[t.parentLocale]) i = F[t.parentLocale]._config;
             else {
                 if (null == (n = ht(t.parentLocale))) return ut[t.parentLocale] || (ut[t.parentLocale] = []), ut[t.parentLocale].push({
                     name: e,
                     config: t
                 }), null;
                 i = n._config
-            } return j[e] = new K(X(i, t)), ut[e] && ut[e].forEach(function(e) {
+            } return F[e] = new K(X(i, t)), ut[e] && ut[e].forEach(function(e) {
             mt(e.name, e.config)
-        }), ft(e), j[e]
+        }), ft(e), F[e]
     }
 
-    function F(e) {
+    function j(e) {
         var t;
         if (!(e = e && e._locale && e._locale._abbr ? e._locale._abbr : e)) return ot;
         if (!g(e)) {
@@ -879,7 +879,7 @@ function(e, t) {
     function Yt(e) {
         var t, n, i, r, a, s, o, l, u, d, c, h = [];
         if (!e._d) {
-            for (i = e, r = new Date(p.now()), n = i._useUTC ? [r.getUTCFullYear(), r.getUTCMonth(), r.getUTCDate()] : [r.getFullYear(), r.getMonth(), r.getDate()], e._w && null == e._a[M] && null == e._a[D] && (null != (r = (i = e)._w).GG || null != r.W || null != r.E ? (l = 1, u = 4, a = Tt(r.GG, i._a[S], qe(P(), 1, 4).year), s = Tt(r.W, 1), ((o = Tt(r.E, 1)) < 1 || 7 < o) && (d = !0)) : (l = i._locale._week.dow, u = i._locale._week.doy, c = qe(P(), l, u), a = Tt(r.gg, i._a[S], c.year), s = Tt(r.w, c.week), null != r.d ? ((o = r.d) < 0 || 6 < o) && (d = !0) : null != r.e ? (o = r.e + l, (r.e < 0 || 6 < r.e) && (d = !0)) : o = l), s < 1 || s > O(a, l, u) ? v(i)._overflowWeeks = !0 : null != d ? v(i)._overflowWeekday = !0 : (c = Be(a, s, o, l, u), i._a[S] = c.year, i._dayOfYear = c.dayOfYear)), null != e._dayOfYear && (r = Tt(e._a[S], n[S]), (e._dayOfYear > je(r) || 0 === e._dayOfYear) && (v(e)._overflowDayOfYear = !0), d = Ve(r, 0, e._dayOfYear), e._a[D] = d.getUTCMonth(), e._a[M] = d.getUTCDate()), t = 0; t < 3 && null == e._a[t]; ++t) e._a[t] = h[t] = n[t];
+            for (i = e, r = new Date(p.now()), n = i._useUTC ? [r.getUTCFullYear(), r.getUTCMonth(), r.getUTCDate()] : [r.getFullYear(), r.getMonth(), r.getDate()], e._w && null == e._a[M] && null == e._a[D] && (null != (r = (i = e)._w).GG || null != r.W || null != r.E ? (l = 1, u = 4, a = Tt(r.GG, i._a[S], qe(P(), 1, 4).year), s = Tt(r.W, 1), ((o = Tt(r.E, 1)) < 1 || 7 < o) && (d = !0)) : (l = i._locale._week.dow, u = i._locale._week.doy, c = qe(P(), l, u), a = Tt(r.gg, i._a[S], c.year), s = Tt(r.w, c.week), null != r.d ? ((o = r.d) < 0 || 6 < o) && (d = !0) : null != r.e ? (o = r.e + l, (r.e < 0 || 6 < r.e) && (d = !0)) : o = l), s < 1 || s > O(a, l, u) ? v(i)._overflowWeeks = !0 : null != d ? v(i)._overflowWeekday = !0 : (c = Be(a, s, o, l, u), i._a[S] = c.year, i._dayOfYear = c.dayOfYear)), null != e._dayOfYear && (r = Tt(e._a[S], n[S]), (e._dayOfYear > Fe(r) || 0 === e._dayOfYear) && (v(e)._overflowDayOfYear = !0), d = Ve(r, 0, e._dayOfYear), e._a[D] = d.getUTCMonth(), e._a[M] = d.getUTCDate()), t = 0; t < 3 && null == e._a[t]; ++t) e._a[t] = h[t] = n[t];
             for (; t < 7; t++) e._a[t] = h[t] = null == e._a[t] ? 2 === t ? 1 : 0 : e._a[t];
             24 === e._a[x] && 0 === e._a[T] && 0 === e._a[Y] && 0 === e._a[Ye] && (e._nextDay = !0, e._a[x] = 0), e._d = (e._useUTC ? Ve : ze).apply(null, h), a = e._useUTC ? e._d.getUTCDay() : e._d.getDay(), null != e._tzm && e._d.setUTCMinutes(e._d.getUTCMinutes() - e._tzm), e._nextDay && (e._a[x] = 24), e._w && void 0 !== e._w.d && e._w.d !== a && (v(e).weekdayMismatch = !0)
         }
@@ -901,7 +901,7 @@ function(e, t) {
     function Ot(e) {
         var t, n, i, r = e._i,
             a = e._f;
-        if (e._locale = e._locale || F(e._l), null === r || void 0 === a && "" === r) return H({
+        if (e._locale = e._locale || j(e._l), null === r || void 0 === a && "" === r) return H({
             nullInput: !0
         });
         if ("string" == typeof r && (e._i = r = e._locale.preparse(r)), w(r)) return new B(pt(r));
@@ -925,13 +925,13 @@ function(e, t) {
         return I(e) || (e._d = null), e
     }
 
-    function jt(e, t, n, i, r) {
+    function Ft(e, t, n, i, r) {
         var a = {};
         return !0 !== t && !1 !== t || (i = t, t = void 0), !0 !== n && !1 !== n || (i = n, n = void 0), (L(e) && $(e) || g(e) && 0 === e.length) && (e = void 0), a._isAMomentObject = !0, a._useUTC = a._isUTC = r, a._l = n, a._i = e, a._f = t, a._strict = i, (r = new B(pt(Ot(r = a))))._nextDay && (r.add(1, "d"), r._nextDay = void 0), r
     }
 
     function P(e, t, n, i) {
-        return jt(e, t, n, i, !1)
+        return Ft(e, t, n, i, !1)
     }
     p.createFromInputFallback = e("value provided is not in a recognized RFC2822 or ISO format. moment construction falls back to js Date(), which is not reliable across all browsers and versions. Non RFC2822/ISO date formats are discouraged. Please refer to http://momentjs.com/guides/#/warnings/js-date/ for more info.", function(e) {
         e._d = new Date(e._i + (e._useUTC ? " UTC" : ""))
@@ -944,7 +944,7 @@ function(e, t) {
         return this.isValid() && e.isValid() ? this < e ? this : e : H()
     });
 
-    function Ft(e, t) {
+    function jt(e, t) {
         var n, i;
         if (!(t = 1 === t.length && g(t[0]) ? t[0] : t).length) return P();
         for (n = t[0], i = 1; i < t.length; ++i) t[i].isValid() && !t[i][e](n) || (n = t[i]);
@@ -973,7 +973,7 @@ function(e, t) {
                     if (i) return !1;
                     parseFloat(e[Pt[n]]) !== b(e[Pt[n]]) && (i = !0)
                 } return !0
-        }(e), this._milliseconds = +u + 1e3 * l + 6e4 * o + 1e3 * s * 60 * 60, this._days = +a + 7 * r, this._months = +i + 3 * n + 12 * t, this._data = {}, this._locale = F(), this._bubble()
+        }(e), this._milliseconds = +u + 1e3 * l + 6e4 * o + 1e3 * s * 60 * 60, this._days = +a + 7 * r, this._months = +i + 3 * n + 12 * t, this._data = {}, this._locale = j(), this._bubble()
     }
 
     function Et(e) {
@@ -1105,7 +1105,7 @@ function(e, t) {
     }
 
     function Xt(e) {
-        return void 0 === e ? this._locale._abbr : (null != (e = F(e)) && (this._locale = e), this)
+        return void 0 === e ? this._locale._abbr : (null != (e = j(e)) && (this._locale = e), this)
     }
     p.defaultFormat = "YYYY-MM-DDTHH:mm:ssZ", p.defaultFormatUtc = "YYYY-MM-DDTHH:mm:ss[Z]";
     Ke = e("moment().lang() is deprecated. Instead, use moment().localeData() to get the language configuration. Use moment().locale() to change languages.", function(e) {
@@ -1438,7 +1438,7 @@ function(e, t) {
         for (var e, t, n = this.localeData().eras(), i = 0, r = n.length; i < r; ++i)
             if (e = n[i].since <= n[i].until ? 1 : -1, t = this.clone().startOf("day").valueOf(), n[i].since <= t && t <= n[i].until || n[i].until <= t && t <= n[i].since) return (this.year() - p(n[i].since).year()) * e + n[i].offset;
         return this.year()
-    }, l.year = Fe, l.isLeapYear = function() {
+    }, l.year = je, l.isLeapYear = function() {
         return Te(this.year())
     }, l.weekYear = function(e) {
         return ln.call(this, e, this.week(), this.weekday() + this.localeData()._week.dow, this.localeData()._week.dow, this.localeData()._week.doy)
@@ -1503,7 +1503,7 @@ function(e, t) {
         return this._isUTC ? "UTC" : ""
     }, l.zoneName = function() {
         return this._isUTC ? "Coordinated Universal Time" : ""
-    }, l.dates = e("dates accessor is deprecated. Use date instead.", ye), l.months = e("months accessor is deprecated. Use month instead", He), l.years = e("years accessor is deprecated. Use year instead", Fe), l.zone = e("moment().zone is deprecated, use moment().utcOffset instead. http://momentjs.com/guides/#/warnings/zone/", function(e, t) {
+    }, l.dates = e("dates accessor is deprecated. Use date instead.", ye), l.months = e("months accessor is deprecated. Use month instead", He), l.years = e("years accessor is deprecated. Use year instead", je), l.zone = e("moment().zone is deprecated, use moment().utcOffset instead. http://momentjs.com/guides/#/warnings/zone/", function(e, t) {
         return null != e ? (this.utcOffset(e = "string" != typeof e ? -e : e, t), this) : -this.utcOffset()
     }), l.isDSTShifted = e("isDSTShifted is deprecated. See http://momentjs.com/guides/#/warnings/dst-shifted/ for more information", function() {
         var e, t;
@@ -1515,7 +1515,7 @@ function(e, t) {
     d = K.prototype;
 
     function hn(e, t, n, i) {
-        var r = F(),
+        var r = j(),
             i = u().set(i, t);
         return r[n](i, e)
     }
@@ -1528,7 +1528,7 @@ function(e, t) {
 
     function mn(e, t, n, i) {
         t = ("boolean" == typeof e ? _(t) && (n = t, t = void 0) : (t = e, e = !1, _(n = t) && (n = t, t = void 0)), t || "");
-        var r, a = F(),
+        var r, a = j(),
             s = e ? a._week.dow : 0,
             o = [];
         if (null != n) return hn(t, (n + s) % 7, i, "day");
@@ -1557,7 +1557,7 @@ function(e, t) {
         for (n in e) h(e, n) && (s(t = e[n]) ? this[n] = t : this["_" + n] = t);
         this._config = e, this._dayOfMonthOrdinalParseLenient = new RegExp((this._dayOfMonthOrdinalParse.source || this._ordinalParse.source) + "|" + /\d{1,2}/.source)
     }, d.eras = function(e, t) {
-        for (var n, i = this._eras || F("en")._eras, r = 0, a = i.length; r < a; ++r) switch ("string" == typeof i[r].since && (n = p(i[r].since).startOf("day"), i[r].since = n.valueOf()), typeof i[r].until) {
+        for (var n, i = this._eras || j("en")._eras, r = 0, a = i.length; r < a; ++r) switch ("string" == typeof i[r].since && (n = p(i[r].since).startOf("day"), i[r].since = n.valueOf()), typeof i[r].until) {
             case "undefined":
                 i[r].until = 1 / 0;
                 break;
@@ -1667,7 +1667,7 @@ function(e, t) {
             var t = e % 10;
             return e + (1 === b(e % 100 / 10) ? "th" : 1 == t ? "st" : 2 == t ? "nd" : 3 == t ? "rd" : "th")
         }
-    }), p.lang = e("moment.lang is deprecated. Use moment.locale instead.", ft), p.langData = e("moment.langData is deprecated. Use moment.localeData instead.", F);
+    }), p.lang = e("moment.lang is deprecated. Use moment.locale instead.", ft), p.langData = e("moment.langData is deprecated. Use moment.localeData instead.", j);
     var pn = Math.abs;
 
     function gn(e, t, n, i) {
@@ -1702,7 +1702,7 @@ function(e, t) {
     var _e = bn("milliseconds"),
         fe = bn("seconds"),
         ye = bn("minutes"),
-        Fe = bn("hours"),
+        je = bn("hours"),
         d = bn("days"),
         kn = bn("months"),
         Sn = bn("years");
@@ -1788,7 +1788,7 @@ function(e, t) {
         return N(this)
     }, E.get = function(e) {
         return e = o(e), this.isValid() ? this[e + "s"]() : NaN
-    }, E.milliseconds = _e, E.seconds = fe, E.minutes = ye, E.hours = Fe, E.days = d, E.weeks = function() {
+    }, E.milliseconds = _e, E.seconds = fe, E.minutes = ye, E.hours = je, E.days = d, E.weeks = function() {
         return m(this.days() / 7)
     }, E.months = kn, E.years = Sn, E.humanize = function(e, t) {
         var n, i;
@@ -1798,9 +1798,9 @@ function(e, t) {
     }), k("x", function(e, t, n) {
         n._d = new Date(b(e))
     }), p.version = "2.30.1", U = P, p.fn = l, p.min = function() {
-        return Ft("isBefore", [].slice.call(arguments, 0))
+        return jt("isBefore", [].slice.call(arguments, 0))
     }, p.max = function() {
-        return Ft("isAfter", [].slice.call(arguments, 0))
+        return jt("isAfter", [].slice.call(arguments, 0))
     }, p.now = function() {
         return Date.now ? Date.now() : +new Date
     }, p.utc = u, p.unix = function(e) {
@@ -1811,15 +1811,15 @@ function(e, t) {
         return mn(e, t, n, "weekdays")
     }, p.parseZone = function() {
         return P.apply(null, arguments).parseZone()
-    }, p.localeData = F, p.isDuration = Et, p.monthsShort = function(e, t) {
+    }, p.localeData = j, p.isDuration = Et, p.monthsShort = function(e, t) {
         return fn(e, t, "monthsShort")
     }, p.weekdaysMin = function(e, t, n) {
         return mn(e, t, n, "weekdaysMin")
     }, p.defineLocale = mt, p.updateLocale = function(e, t) {
         var n, i;
-        return null != t ? (i = lt, null != j[e] && null != j[e].parentLocale ? j[e].set(X(j[e]._config, t)) : (t = X(i = null != (n = ht(e)) ? n._config : i, t), null == n && (t.abbr = e), (i = new K(t)).parentLocale = j[e], j[e] = i), ft(e)) : null != j[e] && (null != j[e].parentLocale ? (j[e] = j[e].parentLocale, e === ft() && ft(e)) : null != j[e] && delete j[e]), j[e]
+        return null != t ? (i = lt, null != F[e] && null != F[e].parentLocale ? F[e].set(X(F[e]._config, t)) : (t = X(i = null != (n = ht(e)) ? n._config : i, t), null == n && (t.abbr = e), (i = new K(t)).parentLocale = F[e], F[e] = i), ft(e)) : null != F[e] && (null != F[e].parentLocale ? (F[e] = F[e].parentLocale, e === ft() && ft(e)) : null != F[e] && delete F[e]), F[e]
     }, p.locales = function() {
-        return ee(j)
+        return ee(F)
     }, p.weekdaysShort = function(e, t, n) {
         return mn(e, t, n, "weekdaysShort")
     }, p.normalizeUnits = o, p.relativeTimeRounding = function(e) {
@@ -1845,7 +1845,7 @@ function(e, t) {
 }(this, function() {
     "use strict";
     var t = Object.prototype.toString,
-        j = Array.isArray || function(e) {
+        F = Array.isArray || function(e) {
             return "[object Array]" === t.call(e)
         };
 
@@ -1853,7 +1853,7 @@ function(e, t) {
         return "function" == typeof e
     }
 
-    function F(e) {
+    function j(e) {
         return e.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, "\\$&")
     }
 
@@ -1901,8 +1901,8 @@ function(e, t) {
         }
 
         function m(e) {
-            if ("string" == typeof e && (e = e.split(E, 2)), !j(e) || 2 !== e.length) throw new Error("Invalid tags: " + e);
-            n = new RegExp(F(e[0]) + "\\s*"), i = new RegExp("\\s*" + F(e[1])), r = new RegExp("\\s*" + F("}" + e[1]))
+            if ("string" == typeof e && (e = e.split(E, 2)), !F(e) || 2 !== e.length) throw new Error("Invalid tags: " + e);
+            n = new RegExp(j(e[0]) + "\\s*"), i = new RegExp("\\s*" + j(e[1])), r = new RegExp("\\s*" + j("}" + e[1]))
         }
         m(t || R.tags);
         for (var p, g, y, _, v, w, b = new A(e); !b.eos();) {
@@ -2016,7 +2016,7 @@ function(e, t) {
             s = "",
             o = t.lookup(e[1]);
         if (o) {
-            if (j(o))
+            if (F(o))
                 for (var l = 0, u = o.length; l < u; ++l) s += this.renderTokens(e[4], t.push(o[l]), n, i, r);
             else if ("object" == typeof o || "string" == typeof o || "number" == typeof o) s += this.renderTokens(e[4], t.push(o), n, i, r);
             else if (d(o)) {
@@ -2029,7 +2029,7 @@ function(e, t) {
         }
     }, e.prototype.renderInverted = function(e, t, n, i, r) {
         var a = t.lookup(e[1]);
-        if (!a || j(a) && 0 === a.length) return this.renderTokens(e[4], t, n, i, r)
+        if (!a || F(a) && 0 === a.length) return this.renderTokens(e[4], t, n, i, r)
     }, e.prototype.indentPartial = function(e, t, n) {
         for (var i = t.replace(/[^ \t]/g, ""), r = e.split("\n"), a = 0; a < r.length; a++) r[a].length && (0 < a || !n) && (r[a] = i + r[a]);
         return r.join("\n")
@@ -2045,9 +2045,9 @@ function(e, t) {
     }, e.prototype.rawValue = function(e) {
         return e[1]
     }, e.prototype.getConfigTags = function(e) {
-        return j(e) ? e : e && "object" == typeof e ? e.tags : void 0
+        return F(e) ? e : e && "object" == typeof e ? e.tags : void 0
     }, e.prototype.getConfigEscape = function(e) {
-        if (e && "object" == typeof e && !j(e)) return e.escape
+        if (e && "object" == typeof e && !F(e)) return e.escape
     };
     var R = {
             name: "mustache.js",
@@ -2073,7 +2073,7 @@ function(e, t) {
     }, R.parse = function(e, t) {
         return o.parse(e, t)
     }, R.render = function(e, t, n, i) {
-        if ("string" != typeof e) throw new TypeError('Invalid template! Template should be a "string" but "' + (j(r = e) ? "array" : typeof r) + '" was given as the first argument for mustache#render(template, view, partials)');
+        if ("string" != typeof e) throw new TypeError('Invalid template! Template should be a "string" but "' + (F(r = e) ? "array" : typeof r) + '" was given as the first argument for mustache#render(template, view, partials)');
         var r;
         return o.render(e, t, n, i)
     }, R.escape = function(e) {
@@ -2209,7 +2209,7 @@ function enableButton(e, t) {
 function ajaxDialog(e, t, n, i, r) {
     r = void 0 !== r ? r : "Save", jQuery("#dialog").remove();
     var a = "s-lc-ajax-modal";
-    return jQuery('<div class="modal fade" id="dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"><div class="modal-dialog"' + (0 == i ? "" : ' style="width:' + i + 'px"') + '><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true" aria-label="Close">&times;</button><h4 class="modal-title" id="myModalLabel">' + n + '</h4></div><div class="modal-body" id="' + a + '"></div><div class="modal-footer"><button type="button" id="modalbtn" class="btn btn-primary pull-left">' + r + '</button> <button type="button" id="modalbtnc" class="btn btn-default pull-left" data-dismiss="modal">Close</button></div></div></div></div>').appendTo("body"), springyPublic.setLastFocusElement(), jQuery("#" + a).load(e + "?" + t, function() {
+    return jQuery('<div class="modal fade" id="dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"><div class="modal-dialog"' + (0 == i ? "" : ' style="width:' + i + 'px"') + '><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close">&times;</button><h4 class="modal-title" id="myModalLabel">' + n + '</h4></div><div class="modal-body" id="' + a + '"></div><div class="modal-footer"><button type="button" id="modalbtn" class="btn btn-primary pull-left">' + r + '</button> <button type="button" id="modalbtnc" class="btn btn-default pull-left" data-dismiss="modal">Close</button></div></div></div></div>').appendTo("body"), springyPublic.setLastFocusElement(), jQuery("#" + a).load(e + "?" + t, function() {
         jQuery("#dialog").modal(), jQuery("#dialog").on("hidden.bs.modal", function() {
             springyPublic.restoreLastFocusElement()
         })
@@ -2224,9 +2224,7 @@ function ajaxModal(e, t) {
         type: "get",
         dataType: "html"
     }).always(stopAlert).done(function(e) {
-        springyPublic.setLastFocusElement(), springyPublic.createModal(e, n), jQuery("#dialog").on("hidden.bs.modal", function() {
-            springyPublic.restoreLastFocusElement()
-        })
+        springyPublic.createModal(e, n)
     }).fail(ajaxErrorHandler), !1
 }
 
@@ -2442,7 +2440,9 @@ var springyPublic = {
         return ajaxModal("/timezone/list", 0)
     },
     createModal: function(e, t) {
-        jQuery('<div class="modal fade" id="dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"><div class="modal-dialog"' + t + '><div class="modal-content s-lc-public-modal-content">' + e + "</div></div></div>").appendTo("body").modal()
+        springyPublic.setLastFocusElement(), jQuery('<div class="modal fade" id="dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"><div class="modal-dialog"' + t + '><div class="modal-content s-lc-public-modal-content">' + e + "</div></div></div>").appendTo("body").modal().on("hidden.bs.modal", function() {
+            springyPublic.restoreLastFocusElement()
+        })
     },
     getFutureEventDates: function(t) {
         return 0 < jQuery("#future_" + t).html().trim().length || (jQuery("#future_loading_" + t).show(), jQuery.ajax({
