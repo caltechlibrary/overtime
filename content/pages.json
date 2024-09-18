@@ -5964,7 +5964,7 @@
         "thumbnail_url": "",
         "type_id": 3,
         "type_label": "Subject Guide",
-        "updated": "2024-09-16 17:39:42",
+        "updated": "2024-09-17 16:26:56",
         "url": "https://library.caltech.edu/c.php?g=512630"
     },
     {
@@ -9228,7 +9228,7 @@
         "thumbnail_url": "",
         "type_id": 1,
         "type_label": "General Purpose Guide",
-        "updated": "2024-08-23 23:12:27",
+        "updated": "2024-09-17 20:31:13",
         "url": "https://library.caltech.edu/c.php?g=1212590"
     },
     {
@@ -9680,7 +9680,7 @@
         "thumbnail_url": "",
         "type_id": 1,
         "type_label": "General Purpose Guide",
-        "updated": "2024-09-16 23:27:09",
+        "updated": "2024-09-17 17:54:42",
         "url": "https://library.caltech.edu/c.php?g=1228721"
     },
     {
@@ -14948,7 +14948,7 @@
         "thumbnail_url": "",
         "type_id": 4,
         "type_label": "Topic Guide",
-        "updated": "2024-09-16 23:56:15",
+        "updated": "2024-09-18 00:08:36",
         "url": "https://library.caltech.edu/c.php?g=1216793"
     },
     {
@@ -15029,7 +15029,7 @@
                 "column_layout": "{\"1\":{\"span\":3},\"2\":{\"span\":6},\"3\":{\"span\":3}}",
                 "created": "2022-04-18 19:57:20",
                 "description": "",
-                "enable_display": "0",
+                "enable_display": "1",
                 "enable_newwin": "0",
                 "er_course_id": "0",
                 "friendly_url": "https://library.caltech.edu/events/stamp-rally",
@@ -15042,7 +15042,7 @@
                 "slug_id": "2568887",
                 "source_id": "0",
                 "type_id": "1",
-                "updated": "2022-06-07 18:57:28",
+                "updated": "2024-09-17 21:47:27",
                 "url": "https://library.caltech.edu/c.php?g=1233570&p=9027478"
             },
             {
@@ -15089,7 +15089,7 @@
                 "column_layout": "{\"1\":{\"span\":3},\"2\":{\"span\":6},\"3\":{\"span\":3}}",
                 "created": "2022-04-18 19:58:23",
                 "description": "",
-                "enable_display": "1",
+                "enable_display": "0",
                 "enable_newwin": "0",
                 "er_course_id": "0",
                 "friendly_url": "https://library.caltech.edu/events/stress-free-finals-week",
@@ -15102,7 +15102,7 @@
                 "slug_id": "2568890",
                 "source_id": "0",
                 "type_id": "1",
-                "updated": "2022-04-18 19:58:23",
+                "updated": "2024-09-17 21:50:44",
                 "url": "https://library.caltech.edu/c.php?g=1233570&p=9027484"
             },
             {
@@ -15129,7 +15129,7 @@
                 "column_layout": "{\"1\":{\"span\":12}}",
                 "created": "2022-04-18 19:58:48",
                 "description": "",
-                "enable_display": "1",
+                "enable_display": "0",
                 "enable_newwin": "0",
                 "er_course_id": "0",
                 "friendly_url": "https://library.caltech.edu/events/senior-thesis-prize",
@@ -15142,7 +15142,7 @@
                 "slug_id": "2568892",
                 "source_id": "0",
                 "type_id": "1",
-                "updated": "2022-04-28 16:24:16",
+                "updated": "2024-09-17 21:50:20",
                 "url": "https://library.caltech.edu/c.php?g=1233570&p=9027489"
             },
             {
@@ -15176,7 +15176,7 @@
         "thumbnail_url": "",
         "type_id": 1,
         "type_label": "General Purpose Guide",
-        "updated": "2024-04-19 22:45:41",
+        "updated": "2024-09-18 00:35:13",
         "url": "https://library.caltech.edu/c.php?g=1233570"
     },
     {
