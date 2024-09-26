@@ -363,7 +363,7 @@ springSpace.public = {}, springSpace.public._construct = function() {
             jQuery(this).attr("target", "_blank")
         })), jQuery(".s-lg-az-result-title a, .s-lib-featured-profile-image a, .s-lib-profile-container a, .s-lib-featured-profile-container a").each((function() {
             var e = jQuery(this).attr("href");
-            0 == /^https?:\/\/|^\/\//i.test(e) && jQuery(this).attr("href", "http://" + springSpace.azList.site_domain + e)
+            0 == /^https?:\/\/|^\/\//i.test(e) && 0 !== e.indexOf("mailto:") && jQuery(this).attr("href", "https://" + springSpace.azList.site_domain + e)
         }))
     }, e.prototype.setReadMoreLink = function() {
         jQuery(".az-description-short").each((function() {
@@ -2199,11 +2199,11 @@ springSpace.util = {}, springSpace.common = {}, springSpace.validation = {}, spr
                             var s = (r = 0, function(t, e) {
                                 clearTimeout(r), r = setTimeout(t, e)
                             });
-                            springSpace.Util.setObjProp("delay", 500, e.column_filters[t]), jQuery(e.table_selector + " #s-lib-col-filter-" + t).on("keyup", (function() {
-                                var a = jQuery(this).val();
-                                a = "number" == e.column_filters[t].type && "" != a ? '"' + a.trim('"').trim("'") + '"' : decodeURI(a), s((function() {
-                                    e.table.columns(t).search(a).draw(), jQuery(e.table_selector).DataTable().state.save()
-                                }), e.column_filters[t].delay)
+                            springSpace.Util.setObjProp("delay", 500, e.column_filters[t]), jQuery(e.table_selector + " #s-lib-col-filter-" + t).on("keyup", (function(a) {
+                                var i = jQuery(this).val();
+                                9 !== a.keyCode && 16 !== a.keyCode && 17 !== a.keyCode && 18 !== a.keyCode && (i = "number" == e.column_filters[t].type && "" != i ? '"' + i.trim('"').trim("'") + '"' : decodeURI(i), s((function() {
+                                    e.table.columns(t).search(i).draw(), jQuery(e.table_selector).DataTable().state.save()
+                                }), e.column_filters[t].delay))
                             }));
                             break;
                         case "checkbox":
