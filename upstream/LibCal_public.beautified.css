@@ -5413,11 +5413,11 @@ table.s-lc-export-table th {
 .s-lc-dl-left dt {
     float: left;
     text-align: left;
-    width: 80px
+    width: 140px
 }
 
 .s-lc-dl-left dd {
-    margin-left: 90px
+    margin-left: 150px
 }
 
 .s-lc-hr-dashed {
