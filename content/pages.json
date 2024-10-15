@@ -1176,7 +1176,7 @@
         "thumbnail_url": "",
         "type_id": 3,
         "type_label": "Subject Guide",
-        "updated": "2024-09-24 19:54:21",
+        "updated": "2024-10-14 16:51:32",
         "url": "https://library.caltech.edu/c.php?g=512661"
     },
     {
@@ -5964,7 +5964,7 @@
         "thumbnail_url": "",
         "type_id": 3,
         "type_label": "Subject Guide",
-        "updated": "2024-10-08 20:03:14",
+        "updated": "2024-10-15 01:52:55",
         "url": "https://library.caltech.edu/c.php?g=512630"
     },
     {
@@ -9680,7 +9680,7 @@
         "thumbnail_url": "",
         "type_id": 1,
         "type_label": "General Purpose Guide",
-        "updated": "2024-10-11 23:36:03",
+        "updated": "2024-10-15 00:40:22",
         "url": "https://library.caltech.edu/c.php?g=1228721"
     },
     {
@@ -14569,7 +14569,7 @@
                 "name": "Virtual Display for Hispanic Heritage Month",
                 "num_cols": "1",
                 "parent_id": "0",
-                "position": "1",
+                "position": "2",
                 "redirect_url": "",
                 "slug_id": "3203368",
                 "source_id": "0",
@@ -14609,7 +14609,7 @@
                 "name": "Crossing Over: Art and Science at Caltech, 1920\u2013\u20602020",
                 "num_cols": "1",
                 "parent_id": "0",
-                "position": "3",
+                "position": "4",
                 "redirect_url": "",
                 "slug_id": "3203370",
                 "source_id": "0",
@@ -14626,15 +14626,15 @@
                 "er_course_id": "0",
                 "friendly_url": "https://library.caltech.edu/ondisplay/indigenous-peoples-day",
                 "id": "10597171",
-                "name": "Upcoming: Indigenous People's Day",
+                "name": "Indigenous People's Day",
                 "num_cols": "1",
                 "parent_id": "0",
-                "position": "4",
+                "position": "1",
                 "redirect_url": "",
                 "slug_id": "3203377",
                 "source_id": "0",
                 "type_id": "1",
-                "updated": "2024-09-27 22:41:58",
+                "updated": "2024-10-14 19:08:03",
                 "url": "https://library.caltech.edu/c.php?g=1216793&p=10597171"
             },
             {
@@ -14649,7 +14649,7 @@
                 "name": "Domestic Violence Awareness Month",
                 "num_cols": "1",
                 "parent_id": "0",
-                "position": "2",
+                "position": "3",
                 "redirect_url": "",
                 "slug_id": "3203376",
                 "source_id": "0",
@@ -14968,7 +14968,7 @@
         "thumbnail_url": "",
         "type_id": 4,
         "type_label": "Topic Guide",
-        "updated": "2024-10-11 23:36:03",
+        "updated": "2024-10-15 00:28:25",
         "url": "https://library.caltech.edu/c.php?g=1216793"
     },
     {
