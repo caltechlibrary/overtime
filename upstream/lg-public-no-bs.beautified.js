@@ -1,19 +1,17 @@
-/*! springshare 1.11.0 */
-
 var total_db_count = 0,
     springSpace = springSpace || {};
 springSpace.public = {}, springSpace.public._construct = function() {
-    function e(e) {
-        this.constant = springSpace.Util.setProp(e.constant, null), this.script_name = springSpace.Util.setProp(e.script_name, 0), this.guide_id = springSpace.Util.setProp(e.guide_id, 0), this.page_id = springSpace.Util.setProp(e.page_id, 0), this.guide_friendly_name = springSpace.Util.setProp(e.guide_friendly_name, ""), this.page_friendly_name = springSpace.Util.setProp(e.page_friendly_name, ""), this.system_name = springSpace.Util.setProp(e.system_name, ""), this.customer = springSpace.Util.setProp(e.customer, {
+    function Public(config) {
+        this.constant = springSpace.Util.setProp(config.constant, null), this.script_name = springSpace.Util.setProp(config.script_name, 0), this.guide_id = springSpace.Util.setProp(config.guide_id, 0), this.page_id = springSpace.Util.setProp(config.page_id, 0), this.guide_friendly_name = springSpace.Util.setProp(config.guide_friendly_name, ""), this.page_friendly_name = springSpace.Util.setProp(config.page_friendly_name, ""), this.system_name = springSpace.Util.setProp(config.system_name, ""), this.customer = springSpace.Util.setProp(config.customer, {
             name: ""
         }), this.login_status = null
     }
-    e.prototype.loadHomepageList = function(e) {
-        springSpace.Util.setObjProp("nav", "", e), key = springSpace.Util.setProp(e.key, 0), type_id = springSpace.Util.setProp(e.type_id, 0), group_id = springSpace.Util.setProp(e.group_id, 0), owner_id = springSpace.Util.setProp(e.owner_id, 0), type_label = springSpace.Util.setProp(e.type_label, "Guides"), num_cols = springSpace.Util.setProp(e.num_cols, ""), display_sort = springSpace.Util.setProp(e.display_sort, !1), jQuery(".s-lg-index-nav-btn.active > button").removeAttr("aria-pressed"), jQuery(".s-lg-index-nav-btn").removeClass("active"), jQuery("#" + e.button_id).addClass("active"), jQuery("#" + e.button_id + " > button").attr("aria-pressed", "true"), jQuery("#s-lg-guide-list-controls").hide(), jQuery("#" + e.elt_id).html('<div class="bold s-lib-color-lt-grey pad-top-med">Loading...</div>'), springSpace.homepage.current_list !== e.action && (springSpace.homepage.current_list = e.action, springSpace.homepage.current_btn_id = e.button_id, springSpace.homepage.current_button_code = springSpace.homepage.mapButtonEltIdToQSId(e.button_id), springSpace.homepage.current_num_cols = num_cols, springSpace.homepage.current_type_label = type_label || jQuery("#s-lg-index-label").html()), xhr = jQuery.ajax({
+    Public.prototype.loadHomepageList = function(config) {
+        springSpace.Util.setObjProp("nav", "", config), key = springSpace.Util.setProp(config.key, 0), type_id = springSpace.Util.setProp(config.type_id, 0), group_id = springSpace.Util.setProp(config.group_id, 0), owner_id = springSpace.Util.setProp(config.owner_id, 0), type_label = springSpace.Util.setProp(config.type_label, "Guides"), num_cols = springSpace.Util.setProp(config.num_cols, ""), display_sort = springSpace.Util.setProp(config.display_sort, !1), jQuery(".s-lg-index-nav-btn.active > button").removeAttr("aria-pressed"), jQuery(".s-lg-index-nav-btn").removeClass("active"), jQuery("#" + config.button_id).addClass("active"), jQuery("#" + config.button_id + " > button").attr("aria-pressed", "true"), jQuery("#s-lg-guide-list-controls").hide(), jQuery("#" + config.elt_id).html('<div class="bold s-lib-color-lt-grey pad-top-med">Loading...</div>'), springSpace.homepage.current_list !== config.action && (springSpace.homepage.current_list = config.action, springSpace.homepage.current_btn_id = config.button_id, springSpace.homepage.current_button_code = springSpace.homepage.mapButtonEltIdToQSId(config.button_id), springSpace.homepage.current_num_cols = num_cols, springSpace.homepage.current_type_label = type_label || jQuery("#s-lg-index-label").html()), xhr = jQuery.ajax({
             url: "/index_process.php",
             data: {
-                action: e.action,
-                order: e.order,
+                action: config.action,
+                order: config.order,
                 type_id: type_id,
                 owner_id: owner_id,
                 group_id: group_id,
@@ -22,441 +20,439 @@ springSpace.public = {}, springSpace.public._construct = function() {
             },
             type: "GET",
             dataType: "json",
-            success: function(t, s, r) {
-                if (200 == t.errCode)
-                    if (1 == t.data.reload_ui) top.window.document.location.reload();
+            success: function(response, textStatus, jqXHR) {
+                if (200 == response.errCode)
+                    if (1 == response.data.reload_ui) top.window.document.location.reload();
                     else {
-                        if (jQuery("#" + e.elt_id).html(t.data.content), jQuery("#s-lg-index-list-header").html(t.data.list_header), jQuery("#form-group-s-lg-guide-order").toggle(display_sort), jQuery("#s-lg-guide-list-controls").show(), top.window.helptips = new springSpace.sui.helptip({
+                        if (jQuery("#" + config.elt_id).html(response.data.content), jQuery("#s-lg-index-list-header").html(response.data.list_header), jQuery("#form-group-s-lg-guide-order").toggle(display_sort), jQuery("#s-lg-guide-list-controls").show(), top.window.helptips = new springSpace.sui.helptip({
                                 placement: "right"
-                            }), e.action == springSpace.publicObj.constant.PROCESSING.ACTION_LOAD_GUIDE_LIST) guide_text = springSpace.publicObj.homeNavButtons[e.action] + " " + jQuery("#s-lg-guide-order option:selected").text();
+                            }), config.action == springSpace.publicObj.constant.PROCESSING.ACTION_LOAD_GUIDE_LIST) guide_text = springSpace.publicObj.homeNavButtons[config.action] + " " + jQuery("#s-lg-guide-order option:selected").text();
                         else {
-                            var a = springSpace.publicObj.constant.CONTENT.HOME_GUIDES_TITLE || "Guides";
-                            guide_text = a + " " + springSpace.publicObj.homeNavButtons[e.action]
+                            var guide_text_prefix = springSpace.publicObj.constant.CONTENT.HOME_GUIDES_TITLE || "Guides";
+                            guide_text = guide_text_prefix + " " + springSpace.publicObj.homeNavButtons[config.action]
                         }
-                        document.title = guide_text + " - " + springSpace.publicObj.system_name + " at " + springSpace.publicObj.customer.name, springSpace.homepage.default_list_order = springSpace.homepage.mapGuideSortIdToQSId(e.order), jQuery("#s-lg-guide-order > option[value='" + e.order + "']").prop("selected", !0), springSpace.homepage.processPushState({
-                            nav: e.nav
-                        }), 172 === e.action && (jQuery(".panel-collapse").on("shown.bs.collapse", (function() {
+                        document.title = guide_text + " - " + springSpace.publicObj.system_name + " at " + springSpace.publicObj.customer.name, springSpace.homepage.default_list_order = springSpace.homepage.mapGuideSortIdToQSId(config.order), jQuery("#s-lg-guide-order > option[value='" + config.order + "']").prop("selected", !0), springSpace.homepage.processPushState({
+                            nav: config.nav
+                        }), 172 === config.action && (jQuery(".panel-collapse").on("shown.bs.collapse", (function() {
                             jQuery(".panel-default .panel-heading a").removeAttr("tabindex")
                         })), jQuery(".panel-collapse").on("hidden.bs.collapse", (function() {
                             jQuery(".panel-default .panel-heading a").removeAttr("tabindex")
                         })))
                     }
-                else jQuery("#" + e.elt_id).html('<div class="alert alert-danger"><div>Sorry, there was a problem loading the list. ' + errorThrown + "</div><div>Please try again. If the problem persists contact support@springshare.com.</div></div>")
+                else jQuery("#" + config.elt_id).html('<div class="alert alert-danger"><div>Sorry, there was a problem loading the list. ' + errorThrown + "</div><div>Please try again. If the problem persists contact support@springshare.com.</div></div>")
             },
-            error: function(t, s, r) {
-                jQuery("#" + e.elt_id).html('<div class="alert alert-danger"><div>Sorry, there was a problem loading the list. ' + r + "</div><div>Please try again. If the problem persists contact support@springshare.com.</div></div>")
+            error: function(jqXHR, textStatus, errorThrown) {
+                jQuery("#" + config.elt_id).html('<div class="alert alert-danger"><div>Sorry, there was a problem loading the list. ' + errorThrown + "</div><div>Please try again. If the problem persists contact support@springshare.com.</div></div>")
             }
         })
-    }, e.prototype.getAzFilterValues = function(e) {
+    }, Public.prototype.getAzFilterValues = function(config) {
         return {
-            search: e.search ?? this.getSearchTerm(),
-            subject_id: e.subject_id ?? this.getSelectValues(".s-lg-sel-subjects"),
-            type_id: e.type_id ?? this.getSelectValues(".s-lg-sel-az-types"),
-            vendor_id: e.vendor_id ?? this.getSelectValues(".s-lg-sel-az-vendors"),
-            access_mode_id: e.access_mode_id ?? this.getSelectValues(".s-lg-sel-az-access-modes"),
-            first: e.first ?? "",
-            page: e.page ?? 1,
-            site_id: e.site_id
+            search: config.search ?? this.getSearchTerm(),
+            subject_id: config.subject_id ?? this.getSelectValues(".s-lg-sel-subjects"),
+            type_id: config.type_id ?? this.getSelectValues(".s-lg-sel-az-types"),
+            vendor_id: config.vendor_id ?? this.getSelectValues(".s-lg-sel-az-vendors"),
+            access_mode_id: config.access_mode_id ?? this.getSelectValues(".s-lg-sel-az-access-modes"),
+            first: config.first ?? "",
+            page: config.page ?? 1,
+            site_id: config.site_id
         }
-    }, e.prototype.addMultiselectChangeListener = function(e) {
-        jQuery(e).on("change", (function() {
-            jQuery(e).val(jQuery(this).val())
+    }, Public.prototype.addMultiselectChangeListener = function(selector) {
+        jQuery(selector).on("change", (function() {
+            jQuery(selector).val(jQuery(this).val())
         }))
-    }, e.prototype.getSelectValues = function(e) {
-        let t = jQuery(e).find(":selected").map((function() {
+    }, Public.prototype.getSelectValues = function(selector) {
+        let values = jQuery(selector).find(":selected").map((function() {
             return jQuery(this).val()
         })).get();
-        return [...new Set(t)].toString()
-    }, e.prototype.getSelectTexts = function(e) {
-        let t = jQuery(e).find('option[value!=""]:selected').map((function() {
+        return [...new Set(values)].toString()
+    }, Public.prototype.getSelectTexts = function(selector) {
+        let texts = jQuery(selector).find('option[value!=""]:selected').map((function() {
             return jQuery(this).text().replace(/ \(\d+\)/i, "")
         })).get();
-        return [...new Set(t)].join("; ")
-    }, e.prototype.filterAzByFirst = function(e, t, s) {
-        this.quickFilterAzByFirst(e, t, s)
-    }, e.prototype.quickFilterAzByFirstBS5 = function(e, t) {
+        return [...new Set(texts)].join("; ")
+    }, Public.prototype.filterAzByFirst = function(first, site_id, languageKeyLabel) {
+        this.quickFilterAzByFirst(first, site_id, languageKeyLabel)
+    }, Public.prototype.quickFilterAzByFirstBS5 = function(first, site_id) {
         this.loadAzList(this.getAzFilterValues({
-            first: e,
-            site_id: t
+            first: first,
+            site_id: site_id
         }))
-    }, e.prototype.quickFilterAzByFirst = function(e, t, s = "") {
-        if (springSpace.azList.letter_selected = e, jQuery(".s-lg-az-first").removeClass("bold"), "" === e || "all" === e) return jQuery("#s-lg-az-first-all").addClass("bold"), jQuery("#s-lg-az-results .s-lg-db-panel").toggle(!0), jQuery(".s-lg-az-result-featured").toggle(!0), jQuery("#s-lg-db-name-featured").toggle(jQuery(".s-lg-az-result-featured").length > 0), history.pushState({}, null, location.pathname + encodeURI(this.buildAzQs(this.getAzFilterValues({
+    }, Public.prototype.quickFilterAzByFirst = function(first, site_id, languageKeyLabel = "") {
+        if (springSpace.azList.letter_selected = first, jQuery(".s-lg-az-first").removeClass("bold"), "" === first || "all" === first) return jQuery("#s-lg-az-first-all").addClass("bold"), jQuery("#s-lg-az-results .s-lg-db-panel").toggle(!0), jQuery(".s-lg-az-result-featured").toggle(!0), jQuery("#s-lg-db-name-featured").toggle(jQuery(".s-lg-az-result-featured").length > 0), history.pushState({}, null, location.pathname + encodeURI(this.buildAzQs(this.getAzFilterValues({
             first: ""
         })))), void this.refreshResultCountNumeric(total_db_count);
-        jQuery("#s-lg-az-first-" + e).addClass("bold"), jQuery("#s-lg-az-results .s-lg-db-panel").hide(), jQuery(".s-lg-az-result-featured").hide(), "pound" === e && (e = "other"), jQuery("#s-lg-az-name-" + e).show(), jQuery(".s-lg-az-result-featured-" + e).show(), jQuery("#s-lg-db-name-featured").toggle(jQuery(".s-lg-az-result-featured-" + e).length > 0), this.refreshResultCountNumeric(), history.pushState({}, null, location.pathname + encodeURI(this.buildAzQs(this.getAzFilterValues({
-            first: e
+        jQuery("#s-lg-az-first-" + first).addClass("bold"), jQuery("#s-lg-az-results .s-lg-db-panel").hide(), jQuery(".s-lg-az-result-featured").hide(), "pound" === first && (first = "other"), jQuery("#s-lg-az-name-" + first).show(), jQuery(".s-lg-az-result-featured-" + first).show(), jQuery("#s-lg-db-name-featured").toggle(jQuery(".s-lg-az-result-featured-" + first).length > 0), this.refreshResultCountNumeric(), history.pushState({}, null, location.pathname + encodeURI(this.buildAzQs(this.getAzFilterValues({
+            first: first
         }))))
-    }, e.prototype.refreshResultCountNumeric = function(e = 0) {
-        let t = e;
-        0 == t && jQuery("div.s-lg-db-panel:visible").each((function() {
-            t += jQuery(this).find(".s-lg-az-result").length
+    }, Public.prototype.refreshResultCountNumeric = function(total_cnt = 0) {
+        let vis_cnt = total_cnt;
+        0 == vis_cnt && jQuery("div.s-lg-db-panel:visible").each((function() {
+            vis_cnt += jQuery(this).find(".s-lg-az-result").length
         })), jQuery("#s-lg-az-result-count span.list_count").each((function() {
-            jQuery(this).text(t)
+            jQuery(this).text(vis_cnt)
         }))
-    }, e.prototype.filterAzBySubject = function(e, t) {
+    }, Public.prototype.filterAzBySubject = function(subject_ids, site_id) {
         jQuery("#col1.d-none, #col2.d-none").removeClass("d-none"), jQuery(".view-all-databases").addClass("d-none"), jQuery("#az-public-mobile-filters").hide(), this.loadAzList(this.getAzFilterValues({
-            subject_id: Array.isArray(e) ? e.join(",") : e,
-            site_id: t
+            subject_id: Array.isArray(subject_ids) ? subject_ids.join(",") : subject_ids,
+            site_id: site_id
         })), this.recordAzSearchHit()
-    }, e.prototype.filterAzBySubjectEdit = function(e, t) {
-        let s = jQuery(".s-lg-sel-subjects").val().filter((function(t) {
-            return t != e
+    }, Public.prototype.filterAzBySubjectEdit = function(id, site_id) {
+        let revised = jQuery(".s-lg-sel-subjects").val().filter((function(e) {
+            return e != id
         }));
-        this.filterAzBySubject(s, t)
-    }, e.prototype.filterAzByType = function(e, t) {
+        this.filterAzBySubject(revised, site_id)
+    }, Public.prototype.filterAzByType = function(type_ids, site_id) {
         jQuery("#col1.d-none, #col2.d-none").removeClass("d-none"), jQuery(".view-all-databases").addClass("d-none"), jQuery("#az-public-mobile-filters").hide(), this.loadAzList(this.getAzFilterValues({
-            type_id: Array.isArray(e) ? e.join(",") : e,
-            site_id: t
+            type_id: Array.isArray(type_ids) ? type_ids.join(",") : type_ids,
+            site_id: site_id
         })), this.recordAzSearchHit()
-    }, e.prototype.filterAzByTypeEdit = function(e, t) {
-        let s = jQuery(".s-lg-sel-az-types").val().filter((function(t) {
-            return t != e
+    }, Public.prototype.filterAzByTypeEdit = function(id, site_id) {
+        let revised = jQuery(".s-lg-sel-az-types").val().filter((function(e) {
+            return e != id
         }));
-        this.filterAzByType(s, t)
-    }, e.prototype.filterAzByVendor = function(e, t) {
+        this.filterAzByType(revised, site_id)
+    }, Public.prototype.filterAzByVendor = function(vendor_ids, site_id) {
         jQuery("#col1.d-none, #col2.d-none").removeClass("d-none"), jQuery(".view-all-databases").addClass("d-none"), jQuery("#az-public-mobile-filters").hide(), this.loadAzList(this.getAzFilterValues({
-            vendor_id: Array.isArray(e) ? e.join(",") : e,
-            site_id: t
+            vendor_id: Array.isArray(vendor_ids) ? vendor_ids.join(",") : vendor_ids,
+            site_id: site_id
         })), this.recordAzSearchHit()
-    }, e.prototype.filterAzByVendorEdit = function(e, t) {
-        let s = jQuery(".s-lg-sel-az-vendors").val().filter((function(t) {
-            return t != e
+    }, Public.prototype.filterAzByVendorEdit = function(id, site_id) {
+        let revised = jQuery(".s-lg-sel-az-vendors").val().filter((function(e) {
+            return e != id
         }));
-        this.filterAzByVendor(s, t)
-    }, e.prototype.filterAzByAccessMode = function(e, t) {
+        this.filterAzByVendor(revised, site_id)
+    }, Public.prototype.filterAzByAccessMode = function(access_mode_ids, site_id) {
         jQuery("#col1.d-none, #col2.d-none").removeClass("d-none"), jQuery(".view-all-databases").addClass("d-none"), jQuery("#az-public-mobile-filters").hide(), this.loadAzList(this.getAzFilterValues({
-            access_mode_id: Array.isArray(e) ? e.join(",") : e,
-            site_id: t
+            access_mode_id: Array.isArray(access_mode_ids) ? access_mode_ids.join(",") : access_mode_ids,
+            site_id: site_id
         }))
-    }, e.prototype.filterAzByAccessModeEdit = function(e, t) {
-        let s = jQuery(".s-lg-sel-az-access-modes").val().filter((function(t) {
-            return t != e
+    }, Public.prototype.filterAzByAccessModeEdit = function(id, site_id) {
+        let revised = jQuery(".s-lg-sel-az-access-modes").val().filter((function(e) {
+            return e != id
         }));
-        this.filterAzByAccessMode(s, t)
-    }, e.prototype.changeAzPage = function(e, t) {
+        this.filterAzByAccessMode(revised, site_id)
+    }, Public.prototype.changeAzPage = function(page, site_id) {
         jQuery(".lazy-load-link").html('<div class="bold s-lib-color-lt-grey pad-top-med text-center">Loading...</div>'), this.loadAzList(this.getAzFilterValues({
-            page: e,
-            site_id: t
+            page: page,
+            site_id: site_id
         }), !1, !0)
-    }, e.prototype.recordAzSearchHit = function() {
+    }, Public.prototype.recordAzSearchHit = function() {
         if (void 0 !== springSpace.springTrack) try {
-            let e = this.getSearchTerm(),
-                t = this.getSelectTexts(".s-lg-sel-subjects"),
-                s = this.getSelectTexts(".s-lg-sel-az-types"),
-                r = this.getSelectTexts(".s-lg-sel-az-vendors"),
-                a = this.getSelectTexts(".s-lg-sel-az-access-modes"),
-                i = e + t + s + r + a;
-            if ("" === i || "*:*" === i) return;
+            let searchTerm = this.getSearchTerm(),
+                searchSubjects = this.getSelectTexts(".s-lg-sel-subjects"),
+                searchAzTypes = this.getSelectTexts(".s-lg-sel-az-types"),
+                searchAzVendors = this.getSelectTexts(".s-lg-sel-az-vendors"),
+                searchAzAccessModes = this.getSelectTexts(".s-lg-sel-az-access-modes"),
+                concat = searchTerm + searchSubjects + searchAzTypes + searchAzVendors + searchAzAccessModes;
+            if ("" === concat || "*:*" === concat) return;
             springSpace.springTrack.trackSearch({
                 _st_group_id: 0,
                 _st_guide_id: 0,
-                _st_search_az_access_modes: a,
-                _st_search_az_types: s,
-                _st_search_az_vendors: r,
-                _st_search_subjects: t,
-                _st_search_terms: e,
+                _st_search_az_access_modes: searchAzAccessModes,
+                _st_search_az_types: searchAzTypes,
+                _st_search_az_vendors: searchAzVendors,
+                _st_search_subjects: searchSubjects,
+                _st_search_terms: searchTerm,
                 _st_type_id: "27"
             })
         } catch (e) {
             searchcontroller.debug(e)
         }
-    }, e.prototype.filterAzBySearch = function(e) {
+    }, Public.prototype.filterAzBySearch = function(site_id) {
         jQuery("#col1.d-none, #col2.d-none").removeClass("d-none"), jQuery(".view-all-databases").addClass("d-none"), jQuery("#az-public-mobile-filters").hide(), this.loadAzList(this.getAzFilterValues({
-            site_id: e
+            site_id: site_id
         })), this.recordAzSearchHit()
-    }, e.prototype.filterAzBySearchEdit = function(e) {
-        jQuery(".s-lg-az-search").val(""), this.filterAzBySearch(e)
-    }, e.prototype.clearAzSelection = function(e) {
-        jQuery("#" + e + ", ." + e).val("")
-    }, e.prototype.toggleAzClearButton = function(e) {
-        jQuery("#s-lg-az-reset").toggle("" !== e.subject_id || "" !== e.type_id || "" !== e.search || "" !== e.vendor_id)
-    }, e.prototype.toggleAzClearButtonBS5 = function(e) {
-        jQuery("#s-lg-az-reset").hide(), jQuery(".s-lg-az-reset").toggle("" !== e.subject_id || "" !== e.type_id || "" !== e.search || "" !== e.vendor_id || "" !== e.access_mode_id)
-    }, e.prototype.toggleAzSubjectBoxes = function(e) {
-        var t = "" != e.subject_id;
+    }, Public.prototype.filterAzBySearchEdit = function(site_id) {
+        jQuery(".s-lg-az-search").val(""), this.filterAzBySearch(site_id)
+    }, Public.prototype.clearAzSelection = function(elt_id) {
+        jQuery("#" + elt_id + ", ." + elt_id).val("")
+    }, Public.prototype.toggleAzClearButton = function(config) {
+        jQuery("#s-lg-az-reset").toggle("" !== config.subject_id || "" !== config.type_id || "" !== config.search || "" !== config.vendor_id)
+    }, Public.prototype.toggleAzClearButtonBS5 = function(config) {
+        jQuery("#s-lg-az-reset").hide(), jQuery(".s-lg-az-reset").toggle("" !== config.subject_id || "" !== config.type_id || "" !== config.search || "" !== config.vendor_id || "" !== config.access_mode_id)
+    }, Public.prototype.toggleAzSubjectBoxes = function(config) {
+        var is_subject = "" != config.subject_id;
         jQuery("#s-lg-az-experts-div").html(""), jQuery("#s-lg-az-guides-div").html("");
-        var s = this;
-        t && (xhr = jQuery.ajax({
+        var current_obj = this;
+        is_subject && (xhr = jQuery.ajax({
             url: "/az_process.php",
             type: "GET",
             dataType: "json",
             data: {
-                action: e.action,
-                subject_id: e.subject_id,
-                site_id: e.site_id,
+                action: config.action,
+                subject_id: config.subject_id,
+                site_id: config.site_id,
                 is_widget: springSpace.azList.is_widget
             },
-            success: function(e, t) {
-                200 == e.errCode && (jQuery("#s-lg-az-experts-div").html(e.data.experts), jQuery("#s-lg-az-guides-div").html(e.data.guides)), 1 == springSpace.azList.is_widget && s.transformAzLinks()
+            success: function(response, textStatus) {
+                200 == response.errCode && (jQuery("#s-lg-az-experts-div").html(response.data.experts), jQuery("#s-lg-az-guides-div").html(response.data.guides)), 1 == springSpace.azList.is_widget && current_obj.transformAzLinks()
             },
-            error: function(e, t, s) {
-                springSpace.UI.error(s)
+            error: function(jqXHR, textStatus, errorThrown) {
+                springSpace.UI.error(errorThrown)
             }
-        })), jQuery("#s-lg-az-trials-div").toggle(!t), jQuery("#s-lg-az-popular-div").toggle(!t), jQuery("#s-lg-az-experts-div").toggle(t), jQuery("#s-lg-az-guides-div").toggle(t)
-    }, e.prototype.toggleAzSubjectBoxesBS5 = function(e) {
-        var t = "" != e;
-        t && jQuery.ajax({
-            url: "/process/az/subject_experts/" + e,
+        })), jQuery("#s-lg-az-trials-div").toggle(!is_subject), jQuery("#s-lg-az-popular-div").toggle(!is_subject), jQuery("#s-lg-az-experts-div").toggle(is_subject), jQuery("#s-lg-az-guides-div").toggle(is_subject)
+    }, Public.prototype.toggleAzSubjectBoxesBS5 = function(subject_id) {
+        var is_subject = "" != subject_id;
+        is_subject && jQuery.ajax({
+            url: "/process/az/subject_experts/" + subject_id,
             type: "GET",
             dataType: "html",
-            success: function(e, t) {
-                jQuery("#s-lg-az-subject-resources").replaceWith(e)
+            success: function(response, textStatus) {
+                jQuery("#s-lg-az-subject-resources").replaceWith(response)
             },
-            error: function(e, t, s) {
-                springSpace.UI.error(s)
+            error: function(jqXHR, textStatus, errorThrown) {
+                springSpace.UI.error(errorThrown)
             }
-        }), jQuery("#s-lg-az-trials-div").toggle(!t), jQuery("#s-lg-az-popular-div").toggle(!t), jQuery("#s-lg-az-subject-resources").toggle(t)
-    }, e.prototype.displayAzShareAlert = function(e) {
-        btn_text = e.btn_text, xhr = jQuery.ajax({
+        }), jQuery("#s-lg-az-trials-div").toggle(!is_subject), jQuery("#s-lg-az-popular-div").toggle(!is_subject), jQuery("#s-lg-az-subject-resources").toggle(is_subject)
+    }, Public.prototype.displayAzShareAlert = function(config) {
+        btn_text = config.btn_text, xhr = jQuery.ajax({
             url: "/az_process.php",
             type: "POST",
             dataType: "json",
             data: {
-                action: e.action,
-                id: e.id,
-                name: e.name,
-                site_id: e.site_id
+                action: config.action,
+                id: config.id,
+                name: config.name,
+                site_id: config.site_id
             },
-            success: function(t, s) {
-                200 == t.errCode ? (springSpace.UI.alert({
-                    title: e.name,
+            success: function(response, textStatus) {
+                200 == response.errCode ? (springSpace.UI.alert({
+                    title: config.name,
                     width: "360",
                     height: "auto",
-                    content: t.data.html,
+                    content: response.data.html,
                     buttons: {
                         btn_text: function() {
                             jQuery("#s-lib-alert").dialog("close"), jQuery("#s-lib-alert-content").html("")
                         }
                     }
-                }), jQuery("#s-lib-alert-btn-first").html(e.btn_text)) : springSpace.UI.error(t.errText)
+                }), jQuery("#s-lib-alert-btn-first").html(config.btn_text)) : springSpace.UI.error(response.errText)
             },
-            error: function(e, t, s) {
-                springSpace.UI.error(s)
+            error: function(jqXHR, textStatus, errorThrown) {
+                springSpace.UI.error(errorThrown)
             }
         })
-    }, e.prototype.loadAzList = function(e, t = !1, s = !1) {
+    }, Public.prototype.loadAzList = function(config, handle_alpha_filter = !1, lazy_load = !1) {
         is_bootstrap || springSpace.UI.notify({
             mode: "load",
             duration: 3e4
-        }), "undefined" != typeof Storage && (localStorage.loadAzListConfig = JSON.stringify(e)), e = void 0 === e ? {
+        }), "undefined" != typeof Storage && (localStorage.loadAzListConfig = JSON.stringify(config)), config = void 0 === config ? {
             subject_id: "",
             search: ""
-        } : e, jQuery.each(["search", "subject_id", "type_id", "first", "vendor_id", "access_mode_id", "page"], (function(t, s) {
-            e[s] || (e[s] = "")
-        })), is_bootstrap ? (this.toggleAzClearButtonBS5(e), jQuery(".s-lg-az-search").change((function() {
+        } : config, jQuery.each(["search", "subject_id", "type_id", "first", "vendor_id", "access_mode_id", "page"], (function(idx, val) {
+            config[val] || (config[val] = "")
+        })), is_bootstrap ? (this.toggleAzClearButtonBS5(config), jQuery(".s-lg-az-search").change((function() {
             jQuery(".s-lg-az-search").val(jQuery(this).val())
-        }))) : this.toggleAzClearButton(e), is_bootstrap ? this.toggleAzSubjectBoxesBS5(e.subject_id) : this.toggleAzSubjectBoxes({
-            subject_id: e.subject_id ? e.subject_id : "",
+        }))) : this.toggleAzClearButton(config), is_bootstrap ? this.toggleAzSubjectBoxesBS5(config.subject_id) : this.toggleAzSubjectBoxes({
+            subject_id: config.subject_id ? config.subject_id : "",
             action: 521,
-            site_id: e.site_id
+            site_id: config.site_id
         });
-        var r = this,
-            a = function(e, t) {
-                if (!t.length) return;
-                let s = [];
-                t.forEach((function(e, t) {
-                    e = (e = e.replace(/ \(\d+\)/i, "")).replace("↳", "").trim(), s.push(springSpace.Util.escapeHtml(e))
-                })), e.push(s.join(", "))
+        var current_obj = this,
+            getDisplayOption = function(arr, vals) {
+                if (!vals.length) return;
+                let ret = [];
+                vals.forEach((function(val, index) {
+                    val = (val = val.replace(/ \(\d+\)/i, "")).replace("↳", "").trim(), ret.push(springSpace.Util.escapeHtml(val))
+                })), arr.push(ret.join(", "))
             },
-            i = "" !== this.getSearchTerm(),
-            l = i ? "/process/az/dbsearch" : "/process/az/dblist";
-        let o = window.innerWidth <= 575.98 ? 10 : 0;
+            is_search = "" !== this.getSearchTerm(),
+            endpoint = is_search ? "/process/az/dbsearch" : "/process/az/dblist";
+        let page_size = window.innerWidth <= 575.98 ? 10 : 0;
         xhr = jQuery.ajax({
-            url: l,
+            url: endpoint,
             type: "GET",
             dataType: "json",
             data: {
-                search: e.search,
-                subject_id: e.subject_id,
-                type_id: e.type_id,
-                vendor_id: e.vendor_id,
-                access_mode_id: e.access_mode_id,
-                page: e.page ?? 1,
-                site_id: e.site_id,
-                content_id: e.content_id ? e.content_id : 0,
+                search: config.search,
+                subject_id: config.subject_id,
+                type_id: config.type_id,
+                vendor_id: config.vendor_id,
+                access_mode_id: config.access_mode_id,
+                page: config.page ?? 1,
+                site_id: config.site_id,
+                content_id: config.content_id ? config.content_id : 0,
                 is_widget: springSpace.azList.is_widget,
                 bootstrap5: is_bootstrap,
-                page_size: o,
+                page_size: page_size,
                 preview: springSpace.azList.az_preview,
                 sublist_id: springSpace.azList.az_sublist_id,
-                alpha: e.first
+                alpha: config.first
             },
-            success: function(l, o) {
-                if (is_bootstrap || springSpace.UI.notifyStop(), history.pushState && 0 == springSpace.azList.is_widget && "back" !== e.action && "init" !== e.action && history.pushState({}, null, location.pathname + encodeURI(r.buildAzQs(e))), springSpace.azList.historyEdited = !0, 200 == l.errCode)
-                    if (s) jQuery(".lazy-load-link").remove(), jQuery("#s-lg-az-results").append(l.data.html), jQuery("#s-lg-az-content").append(l.data.az_pager_html ?? "");
+            success: function(response, textStatus) {
+                if (is_bootstrap || springSpace.UI.notifyStop(), history.pushState && 0 == springSpace.azList.is_widget && "back" !== config.action && "init" !== config.action && history.pushState({}, null, location.pathname + encodeURI(current_obj.buildAzQs(config))), springSpace.azList.historyEdited = !0, 200 == response.errCode)
+                    if (lazy_load) jQuery(".lazy-load-link").remove(), jQuery("#s-lg-az-results").append(response.data.html), jQuery("#s-lg-az-content").append(response.data.az_pager_html ?? "");
                     else {
-                        jQuery("#s-lg-az-content").html(l.data.html), jQuery("#s-lg-az-content").append(l.data.az_pager_html ?? ""), l.data.az_index_html && jQuery("#s-lg-az-index").html(l.data.az_index_html), l.data.subjects_html && jQuery(".col-subjects").html(l.data.subjects_html), is_bootstrap && jQuery("#s-lg-az-filter-cols .s-lg-sel-subjects").select2({
-                            placeholder: l.data.label_all_subjects ?? "Subjects",
+                        jQuery("#s-lg-az-content").html(response.data.html), jQuery("#s-lg-az-content").append(response.data.az_pager_html ?? ""), response.data.az_index_html && jQuery("#s-lg-az-index").html(response.data.az_index_html), response.data.subjects_html && jQuery(".col-subjects").html(response.data.subjects_html), is_bootstrap && jQuery("#s-lg-az-filter-cols .s-lg-sel-subjects").select2({
+                            placeholder: response.data.label_all_subjects ?? "Subjects",
                             theme: "bootstrap5"
-                        }), l.data.az_types_html && jQuery(".col-types").html(l.data.az_types_html), is_bootstrap && jQuery("#s-lg-az-filter-cols .s-lg-sel-az-types").select2({
-                            placeholder: l.data.label_all_types ?? "Types",
+                        }), response.data.az_types_html && jQuery(".col-types").html(response.data.az_types_html), is_bootstrap && jQuery("#s-lg-az-filter-cols .s-lg-sel-az-types").select2({
+                            placeholder: response.data.label_all_types ?? "Types",
                             theme: "bootstrap5"
-                        }), l.data.az_vendors_html && jQuery(".col-vendors").html(l.data.az_vendors_html), is_bootstrap && (jQuery("#s-lg-az-filter-cols .s-lg-sel-az-vendors").select2({
-                            placeholder: l.data.label_all_vendors ?? "Vendors",
+                        }), response.data.az_vendors_html && jQuery(".col-vendors").html(response.data.az_vendors_html), is_bootstrap && (jQuery("#s-lg-az-filter-cols .s-lg-sel-az-vendors").select2({
+                            placeholder: response.data.label_all_vendors ?? "Vendors",
                             theme: "bootstrap5"
                         }), jQuery("#s-lg-az-filter-cols .s-lg-sel-az-access-modes").select2({
-                            placeholder: l.data.label_all_access_modes ?? "Access Modes",
+                            placeholder: response.data.label_all_access_modes ?? "Access Modes",
                             theme: "bootstrap5"
-                        })), jQuery("#s-lg-az-index").toggle(!i);
-                        var n = [];
-                        a(n, r.getAZFilterData("s-lg-sel-subjects")), a(n, r.getAZFilterData("s-lg-sel-az-types")), a(n, r.getAZFilterData("s-lg-sel-az-vendors")), a(n, i ? [r.getSearchTerm()] : []);
-                        var c = (n.length > 0 ? ": " : "") + n.join("; "),
-                            p = n.join("; ");
-                        total_db_count = l.data.count ?? 0, is_bootstrap ? (r.writeMobileAzFilters(l.data), r.setMobileAzFormValues(l.data), 0 === (l.data.subjects ?? []).length && 0 === (l.data.types ?? []).length && 0 === (l.data.vendors ?? []).length && "" === (l.data.q ?? "") && (jQuery(".s-lg-az-search").val(""), jQuery(".s-lg-sel-subjects").val([]), jQuery(".s-lg-sel-az-types").val([]), jQuery(".s-lg-sel-az-vendors").val([]), jQuery("#az-public-mobile-filters").show())) : jQuery("#s-lg-az-result-count").html(l.data.list_count + (p.length > 0 ? " " + l.data.list_count_for + " " + p : "")), t && "" !== springSpace.azList.init_filters.alpha && r.quickFilterAzByFirst(springSpace.azList.init_filters.alpha, e.site_id), is_bootstrap || jQuery("#s-lib-public-header-title").html(title_base + c), jQuery("title").html(title_base + c)
+                        })), jQuery("#s-lg-az-index").toggle(!is_search);
+                        var title_filter_options = [];
+                        getDisplayOption(title_filter_options, current_obj.getAZFilterData("s-lg-sel-subjects")), getDisplayOption(title_filter_options, current_obj.getAZFilterData("s-lg-sel-az-types")), getDisplayOption(title_filter_options, current_obj.getAZFilterData("s-lg-sel-az-vendors")), getDisplayOption(title_filter_options, is_search ? [current_obj.getSearchTerm()] : []);
+                        var title_options = (title_filter_options.length > 0 ? ": " : "") + title_filter_options.join("; "),
+                            filter_options = title_filter_options.join("; ");
+                        total_db_count = response.data.count ?? 0, is_bootstrap ? (current_obj.writeMobileAzFilters(response.data), current_obj.setMobileAzFormValues(response.data), 0 === (response.data.subjects ?? []).length && 0 === (response.data.types ?? []).length && 0 === (response.data.vendors ?? []).length && "" === (response.data.q ?? "") && (jQuery(".s-lg-az-search").val(""), jQuery(".s-lg-sel-subjects").val([]), jQuery(".s-lg-sel-az-types").val([]), jQuery(".s-lg-sel-az-vendors").val([]), jQuery("#az-public-mobile-filters").show())) : jQuery("#s-lg-az-result-count").html(response.data.list_count + (filter_options.length > 0 ? " " + response.data.list_count_for + " " + filter_options : "")), handle_alpha_filter && "" !== springSpace.azList.init_filters.alpha && current_obj.quickFilterAzByFirst(springSpace.azList.init_filters.alpha, config.site_id), is_bootstrap || jQuery("#s-lib-public-header-title").html(title_base + title_options), jQuery("title").html(title_base + title_options)
                     }
-                else jQuery("#s-lg-az-content").html('Something unexpected happened - please try again and if you continue to receive the error please let us know.<div class="s-ghost" style="margin-top:20px;">' + l.errText + "</div>");
+                else jQuery("#s-lg-az-content").html('Something unexpected happened - please try again and if you continue to receive the error please let us know.<div class="s-ghost" style="margin-top:20px;">' + response.errText + "</div>");
                 jQuery(".az-bs-tooltip").tooltip(), jQuery((function() {
                     jQuery('[data-toggle="popover"]').popover()
-                })), is_bootstrap && (tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]'), tooltipList = [...tooltipTriggerList].map((e => new bootstrap.Tooltip(e)))), 1 == springSpace.azList.is_widget && r.transformAzLinks(), is_bootstrap && (r.shortenAZBoxItems("s-lg-az-popular"), r.shortenAZBoxItems("s-lg-az-trials"), r.setReadMoreLink()), jQuery("#s-lg-az-trials-loading").toggle(!1), jQuery("#s-lg-az-trials").toggle(!0), jQuery("#s-lg-az-popular-loading").toggle(!1), jQuery("#s-lg-az-popular").toggle(!0)
+                })), is_bootstrap && (tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]'), tooltipList = [...tooltipTriggerList].map((tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl)))), 1 == springSpace.azList.is_widget && current_obj.transformAzLinks(), is_bootstrap && (current_obj.shortenAZBoxItems("s-lg-az-popular"), current_obj.shortenAZBoxItems("s-lg-az-trials"), current_obj.setReadMoreLink()), jQuery("#s-lg-az-trials-loading").toggle(!1), jQuery("#s-lg-az-trials").toggle(!0), jQuery("#s-lg-az-popular-loading").toggle(!1), jQuery("#s-lg-az-popular").toggle(!0)
             },
-            error: function(e, t, s) {
-                springSpace.UI.error(s)
+            error: function(jqXHR, textStatus, errorThrown) {
+                springSpace.UI.error(errorThrown)
             }
         })
-    }, e.prototype.shortenAZBoxItems = function(e) {
-        window.innerWidth <= 575.98 && jQuery("#" + e + " div.mb-4").each((function(t) {
-            t > 2 && jQuery(this).detach().appendTo("#" + e + "-view-all")
+    }, Public.prototype.shortenAZBoxItems = function(id) {
+        window.innerWidth <= 575.98 && jQuery("#" + id + " div.mb-4").each((function(index) {
+            index > 2 && jQuery(this).detach().appendTo("#" + id + "-view-all")
         }))
-    }, e.prototype.setMobileAzFormValues = function(e) {
-        jQuery(".s-lg-az-search").val(e.q ?? ""), jQuery(".s-lg-sel-subjects").val(Object.keys(e.subjects ?? [])), jQuery(".s-lg-sel-az-types").val(Object.keys(e.types ?? [])), jQuery(".s-lg-sel-az-vendors").val(Object.keys(e.vendors ?? [])), jQuery(".s-lg-sel-az-access-modes").val(Object.keys(e.access_modes ?? []))
-    }, e.prototype.writeMobileAzFilters = function(e) {
+    }, Public.prototype.setMobileAzFormValues = function(data) {
+        jQuery(".s-lg-az-search").val(data.q ?? ""), jQuery(".s-lg-sel-subjects").val(Object.keys(data.subjects ?? [])), jQuery(".s-lg-sel-az-types").val(Object.keys(data.types ?? [])), jQuery(".s-lg-sel-az-vendors").val(Object.keys(data.vendors ?? [])), jQuery(".s-lg-sel-az-access-modes").val(Object.keys(data.access_modes ?? []))
+    }, Public.prototype.writeMobileAzFilters = function(data) {
         jQuery(".az-filter-chip, #az-mobile-filter-edit").remove(), jQuery("#az-mobile-filter-edit-modal").modal("hide");
-        const t = jQuery("#site_id").val();
-        let s = Object.keys(e.subjects ?? []).length || Object.keys(e.types ?? []).length || Object.keys(e.vendors ?? []).length || e.q?.trim().length,
-            r = mobileLabel = e.count + " " + (e.label_databases ?? "Database" + (1 == e.count ? "" : "s"));
-        s && (e.label_databases_found_for ? r = e.label_databases_found_for.replace("{{list_count}}", e.count) : r += " Found for: ", mobileLabel = e.count + " Matching Result" + (1 == e.count ? "" : "s") + " for:"), jQuery("#s-lg-az-result-count").html('<span class="d-lg-none" aria-hidden="true">' + mobileLabel + '</span><span class="d-none d-lg-inline me-1">' + r + "</span>"), Object.keys(e.subjects ?? []).forEach((function(s) {
-            jQuery("#s-lg-az-result-count").append("<span class='az-filter-chip' aria-hidden='true'>" + e.subjects[s] + "<a class='d-lg-none' onclick='springSpace.publicObj.filterAzBySubjectEdit(" + s + ", " + t + "); return false;'><img src='/web/assets/media/icons/duotune/arrows/arr097.svg' role='presentation'/></a></span>")
-        })), Object.keys(e.types ?? []).forEach((function(s) {
-            jQuery("#s-lg-az-result-count").append("<span class='az-filter-chip' aria-hidden='true'>" + e.types[s] + "<a class='d-lg-none' onclick='springSpace.publicObj.filterAzByTypeEdit(" + s + ", " + t + "); return false;'><img src='/web/assets/media/icons/duotune/arrows/arr097.svg' role='presentation'/></a></span>")
-        })), Object.keys(e.vendors ?? []).forEach((function(s) {
-            jQuery("#s-lg-az-result-count").append("<span class='az-filter-chip' aria-hidden='true'>" + e.vendors[s] + "<a class='d-lg-none' onclick='springSpace.publicObj.filterAzByVendorEdit(" + s + ", " + t + "); return false;'><img src='/web/assets/media/icons/duotune/arrows/arr097.svg' role='presentation'/></a></span>")
-        })), Object.keys(e.access_modes ?? []).forEach((function(s) {
-            jQuery("#s-lg-az-result-count").append("<span class='az-filter-chip' aria-hidden='true'>" + e.access_modes[s] + "<a class='d-lg-none' onclick='springSpace.publicObj.filterAzByAccessModeEdit(" + s + ", " + t + "); return false;'><img src='/web/assets/media/icons/duotune/arrows/arr097.svg' role='presentation'/></a></span>")
-        })), e.q && (jQuery("#s-lg-az-result-count").append("<span class='az-filter-chip' aria-hidden='true'><span class='data-q-display'></span><a class='d-lg-none' onclick='springSpace.publicObj.filterAzBySearchEdit(" + t + "); return false;'><img src='/web/assets/media/icons/duotune/arrows/arr097.svg' role='presentation'/></a></span>"), jQuery(".data-q-display").text(e.q)), s && jQuery(".az-filter-chip:last-of-type").after("<a id='az-mobile-filter-edit' aria-hidden='true' class='d-lg-none' data-bs-toggle='modal' data-bs-target='#az-mobile-filter-edit-modal'><i class='fa fa-pencil' aria-hidden='true'></i>&nbsp;Edit Filters</a>")
-    }, e.prototype.getSearchTerm = function() {
-        var e = [];
+        const site_id = jQuery("#site_id").val();
+        let filtersApplied = Object.keys(data.subjects ?? []).length || Object.keys(data.types ?? []).length || Object.keys(data.vendors ?? []).length || data.q?.trim().length,
+            desktopLabel = mobileLabel = data.count + " " + (data.label_databases ?? "Database" + (1 == data.count ? "" : "s"));
+        filtersApplied && (data.label_databases_found_for ? desktopLabel = data.label_databases_found_for.replace("{{list_count}}", data.count) : desktopLabel += " Found for: ", mobileLabel = data.count + " Matching Result" + (1 == data.count ? "" : "s") + " for:"), jQuery("#s-lg-az-result-count").html('<span class="d-lg-none" aria-hidden="true">' + mobileLabel + '</span><span class="d-none d-lg-inline me-1">' + desktopLabel + "</span>"), Object.keys(data.subjects ?? []).forEach((function(key) {
+            jQuery("#s-lg-az-result-count").append("<span class='az-filter-chip' aria-hidden='true'>" + data.subjects[key] + "<a class='d-lg-none' onclick='springSpace.publicObj.filterAzBySubjectEdit(" + key + ", " + site_id + "); return false;'><img src='/web/assets/media/icons/duotune/arrows/arr097.svg' role='presentation'/></a></span>")
+        })), Object.keys(data.types ?? []).forEach((function(key) {
+            jQuery("#s-lg-az-result-count").append("<span class='az-filter-chip' aria-hidden='true'>" + data.types[key] + "<a class='d-lg-none' onclick='springSpace.publicObj.filterAzByTypeEdit(" + key + ", " + site_id + "); return false;'><img src='/web/assets/media/icons/duotune/arrows/arr097.svg' role='presentation'/></a></span>")
+        })), Object.keys(data.vendors ?? []).forEach((function(key) {
+            jQuery("#s-lg-az-result-count").append("<span class='az-filter-chip' aria-hidden='true'>" + data.vendors[key] + "<a class='d-lg-none' onclick='springSpace.publicObj.filterAzByVendorEdit(" + key + ", " + site_id + "); return false;'><img src='/web/assets/media/icons/duotune/arrows/arr097.svg' role='presentation'/></a></span>")
+        })), Object.keys(data.access_modes ?? []).forEach((function(key) {
+            jQuery("#s-lg-az-result-count").append("<span class='az-filter-chip' aria-hidden='true'>" + data.access_modes[key] + "<a class='d-lg-none' onclick='springSpace.publicObj.filterAzByAccessModeEdit(" + key + ", " + site_id + "); return false;'><img src='/web/assets/media/icons/duotune/arrows/arr097.svg' role='presentation'/></a></span>")
+        })), data.q && (jQuery("#s-lg-az-result-count").append("<span class='az-filter-chip' aria-hidden='true'><span class='data-q-display'></span><a class='d-lg-none' onclick='springSpace.publicObj.filterAzBySearchEdit(" + site_id + "); return false;'><img src='/web/assets/media/icons/duotune/arrows/arr097.svg' role='presentation'/></a></span>"), jQuery(".data-q-display").text(data.q)), filtersApplied && jQuery(".az-filter-chip:last-of-type").after("<a id='az-mobile-filter-edit' aria-hidden='true' class='d-lg-none' data-bs-toggle='modal' data-bs-target='#az-mobile-filter-edit-modal'><i class='fa fa-pencil' aria-hidden='true'></i>&nbsp;Edit Filters</a>")
+    }, Public.prototype.getSearchTerm = function() {
+        var allSearches = [];
         return jQuery(".s-lg-az-search").each((function() {
-            "" !== jQuery(this).val() && (e[jQuery(this).val()] = "")
-        })), Object.keys(e).join(" ")
-    }, e.prototype.getDelimitedFilterSelections = function(e) {
-        return [...new Set(jQuery(e).toArray().map((e => e.text)))].join("; ")
-    }, e.prototype.getAZFilterData = function(e) {
-        let t = [];
-        return jQuery("#" + e + " > option:selected").each((function() {
-            "" !== jQuery(this).val() && "0" !== jQuery(this).val() && "" !== jQuery(this).text() && t.push(jQuery(this).text())
-        })), t
-    }, e.prototype.buildAzQs = function(e) {
-        var t = {
-                q: springSpace.Util.setProp(e.search, ""),
-                s: springSpace.Util.setProp(e.subject_id, ""),
-                t: springSpace.Util.setProp(e.type_id, ""),
-                a: springSpace.Util.setProp(e.first, ""),
-                v: springSpace.Util.setProp(e.vendor_id, ""),
-                am: springSpace.Util.setProp(e.access_mode_id, "")
+            "" !== jQuery(this).val() && (allSearches[jQuery(this).val()] = "")
+        })), Object.keys(allSearches).join(" ")
+    }, Public.prototype.getDelimitedFilterSelections = function(identifier) {
+        return [...new Set(jQuery(identifier).toArray().map((item => item.text)))].join("; ")
+    }, Public.prototype.getAZFilterData = function(filter_elt_name) {
+        let names = [];
+        return jQuery("#" + filter_elt_name + " > option:selected").each((function() {
+            "" !== jQuery(this).val() && "0" !== jQuery(this).val() && "" !== jQuery(this).text() && names.push(jQuery(this).text())
+        })), names
+    }, Public.prototype.buildAzQs = function(config) {
+        var params = {
+                q: springSpace.Util.setProp(config.search, ""),
+                s: springSpace.Util.setProp(config.subject_id, ""),
+                t: springSpace.Util.setProp(config.type_id, ""),
+                a: springSpace.Util.setProp(config.first, ""),
+                v: springSpace.Util.setProp(config.vendor_id, ""),
+                am: springSpace.Util.setProp(config.access_mode_id, "")
             },
-            s = [];
-        return jQuery.each(t, (function(e, t) {
-            "" !== t && "0" !== t && s.push(e + "=" + t)
-        })), "" !== springSpace.azList.az_preview && s.push("preview=" + springSpace.azList.az_preview), 0 == s.length ? "" : "?" + s.join("&")
-    }, e.prototype.transformAzLinks = function(e) {
+            qs_params = [];
+        return jQuery.each(params, (function(idx, val) {
+            "" !== val && "0" !== val && qs_params.push(idx + "=" + val)
+        })), "" !== springSpace.azList.az_preview && qs_params.push("preview=" + springSpace.azList.az_preview), 0 == qs_params.length ? "" : "?" + qs_params.join("&")
+    }, Public.prototype.transformAzLinks = function(config) {
         jQuery(".s-lg-az-result-title a, .s-lib-featured-profile-image a, .s-lib-profile-container a, .s-lib-featured-profile-container a, #s-lg-az-guides-div a").each((function() {
             jQuery(this).attr("target", "_blank")
         })), jQuery(".s-lg-az-result-title a, .s-lib-featured-profile-image a, .s-lib-profile-container a, .s-lib-featured-profile-container a").each((function() {
-            var e = jQuery(this).attr("href");
-            0 == /^https?:\/\/|^\/\//i.test(e) && 0 !== e.indexOf("mailto:") && jQuery(this).attr("href", "https://" + springSpace.azList.site_domain + e)
+            var href = jQuery(this).attr("href");
+            0 == /^https?:\/\/|^\/\//i.test(href) && 0 !== href.indexOf("mailto:") && jQuery(this).attr("href", "https://" + springSpace.azList.site_domain + href)
         }))
-    }, e.prototype.setReadMoreLink = function() {
+    }, Public.prototype.setReadMoreLink = function() {
         jQuery(".az-description-short").each((function() {
             jQuery(this).hasClass("ddd-truncated") && jQuery(this).next(".az-description-view-more").removeClass("d-none")
-        })), jQuery(".az-description-view-more-link").off("click").on("click", (function(e) {
-            e.preventDefault(), jQuery(this).parent().prev().data("dotdotdot").restore(), jQuery(this).addClass("d-none")
+        })), jQuery(".az-description-view-more-link").off("click").on("click", (function(event) {
+            event.preventDefault(), jQuery(this).parent().prev().data("dotdotdot").restore(), jQuery(this).addClass("d-none")
         }))
-    }, this.Public = e
+    }, this.Public = Public
 }, springSpace.public._construct(), jQuery(document).ready((function() {
     jQuery(window).scroll((function() {
         jQuery(this).scrollTop() > 220 ? jQuery("#s-lib-scroll-top").fadeIn(750) : jQuery("#s-lib-scroll-top").fadeOut(750)
-    })), jQuery("#s-lib-scroll-top").click((function(e) {
-        return e.preventDefault(), jQuery("html, body").animate({
+    })), jQuery("#s-lib-scroll-top").click((function(event) {
+        return event.preventDefault(), jQuery("html, body").animate({
             scrollTop: 0
         }, 750), jQuery("body").find("a:focusable:first").focus(), !1
     })), jQuery(".az-bs-tooltip").tooltip()
 }));
-/*! springshare 1.11.0 */
-
 var springSpace = springSpace || {};
 springSpace.util = {}, springSpace.common = {}, springSpace.validation = {}, springSpace.dynForm = {}, springSpace.lang = {}, springSpace.ui = {}, springSpace.googleSearch = {}, springSpace.session = {}, springSpace.dataTable = {}, springSpace.tagParser = {}, springSpace.util._construct = function() {
     function Util() {
         LOADING_DOTS = '<style>.loader-container{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center}.loader{height:1rem;line-height:1rem}.loader__dot{-webkit-animation:load 501ms alternate infinite;animation:load 501ms alternate infinite;background-color:#f7941d;border-radius:50%;display:inline-block;font-size:0;height:.5rem;margin:0 .25rem;width:.5rem}.loader__dot:nth-of-type(2){-webkit-animation-delay:.2s;animation-delay:.2s}.loader__dot:nth-of-type(3){-webkit-animation-delay:.4s;animation-delay:.4s}.loader__dot:nth-of-type(4){-webkit-animation-delay:.6s;animation-delay:.6s}.loader__dot:nth-of-type(5){-webkit-animation-delay:.8s;animation-delay:.8s}.loader__dot:nth-of-type(6){-webkit-animation-delay:1s;animation-delay:1s}.loader__dot:nth-of-type(7){-webkit-animation-delay:1.2s;animation-delay:1.2s}.loader__dot:nth-of-type(8){-webkit-animation-delay:1.4s;animation-delay:1.4s}.loader__dot:nth-of-type(9){-webkit-animation-delay:1.6s;animation-delay:1.6s}.loader__dot:nth-of-type(10){-webkit-animation-delay:1.8s;animation-delay:1.8s}@-webkit-keyframes load{0%{-webkit-transform:scale(0,0);transform:scale(0,0)}100%{-webkit-transform:scale(1,1);transform:scale(1,1)}}@keyframes load{0%{-webkit-transform:scale(0,0);transform:scale(0,0)}100%{-webkit-transform:scale(1,1);transform:scale(1,1)}}</style><div class="loader-container"><div aria-live="polite" class="loader" role="status"><span class="loader__text sr-only">Loading ... </span><div class="loader__dot"></div><div class="loader__dot"></div><div class="loader__dot"></div><div class="loader__dot"></div><div class="loader__dot"></div><div class="loader__dot"></div><div class="loader__dot"></div><div class="loader__dot"></div><div class="loader__dot"></div><div class="loader__dot"></div></div></div>'
     }
-    Util.prototype.safeFunctionCall = function(t) {
-        "function" == typeof window[t] && window[t]()
-    }, Util.prototype.loadJS = function(t, e, a, i) {
-        var s, r = document,
-            o = r.getElementsByTagName(t)[0];
-        /^http:/.test(r.location);
-        r.getElementById(a) || ((s = r.createElement(t)).id = a, s.src = e, s.onload = i, o.parentNode.insertBefore(s, o))
-    }, Util.prototype.setProp = function(t, e) {
-        return null != t ? t : e
-    }, Util.prototype.setConfig = function(t) {
-        return void 0 === t ? {} : t
-    }, Util.prototype.setObjProp = function(t, e, a) {
-        t in a || (a[t] = e)
+    Util.prototype.safeFunctionCall = function(function_name) {
+        "function" == typeof window[function_name] && window[function_name]()
+    }, Util.prototype.loadJS = function(s, url, id, callback) {
+        var js, d = document,
+            fjs = d.getElementsByTagName(s)[0];
+        /^http:/.test(d.location);
+        d.getElementById(id) || ((js = d.createElement(s)).id = id, js.src = url, js.onload = callback, fjs.parentNode.insertBefore(js, fjs))
+    }, Util.prototype.setProp = function(id, default_val) {
+        return null != id ? id : default_val
+    }, Util.prototype.setConfig = function(config) {
+        return void 0 === config ? {} : config
+    }, Util.prototype.setObjProp = function(key, default_val, obj) {
+        key in obj || (obj[key] = default_val)
     }, Util.prototype.replaceAll = function(config) {
         var ignore_case = this.setProp(config.ignoreCase, !1),
             regex = "/" + config.searchTerm + "/g";
         return ignore_case && (regex += "i"), config.str.replace(eval(regex), config.replaceWith)
-    }, Util.prototype.parseQS = function(t) {
-        var e = {},
-            a = t.qs.replace("?", "").split("&");
-        return jQuery.each(a, (function(t, a) {
-            var i = a.split("=");
-            e[i[0]] = i[1]
-        })), e
-    }, Util.prototype.getQSParam = function(t) {
-        var e = this.parseQS(t),
-            a = this.setProp(t.default, "");
-        return void 0 !== e[t.name] ? e[t.name] : a
-    }, Util.prototype.getScriptPathLeader = function(t) {
-        var e = location.pathname;
-        return "/" == e.charAt(e.length - 1) ? "/" : ""
-    }, Util.prototype.stringFormat = function(t, e) {
-        return t.replace(/%(\d+)/g, (function(t, a) {
-            return e[--a]
+    }, Util.prototype.parseQS = function(config) {
+        var params = {},
+            qs_params = config.qs.replace("?", "").split("&");
+        return jQuery.each(qs_params, (function(idx, val) {
+            var parts = val.split("=");
+            params[parts[0]] = parts[1]
+        })), params
+    }, Util.prototype.getQSParam = function(config) {
+        var params = this.parseQS(config),
+            def = this.setProp(config.default, "");
+        return void 0 !== params[config.name] ? params[config.name] : def
+    }, Util.prototype.getScriptPathLeader = function(config) {
+        var path = location.pathname;
+        return "/" == path.charAt(path.length - 1) ? "/" : ""
+    }, Util.prototype.stringFormat = function(str, arr) {
+        return str.replace(/%(\d+)/g, (function(_, m) {
+            return arr[--m]
         }))
-    }, Util.prototype.escapeHtml = function(t) {
-        var e = document.createElement("div");
-        return e.appendChild(document.createTextNode(t)), e.innerHTML
-    }, Util.prototype.toSeoUrl = function(t) {
-        var e = t.toString();
-        return (e = this.latinize(e)).replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, "-").replace(/&/g, "-and-").replace(/[^a-zA-Z0-9\-\_\/]/g, "").replace(/-+/g, "-").replace(/^-*/, "").replace(/-*$/, "").replace(/\/{2,}/g, "/").replace(/\/*$/, "").replace(/^\/*/, "")
-    }, Util.prototype.strip_tags = function(t, e) {
-        e = (((e || "") + "").toLowerCase().match(/<[a-z][a-z0-9]*>/g) || []).join("");
-        var a = /<\/?([a-z0-9]*)\b[^>]*>?/gi,
-            i = /<!--[\s\S]*?-->|<\?(?:php)?[\s\S]*?\?>/gi,
-            s = function(t) {
-                switch (typeof t) {
+    }, Util.prototype.escapeHtml = function(str) {
+        var div = document.createElement("div");
+        return div.appendChild(document.createTextNode(str)), div.innerHTML
+    }, Util.prototype.toSeoUrl = function(url) {
+        var str = url.toString();
+        return (str = this.latinize(str)).replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, "-").replace(/&/g, "-and-").replace(/[^a-zA-Z0-9\-\_\/]/g, "").replace(/-+/g, "-").replace(/^-*/, "").replace(/-*$/, "").replace(/\/{2,}/g, "/").replace(/\/*$/, "").replace(/^\/*/, "")
+    }, Util.prototype.strip_tags = function(input, allowed) {
+        allowed = (((allowed || "") + "").toLowerCase().match(/<[a-z][a-z0-9]*>/g) || []).join("");
+        var tags = /<\/?([a-z0-9]*)\b[^>]*>?/gi,
+            commentsAndPhpTags = /<!--[\s\S]*?-->|<\?(?:php)?[\s\S]*?\?>/gi,
+            after = function(value) {
+                switch (typeof value) {
                     case "boolean":
-                        return t ? "1" : "";
+                        return value ? "1" : "";
                     case "string":
-                        return t;
+                        return value;
                     case "number":
-                        return isNaN(t) ? "NAN" : isFinite(t) ? t + "" : (t < 0 ? "-" : "") + "INF";
+                        return isNaN(value) ? "NAN" : isFinite(value) ? value + "" : (value < 0 ? "-" : "") + "INF";
                     case "undefined":
                         return "";
                     case "object":
-                        return Array.isArray(t) ? "Array" : null !== t ? "Object" : "";
+                        return Array.isArray(value) ? "Array" : null !== value ? "Object" : "";
                     default:
                         throw new Error("Unsupported value type")
                 }
-            }(t);
-        for (s = "<" === s.substring(s.length - 1) ? s.substring(0, s.length - 1) : s;;) {
-            var r = s;
-            if (s = r.replace(i, "").replace(a, (function(t, a) {
-                    return e.indexOf("<" + a.toLowerCase() + ">") > -1 ? t : ""
-                })), r === s) return s
+            }(input);
+        for (after = "<" === after.substring(after.length - 1) ? after.substring(0, after.length - 1) : after;;) {
+            var before = after;
+            if (after = before.replace(commentsAndPhpTags, "").replace(tags, (function($0, $1) {
+                    return allowed.indexOf("<" + $1.toLowerCase() + ">") > -1 ? $0 : ""
+                })), before === after) return after
         }
-    }, Util.prototype.latinize = function(t) {
-        var e = {
+    }, Util.prototype.latinize = function(str) {
+        var latin_map = {
             "Á": "A",
             "Ă": "A",
             "Ắ": "A",
@@ -1282,58 +1278,57 @@ springSpace.util = {}, springSpace.common = {}, springSpace.validation = {}, spr
             "ᵥ": "v",
             "ₓ": "x"
         };
-        return t.replace(/[^A-Za-z0-9\[\] ]/g, (function(t) {
-            return e[t] || t
+        return str.replace(/[^A-Za-z0-9\[\] ]/g, (function(a) {
+            return latin_map[a] || a
         }))
-    }, Util.prototype.updateDataTableAriaLabelInFilterHeaders = function(t) {
-        t = t || {}, this.setObjProp("id", "#s-lib-dt-filter-header", t);
-        const e = "aria-label";
-        jQuery(t.id + " > td").each(((t, a) => {
-            const i = jQuery(a),
-                s = i.attr(e);
-            s && (i.find("> span.filter_column > input").each(((t, a) => {
-                a.setAttribute(e, s)
-            })), i.find("> span.filter_column > select").each(((t, a) => {
-                a.setAttribute(e, s)
+    }, Util.prototype.updateDataTableAriaLabelInFilterHeaders = function(config) {
+        config = config || {}, this.setObjProp("id", "#s-lib-dt-filter-header", config);
+        jQuery(config.id + " > td").each(((_i, td) => {
+            const $td = jQuery(td),
+                aria_label = $td.attr("aria-label");
+            aria_label && ($td.find("> span.filter_column > input").each(((_j, input) => {
+                input.setAttribute("aria-label", aria_label)
+            })), $td.find("> span.filter_column > select").each(((_j, select) => {
+                select.setAttribute("aria-label", aria_label)
             })))
         }))
     }, this.Util = Util
 }, springSpace.util._construct(), springSpace.Util = new springSpace.util.Util, springSpace.common._construct = function() {
-    function t() {
+    function Common() {
         this.submit_button, this.baseURL = "", this.HTTP_STATUS_OK = 200
     }
-    t.prototype.loadRemoteScript = function(t) {
-        springSpace.Util.setObjProp("id", 0, t), springSpace.Util.setObjProp("action", "", t);
-        var e = "#s-lg-rs-container-" + t.id;
-        jQuery(e).html('<div class=""><i class="fa fa-spinner fa-spin fa-fw"></i> Loading Remote Script</div>'), jQuery.ajax({
+    Common.prototype.loadRemoteScript = function(config) {
+        springSpace.Util.setObjProp("id", 0, config), springSpace.Util.setObjProp("action", "", config);
+        var elt_id = "#s-lg-rs-container-" + config.id;
+        jQuery(elt_id).html('<div class=""><i class="fa fa-spinner fa-spin fa-fw"></i> Loading Remote Script</div>'), jQuery.ajax({
             url: springSpace.Common.baseURL + "content_process.php",
             dataType: "json",
             data: {
-                action: t.action,
-                id: t.id
+                action: config.action,
+                id: config.id
             },
-            success: function(t) {
-                200 == t.errCode ? jQuery(e).html(t.data.html).slideDown("fast") : jQuery(e).html("Sorry, there has been an error processing the request. Status: " + t.data.status)
+            success: function(response) {
+                200 == response.errCode ? jQuery(elt_id).html(response.data.html).slideDown("fast") : jQuery(elt_id).html("Sorry, there has been an error processing the request. Status: " + response.data.status)
             },
-            error: function(t, a, i) {
-                jQuery(e).html("Sorry, there has been an error processing the request.").slideDown("fast")
+            error: function(jqXHR, textStatus, errorThrown) {
+                jQuery(elt_id).html("Sorry, there has been an error processing the request.").slideDown("fast")
             }
         })
-    }, t.prototype.getFeed = function(t, e) {
-        var a = window.jQuery || $;
-        a.get(t, (function(t) {
-            a(".s-lg-rss-" + e).html(t), a("[data-toggle='popover']").popover()
+    }, Common.prototype.getFeed = function(url, content_id) {
+        var jq = window.jQuery || $;
+        jq.get(url, (function(data) {
+            jq(".s-lg-rss-" + content_id).html(data), jq("[data-toggle='popover']").popover()
         }))
-    }, t.prototype.showEnhancedBookData = function(t) {
+    }, Common.prototype.showEnhancedBookData = function(config) {
         springSpace.UI.alert({
-            title: t.title,
-            url: "content_process.php?action=" + t.action + "&content_id=" + t.content_id,
+            title: config.title,
+            url: "content_process.php?action=" + config.action + "&content_id=" + config.content_id,
             width: "450",
             height: "250"
         })
-    }, t.prototype.submitPoll = function(t) {
-        var e = jQuery("#" + t.form_id);
-        this.submit_button = t.button, null == jQuery("input:radio[name ='s-lg-poll-option-" + t.content_id + "']:checked").val() ? springSpace.UI.notify({
+    }, Common.prototype.submitPoll = function(config) {
+        var poll_form = jQuery("#" + config.form_id);
+        this.submit_button = config.button, null == jQuery("input:radio[name ='s-lg-poll-option-" + config.content_id + "']:checked").val() ? springSpace.UI.notify({
             msg: "<div>You must select a poll option</div>",
             duration: springSpace.UI.CONST.conf_close_delay
         }) : (springSpace.UI.changeButtonStatus({
@@ -1341,15 +1336,15 @@ springSpace.util = {}, springSpace.common = {}, springSpace.validation = {}, spr
             status: "clicked",
             button: this.submit_button
         }), xhr = jQuery.ajax({
-            url: t.url,
+            url: config.url,
             dataType: "jsonp",
             jsonpCallback: "springSpace.Common.submitPollCallback",
-            data: e.serialize()
+            data: poll_form.serialize()
         }))
-    }, t.prototype.submitPollCallback = function(t) {
-        var e = this;
+    }, Common.prototype.submitPollCallback = function(response) {
+        var obj_this = this;
         springSpace.Common.apiLoad ? jQuery.ajax({
-            url: t.data.html.display_url,
+            url: response.data.html.display_url,
             dataType: "jsonp",
             cache: !1,
             jsonpCallback: "springSpace.Common.submitApiPollCallback"
@@ -1359,65 +1354,65 @@ springSpace.util = {}, springSpace.common = {}, springSpace.validation = {}, spr
             cache: !1,
             data: {
                 action: springSpace.Common.constant.PROCESSING.ACTION_DISPLAY_POLL,
-                content_id: t.data.html.content_id
+                content_id: response.data.html.content_id
             },
-            success: function(t, a, i) {
-                jQuery("#s-lg-content-votes-" + t.data.content_id).html(t.data.content), e.showPoll({
+            success: function(response, textStatus, jqXHR) {
+                jQuery("#s-lg-content-votes-" + response.data.content_id).html(response.data.content), obj_this.showPoll({
                     pane: "votes",
-                    elt_id: t.data.content_id
-                }), jQuery("#s-lg-content-votes-" + t.data.content_id + " div.s-lg-poll-toggle button").focus(), springSpace.UI.changeButtonStatus({
+                    elt_id: response.data.content_id
+                }), jQuery("#s-lg-content-votes-" + response.data.content_id + " div.s-lg-poll-toggle button").focus(), springSpace.UI.changeButtonStatus({
                     active_text: "Submit",
                     status: "active",
-                    button: e.submit_button
+                    button: obj_this.submit_button
                 })
             },
-            error: function(t, e, a) {
-                alert("Oops, sorry! Something unexpected happened: " + a + " \n\nThat might not mean much to you, but it probably does to the Springy Techs...you can let them know at support@springshare.com.")
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert("Oops, sorry! Something unexpected happened: " + errorThrown + " \n\nThat might not mean much to you, but it probably does to the Springy Techs...you can let them know at support@springshare.com.")
             }
         })
-    }, t.prototype.submitApiPollCallback = function(t) {
-        jQuery("#s-lg-content-votes-" + t.data.html.content_id).html(t.data.html.content), this.showPoll({
+    }, Common.prototype.submitApiPollCallback = function(response) {
+        jQuery("#s-lg-content-votes-" + response.data.html.content_id).html(response.data.html.content), this.showPoll({
             pane: "votes",
-            elt_id: t.data.html.content_id
+            elt_id: response.data.html.content_id
         }), springSpace.UI.changeButtonStatus({
             active_text: "Submit",
             status: "active",
             button: this.submit_button
         })
-    }, t.prototype.showPoll = function(t) {
-        return "votes" == t.pane ? (jQuery("#s-lg-content-poll-" + t.elt_id).hide(), jQuery("#s-lg-content-votes-" + t.elt_id).show(), jQuery("#s-lg-show-votes-" + t.elt_id).hide()) : "poll" == t.pane && (jQuery("#s-lg-content-poll-" + t.elt_id).show(), jQuery("#s-lg-content-votes-" + t.elt_id).hide(), jQuery("#s-lg-show-votes-" + t.elt_id).show(), jQuery("#s-lg-show-votes-" + t.elt_id + " button").removeAttr("disabled")), !1
-    }, this.Common = t
+    }, Common.prototype.showPoll = function(config) {
+        return "votes" == config.pane ? (jQuery("#s-lg-content-poll-" + config.elt_id).hide(), jQuery("#s-lg-content-votes-" + config.elt_id).show(), jQuery("#s-lg-show-votes-" + config.elt_id).hide()) : "poll" == config.pane && (jQuery("#s-lg-content-poll-" + config.elt_id).show(), jQuery("#s-lg-content-votes-" + config.elt_id).hide(), jQuery("#s-lg-show-votes-" + config.elt_id).show(), jQuery("#s-lg-show-votes-" + config.elt_id + " button").removeAttr("disabled")), !1
+    }, this.Common = Common
 }, springSpace.common._construct(), springSpace.Common = new springSpace.common.Common, springSpace.ui._construct = function() {
-    function t() {
+    function UI() {
         this.alertObj = null, this.alertConfig = null, this.alertTriggeredElt = null, this.CONST = {
             conf_close_delay: 2e3,
             load_img_notify: "//s3.amazonaws.com/libapps/apps/common/images/ajax-loader.gif",
             refresh_page_msg: '<i class="fa fa-refresh"></i> Refreshing page...'
         }
     }
-    t.prototype.hoverColor = function(t) {
-        jQuery(t.hoverEltSelector).hover((function() {
-            jQuery(t.targetEltSelector).css("background", t.hoverColor)
+    UI.prototype.hoverColor = function(config) {
+        jQuery(config.hoverEltSelector).hover((function() {
+            jQuery(config.targetEltSelector).css("background", config.hoverColor)
         }), (function() {
-            jQuery(t.targetEltSelector).css("background", "")
+            jQuery(config.targetEltSelector).css("background", "")
         }))
-    }, t.prototype.focus = function(t) {
-        t = springSpace.Util.setConfig(t);
-        var e = springSpace.Util.setProp(t.id, ".s-lib-focus");
-        jQuery(e).focus(), jQuery('a[data-toggle="tab"]').on("shown.bs.tab", (function(t) {
-            jQuery(e).focus()
+    }, UI.prototype.focus = function(config) {
+        config = springSpace.Util.setConfig(config);
+        var elt_id = springSpace.Util.setProp(config.id, ".s-lib-focus");
+        jQuery(elt_id).focus(), jQuery('a[data-toggle="tab"]').on("shown.bs.tab", (function(e) {
+            jQuery(elt_id).focus()
         }))
-    }, t.prototype.popover = function(t) {
-        jQuery("#" + t.elt_id).popover(t)
-    }, t.prototype.showEditable = function(t) {
-        var e = springSpace.Util.setProp(t.source_id, ""),
-            a = springSpace.Util.setProp(t.id, "");
-        a.length > 0 && jQuery("#" + e).click((function(t) {
-            t.stopPropagation(), jQuery("#" + a).editable("toggle")
+    }, UI.prototype.popover = function(config) {
+        jQuery("#" + config.elt_id).popover(config)
+    }, UI.prototype.showEditable = function(config) {
+        var source_id = springSpace.Util.setProp(config.source_id, ""),
+            elt_id = springSpace.Util.setProp(config.id, "");
+        elt_id.length > 0 && jQuery("#" + source_id).click((function(e) {
+            e.stopPropagation(), jQuery("#" + elt_id).editable("toggle")
         }))
-    }, t.prototype.initPopOvers = function() {
+    }, UI.prototype.initPopOvers = function() {
         jQuery("[data-toggle='popover']").popover()
-    }, t.prototype.initHelpPopOvers = function() {
+    }, UI.prototype.initHelpPopOvers = function() {
         jQuery("[data-toggle='help-popover-info']").popover({
             container: "body",
             placement: "auto right",
@@ -1425,277 +1420,256 @@ springSpace.util = {}, springSpace.common = {}, springSpace.validation = {}, spr
             html: !0,
             template: '<div class="popover s-lib-help-popover" role="tooltip"><div class="popover-content"></div></div>'
         }), springSpace.UI.escapeTooltips()
-    }, t.prototype.escapeTooltips = function() {
-        document.addEventListener("keydown", (function(t) {
-            if ("Escape" === t.key) {
-                document.querySelectorAll("a.help-icon-button[aria-describedby]").forEach((function(t) {
-                    jQuery(t).popover("hide")
+    }, UI.prototype.escapeTooltips = function() {
+        document.addEventListener("keydown", (function(event) {
+            if ("Escape" === event.key) {
+                document.querySelectorAll("a.help-icon-button[aria-describedby]").forEach((function(button) {
+                    jQuery(button).popover("hide")
                 }))
             }
         }))
-    }, t.prototype.initChosen = function() {
+    }, UI.prototype.initChosen = function() {
         jQuery(".chosen-select").chosen(), jQuery(".chosen-select-deselect").chosen({
             allow_single_deselect: !0
         })
-    }, t.prototype.setEltVal = function(t) {
-        jQuery("#" + t.id).val(t.value), jQuery("#" + t.id).trigger("change")
-    }, t.prototype.alert = function(t) {
+    }, UI.prototype.setEltVal = function(config) {
+        jQuery("#" + config.id).val(config.value), jQuery("#" + config.id).trigger("change")
+    }, UI.prototype.alert = function(config) {
         if (this.alertTriggeredElt = document.activeElement, !jQuery("#s-lib-alert-content").length) return console.log("API error: div #s-lib-alert-content not defined."), !1;
-        jQuery("#s-lib-alert-content").html('<div class="s-lg-text-greyout bold text-center pad-med">Loading...</div>'), void 0 === t && (t = {}), this.alertConfig = t;
-        var e = this,
-            a = springSpace.Util.setProp(t.focus_on_close, !0),
-            i = springSpace.Util.setProp(t.resizable, !0),
-            s = springSpace.Util.setProp(t.async, !0),
-            r = springSpace.Util.setProp(t.modal, !0),
-            o = springSpace.Util.setProp(t.title, "[ADD TITLE]"),
-            n = springSpace.Util.setProp(t.content, "[content]"),
-            l = springSpace.Util.setProp(t.url, null),
-            c = springSpace.Util.setProp(t.data, null),
-            p = springSpace.Util.setProp(t.width, 400),
-            u = springSpace.Util.setProp(t.height, 400),
-            d = springSpace.Util.setProp(t.no_button, !1),
-            h = springSpace.Util.setProp(t.button_class_ok, "btn-primary"),
-            g = springSpace.Util.setProp(t.load_callback, null),
-            m = springSpace.Util.setProp(t.error_callback, null),
-            _ = springSpace.Util.setProp(t.close_callback, null),
-            y = d ? {} : springSpace.Util.setProp(t.buttons, {
+        jQuery("#s-lib-alert-content").html('<div class="s-lg-text-greyout bold text-center pad-med">Loading...</div>'), void 0 === config && (config = {}), this.alertConfig = config;
+        var obj_this = this,
+            focus_on_close = springSpace.Util.setProp(config.focus_on_close, !0),
+            resize = springSpace.Util.setProp(config.resizable, !0),
+            async = springSpace.Util.setProp(config.async, !0), modal = springSpace.Util.setProp(config.modal, !0), title = springSpace.Util.setProp(config.title, "[ADD TITLE]"), content = springSpace.Util.setProp(config.content, "[content]"), url = springSpace.Util.setProp(config.url, null), url_data = springSpace.Util.setProp(config.data, null), width = springSpace.Util.setProp(config.width, 400), height = springSpace.Util.setProp(config.height, 400), no_button = springSpace.Util.setProp(config.no_button, !1), button_class_ok = springSpace.Util.setProp(config.button_class_ok, "btn-primary"), load_callback = springSpace.Util.setProp(config.load_callback, null), error_callback = springSpace.Util.setProp(config.error_callback, null), close_callback = springSpace.Util.setProp(config.close_callback, null), buttons = no_button ? {} : springSpace.Util.setProp(config.buttons, {
                 OK: function() {
                     jQuery(this).dialog("close")
                 }
             });
-        return null !== l ? jQuery.ajax({
-            url: l,
+        return null !== url ? jQuery.ajax({
+            url: url,
             cache: !1,
-            data: c,
-            async: s,
-            type: t.type ?? "GET",
-            success: function(t) {
-                jQuery("#s-lib-alert-content").html(t), e.initPopOvers()
+            data: url_data,
+            async: async,
+            type: config.type ?? "GET",
+            success: function(data) {
+                jQuery("#s-lib-alert-content").html(data), obj_this.initPopOvers()
             },
-            error: function(t, e, a) {
-                null !== m && m(a)
+            error: function(jqXHR, textStatus, errorThrown) {
+                null !== error_callback && error_callback(errorThrown)
             }
-        }) : jQuery("#s-lib-alert-content").html(n), dialogConfig = {
-            title: o,
-            resizable: i,
+        }) : jQuery("#s-lib-alert-content").html(content), dialogConfig = {
+            title: title,
+            resizable: resize,
             autoResize: !0,
-            width: p,
-            height: u,
-            modal: r,
-            buttons: y,
+            width: width,
+            height: height,
+            modal: modal,
+            buttons: buttons,
             open: function() {
                 $buttonPane = jQuery(".ui-dialog-buttonset"), $buttonPane.children().addClass("btn").addClass("btn-sm").addClass("btn-default");
-                var t = $buttonPane.find("button:first");
-                t.attr("id", "s-lib-alert-btn-first"), h && t.addClass(h), $buttonPane.find("button").addClass("margin-right-med"), null !== g && g()
+                var first_button = $buttonPane.find("button:first");
+                first_button.attr("id", "s-lib-alert-btn-first"), button_class_ok && first_button.addClass(button_class_ok), $buttonPane.find("button").addClass("margin-right-med"), null !== load_callback && load_callback()
             },
-            resize: function(t, e) {
+            resize: function(evt, ui) {
                 jQuery("#s-lib-alert").dialog("option", "position", "center")
             },
-            create: function(t, e) {
-                var a = jQuery(this).dialog("widget");
-                jQuery(".ui-dialog-titlebar-close", a).replaceWith('<button class="btn btn-xs btn-default ui-dialog-titlebar-close"><i class="fa fa-close fa-fw" aria-hidden="true"></i><span class="sr-only">Closes the pop-up dialog</span></button>');
-                var i = this;
-                jQuery(".ui-dialog-titlebar-close").on("click", (function(t) {
-                    jQuery(i).dialog("close")
+            create: function(event, ui) {
+                var widget = jQuery(this).dialog("widget");
+                jQuery(".ui-dialog-titlebar-close", widget).replaceWith('<button class="btn btn-xs btn-default ui-dialog-titlebar-close"><i class="fa fa-close fa-fw" aria-hidden="true"></i><span class="sr-only">Closes the pop-up dialog</span></button>');
+                var that = this;
+                jQuery(".ui-dialog-titlebar-close").on("click", (function(evt) {
+                    jQuery(that).dialog("close")
                 }))
             },
             beforeClose: function() {
-                null !== _ && _()
+                null !== close_callback && close_callback()
             }
         }, jQuery.widget("ui.dialog", jQuery.ui.dialog, {
-            _allowInteraction: function(t) {
-                return !!this._super(t) || (t.target.ownerDocument != this.document[0] || (!!jQuery(t.target).closest(".cke_dialog").length || (!!jQuery(t.target).closest(".cke").length || void 0)))
+            _allowInteraction: function(event) {
+                return !!this._super(event) || (event.target.ownerDocument != this.document[0] || (!!jQuery(event.target).closest(".cke_dialog").length || (!!jQuery(event.target).closest(".cke").length || void 0)))
             },
-            _moveToTop: function(t, e) {
-                t && this.options.modal || this._super(t, e)
+            _moveToTop: function(event, silent) {
+                event && this.options.modal || this._super(event, silent)
             }
-        }), this.alertObj = jQuery("#s-lib-alert"), this.alertObj.dialog(dialogConfig), a && this.alertObj.on("dialogclose", (function(t, a) {
-            e.alertTriggeredElt.focus()
+        }), this.alertObj = jQuery("#s-lib-alert"), this.alertObj.dialog(dialogConfig), focus_on_close && this.alertObj.on("dialogclose", (function(event, ui) {
+            obj_this.alertTriggeredElt.focus()
         })), !1
-    }, t.prototype.setupAlertButtons = function(t, e) {
-        let a = Object.keys(e);
-        var i = [],
-            s = "";
-        for (let t = 0; t < a.length; t++) {
-            const r = a[t],
-                o = e[r];
-            let n = "",
-                l = "btn btn-sm margin-right-med ",
-                c = "button",
-                p = r,
-                u = o;
-            0 === t ? (n = "s-lib-alert-btn-first", l += "btn-primary") : (n = "s-lib-alert-btn-" + t, l += "btn-default"), "object" == typeof o && (c = o.type || "button", p = o.text, u = o.click), s += '<button type="' + c + '" class="' + l + '" id="' + n + '">' + p + "</button>", i.push([n, u])
+    }, UI.prototype.setupAlertButtons = function(element, buttons) {
+        let buttonKeys = Object.keys(buttons);
+        var onClickHandlers = [],
+            html = "";
+        for (let i = 0; i < buttonKeys.length; i++) {
+            const buttonKey = buttonKeys[i],
+                buttonInfo = buttons[buttonKey];
+            let id = "",
+                classNames = "btn btn-sm margin-right-med ",
+                buttonType = "button",
+                label = buttonKey,
+                onClickFn = buttonInfo;
+            0 === i ? (id = "s-lib-alert-btn-first", classNames += "btn-primary") : (id = "s-lib-alert-btn-" + i, classNames += "btn-default"), "object" == typeof buttonInfo && (buttonType = buttonInfo.type || "button", label = buttonInfo.text, onClickFn = buttonInfo.click), html += '<button type="' + buttonType + '" class="' + classNames + '" id="' + id + '">' + label + "</button>", onClickHandlers.push([id, onClickFn])
         }
-        t.html(s);
-        for (let t = 0; t < i.length; t++) {
-            var r = i[t];
-            jQuery("#" + r[0]).on("click", r[1])
+        element.html(html);
+        for (let i = 0; i < onClickHandlers.length; i++) {
+            var onClickHandler = onClickHandlers[i];
+            jQuery("#" + onClickHandler[0]).on("click", onClickHandler[1])
         }
-    }, t.prototype.alertBS = function(t) {
+    }, UI.prototype.alertBS = function(config) {
         this.alertTriggeredElt = document.activeElement;
-        let e = jQuery("#s-lib-alert");
-        if (e.is(":visible")) return this.closeAlertBS(), void e.one("hidden.bs.modal", (function() {
-            springSpace.UI.alertBS(t)
+        let alertElement = jQuery("#s-lib-alert");
+        if (alertElement.is(":visible")) return this.closeAlertBS(), void alertElement.one("hidden.bs.modal", (function() {
+            springSpace.UI.alertBS(config)
         }));
-        let a = jQuery("#s-lib-alert-loading"),
-            i = jQuery("#s-lib-alert-content"),
-            s = jQuery("#s-lib-alert-buttons");
-        if (0 === i.length) return console.log("API error: div #s-lib-alert-content not defined."), !1;
-        void 0 === t && (t = {}), this.alertConfig = t;
-        var r = this,
-            o = springSpace.Util.setProp(t.focus_on_close, !0),
-            n = springSpace.Util.setProp(t.async, !0),
-            l = springSpace.Util.setProp(t.title, "[ADD TITLE]"),
-            c = springSpace.Util.setProp(t.content, "[content]"),
-            p = springSpace.Util.setProp(t.url, null),
-            u = springSpace.Util.setProp(t.data, null),
-            d = springSpace.Util.setProp(t.small, !1),
-            h = springSpace.Util.setProp(t.load_callback, null),
-            g = springSpace.Util.setProp(t.close_callback, null),
-            m = springSpace.Util.setProp(t.buttons, {
+        let loadingDiv = jQuery("#s-lib-alert-loading"),
+            contentDiv = jQuery("#s-lib-alert-content"),
+            buttonsDiv = jQuery("#s-lib-alert-buttons");
+        if (0 === contentDiv.length) return console.log("API error: div #s-lib-alert-content not defined."), !1;
+        void 0 === config && (config = {}), this.alertConfig = config;
+        var obj_this = this,
+            focus_on_close = springSpace.Util.setProp(config.focus_on_close, !0),
+            async = springSpace.Util.setProp(config.async, !0), title = springSpace.Util.setProp(config.title, "[ADD TITLE]"), content = springSpace.Util.setProp(config.content, "[content]"), url = springSpace.Util.setProp(config.url, null), url_data = springSpace.Util.setProp(config.data, null), small = springSpace.Util.setProp(config.small, !1), load_callback = springSpace.Util.setProp(config.load_callback, null), close_callback = springSpace.Util.setProp(config.close_callback, null), buttons = springSpace.Util.setProp(config.buttons, {
                 OK: springSpace.UI.closeAlertBS
             });
-        jQuery("#s-lib-alert-title").text(l), jQuery("#s-lib-alert .modal-dialog").removeClass("modal-sm").removeClass("modal-lg").addClass(d ? "modal-sm" : "modal-lg"), null !== p ? (a.show(), i.hide(), s.html(""), jQuery.ajax({
-            url: p,
+        jQuery("#s-lib-alert-title").text(title), jQuery("#s-lib-alert .modal-dialog").removeClass("modal-sm").removeClass("modal-lg").addClass(small ? "modal-sm" : "modal-lg"), null !== url ? (loadingDiv.show(), contentDiv.hide(), buttonsDiv.html(""), jQuery.ajax({
+            url: url,
             cache: !1,
-            data: u,
-            async: n,
-            success: function(t) {
-                a.hide(), springSpace.UI.setupAlertButtons(s, m), i.html(t).show(), null !== h && h(), r.initPopOvers()
+            data: url_data,
+            async: async,
+            success: function(data) {
+                loadingDiv.hide(), springSpace.UI.setupAlertButtons(buttonsDiv, buttons), contentDiv.html(data).show(), null !== load_callback && load_callback(), obj_this.initPopOvers()
             },
-            error: function(t, e, r) {
-                a.hide(), springSpace.UI.setupAlertButtons(s, m), i.html(r).show()
+            error: function(jqXHR, textStatus, errorThrown) {
+                loadingDiv.hide(), springSpace.UI.setupAlertButtons(buttonsDiv, buttons), contentDiv.html(errorThrown).show()
             }
-        })) : (a.hide(), springSpace.UI.setupAlertButtons(s, m), i.html(c).show());
+        })) : (loadingDiv.hide(), springSpace.UI.setupAlertButtons(buttonsDiv, buttons), contentDiv.html(content).show());
         return alertObj = new bootstrap.Modal("#s-lib-alert", {
             backdrop: "static"
-        }), e.off("hidden.bs.modal").on("hidden.bs.modal", (function() {
-            o && r.alertTriggeredElt.focus(), null !== g && g(), jQuery("#s-lib-alert-content, #s-lib-alert-buttons").empty()
+        }), alertElement.off("hidden.bs.modal").on("hidden.bs.modal", (function() {
+            focus_on_close && obj_this.alertTriggeredElt.focus(), null !== close_callback && close_callback(), jQuery("#s-lib-alert-content, #s-lib-alert-buttons").empty()
         })), alertObj.show(), !1
-    }, t.prototype.closeAlertBS = function() {
+    }, UI.prototype.closeAlertBS = function() {
         jQuery("#s-lib-alert").modal("hide")
-    }, t.prototype.getAlertButton = function(t) {
-        return springSpace.Util.setObjProp("name", "", t), "" !== t.name ? jQuery(".ui-dialog-buttonset :button:contains('" + t.name + "')") : {}
-    }, t.prototype.error = function(t) {
+    }, UI.prototype.getAlertButton = function(config) {
+        return springSpace.Util.setObjProp("name", "", config), "" !== config.name ? jQuery(".ui-dialog-buttonset :button:contains('" + config.name + "')") : {}
+    }, UI.prototype.error = function(err_txt) {
         springSpace.UI.alert({
             title: "Error",
             width: 800,
             height: 400,
-            content: '<div class="alert alert-danger">Sorry, an error occurred while processing your request. If you continue to receive this error please contact us at https://ask.springshare.com/ask with the following error code along with a description of the action you were attempting.<BR><HR>' + t + "</div>"
+            content: '<div class="alert alert-danger">Sorry, an error occurred while processing your request. If you continue to receive this error please contact us at https://ask.springshare.com/ask with the following error code along with a description of the action you were attempting.<BR><HR>' + err_txt + "</div>"
         }), springSpace.UI.refreshAlert()
-    }, t.prototype.errorBS = function(t) {
+    }, UI.prototype.errorBS = function(err_txt) {
         springSpace.UI.alertBS({
             title: "Error",
             width: 800,
             height: 400,
-            content: '<div class="alert alert-danger">Sorry, an error occurred while processing your request. If you continue to receive this error please contact us at https://ask.springshare.com/ask with the following error code along with a description of the action you were attempting.<BR><HR>' + t + "</div>"
+            content: '<div class="alert alert-danger">Sorry, an error occurred while processing your request. If you continue to receive this error please contact us at https://ask.springshare.com/ask with the following error code along with a description of the action you were attempting.<BR><HR>' + err_txt + "</div>"
         })
-    }, t.prototype.refreshAlert = function() {
+    }, UI.prototype.refreshAlert = function() {
         this.closeAlert(), this.alert(this.alertConfig)
-    }, t.prototype.closeAlert = function(t) {
+    }, UI.prototype.closeAlert = function(config) {
         springSpace.UI.alertTriggeredElt && springSpace.UI.alertTriggeredElt.focus(), jQuery("#s-lib-alert-content").empty(), jQuery("#s-lib-alert").dialog("destroy")
-    }, t.prototype.centerAlert = function(t) {
+    }, UI.prototype.centerAlert = function(config) {
         jQuery("#s-lib-alert").dialog("option", "position", ["center", "center"])
-    }, t.prototype.alertError = function(t) {
-        springSpace.Util.setProp(t.error, "Undefined");
-        var e = springSpace.Util.setProp(t.custom_msg, ""),
-            a = springSpace.Util.setProp(t.title, "Error!"),
-            i = "" !== e ? e : "<div class=\"alert alert-danger\">Yikes, looks like you've encountered an error. Please try again if you still get the error, please let us know what the issue is at <a href='https://ask.springshare.com/ask'>https://ask.springshare.com/ask</a></div>",
-            s = springSpace.Util.setProp(t.width, 300),
-            r = springSpace.Util.setProp(t.height, 250);
+    }, UI.prototype.alertError = function(config) {
+        springSpace.Util.setProp(config.error, "Undefined");
+        var custom_msg = springSpace.Util.setProp(config.custom_msg, ""),
+            title = springSpace.Util.setProp(config.title, "Error!"),
+            msg = "" !== custom_msg ? custom_msg : "<div class=\"alert alert-danger\">Yikes, looks like you've encountered an error. Please try again if you still get the error, please let us know what the issue is at <a href='https://ask.springshare.com/ask'>https://ask.springshare.com/ask</a></div>",
+            width = springSpace.Util.setProp(config.width, 300),
+            height = springSpace.Util.setProp(config.height, 250);
         springSpace.UI.alert({
-            title: a,
-            height: r,
-            width: s,
-            content: i
+            title: title,
+            height: height,
+            width: width,
+            content: msg
         })
-    }, t.prototype.alertScrollToField = function(t) {
-        if (springSpace.Util.setObjProp("main_tab_id", "s-lg-add-content-tab", t), springSpace.Util.setObjProp("scroll_to_id", "", t), jQuery("#" + t.main_tab_id).hasClass("active")) {
-            var e = jQuery("#s-lib-alert");
-            scrollTo = jQuery("#" + t.scroll_to_id), void 0 !== scrollTo.offset() && e.animate({
-                scrollTop: scrollTo.offset().top - e.offset().top + e.scrollTop()
+    }, UI.prototype.alertScrollToField = function(config) {
+        if (springSpace.Util.setObjProp("main_tab_id", "s-lg-add-content-tab", config), springSpace.Util.setObjProp("scroll_to_id", "", config), jQuery("#" + config.main_tab_id).hasClass("active")) {
+            var container = jQuery("#s-lib-alert");
+            scrollTo = jQuery("#" + config.scroll_to_id), void 0 !== scrollTo.offset() && container.animate({
+                scrollTop: scrollTo.offset().top - container.offset().top + container.scrollTop()
             })
-        } else jQuery("#" + t.main_tab_id + " a").tab("show"), jQuery("#" + t.main_tab_id + " a").on("shown.bs.tab", (function(e) {
-            var a = jQuery("#s-lib-alert");
-            scrollTo = jQuery("#" + t.scroll_to_id), void 0 !== scrollTo.offset() && a.animate({
-                scrollTop: scrollTo.offset().top - a.offset().top + a.scrollTop()
+        } else jQuery("#" + config.main_tab_id + " a").tab("show"), jQuery("#" + config.main_tab_id + " a").on("shown.bs.tab", (function(e) {
+            var container = jQuery("#s-lib-alert");
+            scrollTo = jQuery("#" + config.scroll_to_id), void 0 !== scrollTo.offset() && container.animate({
+                scrollTop: scrollTo.offset().top - container.offset().top + container.scrollTop()
             })
         }))
-    }, t.prototype.scrollToHashId = function(t) {
-        springSpace.Util.setObjProp("scroll_to_id", "", t);
-        var e = document.location.href.replace(location.hash, "");
-        window.document.location.href = e + "#" + t.scroll_to_id
-    }, t.prototype.changeButtonStatus = function(t) {
-        var e = springSpace.Util.setProp(t.status, ""),
-            a = springSpace.Util.setProp(t.disabled, jQuery(t.button).attr("disabled")),
-            i = springSpace.Util.setProp(t.text, jQuery(t.button).html()),
-            s = springSpace.Util.setProp(t.class, jQuery(t.button).attr("class")),
-            r = springSpace.Util.setProp(t.active_text, "Save"),
-            o = springSpace.Util.setProp(t.clicked_text, "Saving..."),
-            n = springSpace.Util.setProp(t.conf_text, "Saved!"),
-            l = springSpace.Util.setProp(t.active_class, "btn btn-primary"),
-            c = (springSpace.Util.setProp(t.clicked_class, "btn btn-primary"), springSpace.Util.setProp(t.conf_class, "btn btn-success"));
-        if ("" == e) jQuery(t.button).html(i), jQuery(t.button).attr("disabled", a), jQuery(t.button).attr("class", s);
-        else if ("clicked" == e) jQuery(t.button).html(o), jQuery(t.button).attr("disabled", !0);
-        else if ("conf" == e) {
-            var p = springSpace.Util.setProp(t.timeout, 4e3);
-            jQuery(t.button).removeClass(l), jQuery(t.button).addClass(c), jQuery(t.button).html(n), jQuery(t.button).attr("disabled", !1), setTimeout((function() {
-                jQuery(t.button).removeClass(c), jQuery(t.button).addClass(l), jQuery(t.button).html(r)
-            }), p)
-        } else "active" == e && (jQuery(t.button).removeClass(c), jQuery(t.button).addClass(l), jQuery(t.button).attr("disabled", !1), jQuery(t.button).html(r))
-    }, t.prototype.changeSaveButtonStatus = function(t) {
-        var e = {
+    }, UI.prototype.scrollToHashId = function(config) {
+        springSpace.Util.setObjProp("scroll_to_id", "", config);
+        var url = document.location.href.replace(location.hash, "");
+        window.document.location.href = url + "#" + config.scroll_to_id
+    }, UI.prototype.changeButtonStatus = function(config) {
+        var status = springSpace.Util.setProp(config.status, ""),
+            disabled = springSpace.Util.setProp(config.disabled, jQuery(config.button).attr("disabled")),
+            text = springSpace.Util.setProp(config.text, jQuery(config.button).html()),
+            css_class = springSpace.Util.setProp(config.class, jQuery(config.button).attr("class")),
+            active_text = springSpace.Util.setProp(config.active_text, "Save"),
+            clicked_text = springSpace.Util.setProp(config.clicked_text, "Saving..."),
+            conf_text = springSpace.Util.setProp(config.conf_text, "Saved!"),
+            active_class = springSpace.Util.setProp(config.active_class, "btn btn-primary"),
+            conf_class = (springSpace.Util.setProp(config.clicked_class, "btn btn-primary"), springSpace.Util.setProp(config.conf_class, "btn btn-success"));
+        if ("" == status) jQuery(config.button).html(text), jQuery(config.button).attr("disabled", disabled), jQuery(config.button).attr("class", css_class);
+        else if ("clicked" == status) jQuery(config.button).html(clicked_text), jQuery(config.button).attr("disabled", !0);
+        else if ("conf" == status) {
+            var timeout = springSpace.Util.setProp(config.timeout, 4e3);
+            jQuery(config.button).removeClass(active_class), jQuery(config.button).addClass(conf_class), jQuery(config.button).html(conf_text), jQuery(config.button).attr("disabled", !1), setTimeout((function() {
+                jQuery(config.button).removeClass(conf_class), jQuery(config.button).addClass(active_class), jQuery(config.button).html(active_text)
+            }), timeout)
+        } else "active" == status && (jQuery(config.button).removeClass(conf_class), jQuery(config.button).addClass(active_class), jQuery(config.button).attr("disabled", !1), jQuery(config.button).html(active_text))
+    }, UI.prototype.changeSaveButtonStatus = function(config) {
+        var states = {
             save: "active",
             saving: "clicked",
             saved: "conf"
         };
-        t.active_text || (t.active_text = "Save"), t.clicked_text || (t.clicked_text = "Saving..."), t.conf_text || (t.conf_text = "Saved"), this.changeButtonStatus({
-            active_text: t.active_text,
-            clicked_text: t.clicked_text,
-            conf_text: t.conf_text,
-            status: e[t.status],
-            button: t.button
+        config.active_text || (config.active_text = "Save"), config.clicked_text || (config.clicked_text = "Saving..."), config.conf_text || (config.conf_text = "Saved"), this.changeButtonStatus({
+            active_text: config.active_text,
+            clicked_text: config.clicked_text,
+            conf_text: config.conf_text,
+            status: states[config.status],
+            button: config.button
         })
-    }, t.prototype.xhrPopover = function(t) {
+    }, UI.prototype.xhrPopover = function(config) {
         jQuery(".s-lib-popover").popover({
             container: "body",
             html: !0,
-            content: function(t) {
+            content: function(ele) {
                 return jQuery.ajax({
                     url: jQuery(this).data("ajload"),
                     type: "get",
                     dataType: "json",
                     async: !1,
-                    success: function(t) {
-                        jQuery("#s-lib-popover-content").html(t.data.content)
+                    success: function(response) {
+                        jQuery("#s-lib-popover-content").html(response.data.content)
                     }
                 }), jQuery("#s-lib-popover-content").html()
             }
-        }).click((function(t) {
-            jQuery(".s-lib-popover").not(this).popover("hide"), jQuery(".popover-title").html(jQuery(this).data("original-title") + '<button type="button" class="close">&times;</button>'), jQuery(".close, .btn-close").click((function(t) {
+        }).click((function(e) {
+            jQuery(".s-lib-popover").not(this).popover("hide"), jQuery(".popover-title").html(jQuery(this).data("original-title") + '<button type="button" class="close">&times;</button>'), jQuery(".close, .btn-close").click((function(e) {
                 jQuery(".s-lib-popover").popover("hide")
-            })), t.preventDefault()
-        })), jQuery(".popclose").on("click", (function(t) {}))
-    }, t.prototype.closeXhrPopover = function() {
+            })), e.preventDefault()
+        })), jQuery(".popclose").on("click", (function(e) {}))
+    }, UI.prototype.closeXhrPopover = function() {
         jQuery(".s-lib-popover").popover("hide")
-    }, t.prototype.scrollToTop = function(t) {
-        var e = springSpace.Util.setProp(t.scroll_time, 1500),
-            a = springSpace.Util.setProp(t.position, 0);
+    }, UI.prototype.scrollToTop = function(config) {
+        var scroll_time = springSpace.Util.setProp(config.scroll_time, 1500),
+            position = springSpace.Util.setProp(config.position, 0);
         jQuery("html, body").animate({
-            scrollTop: a
-        }, e)
-    }, t.prototype.clickOnEnter = function(t) {
-        jQuery("." + t.class_name).keyup((function(e) {
-            13 == e.keyCode && (e.preventDefault(), jQuery("#" + t.button_id).click())
+            scrollTop: position
+        }, scroll_time)
+    }, UI.prototype.clickOnEnter = function(config) {
+        jQuery("." + config.class_name).keyup((function(event) {
+            13 == event.keyCode && (event.preventDefault(), jQuery("#" + config.button_id).click())
         }))
-    }, t.prototype.disableSubmitOnEnter = function(t) {
-        jQuery("." + t.class_name).bind("keypress", (function(t) {
-            if (13 == t.keyCode && "textarea" != t.target.tagName.toLowerCase()) return !1
+    }, UI.prototype.disableSubmitOnEnter = function(config) {
+        jQuery("." + config.class_name).bind("keypress", (function(e) {
+            if (13 == e.keyCode && "textarea" != e.target.tagName.toLowerCase()) return !1
         }))
-    }, t.prototype.notifyInit = function() {
-        jQuery.notification || (jQuery.notification = function(t, e) {
-            if ("" !== t && null != t) {
-                e = jQuery.extend(!0, {
+    }, UI.prototype.notifyInit = function() {
+        jQuery.notification || (jQuery.notification = function(message, settings) {
+            if ("" !== message && null != message) {
+                settings = jQuery.extend(!0, {
                     className: "jquery-notification",
                     duration: 2e3,
                     freezeOnHover: !1,
@@ -1703,347 +1677,332 @@ springSpace.util = {}, springSpace.common = {}, springSpace.validation = {}, spr
                     position: "center",
                     showSpeed: 250,
                     zIndex: 99999
-                }, e), jQuery("#jquery-notification").length > 0 && (e.showSpeed = 0), jQuery("#jquery-notification").remove();
-                var a, i, s, r, o, n = jQuery(window).width(),
-                    l = jQuery(window).height(),
-                    c = jQuery('<div id="jquery-notification" />');
-                switch (c.appendTo(jQuery("BODY")).addClass(e.className).html(t).css({
+                }, settings), jQuery("#jquery-notification").length > 0 && (settings.showSpeed = 0), jQuery("#jquery-notification").remove();
+                var width, height, top, left, timeout, windowWidth = jQuery(window).width(),
+                    windowHeight = jQuery(window).height(),
+                    notification = jQuery('<div id="jquery-notification" />');
+                switch (notification.appendTo(jQuery("BODY")).addClass(settings.className).html(message).css({
                         position: "fixed",
                         display: "none",
-                        zIndex: e.zIndex
+                        zIndex: settings.zIndex
                     }).mouseover((function() {
-                        e.freezeOnHover && clearTimeout(o), jQuery(this).addClass(e.className + "-hover")
+                        settings.freezeOnHover && clearTimeout(timeout), jQuery(this).addClass(settings.className + "-hover")
                     })).mouseout((function() {
-                        jQuery(this).removeClass(e.className + "-hover"), e.freezeOnHover && (o = setTimeout(p, e.duration))
-                    })).click(p).wrapInner('<div id="jquery-notification-message" />'), a = c.outerWidth(), i = c.outerHeight(), e.position) {
+                        jQuery(this).removeClass(settings.className + "-hover"), settings.freezeOnHover && (timeout = setTimeout(hide, settings.duration))
+                    })).click(hide).wrapInner('<div id="jquery-notification-message" />'), width = notification.outerWidth(), height = notification.outerHeight(), settings.position) {
                     case "top":
-                        s = 0, r = n / 2 - a / 2;
+                        top = 0, left = windowWidth / 2 - width / 2;
                         break;
                     case "top-left":
-                        s = 0, r = 0;
+                        top = 0, left = 0;
                         break;
                     case "top-right":
-                        s = 0, r = n - a;
+                        top = 0, left = windowWidth - width;
                         break;
                     case "bottom":
-                        s = l - i, r = n / 2 - a / 2;
+                        top = windowHeight - height, left = windowWidth / 2 - width / 2;
                         break;
                     case "bottom-left":
-                        s = l - i, r = 0;
+                        top = windowHeight - height, left = 0;
                         break;
                     case "bottom-right":
-                        s = l - i, r = n - a;
+                        top = windowHeight - height, left = windowWidth - width;
                         break;
                     case "left":
-                        s = l / 2 - i / 2, r = 0;
+                        top = windowHeight / 2 - height / 2, left = 0;
                         break;
                     case "right":
-                        s = l / 2 - i / 2, r = n - a;
+                        top = windowHeight / 2 - height / 2, left = windowWidth - width;
                         break;
                     default:
-                        s = l / 2 - i / 2, r = n / 2 - a / 2
+                        top = windowHeight / 2 - height / 2, left = windowWidth / 2 - width / 2
                 }
-                c.css({
-                    top: s,
-                    left: r
-                }).fadeIn(e.showSpeed, (function() {
-                    o = setTimeout(p, e.duration)
+                notification.css({
+                    top: top,
+                    left: left
+                }).fadeIn(settings.showSpeed, (function() {
+                    timeout = setTimeout(hide, settings.duration)
                 }))
             }
 
-            function p() {
-                clearTimeout(o), c.fadeOut(e.hideSpeed, (function() {
+            function hide() {
+                clearTimeout(timeout), notification.fadeOut(settings.hideSpeed, (function() {
                     jQuery(this).remove()
                 }))
             }
         })
-    }, t.prototype.clearValidationErrors = function(t = !0) {
-        jQuery(".s-lib-form-msg").html("").toggle(!1), t && springSpace.UI.notify({
+    }, UI.prototype.clearValidationErrors = function(notify = !0) {
+        jQuery(".s-lib-form-msg").html("").toggle(!1), notify && springSpace.UI.notify({
             mode: "load",
             duration: 3e4
         })
-    }, t.prototype.setValidationErrors = function(t, e = !1) {
-        for (var a in t) Object.prototype.hasOwnProperty.call(t, a) && (jQuery("#form-msg-" + a).html(t[a]).toggle(!0), e && (jQuery(window).scrollTop(jQuery("#form-group-" + a).offset().top - 50), e = !1))
-    }, t.prototype.notify = function(t) {
-        switch (this.notifyInit(), springSpace.Util.setObjProp("msg", "", t), springSpace.Util.setObjProp("duration", 5e3, t), springSpace.Util.setObjProp("mode", "custom", t), settings = {
-                duration: t.duration
-            }, t.mode) {
+    }, UI.prototype.setValidationErrors = function(errs, focus_first = !1) {
+        for (var elt_id in errs) Object.prototype.hasOwnProperty.call(errs, elt_id) && (jQuery("#form-msg-" + elt_id).html(errs[elt_id]).toggle(!0), focus_first && (jQuery(window).scrollTop(jQuery("#form-group-" + elt_id).offset().top - 50), focus_first = !1))
+    }, UI.prototype.notify = function(config) {
+        switch (this.notifyInit(), springSpace.Util.setObjProp("msg", "", config), springSpace.Util.setObjProp("duration", 5e3, config), springSpace.Util.setObjProp("mode", "custom", config), settings = {
+                duration: config.duration
+            }, config.mode) {
             case "custom":
                 break;
             case "load":
-                t.msg = '<img src="' + springSpace.UI.CONST.load_img_notify + '" alt="Working..." />';
+                config.msg = '<img src="' + springSpace.UI.CONST.load_img_notify + '" alt="Working..." />';
                 break;
             case "success":
-                t.msg = "Success.";
+                config.msg = "Success.";
                 break;
             case "error":
-                t.msg = t.msg ? t.msg : "Error: Please try again.", settings = {
+                config.msg = config.msg ? config.msg : "Error: Please try again.", settings = {
                     className: "jquery-notification-error",
-                    duration: t.duration
+                    duration: config.duration
                 }
         }
-        void 0 !== t.msg && "" != t.msg || (t.msg = "Error: Please try again."), jQuery.notification(t.msg, settings)
-    }, t.prototype.notifyStop = function(t) {
+        void 0 !== config.msg && "" != config.msg || (config.msg = "Error: Please try again."), jQuery.notification(config.msg, settings)
+    }, UI.prototype.notifyStop = function(config) {
         jQuery("#jquery-notification").hide()
-    }, t.prototype.notifySuccessAndReloadPageBS = function() {
+    }, UI.prototype.notifySuccessAndReloadPageBS = function() {
         springSpace.UI.closeAlertBS(), springSpace.UI.notify({
             mode: "success",
             duration: springSpace.UI.CONST.conf_close_delay
         }), setTimeout((function() {
             window.location.reload()
         }), springSpace.UI.CONST.conf_close_delay)
-    }, t.prototype.loginRedirect = function(t) {
-        t = t || {}, springSpace.Util.setObjProp("title", "Session Timeout", t), springSpace.Util.setObjProp("width", "400", t), springSpace.Util.setObjProp("height", "auto", t), springSpace.Util.setObjProp("content", "<p>Your session has timed out.</p><p>Refresh the page or click OK to be redirected to the login page.</p>", t), springSpace.UI.alert({
-            title: t.title,
-            width: t.width,
-            height: t.height,
-            content: t.content,
+    }, UI.prototype.loginRedirect = function(config) {
+        config = config || {}, springSpace.Util.setObjProp("title", "Session Timeout", config), springSpace.Util.setObjProp("width", "400", config), springSpace.Util.setObjProp("height", "auto", config), springSpace.Util.setObjProp("content", "<p>Your session has timed out.</p><p>Refresh the page or click OK to be redirected to the login page.</p>", config), springSpace.UI.alert({
+            title: config.title,
+            width: config.width,
+            height: config.height,
+            content: config.content,
             buttons: {
                 OK: function() {
                     jQuery("#s-lib-alert").dialog("close"), jQuery("#s-lib-alert-content").html(""), window.location.href = "/libapps/login.php"
                 }
             }
         })
-    }, t.prototype.disableButton = function(t) {
-        springSpace.Util.setObjProp("btn_id", "s-lib-alert-btn-first", t), jQuery("#" + t.btn_id).addClass("disabled").prop("disabled", !0)
-    }, t.prototype.enableButton = function(t) {
-        springSpace.Util.setObjProp("btn_id", "s-lib-alert-btn-first", t), jQuery("#" + t.btn_id).removeClass("disabled").prop("disabled", !1)
-    }, t.prototype.openTextEditorModal = function(t) {
-        var e;
-        if (springSpace.Util.setObjProp("content", "", t), jQuery.fn.modal.Constructor.prototype.enforceFocus = function() {}, !e) {
-            '<div class="modal-dialog" role="document">',
-            '<div class="modal-content">',
-            '<div class="modal-header">',
-            '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>',
-            '<h4 class="modal-title" id="rte-validation-title">Validation Failed</h4>',
-            "</div>",
-            '<div class="modal-body">',
-            "</div>",
-            '<div class="modal-footer">',
-            '<button id="s-lg-btn-save-code" type="button" class="btn btn-sm btn-default">Save Anyway</button>',
-            '<button type="button" class="btn btn-sm btn-primary" data-dismiss="modal">Cancel - I\'ll fix my code</button>',
-            "</div>",
-            "</div>\x3c!-- /.modal-content --\x3e",
-            "</div>\x3c!-- /.modal-dialog --\x3e",
-            "</div>\x3c!-- /.modal --\x3e",
-            (e = jQuery('<div id="s-lib-rte-validation-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="rte-validation-title"><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title" id="rte-validation-title">Validation Failed</h4></div><div class="modal-body"></div><div class="modal-footer"><button id="s-lg-btn-save-code" type="button" class="btn btn-sm btn-default">Save Anyway</button><button type="button" class="btn btn-sm btn-primary" data-dismiss="modal">Cancel - I\'ll fix my code</button></div></div>\x3c!-- /.modal-content --\x3e</div>\x3c!-- /.modal-dialog --\x3e</div>\x3c!-- /.modal --\x3e')).appendTo("body")
+    }, UI.prototype.disableButton = function(config) {
+        springSpace.Util.setObjProp("btn_id", "s-lib-alert-btn-first", config), jQuery("#" + config.btn_id).addClass("disabled").prop("disabled", !0)
+    }, UI.prototype.enableButton = function(config) {
+        springSpace.Util.setObjProp("btn_id", "s-lib-alert-btn-first", config), jQuery("#" + config.btn_id).removeClass("disabled").prop("disabled", !1)
+    }, UI.prototype.openTextEditorModal = function(config) {
+        var rte_modal;
+        if (springSpace.Util.setObjProp("content", "", config), jQuery.fn.modal.Constructor.prototype.enforceFocus = function() {}, !rte_modal) {
+            (rte_modal = jQuery('<div id="s-lib-rte-validation-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="rte-validation-title"><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title" id="rte-validation-title">Validation Failed</h4></div><div class="modal-body"></div><div class="modal-footer"><button id="s-lg-btn-save-code" type="button" class="btn btn-sm btn-default">Save Anyway</button><button type="button" class="btn btn-sm btn-primary" data-dismiss="modal">Cancel - I\'ll fix my code</button></div></div>\x3c!-- /.modal-content --\x3e</div>\x3c!-- /.modal-dialog --\x3e</div>\x3c!-- /.modal --\x3e')).appendTo("body")
         }
-        jQuery("#s-lib-rte-validation-modal .modal-body").html(t.content), jQuery("#s-lib-rte-validation-modal").modal()
-    }, this.UI = t
+        jQuery("#s-lib-rte-validation-modal .modal-body").html(config.content), jQuery("#s-lib-rte-validation-modal").modal()
+    }, this.UI = UI
 }, springSpace.ui._construct(), springSpace.UI = new springSpace.ui.UI, springSpace.validation._construct = function() {
-    function t() {}
-    t.prototype.required = function(t) {
-        var e = springSpace.Util.setProp(t.field_type, !1);
-        return "checkbox" == e ? jQuery("#" + t.id).is(":checked") : "text" == e ? "" != jQuery("#" + t.id).val().trim() : void 0
-    }, t.prototype.checkbox = function(t) {
-        return this.require_checked = springSpace.Util.setProp(t.require_checked, !1), !this.require_checked || !!jQuery("#" + t.id).is(":checked")
-    }, t.prototype.checkbox_group = function(t) {
-        return this.require_checked = springSpace.Util.setProp(t.require_checked, !1), !this.require_checked || jQuery("input[name='" + t.group_name + "']:checked").length > 0
-    }, t.prototype.email = function(t) {
-        this.allow_empty = springSpace.Util.setProp(t.allow_empty, !0), this.val = springSpace.Util.setProp(jQuery.trim(t.val), "");
+    function Validation() {}
+    Validation.prototype.required = function(config) {
+        var field_type = springSpace.Util.setProp(config.field_type, !1);
+        return "checkbox" == field_type ? jQuery("#" + config.id).is(":checked") : "text" == field_type ? "" != jQuery("#" + config.id).val().trim() : void 0
+    }, Validation.prototype.checkbox = function(config) {
+        return this.require_checked = springSpace.Util.setProp(config.require_checked, !1), !this.require_checked || !!jQuery("#" + config.id).is(":checked")
+    }, Validation.prototype.checkbox_group = function(config) {
+        return this.require_checked = springSpace.Util.setProp(config.require_checked, !1), !this.require_checked || jQuery("input[name='" + config.group_name + "']:checked").length > 0
+    }, Validation.prototype.email = function(config) {
+        this.allow_empty = springSpace.Util.setProp(config.allow_empty, !0), this.val = springSpace.Util.setProp(jQuery.trim(config.val), "");
         return !(!this.allow_empty || "" != this.val) || !!/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(this.val)
-    }, t.prototype.email_list = function(t) {
-        if (this.allow_empty = springSpace.Util.setProp(t.allow_empty, !0), this.val = springSpace.Util.setProp(jQuery.trim(t.val), ""), "" == this.val) return this.allow_empty;
-        var e = this.val.replace(";", ",").split(","),
-            a = this,
-            i = !0;
-        return jQuery.each(e, (function(t, e) {
-            i = i && a.email({
-                val: e,
+    }, Validation.prototype.email_list = function(config) {
+        if (this.allow_empty = springSpace.Util.setProp(config.allow_empty, !0), this.val = springSpace.Util.setProp(jQuery.trim(config.val), ""), "" == this.val) return this.allow_empty;
+        var emails = this.val.replace(";", ",").split(","),
+            obj_this = this,
+            ret = !0;
+        return jQuery.each(emails, (function(key, value) {
+            ret = ret && obj_this.email({
+                val: value,
                 allow_empty: this.allow_empty
             })
-        })), i
-    }, t.prototype.url = function(t) {
-        this.allow_empty = springSpace.Util.setProp(t.allow_empty, !0), this.allow_relative = springSpace.Util.setProp(t.allow_relative, !1), this.https_only = springSpace.Util.setProp(t.https_only, !1), this.val = springSpace.Util.setProp(jQuery.trim(t.val), "");
-        var e = /^$|^https?:\/\/.+/gi;
-        return "" == this.val ? this.allow_empty : this.allow_relative ? /^$|^\/.+/gi.test(this.val) || e.test(this.val) : this.https_only ? /^$|^https:\/\/.+/gi.test(this.val) : e.test(this.val)
-    }, t.prototype.url_ldap = function(t) {
-        this.allow_empty = springSpace.Util.setProp(t.allow_empty, !0), this.allow_relative = springSpace.Util.setProp(t.allow_relative, !1), this.val = springSpace.Util.setProp(jQuery.trim(t.val), "");
-        var e = /^$|^ldaps?:\/\/.+/gi;
-        return "" == this.val ? this.allow_empty : this.allow_relative && /^$|^\/.+/gi.test(this.val) || e.test(this.val)
-    }, t.prototype.url_cas = function(t) {
-        this.allow_empty = springSpace.Util.setProp(t.allow_empty, !0), this.allow_relative = springSpace.Util.setProp(t.allow_relative, !1), this.val = springSpace.Util.setProp(jQuery.trim(t.val), "");
-        var e = /^$|^https:\/\/.+\/serviceValidate/gi;
-        return "" == this.val ? this.allow_empty : this.allow_relative && /^$|^\/.+/gi.test(this.val) || e.test(this.val)
-    }, t.prototype.slug = function(t) {
-        if (this.allow_empty = springSpace.Util.setProp(t.allow_empty, !0), this.val = springSpace.Util.setProp(jQuery.trim(t.val), ""), this.allow_empty && "" == this.val) return !0;
+        })), ret
+    }, Validation.prototype.url = function(config) {
+        this.allow_empty = springSpace.Util.setProp(config.allow_empty, !0), this.allow_relative = springSpace.Util.setProp(config.allow_relative, !1), this.https_only = springSpace.Util.setProp(config.https_only, !1), this.val = springSpace.Util.setProp(jQuery.trim(config.val), "");
+        var filter_absolute = /^$|^https?:\/\/.+/gi;
+        return "" == this.val ? this.allow_empty : this.allow_relative ? /^$|^\/.+/gi.test(this.val) || filter_absolute.test(this.val) : this.https_only ? /^$|^https:\/\/.+/gi.test(this.val) : filter_absolute.test(this.val)
+    }, Validation.prototype.url_ldap = function(config) {
+        this.allow_empty = springSpace.Util.setProp(config.allow_empty, !0), this.allow_relative = springSpace.Util.setProp(config.allow_relative, !1), this.val = springSpace.Util.setProp(jQuery.trim(config.val), "");
+        var filter_absolute = /^$|^ldaps?:\/\/.+/gi;
+        return "" == this.val ? this.allow_empty : this.allow_relative && /^$|^\/.+/gi.test(this.val) || filter_absolute.test(this.val)
+    }, Validation.prototype.url_cas = function(config) {
+        this.allow_empty = springSpace.Util.setProp(config.allow_empty, !0), this.allow_relative = springSpace.Util.setProp(config.allow_relative, !1), this.val = springSpace.Util.setProp(jQuery.trim(config.val), "");
+        var filter_absolute = /^$|^https:\/\/.+\/serviceValidate/gi;
+        return "" == this.val ? this.allow_empty : this.allow_relative && /^$|^\/.+/gi.test(this.val) || filter_absolute.test(this.val)
+    }, Validation.prototype.slug = function(config) {
+        if (this.allow_empty = springSpace.Util.setProp(config.allow_empty, !0), this.val = springSpace.Util.setProp(jQuery.trim(config.val), ""), this.allow_empty && "" == this.val) return !0;
         if (this.val.startsWith("go.php")) return !0;
         return /^[a-zA-Z0-9_\/-]+$/g.test(this.val)
-    }, t.prototype.slug_unique = function(t) {
-        this.allow_empty = springSpace.Util.setProp(t.allow_empty, !0), this.val = springSpace.Util.setProp(jQuery.trim(t.val), "");
-        let e = springSpace.Util.setProp(jQuery.trim(t.friendly_id), 0),
-            a = springSpace.Util.setProp(jQuery.trim(t.prefix), "");
+    }, Validation.prototype.slug_unique = function(config) {
+        this.allow_empty = springSpace.Util.setProp(config.allow_empty, !0), this.val = springSpace.Util.setProp(jQuery.trim(config.val), "");
+        let friendly_id = springSpace.Util.setProp(jQuery.trim(config.friendly_id), 0),
+            prefix = springSpace.Util.setProp(jQuery.trim(config.prefix), "");
         if (this.allow_empty && "" == this.val) return "";
-        let i = "";
+        let err_msg = "";
         return jQuery.ajax({
             url: "/libguides/friendly_urls/process/validate",
             type: "POST",
             async: !1,
             dataType: "json",
             data: {
-                friendly_id: e,
+                friendly_id: friendly_id,
                 slug: this.val,
-                prefix: a
+                prefix: prefix
             },
-            success: function(t, e, a) {
-                i = t.data.err_msg
+            success: function(response, textStatus, jqXHR) {
+                err_msg = response.data.err_msg
             }
-        }), i
-    }, t.prototype.max_length = function(t) {
-        this.val = jQuery("#" + t.id).val();
-        var e = (this.val.match(/\n/g) || []).length,
-            a = this.val.length + e,
-            i = springSpace.Util.setProp(jQuery.trim(t.max_length), 0),
-            s = springSpace.Util.setProp(t.use_form_msg, !0);
-        if (jQuery("#" + t.id + "-counter").length && jQuery("#s-lg-guide-jscss-counter").html("Characters " + a + " / " + i), 0 == i || a <= i) return jQuery("#form-msg-" + t.id).html("").hide(), !0;
-        var r = "You have reached the maximum length of this field - " + i + " characters.";
-        return s ? jQuery("#form-msg-" + t.id).html(r).show() : alert(r), !1
-    }, t.prototype.ip = function(t) {
-        this.allow_empty = springSpace.Util.setProp(t.allow_empty, !0), this.val = springSpace.Util.setProp(jQuery.trim(t.val), "");
-        var e = this.val.split(".");
-        return "" == this.val ? this.allow_empty : 4 == e.length && (e[0] >= 0 && e[0] <= 255 && e[1] >= 0 && e[1] <= 255 && e[2] >= 0 && e[2] <= 255 && e[3] >= 0 && e[3] <= 255)
-    }, t.prototype.number = function(t) {
-        return this.allow_empty = springSpace.Util.setProp(t.allow_empty, !0), this.val = springSpace.Util.setProp(jQuery.trim(t.val), ""), "" == this.val || 0 == this.val ? this.allow_empty : jQuery.isNumeric(this.val) && this.val > 0
-    }, this.Validation = t
+        }), err_msg
+    }, Validation.prototype.max_length = function(config) {
+        this.val = jQuery("#" + config.id).val();
+        var num_line_breaks = (this.val.match(/\n/g) || []).length,
+            char_count = this.val.length + num_line_breaks,
+            max_length = springSpace.Util.setProp(jQuery.trim(config.max_length), 0),
+            use_form_msg = springSpace.Util.setProp(config.use_form_msg, !0);
+        if (jQuery("#" + config.id + "-counter").length && jQuery("#s-lg-guide-jscss-counter").html("Characters " + char_count + " / " + max_length), 0 == max_length || char_count <= max_length) return jQuery("#form-msg-" + config.id).html("").hide(), !0;
+        var msg = "You have reached the maximum length of this field - " + max_length + " characters.";
+        return use_form_msg ? jQuery("#form-msg-" + config.id).html(msg).show() : alert(msg), !1
+    }, Validation.prototype.ip = function(config) {
+        this.allow_empty = springSpace.Util.setProp(config.allow_empty, !0), this.val = springSpace.Util.setProp(jQuery.trim(config.val), "");
+        var ip_array = this.val.split(".");
+        return "" == this.val ? this.allow_empty : 4 == ip_array.length && (ip_array[0] >= 0 && ip_array[0] <= 255 && ip_array[1] >= 0 && ip_array[1] <= 255 && ip_array[2] >= 0 && ip_array[2] <= 255 && ip_array[3] >= 0 && ip_array[3] <= 255)
+    }, Validation.prototype.number = function(config) {
+        return this.allow_empty = springSpace.Util.setProp(config.allow_empty, !0), this.val = springSpace.Util.setProp(jQuery.trim(config.val), ""), "" == this.val || 0 == this.val ? this.allow_empty : jQuery.isNumeric(this.val) && this.val > 0
+    }, this.Validation = Validation
 }, springSpace.validation._construct(), springSpace.Validation = new springSpace.validation.Validation, springSpace.dynForm._construct = function() {
-    function t(t) {
-        this.elt_ref = springSpace.Util.setProp(t.elt_ref, ""), this.data_field = !1, this.fields = springSpace.Util.setProp(t.fields, {}), this.form_id = springSpace.Util.setProp(t.form_id, ""), this.url = springSpace.Util.setProp(t.url, ""), this.method = springSpace.Util.setProp(t.method, "POST"), this.button = springSpace.Util.setProp(t.button, null), this.form = jQuery("<form>"), this.msg_obj = springSpace.Util.setProp(t.msg_obj, null), this.msg_time = springSpace.Util.setProp(t.msg_time, 4e3), this.auto_submit = springSpace.Util.setProp(t.auto_submit, !0), this.return_type = springSpace.Util.setProp(t.return_type, "json"), this.callback = springSpace.Util.setProp(t.callback, null)
+    function DynForm(obj_config) {
+        this.elt_ref = springSpace.Util.setProp(obj_config.elt_ref, ""), this.data_field = !1, this.fields = springSpace.Util.setProp(obj_config.fields, {}), this.form_id = springSpace.Util.setProp(obj_config.form_id, ""), this.url = springSpace.Util.setProp(obj_config.url, ""), this.method = springSpace.Util.setProp(obj_config.method, "POST"), this.button = springSpace.Util.setProp(obj_config.button, null), this.form = jQuery("<form>"), this.msg_obj = springSpace.Util.setProp(obj_config.msg_obj, null), this.msg_time = springSpace.Util.setProp(obj_config.msg_time, 4e3), this.auto_submit = springSpace.Util.setProp(obj_config.auto_submit, !0), this.return_type = springSpace.Util.setProp(obj_config.return_type, "json"), this.callback = springSpace.Util.setProp(obj_config.callback, null)
     }
-    t.prototype.setProp = function(t, e) {
-        return t || e
-    }, t.prototype.build = function() {
-        var t = this;
+    DynForm.prototype.setProp = function(id, default_val) {
+        return id || default_val
+    }, DynForm.prototype.build = function() {
+        var obj_this = this;
         jQuery(this.elt_ref).click((function() {
-            if (t.form = jQuery("<form>"), jQuery(this).attr("data-field")) {
-                var e = jQuery(this).attr("data-field");
-                t.form.append(jQuery("<input>", {
+            if (obj_this.form = jQuery("<form>"), jQuery(this).attr("data-field")) {
+                var field_name = jQuery(this).attr("data-field");
+                obj_this.form.append(jQuery("<input>", {
                     name: "value",
-                    value: jQuery("#" + e).val(),
+                    value: jQuery("#" + field_name).val(),
                     type: "hidden"
-                })), t.form.append(jQuery("<input>", {
+                })), obj_this.form.append(jQuery("<input>", {
                     name: "name",
-                    value: e,
+                    value: field_name,
                     type: "hidden"
                 }))
-            } else t.form.append(jQuery("<input>", {
+            } else obj_this.form.append(jQuery("<input>", {
                 name: "value",
                 value: jQuery(this).val(),
                 type: "hidden"
-            })), t.form.append(jQuery("<input>", {
+            })), obj_this.form.append(jQuery("<input>", {
                 name: "name",
                 value: jQuery(this).attr("name"),
                 type: "hidden"
             }));
-            jQuery.each(t.fields, (function(e, a) {
-                t.form.append(jQuery("<input>", {
-                    name: a.name,
-                    value: a.val,
-                    type: a.type
+            jQuery.each(obj_this.fields, (function(idx, val) {
+                obj_this.form.append(jQuery("<input>", {
+                    name: val.name,
+                    value: val.val,
+                    type: val.type
                 }))
-            })), t.auto_submit && t.submit()
+            })), obj_this.auto_submit && obj_this.submit()
         }))
-    }, t.prototype.buildStandard = function() {
-        var t = this.elt_ref ? jQuery(this.elt_ref) : "";
-        if (jQuery(t).attr("data-field")) {
-            var e = jQuery(t).attr("data-field");
+    }, DynForm.prototype.buildStandard = function() {
+        var elt = this.elt_ref ? jQuery(this.elt_ref) : "";
+        if (jQuery(elt).attr("data-field")) {
+            var field_name = jQuery(elt).attr("data-field");
             this.form.append(jQuery("<input>", {
                 name: "value",
-                value: jQuery("#" + e).val(),
+                value: jQuery("#" + field_name).val(),
                 type: "hidden"
             })), this.form.append(jQuery("<input>", {
                 name: "name",
-                value: e,
+                value: field_name,
                 type: "hidden"
             }))
-        } else t && (this.form.append(jQuery("<input>", {
+        } else elt && (this.form.append(jQuery("<input>", {
             name: "value",
-            value: jQuery(t).val(),
+            value: jQuery(elt).val(),
             type: "hidden"
         })), this.form.append(jQuery("<input>", {
             name: "name",
-            value: jQuery(t).attr("name"),
+            value: jQuery(elt).attr("name"),
             type: "hidden"
         })));
-        var a = this;
-        jQuery.each(a.fields, (function(t, e) {
-            a.form.append(jQuery("<input>", {
-                name: e.name,
-                value: e.val,
-                type: e.type
+        var obj_this = this;
+        jQuery.each(obj_this.fields, (function(idx, val) {
+            obj_this.form.append(jQuery("<input>", {
+                name: val.name,
+                value: val.val,
+                type: val.type
             }))
         })), this.auto_submit && this.submit()
-    }, t.prototype.submit = function() {
-        var t = this;
+    }, DynForm.prototype.submit = function() {
+        var obj_this = this;
         springSpace.UI.changeSaveButtonStatus({
             status: "saving",
-            button: t.button
+            button: obj_this.button
         }), xhr = jQuery.ajax({
             url: this.url,
             type: this.method,
             dataType: this.return_type,
             data: this.form.serialize(),
-            success: function(e, a, i) {
-                null !== t.callback ? t.callback(e, a) : t.msg_obj && t.button && (springSpace.UI.changeSaveButtonStatus({
+            success: function(data, textStatus, jqXHR) {
+                null !== obj_this.callback ? obj_this.callback(data, textStatus) : obj_this.msg_obj && obj_this.button && (springSpace.UI.changeSaveButtonStatus({
                     status: "saved",
-                    button: t.button
+                    button: obj_this.button
                 }), setTimeout((function() {
                     springSpace.UI.changeSaveButtonStatus({
                         status: "save",
-                        button: t.button
+                        button: obj_this.button
                     })
-                }), t.msg_time))
+                }), obj_this.msg_time))
             },
-            error: function(t, e, a) {
-                a && alert("Oops, sorry! Something unexpected happened: " + a + " \n\nThat might not mean much to you, but it probably does to the Springy Techs...you can let them know at support@springshare.com.")
+            error: function(jqXHR, textStatus, errorThrown) {
+                errorThrown && alert("Oops, sorry! Something unexpected happened: " + errorThrown + " \n\nThat might not mean much to you, but it probably does to the Springy Techs...you can let them know at support@springshare.com.")
             }
         })
-    }, this.DynForm = t
+    }, this.DynForm = DynForm
 }, springSpace.dynForm._construct(), springSpace.googleSearch._construct = function() {
-    function t(t) {
-        this.config = t, this.searchField = "", this.search_type = springSpace.Util.setProp(t.search_type, "web")
+    function GoogleSearch(config) {
+        this.config = config, this.searchField = "", this.search_type = springSpace.Util.setProp(config.search_type, "web")
     }
-    t.prototype.getSearchObj = function(t) {
-        var e;
-        return "web" == this.search_type ? e = new t.search.WebSearch : "patent" == this.search_type ? e = new t.search.PatentSearch : "books" == this.search_type ? e = new t.search.BookSearch : "scholar" == this.search_type && (e = new t.search.ScholarSearch), e
-    }, t.prototype.Search = function(t) {
-        this.googleSearch = this.getSearchObj(t), this.googleSearch.setSearchCompleteCallback(this, this.searchComplete, null);
-        var e = document.forms[this.config.form_name];
-        if (this.searchField = e[this.config.field_name], "" == this.searchField.value) return !1;
-        document.getElementById("patent_search_content_" + this.config.content_id).innerHTML = springSpace.Util.LOADING_DOTS, this.googleSearch.setResultSetSize(this.config.num_results), this.googleSearch.execute(this.searchField.value), t.search.Search.getBranding("branding_" + this.config.content_id), document.getElementById("branding_" + this.config.content_id).style.display = "block"
-    }, t.prototype.searchComplete = function() {
+    GoogleSearch.prototype.getSearchObj = function(google_obj) {
+        var obj;
+        return "web" == this.search_type ? obj = new google_obj.search.WebSearch : "patent" == this.search_type ? obj = new google_obj.search.PatentSearch : "books" == this.search_type ? obj = new google_obj.search.BookSearch : "scholar" == this.search_type && (obj = new google_obj.search.ScholarSearch), obj
+    }, GoogleSearch.prototype.Search = function(google_obj) {
+        this.googleSearch = this.getSearchObj(google_obj), this.googleSearch.setSearchCompleteCallback(this, this.searchComplete, null);
+        var searchForm = document.forms[this.config.form_name];
+        if (this.searchField = searchForm[this.config.field_name], "" == this.searchField.value) return !1;
+        document.getElementById("patent_search_content_" + this.config.content_id).innerHTML = springSpace.Util.LOADING_DOTS, this.googleSearch.setResultSetSize(this.config.num_results), this.googleSearch.execute(this.searchField.value), google_obj.search.Search.getBranding("branding_" + this.config.content_id), document.getElementById("branding_" + this.config.content_id).style.display = "block"
+    }, GoogleSearch.prototype.searchComplete = function() {
         if (document.getElementById("patent_search_content_" + this.config.content_id).innerHTML = "", this.googleSearch.results && this.googleSearch.results.length > 0) {
-            for (var t = 0; t < this.googleSearch.results.length; t++) {
-                var e = this.googleSearch.results[t].html.cloneNode(!0);
-                document.getElementById("patent_search_content_" + this.config.content_id).appendChild(e)
+            for (var i = 0; i < this.googleSearch.results.length; i++) {
+                var node = this.googleSearch.results[i].html.cloneNode(!0);
+                document.getElementById("patent_search_content_" + this.config.content_id).appendChild(node)
             }
-            var a = document.createElement("div");
-            a.innerHTML = '<div style="padding: 10px 0 0 0;"><a href="http://www.google.com/search?tbm=pts&tbo=1&hl=en&q=' + escape(this.searchField.value) + '" target="_blank">View more results</a></div>', document.getElementById("patent_search_content_" + this.config.content_id).appendChild(a)
+            var link = document.createElement("div");
+            link.innerHTML = '<div style="padding: 10px 0 0 0;"><a href="http://www.google.com/search?tbm=pts&tbo=1&hl=en&q=' + escape(this.searchField.value) + '" target="_blank">View more results</a></div>', document.getElementById("patent_search_content_" + this.config.content_id).appendChild(link)
         }
-    }, this.GoogleSearch = t
+    }, this.GoogleSearch = GoogleSearch
 }, springSpace.googleSearch._construct(), springSpace.UI.imagePreview = function() {
-    xOffset = 5, yOffset = 5, jQuery("a.preview").click((function(t) {
-        var e = jQuery(this).data("title");
-        "" == e && (e = "Image Preview"), springSpace.UI.alert({
-            title: e,
+    xOffset = 5, yOffset = 5, jQuery("a.preview").click((function(e) {
+        var title = jQuery(this).data("title");
+        "" == title && (title = "Image Preview"), springSpace.UI.alert({
+            title: title,
             content: "<p id='preview'><img src='" + jQuery(this).data("src") + "' alt='Image preview' style='padding-right: 3px; max-width:100%; max-height:100%;' /></p>"
         }), springSpace.UI.centerAlert()
     }))
-}, springSpace.UI.closeImagePreview = function(t) {
-    t.title = t.t, jQuery("#preview").remove()
-}, springSpace.UI.displayErItem = function(t) {
-    springSpace.Util.setProp(t.processing_url, "/er_process.php"), springSpace.Util.setProp(t.site_id, 0), springSpace.Util.setProp(t.er_item_id, 0), springSpace.Util.setProp(t.er_course_id, 0), springSpace.Util.setProp(t.view_mode, 0), springSpace.Util.setProp(t.lti_id, 0), springSpace.Util.setProp(t.er_modal_title), springSpace.Util.setProp(t.er_modal_close_button), springSpace.Util.setProp(t.hit_refactored_api, !1);
-    var e = t.hit_refactored_api ? "/ereserves/process/item" : t.processing_url + "?action=199";
+}, springSpace.UI.closeImagePreview = function(preview_obj) {
+    preview_obj.title = preview_obj.t, jQuery("#preview").remove()
+}, springSpace.UI.displayErItem = function(config) {
+    springSpace.Util.setProp(config.processing_url, "/er_process.php"), springSpace.Util.setProp(config.site_id, 0), springSpace.Util.setProp(config.er_item_id, 0), springSpace.Util.setProp(config.er_course_id, 0), springSpace.Util.setProp(config.view_mode, 0), springSpace.Util.setProp(config.lti_id, 0), springSpace.Util.setProp(config.er_modal_title), springSpace.Util.setProp(config.er_modal_close_button), springSpace.Util.setProp(config.hit_refactored_api, !1);
+    var url = config.hit_refactored_api ? "/ereserves/process/item" : config.processing_url + "?action=199";
     springSpace.UI.alert({
-        title: t.er_modal_title,
-        url: e,
+        title: config.er_modal_title,
+        url: url,
         width: 800,
         height: 400,
         data: {
-            site_id: t.site_id,
-            er_item_id: t.er_item_id,
-            er_course_id: t.er_course_id,
-            view_mode: t.view_mode,
-            lti_id: t.lti_id
+            site_id: config.site_id,
+            er_item_id: config.er_item_id,
+            er_course_id: config.er_course_id,
+            view_mode: config.view_mode,
+            lti_id: config.lti_id
         },
         type: "GET",
         buttons: {
@@ -2051,17 +2010,17 @@ springSpace.util = {}, springSpace.common = {}, springSpace.validation = {}, spr
                 springSpace.UI.closeAlert()
             }
         }
-    }), document.querySelector("#s-lib-alert-btn-first").textContent = t.er_modal_close_button
-}, springSpace.UI.displayErSearchItem = function(t) {
-    springSpace.Util.setProp(t.site_id, 0), springSpace.Util.setProp(t.er_item_id, 0), springSpace.Util.setProp(t.er_course_id, 0), springSpace.UI.alert({
+    }), document.querySelector("#s-lib-alert-btn-first").textContent = config.er_modal_close_button
+}, springSpace.UI.displayErSearchItem = function(config) {
+    springSpace.Util.setProp(config.site_id, 0), springSpace.Util.setProp(config.er_item_id, 0), springSpace.Util.setProp(config.er_course_id, 0), springSpace.UI.alert({
         title: "View Item",
         url: "/ereserves/process/search_item",
         width: 800,
         height: 400,
         data: {
-            site_id: t.site_id,
-            er_item_id: t.er_item_id,
-            er_course_id: t.er_course_id
+            site_id: config.site_id,
+            er_item_id: config.er_item_id,
+            er_course_id: config.er_course_id
         },
         type: "GET",
         buttons: {
@@ -2071,14 +2030,14 @@ springSpace.util = {}, springSpace.common = {}, springSpace.validation = {}, spr
         }
     })
 }, springSpace.session._construct = function() {
-    function t() {
+    function Session() {
         this.CONST = {
             ACTION_SET_LG_SESSION_COOKIE: null
         }, this.auth_reload_script = ""
     }
-    t.prototype.getLGSessionStatus = function(t) {
-        return springSpace.Util.setObjProp("session_id", null, t), springSpace.Util.setObjProp("data", {}, t), jQuery.ajax({
-            url: t.url,
+    Session.prototype.getLGSessionStatus = function(config) {
+        return springSpace.Util.setObjProp("session_id", null, config), springSpace.Util.setObjProp("data", {}, config), jQuery.ajax({
+            url: config.url,
             dataType: "jsonp",
             xhrFields: {
                 withCredentials: !0
@@ -2086,56 +2045,56 @@ springSpace.util = {}, springSpace.common = {}, springSpace.validation = {}, spr
             crossDomain: !0,
             cache: !1,
             jsonpCallback: "springSpace.Session.getLGSessionStatusCallback",
-            data: t.data
+            data: config.data
         })
-    }, t.prototype.getLGSessionStatusCallback = function(t) {
-        t.data.session && !jQuery.isEmptyObject(t.data.session) && jQuery.ajax({
+    }, Session.prototype.getLGSessionStatusCallback = function(response) {
+        response.data.session && !jQuery.isEmptyObject(response.data.session) && jQuery.ajax({
             url: "/auth_process.php",
             cache: !1,
             dataType: "json",
             data: {
                 action: springSpace.Session.CONST.ACTION_AUTH_SET_LG_SESSION_COOKIE,
-                account_id: t.data.session.account_id,
-                site_id: t.data.session.site_id,
-                customer_id: t.data.session.customer_id,
-                account_level: t.data.session.level,
-                acl: t.data.session.acl,
-                auth_reload: t.data.auth_reload
+                account_id: response.data.session.account_id,
+                site_id: response.data.session.site_id,
+                customer_id: response.data.session.customer_id,
+                account_level: response.data.session.level,
+                acl: response.data.session.acl,
+                auth_reload: response.data.auth_reload
             },
-            success: function(t, e, a) {
-                springSpace.UI.notifyStop(), 200 == t.errCode ? 1 == t.data.auth_reload && (springSpace.Session.auth_reload_script.length > 0 ? top.window.document.location.href = springSpace.Session.auth_reload_script : top.window.document.location.reload(!0)) : console.log("Error with LG session processing. " + t.errCode)
+            success: function(resp, textStatus, jqXHR) {
+                springSpace.UI.notifyStop(), 200 == resp.errCode ? 1 == resp.data.auth_reload && (springSpace.Session.auth_reload_script.length > 0 ? top.window.document.location.href = springSpace.Session.auth_reload_script : top.window.document.location.reload(!0)) : console.log("Error with LG session processing. " + resp.errCode)
             },
-            error: function(t, e, a) {
-                springSpace.UI.notifyStop(), console.log("Error with LG session processing. " + a)
+            error: function(jqXHR, textStatus, errorThrown) {
+                springSpace.UI.notifyStop(), console.log("Error with LG session processing. " + errorThrown)
             }
         })
-    }, t.prototype.imgReq = function(t) {
-        return document.images ? (t.imgs[t.idx] = new Image, t.imgs[t.idx].src = t.src) : document.write('<img alt="Springshare session processing." src="' + t.src + '" style="height: 0px; width: 0px; display: none;" />'), !0
-    }, this.Session = t
+    }, Session.prototype.imgReq = function(config) {
+        return document.images ? (config.imgs[config.idx] = new Image, config.imgs[config.idx].src = config.src) : document.write('<img alt="Springshare session processing." src="' + config.src + '" style="height: 0px; width: 0px; display: none;" />'), !0
+    }, this.Session = Session
 }, springSpace.session._construct(), springSpace.Session = new springSpace.session.Session, springSpace.dataTable._construct = function() {
-    function t(t) {
-        springSpace.Util.setObjProp("base_export_columns", [":visible"], t), springSpace.Util.setObjProp("table_selector", "#s-lg-admin-datatable", t);
-        var e = this;
-        this.id = (new Date).getTime().toString(36) + t.table_selector.replace("#", ""), this.proc_script = t.proc_script, springSpace.Util.setObjProp("proc_export_script", t.proc_script, t), this.proc_export_script = t.proc_export_script, this.proc_action = t.proc_action, this.button_defs = {
+    function DataTable(config) {
+        springSpace.Util.setObjProp("base_export_columns", [":visible"], config), springSpace.Util.setObjProp("table_selector", "#s-lg-admin-datatable", config);
+        var top_this = this;
+        this.id = (new Date).getTime().toString(36) + config.table_selector.replace("#", ""), this.proc_script = config.proc_script, springSpace.Util.setObjProp("proc_export_script", config.proc_script, config), this.proc_export_script = config.proc_export_script, this.proc_action = config.proc_action, this.button_defs = {
             copy: {
                 extend: "copy",
                 text: '<i class="fa fa-copy fa-fw"></i> Copy',
                 exportOptions: {
-                    columns: t.base_export_columns
+                    columns: config.base_export_columns
                 }
             },
             excel: {
                 extend: "excelHtml5",
                 text: '<i class="fa fa-file-excel-o fa-fw"></i> Excel',
                 exportOptions: {
-                    columns: t.base_export_columns
+                    columns: config.base_export_columns
                 }
             },
             pdf: {
                 extend: "pdf",
                 text: '<i class="fa fa-file-pdf-o fa-fw"></i> PDF',
                 exportOptions: {
-                    columns: t.base_export_columns
+                    columns: config.base_export_columns
                 },
                 orientation: "landscape"
             },
@@ -2145,12 +2104,12 @@ springSpace.util = {}, springSpace.common = {}, springSpace.validation = {}, spr
                 buttons: [{
                     text: '<i class="fa fa-file-code-o fa-fw"></i> HTML',
                     action: function() {
-                        window.open(e.proc_export_script + "?export=1&export_type=" + t.EXPORT_TYPES.html + "&" + jQuery.param(e.getAjaxParams()))
+                        window.open(top_this.proc_export_script + "?export=1&export_type=" + config.EXPORT_TYPES.html + "&" + jQuery.param(top_this.getAjaxParams()))
                     }
                 }, {
                     text: '<i class="fa fa-file-excel-o fa-fw"></i> CSV',
                     action: function() {
-                        window.location.href = e.proc_export_script + "?export=1&export_type=" + t.EXPORT_TYPES.excel + "&" + jQuery.param(e.getAjaxParams())
+                        window.location.href = top_this.proc_export_script + "?export=1&export_type=" + config.EXPORT_TYPES.excel + "&" + jQuery.param(top_this.getAjaxParams())
                     }
                 }],
                 autoClose: !0,
@@ -2179,54 +2138,54 @@ springSpace.util = {}, springSpace.common = {}, springSpace.validation = {}, spr
             ],
             buttons: [this.button_defs.copy, this.button_defs.excel, this.button_defs.pdf, this.button_defs.export_all],
             scrollX: !1
-        }, springSpace.Util.setObjProp("processing", !0, t), springSpace.Util.setObjProp("columnDefs", [], t), springSpace.Util.setObjProp("searchCols", [], t), springSpace.Util.setObjProp("column_filters", [], t), springSpace.Util.setObjProp("search_column_id", 0, t), this.table_selector = t.table_selector, this.EXPORT_TYPES = t.EXPORT_TYPES, this.table = {}, this.processing = t.processing, this.column_filters = t.column_filters, this.init_search_val = "", this.search_column_id = springSpace.Util.setProp(t.search_column_id, 0), this.serverSide = springSpace.Util.setProp(t.serverSide, this.defaults.serverSide), this.pagingType = springSpace.Util.setProp(t.pagingType, this.defaults.pagingType), this.pageLength = springSpace.Util.setProp(t.pageLength, this.defaults.pageLength), this.displayStart = springSpace.Util.setProp(t.displayStart, this.defaults.displayStart), this.lengthChange = springSpace.Util.setProp(t.lengthChange, this.defaults.lengthChange), this.legacy = springSpace.Util.setProp(t.legacy, this.defaults.legacy), this.dom = springSpace.Util.setProp(t.dom, this.defaults.dom), this.buttons = springSpace.Util.setProp(t.buttons, this.defaults.buttons), this.order = springSpace.Util.setProp(t.order, this.defaults.order), this.add_init_search = springSpace.Util.setProp(t.add_init_search, this.defaults.add_init_search), this.qs_search_field = springSpace.Util.setProp(t.qs_search_field, this.defaults.qs_search_field), this.ajax = springSpace.Util.setProp(t.ajax, this.defaults.ajax), this.autoWidth = springSpace.Util.setProp(t.autoWidth, this.defaults.autoWidth), this.columnDefs = t.columnDefs, this.searchCols = t.searchCols, this.stateSave = springSpace.Util.setProp(t.stateSave, this.defaults.stateSave), this.stateDuration = this.defaults.stateDuration, this.scrollX = springSpace.Util.setProp(t.scrollX, this.defaults.scrollX), this.customInitComplete = springSpace.Util.setProp(t.customInitComplete, (function() {})), this.drawCallback = springSpace.Util.setProp(t.drawCallback, (function() {})), this.initComplete = function(t, a) {
-            e.table.buttons().container().appendTo(jQuery("#s-lg-exp-btns-" + e.id)), jQuery("#s-lg-exp-btns-" + e.id).addClass("pull-right"), jQuery("#s-lg-exp-btns-" + e.id + " a, #s-lg-exp-btns-" + e.id + " button").addClass("btn-sm"), stateData = jQuery(e.table_selector).DataTable().state.loaded(), jQuery(e.table_selector + " #s-lib-dt-filter-header td").each((function(t, a) {
-                if (void 0 !== e.column_filters[t]) {
-                    jQuery(a).html(""), stateData && (e.column_filters[t].stateData = stateData.columns[t].search);
-                    var i = e.buildColumnFilter({
-                        idx: t,
-                        filter: e.column_filters[t],
-                        aria_label: a.getAttribute("aria-label")
+        }, springSpace.Util.setObjProp("processing", !0, config), springSpace.Util.setObjProp("columnDefs", [], config), springSpace.Util.setObjProp("searchCols", [], config), springSpace.Util.setObjProp("column_filters", [], config), springSpace.Util.setObjProp("search_column_id", 0, config), this.table_selector = config.table_selector, this.EXPORT_TYPES = config.EXPORT_TYPES, this.table = {}, this.processing = config.processing, this.column_filters = config.column_filters, this.init_search_val = "", this.search_column_id = springSpace.Util.setProp(config.search_column_id, 0), this.serverSide = springSpace.Util.setProp(config.serverSide, this.defaults.serverSide), this.pagingType = springSpace.Util.setProp(config.pagingType, this.defaults.pagingType), this.pageLength = springSpace.Util.setProp(config.pageLength, this.defaults.pageLength), this.displayStart = springSpace.Util.setProp(config.displayStart, this.defaults.displayStart), this.lengthChange = springSpace.Util.setProp(config.lengthChange, this.defaults.lengthChange), this.legacy = springSpace.Util.setProp(config.legacy, this.defaults.legacy), this.dom = springSpace.Util.setProp(config.dom, this.defaults.dom), this.buttons = springSpace.Util.setProp(config.buttons, this.defaults.buttons), this.order = springSpace.Util.setProp(config.order, this.defaults.order), this.add_init_search = springSpace.Util.setProp(config.add_init_search, this.defaults.add_init_search), this.qs_search_field = springSpace.Util.setProp(config.qs_search_field, this.defaults.qs_search_field), this.ajax = springSpace.Util.setProp(config.ajax, this.defaults.ajax), this.autoWidth = springSpace.Util.setProp(config.autoWidth, this.defaults.autoWidth), this.columnDefs = config.columnDefs, this.searchCols = config.searchCols, this.stateSave = springSpace.Util.setProp(config.stateSave, this.defaults.stateSave), this.stateDuration = this.defaults.stateDuration, this.scrollX = springSpace.Util.setProp(config.scrollX, this.defaults.scrollX), this.customInitComplete = springSpace.Util.setProp(config.customInitComplete, (function() {})), this.drawCallback = springSpace.Util.setProp(config.drawCallback, (function() {})), this.initComplete = function(settings, json) {
+            top_this.table.buttons().container().appendTo(jQuery("#s-lg-exp-btns-" + top_this.id)), jQuery("#s-lg-exp-btns-" + top_this.id).addClass("pull-right"), jQuery("#s-lg-exp-btns-" + top_this.id + " a, #s-lg-exp-btns-" + top_this.id + " button").addClass("btn-sm"), stateData = jQuery(top_this.table_selector).DataTable().state.loaded(), jQuery(top_this.table_selector + " #s-lib-dt-filter-header td").each((function(idx, elt) {
+                if (void 0 !== top_this.column_filters[idx]) {
+                    jQuery(elt).html(""), stateData && (top_this.column_filters[idx].stateData = stateData.columns[idx].search);
+                    var filter = top_this.buildColumnFilter({
+                        idx: idx,
+                        filter: top_this.column_filters[idx],
+                        aria_label: elt.getAttribute("aria-label")
                     });
-                    switch (jQuery(i).appendTo(jQuery(a)), e.column_filters[t].type) {
+                    switch (jQuery(filter).appendTo(jQuery(elt)), top_this.column_filters[idx].type) {
                         case "select":
-                            jQuery(e.table_selector + " #s-lib-col-filter-" + t).on("change", (function() {
-                                springSpace.Util.setObjProp("onchange", null, e.column_filters[t]), jQuery(e.table_selector).DataTable().state.save(), null !== e.column_filters[t].onchange ? e.column_filters[t].onchange(t, jQuery(this).val()) : e.table.columns(t).search(decodeURI(jQuery(this).val())).draw()
+                            jQuery(top_this.table_selector + " #s-lib-col-filter-" + idx).on("change", (function() {
+                                springSpace.Util.setObjProp("onchange", null, top_this.column_filters[idx]), jQuery(top_this.table_selector).DataTable().state.save(), null !== top_this.column_filters[idx].onchange ? top_this.column_filters[idx].onchange(idx, jQuery(this).val()) : top_this.table.columns(idx).search(decodeURI(jQuery(this).val())).draw()
                             }));
                             break;
                         case "number":
                         case "text":
-                            var s = (r = 0, function(t, e) {
-                                clearTimeout(r), r = setTimeout(t, e)
+                            var delay = (timer = 0, function(callback, ms) {
+                                clearTimeout(timer), timer = setTimeout(callback, ms)
                             });
-                            springSpace.Util.setObjProp("delay", 500, e.column_filters[t]), jQuery(e.table_selector + " #s-lib-col-filter-" + t).on("keyup", (function(a) {
-                                var i = jQuery(this).val();
-                                9 !== a.keyCode && 16 !== a.keyCode && 17 !== a.keyCode && 18 !== a.keyCode && (i = "number" == e.column_filters[t].type && "" != i ? '"' + i.trim('"').trim("'") + '"' : decodeURI(i), s((function() {
-                                    e.table.columns(t).search(i).draw(), jQuery(e.table_selector).DataTable().state.save()
-                                }), e.column_filters[t].delay))
+                            springSpace.Util.setObjProp("delay", 500, top_this.column_filters[idx]), jQuery(top_this.table_selector + " #s-lib-col-filter-" + idx).on("keyup", (function(event) {
+                                var search_val = jQuery(this).val();
+                                9 !== event.keyCode && 16 !== event.keyCode && 17 !== event.keyCode && 18 !== event.keyCode && (search_val = "number" == top_this.column_filters[idx].type && "" != search_val ? '"' + search_val.trim('"').trim("'") + '"' : decodeURI(search_val), delay((function() {
+                                    top_this.table.columns(idx).search(search_val).draw(), jQuery(top_this.table_selector).DataTable().state.save()
+                                }), top_this.column_filters[idx].delay))
                             }));
                             break;
                         case "checkbox":
-                            jQuery(e.table_selector + " #s-lib-col-filter-" + t).on("change", (function() {
-                                jQuery(e.table_selector + " :checkbox").prop("checked", this.checked)
+                            jQuery(top_this.table_selector + " #s-lib-col-filter-" + idx).on("change", (function() {
+                                jQuery(top_this.table_selector + " :checkbox").prop("checked", this.checked)
                             }))
                     }
                 }
-                var r
-            })), jQuery(e.table_selector + " #s-lib-dt-filter-header").detach().appendTo(jQuery(e.table_selector + " thead")), e.customInitComplete(t, a)
+                var timer
+            })), jQuery(top_this.table_selector + " #s-lib-dt-filter-header").detach().appendTo(jQuery(top_this.table_selector + " thead")), top_this.customInitComplete(settings, json)
         }, jQuery.fn.dataTable.ext.legacy.ajax = this.legacy
     }
-    t.prototype.init = function(t) {
-        t = springSpace.Util.setConfig(t), springSpace.Util.setObjProp("table_selector", this.table_selector, t), springSpace.Util.setObjProp("columnDefs", this.columnDefs, t), springSpace.Util.setObjProp("skip_load", !1, t), springSpace.Util.setObjProp("searchCols", this.searchCols, t), springSpace.Util.setObjProp("search", null, t), springSpace.Util.setObjProp("add_init_search", this.add_init_search, t), springSpace.Util.setObjProp("qs_search_field", this.qs_search_field, t), springSpace.Util.setObjProp("buttons", this.buttons, t);
-        var e = {
+    DataTable.prototype.init = function(config) {
+        config = springSpace.Util.setConfig(config), springSpace.Util.setObjProp("table_selector", this.table_selector, config), springSpace.Util.setObjProp("columnDefs", this.columnDefs, config), springSpace.Util.setObjProp("skip_load", !1, config), springSpace.Util.setObjProp("searchCols", this.searchCols, config), springSpace.Util.setObjProp("search", null, config), springSpace.Util.setObjProp("add_init_search", this.add_init_search, config), springSpace.Util.setObjProp("qs_search_field", this.qs_search_field, config), springSpace.Util.setObjProp("buttons", this.buttons, config);
+        var dt_config = {
             processing: this.processing,
             serverSide: this.serverSide,
             dom: this.dom,
-            buttons: t.buttons,
+            buttons: config.buttons,
             pagingType: this.pagingType,
             ajax: this.ajax,
             initComplete: this.initComplete,
-            columnDefs: t.columnDefs,
+            columnDefs: config.columnDefs,
             order: this.order,
             pageLength: this.pageLength,
             displayStart: this.displayStart,
@@ -2235,40 +2194,40 @@ springSpace.util = {}, springSpace.common = {}, springSpace.validation = {}, spr
             stateSave: this.stateSave,
             stateDuration: -1
         };
-        t.skip_load && (e.deferLoading = 0), null !== t.search && (e.search = t.search), this.table = jQuery(t.table_selector).DataTable(e), t.add_init_search && (springSpace.Util.setObjProp("qs_search_field", "id", t), this.init_search_val = springSpace.Util.getQSParam({
-            name: t.qs_search_field,
+        config.skip_load && (dt_config.deferLoading = 0), null !== config.search && (dt_config.search = config.search), this.table = jQuery(config.table_selector).DataTable(dt_config), config.add_init_search && (springSpace.Util.setObjProp("qs_search_field", "id", config), this.init_search_val = springSpace.Util.getQSParam({
+            name: config.qs_search_field,
             qs: location.search
         }), this.init_search_val && this.table.columns(this.search_column_id).search('"' + this.init_search_val + '"').draw())
-    }, t.prototype.getAjaxParams = function(t) {
+    }, DataTable.prototype.getAjaxParams = function(config) {
         return this.table.ajax.params()
-    }, t.prototype.addInitSearch = function(t) {
-        var e = springSpace.Util.getQSParam({
-            name: t.qs_search_field,
+    }, DataTable.prototype.addInitSearch = function(config) {
+        var qs_id = springSpace.Util.getQSParam({
+            name: config.qs_search_field,
             qs: location.search
         });
-        return e && (t.search = e), t
-    }, t.prototype.buildColumnFilter = function(t) {
-        springSpace.Util.setObjProp("filter", {}, t), springSpace.Util.setObjProp("idx", 0, t);
-        const e = t.aria_label ? ' aria-label="' + t.aria_label + '" ' : "";
-        switch (t.filter.type) {
+        return qs_id && (config.search = qs_id), config
+    }, DataTable.prototype.buildColumnFilter = function(config) {
+        springSpace.Util.setObjProp("filter", {}, config), springSpace.Util.setObjProp("idx", 0, config);
+        const aria_label_attr = config.aria_label ? ' aria-label="' + config.aria_label + '" ' : "";
+        switch (config.filter.type) {
             case "select":
-                let i = "";
-                return jQuery(t.filter.values).each((function(e, a) {
-                    i += '<option value="' + encodeURI(a.value) + '"' + (t.filter.stateData && t.filter.stateData.search && a.value == t.filter.stateData.search ? " selected" : "") + ">" + a.label + "</option>"
-                })), '<select id="s-lib-col-filter-' + t.idx + '" ' + e + ' class="form-control input-sm">' + i + "</select>";
+                let options = "";
+                return jQuery(config.filter.values).each((function(idx, elt) {
+                    options += '<option value="' + encodeURI(elt.value) + '"' + (config.filter.stateData && config.filter.stateData.search && elt.value == config.filter.stateData.search ? " selected" : "") + ">" + elt.label + "</option>"
+                })), '<select id="s-lib-col-filter-' + config.idx + '" ' + aria_label_attr + ' class="form-control input-sm">' + options + "</select>";
             case "text":
             case "number":
-                springSpace.Util.setObjProp("width", "100%", t.filter);
-                var a = t.idx == this.search_column_id ? this.init_search_val : "";
-                return t.filter.stateData && t.filter.stateData.search && (a = t.filter.stateData.search), '<input id="s-lib-col-filter-' + t.idx + '" ' + e + ' class="form-control input-sm" value="' + a + '" style="width: ' + t.filter.width + '" />';
+                springSpace.Util.setObjProp("width", "100%", config.filter);
+                var filter_val = config.idx == this.search_column_id ? this.init_search_val : "";
+                return config.filter.stateData && config.filter.stateData.search && (filter_val = config.filter.stateData.search), '<input id="s-lib-col-filter-' + config.idx + '" ' + aria_label_attr + ' class="form-control input-sm" value="' + filter_val + '" style="width: ' + config.filter.width + '" />';
             case "checkbox":
-                return '<input id="s-lib-col-filter-' + t.idx + '" ' + e + ' type="checkbox" />';
+                return '<input id="s-lib-col-filter-' + config.idx + '" ' + aria_label_attr + ' type="checkbox" />';
             default:
                 return ""
         }
-    }, this.DataTable = t
+    }, this.DataTable = DataTable
 }, springSpace.dataTable._construct(), springSpace.tagParser._construct = function() {
-    function SpringshareTagParser(t) {
+    function SpringshareTagParser(obj_config) {
         this.CONST = {
             VALIDATION_TYPE_TAG: 1,
             VALIDATION_TYPE_ATTRIBUTE: 2,
@@ -2308,23 +2267,23 @@ springSpace.util = {}, springSpace.common = {}, springSpace.validation = {}, spr
             display_type: this.CONST.DISPLAY_TYPE_BS_MODAL,
             alert_height: 400,
             alert_width: 650
-        }, this.enable = this.setProp(t.enable, !1), this.data = this.setProp(t.data, ""), this.elt_id = this.setProp(t.elt_id, ""), this.selector = this.setProp(t.selector, ""), this.tags = this.setProp(t.tags, this.defaults.tags), this.tag_defs = this.setProp(t.tag_defs, this.defaults.tag_defs), this.message = this.setProp(t.message, this.defaults.message), this.return_type = this.setProp(t.return_type, this.defaults.display_type), this.alert_height = this.setProp(t.height, this.defaults.alert_height), this.alert_width = this.setProp(t.width, this.defaults.alert_width), this.output = "", this.parseSuccess = !0, this.parseFailures = []
+        }, this.enable = this.setProp(obj_config.enable, !1), this.data = this.setProp(obj_config.data, ""), this.elt_id = this.setProp(obj_config.elt_id, ""), this.selector = this.setProp(obj_config.selector, ""), this.tags = this.setProp(obj_config.tags, this.defaults.tags), this.tag_defs = this.setProp(obj_config.tag_defs, this.defaults.tag_defs), this.message = this.setProp(obj_config.message, this.defaults.message), this.return_type = this.setProp(obj_config.return_type, this.defaults.display_type), this.alert_height = this.setProp(obj_config.height, this.defaults.alert_height), this.alert_width = this.setProp(obj_config.width, this.defaults.alert_width), this.output = "", this.parseSuccess = !0, this.parseFailures = []
     }
-    SpringshareTagParser.prototype.setProp = function(t, e) {
-        return t || e
-    }, SpringshareTagParser.prototype.validMatches = function(t) {
-        return null !== t && t.length > 0
+    SpringshareTagParser.prototype.setProp = function(id, default_val) {
+        return id || default_val
+    }, SpringshareTagParser.prototype.validMatches = function(matches) {
+        return null !== matches && matches.length > 0
     }, SpringshareTagParser.prototype.getData = function() {
-        var t = this.data.length > 0 ? this.data : null !== jQuery("#" + this.elt_id).length ? jQuery("#" + this.elt_id).val() : jQuery(this.selector).length ? jQuery(this.selector).val() : null;
-        if (void 0 === t || null == t) {
-            var e = {
+        var data = this.data.length > 0 ? this.data : null !== jQuery("#" + this.elt_id).length ? jQuery("#" + this.elt_id).val() : jQuery(this.selector).length ? jQuery(this.selector).val() : null;
+        if (void 0 === data || null == data) {
+            var err_data = {
                 elt_id: this.elt_id,
                 selector: this.selector,
                 data_length: this.data.length
             };
-            return console.log("There is no 'data'. It's undefined. Here is some data that may be of help:"), console.log(e), ""
+            return console.log("There is no 'data'. It's undefined. Here is some data that may be of help:"), console.log(err_data), ""
         }
-        return t
+        return data
     }, SpringshareTagParser.prototype.parse = function() {
         if (!this.enable) return !0;
         var data = this.getData();
@@ -2336,9 +2295,9 @@ springSpace.util = {}, springSpace.common = {}, springSpace.validation = {}, spr
                 close_matches = data.match(close_pattern);
             if (this.validMatches(open_matches)) {
                 var filter_matches = [];
-                jQuery.each(open_matches, (function(t, e) {
-                    var a = e.replace("<", "").replace(">", "").split(/\s/);
-                    a.length > 0 && a[0] == current_tag && filter_matches.push(e)
+                jQuery.each(open_matches, (function(idx, val) {
+                    var tag_parts = val.replace("<", "").replace(">", "").split(/\s/);
+                    tag_parts.length > 0 && tag_parts[0] == current_tag && filter_matches.push(val)
                 })), open_matches = filter_matches
             }
             this.validMatches(open_matches) && this.validMatches(close_matches) ? open_matches.length !== close_matches.length && this.setFailureData({
@@ -2364,49 +2323,49 @@ springSpace.util = {}, springSpace.common = {}, springSpace.validation = {}, spr
                 }
             }));
             var check_allow_flags = void 0 !== this.tag_defs[current_tag] && (this.tag_defs[current_tag] && !this.tag_defs[current_tag].allow);
-            this.validMatches(open_matches) && jQuery.each(open_matches, (function(t, e) {
-                var a = e.split('"').length - 1,
-                    i = e.split("'").length - 1;
-                a % 2 == 1 && that.setFailureData({
+            this.validMatches(open_matches) && jQuery.each(open_matches, (function(name, value) {
+                var dq_count = value.split('"').length - 1,
+                    sq_count = value.split("'").length - 1;
+                dq_count % 2 == 1 && that.setFailureData({
                     tag: current_tag,
                     type: that.CONST.VALIDATION_TYPE_ATTRIBUTE,
                     data: {
                         quote_type: "double",
-                        quote_count: a,
-                        tag: e
+                        quote_count: dq_count,
+                        tag: value
                     }
-                }), i % 2 == 1 && that.setFailureData({
+                }), sq_count % 2 == 1 && that.setFailureData({
                     tag: current_tag,
                     type: that.CONST.VALIDATION_TYPE_ATTRIBUTE,
                     data: {
                         quote_type: "single",
-                        quote_count: i,
-                        tag: e
+                        quote_count: sq_count,
+                        tag: value
                     }
                 }), check_allow_flags && that.setFailureData({
                     tag: current_tag,
                     type: that.CONST.VALIDATION_TYPE_TAG_NOT_ALLOWED,
                     data: {
-                        tag: e
+                        tag: value
                     }
                 })
-            })), this.validMatches(close_matches) && jQuery.each(close_matches, (function(t, e) {
+            })), this.validMatches(close_matches) && jQuery.each(close_matches, (function(name, value) {
                 check_allow_flags && that.setFailureData({
                     tag: current_tag,
                     type: that.CONST.VALIDATION_TYPE_TAG_NOT_ALLOWED,
                     data: {
-                        tag: e
+                        tag: value
                     }
                 })
             }))
         }
         eval("var jq_pattern=/<script[\\s]*.+src=.+jquery.(min.js|js)[^><]*>/gi");
         var jq_matches = data.match(jq_pattern);
-        return null !== jq_matches && jQuery.each(jq_matches, (function(t, e) {
+        return null !== jq_matches && jQuery.each(jq_matches, (function(name, value) {
             that.setFailureData({
                 type: that.CONST.VALIDATION_TYPE_JQUERY_INCLUDE,
                 data: {
-                    tag: e
+                    tag: value
                 }
             })
         })), this.displayFailure()
@@ -2433,109 +2392,105 @@ springSpace.util = {}, springSpace.common = {}, springSpace.validation = {}, spr
         return this.initData(), !0
     }, SpringshareTagParser.prototype.initData = function() {
         this.parseSuccess = !0, this.parseFailures = []
-    }, SpringshareTagParser.prototype.setFailureData = function(t) {
-        springSpace.Util.setObjProp("tag", "", t), springSpace.Util.setObjProp("type", 0, t), springSpace.Util.setObjProp("data", {}, t), this.parseSuccess = !1, this.parseFailures.push({
-            tag: t.tag,
-            type: t.type,
-            data: t.data
+    }, SpringshareTagParser.prototype.setFailureData = function(config) {
+        springSpace.Util.setObjProp("tag", "", config), springSpace.Util.setObjProp("type", 0, config), springSpace.Util.setObjProp("data", {}, config), this.parseSuccess = !1, this.parseFailures.push({
+            tag: config.tag,
+            type: config.type,
+            data: config.data
         })
     }, SpringshareTagParser.prototype.displayAlert = function() {
-        var t = this.message;
+        var output = this.message;
         if (!this.parseSuccess) {
-            var e = 1;
-            for (var a in this.parseFailures) {
-                switch (this.parseFailures[a].type) {
+            var idx = 1;
+            for (var msg_idx in this.parseFailures) {
+                switch (this.parseFailures[msg_idx].type) {
                     case this.CONST.VALIDATION_TYPE_TAG:
-                        t = t + "<tr><td>" + e + "</td><td>The <code>" + this.parseFailures[a].tag + '</code> tag has <span class="label label-primary">' + this.parseFailures[a].data.open_count + '</span> opening tag(s) and <span class="label label-primary">' + this.parseFailures[a].data.close_count + "</span> closing tag(s)</td></tr>";
+                        output = output + "<tr><td>" + idx + "</td><td>The <code>" + this.parseFailures[msg_idx].tag + '</code> tag has <span class="label label-primary">' + this.parseFailures[msg_idx].data.open_count + '</span> opening tag(s) and <span class="label label-primary">' + this.parseFailures[msg_idx].data.close_count + "</span> closing tag(s)</td></tr>";
                         break;
                     case this.CONST.VALIDATION_TYPE_ATTRIBUTE:
-                        t = t + "<tr><td>" + e + "</td><td>The <code>" + jQuery("<div/>").text(this.parseFailures[a].data.tag).html() + '</code> tag attribute has an odd number (<span class="label label-primary">' + this.parseFailures[a].data.quote_count + "</span>) of " + this.parseFailures[a].data.quote_type + " quotes</td></tr>";
+                        output = output + "<tr><td>" + idx + "</td><td>The <code>" + jQuery("<div/>").text(this.parseFailures[msg_idx].data.tag).html() + '</code> tag attribute has an odd number (<span class="label label-primary">' + this.parseFailures[msg_idx].data.quote_count + "</span>) of " + this.parseFailures[msg_idx].data.quote_type + " quotes</td></tr>";
                         break;
                     case this.CONST.VALIDATION_TYPE_JQUERY_INCLUDE:
-                        t = t + "<tr><td>" + e + "</td><td>Please remove this jQuery include for LibGuides to function properly: <code>" + jQuery("<div/>").text(this.parseFailures[a].data.tag).html() + "</code></td></tr>";
+                        output = output + "<tr><td>" + idx + "</td><td>Please remove this jQuery include for LibGuides to function properly: <code>" + jQuery("<div/>").text(this.parseFailures[msg_idx].data.tag).html() + "</code></td></tr>";
                         break;
                     case this.CONST.VALIDATION_TYPE_TAG_NOT_ALLOWED:
-                        t = t + "<tr><td>" + e + '</td><td>The following tag is <span class="label label-danger">not allowed</span> and should be removed: <code>' + jQuery("<div/>").text(this.parseFailures[a].data.tag).html() + "</code></td></tr>"
+                        output = output + "<tr><td>" + idx + '</td><td>The following tag is <span class="label label-danger">not allowed</span> and should be removed: <code>' + jQuery("<div/>").text(this.parseFailures[msg_idx].data.tag).html() + "</code></td></tr>"
                 }
-                e++
+                idx++
             }
         }
-        return '<table class="table table-striped table-compact table-hover table-bordered"><thead><tr><th>#</th><th>Details</th></tr></thead><tbody>' + t + "</tbody></table>"
+        return '<table class="table table-striped table-compact table-hover table-bordered"><thead><tr><th>#</th><th>Details</th></tr></thead><tbody>' + output + "</tbody></table>"
     }, this.SpringshareTagParser = SpringshareTagParser
 }, springSpace.tagParser._construct();
-/*! springshare 1.11.0 */
-
 var springSpace = springSpace || {};
-springSpace.sui = springSpace.sui || {}, springSpace.sui.helptip = function(t) {
-    void 0 === t && (t = {});
-    if (this.parent = t.parent ? t.parent : "", this.selector = t.selector ? t.selector : "button.btn-help-popover", "" != this.selector) {
-        this.placement = t.placement ? t.placement : "bottom", -1 == ["bottom", "top", "right", "left"].indexOf(this.placement) && (this.placement = "bottom"), this.$el = null, "" !== this.parent ? this.$el = jQuery(this.parent + " " + this.selector) : this.$el = jQuery(this.selector), this.ajcontent = {};
-        var e = this;
+springSpace.sui = springSpace.sui || {}, springSpace.sui.helptip = function(config) {
+    void 0 === config && (config = {});
+    if (this.parent = config.parent ? config.parent : "", this.selector = config.selector ? config.selector : "button.btn-help-popover", "" != this.selector) {
+        this.placement = config.placement ? config.placement : "bottom", -1 == ["bottom", "top", "right", "left"].indexOf(this.placement) && (this.placement = "bottom"), this.$el = null, "" !== this.parent ? this.$el = jQuery(this.parent + " " + this.selector) : this.$el = jQuery(this.selector), this.ajcontent = {};
+        var self = this;
         this.$el.popover({
             placement: this.placement,
             html: !0,
             content: function() {
-                var t = $(this).attr("data-ajload");
-                if (t) {
+                var url = $(this).attr("data-ajload");
+                if (url) {
                     if (void 0 === $(this).attr("data-loaded")) {
                         $(this).attr("data-loaded", "true");
                         return jQuery.ajax({
-                            url: t,
+                            url: url,
                             type: "get",
                             dataType: "json",
                             async: !1,
-                            success: function(n) {
-                                n.data && n.data.content ? e.ajcontent[t] = n.data.content : n.content && (e.ajcontent[t] = n.content)
+                            success: function(d) {
+                                d.data && d.data.content ? self.ajcontent[url] = d.data.content : d.content && (self.ajcontent[url] = d.content)
                             }
                         }).fail((function() {
-                            e.ajcontent[t] = "Sorry, an error occurred."
-                        })), e.ajcontent[t]
+                            self.ajcontent[url] = "Sorry, an error occurred."
+                        })), self.ajcontent[url]
                     }
-                    return e.ajcontent[t]
+                    return self.ajcontent[url]
                 }
-                var n = $(this).attr("data-popover-text") ? "<p>" + $(this).attr("data-popover-text") + "</p>" : $("#" + $(this).attr("data-popover-id")).html();
-                return n += '<button type="button" class="btn btn-xs btn-link btn-close pull-right">close</button>'
+                var html = $(this).attr("data-popover-text") ? "<p>" + $(this).attr("data-popover-text") + "</p>" : $("#" + $(this).attr("data-popover-id")).html();
+                return html += '<button type="button" class="btn btn-xs btn-link btn-close pull-right">close</button>'
             },
             title: function() {
-                var t = $(this).attr("data-title");
-                return t ? t += '<button type="button" class="btn btn-link btn-close pull-right" aria-label="Close"><i class="fa fa-close"></i></button>' : ""
+                var title = $(this).attr("data-title");
+                return title ? title += '<button type="button" class="btn btn-link btn-close pull-right" aria-label="Close"><i class="fa fa-close"></i></button>' : ""
             }
-        }).on("shown.bs.popover", (function(t) {
-            var e = jQuery(this);
-            jQuery(this).attr("aria-pressed", !0).parent().find("div.popover button.btn-close").on("click keydown", (function(t) {
-                ("click" === t.type || "keydown" === t.type && 27 === t.which) && e.popover("hide")
-            })).attr("aria-controls", e.parent().find("div.popover").attr("id"))
-        })).on("hidden.bs.popover", (function(t) {
-            void 0 !== $(t.target).data("bs.popover").inState && ($(t.target).data("bs.popover").inState.click = !1), jQuery(this).attr("aria-pressed", !1)
-        })).on("keydown.dismiss.bs.popover", (function(t) {
-            27 == t.which && jQuery(this).popover("hide")
+        }).on("shown.bs.popover", (function(e) {
+            var popover = jQuery(this);
+            jQuery(this).attr("aria-pressed", !0).parent().find("div.popover button.btn-close").on("click keydown", (function(e) {
+                ("click" === e.type || "keydown" === e.type && 27 === e.which) && popover.popover("hide")
+            })).attr("aria-controls", popover.parent().find("div.popover").attr("id"))
+        })).on("hidden.bs.popover", (function(e) {
+            void 0 !== $(e.target).data("bs.popover").inState && ($(e.target).data("bs.popover").inState.click = !1), jQuery(this).attr("aria-pressed", !1)
+        })).on("keydown.dismiss.bs.popover", (function(e) {
+            27 == e.which && jQuery(this).popover("hide")
         }))
     }
 };
-/*! springshare 1.11.0 */
-
 var springSpace = springSpace || {};
-springSpace.cookieConsent = springSpace.cookieConsent || {}, springSpace.cookieConsent.alert = function(e) {
-    this.setConfig = function(e) {
-        void 0 === e && (e = {});
-        var t = e.okay ? e.okay : "OK";
-        this.placement_opts = ["bottom", "top"], this.placement = -1 !== this.placement_opts.indexOf(e.placement) ? e.placement : "bottom", this.cookie_name = "springy_cookie_consent", this.cookie_notice_accepted = "ok", this.cookie_exp_days = e.cookie_exp_days ? e.cookie_exp_days : 180, this.read_more_callback = e.read_more_callback ? e.read_more_callback : function() {}, this.aria_label = e.aria_label || "User Privacy Alert", this.fade_in = 500, this.fade_out = 200, this.container_id = "s-ui-cc-container", this.close_button_id = "s-ui-cc-close-btn", this.read_more_elt_id = "s-ui-cc-read-more-link", this.consent_message = e.consent_message ? e.consent_message : "By using our website you are consenting to our use of cookies in accordance with our cookie policy.", this.content = '<div id="' + this.container_id + '" class="container" style="display: none;">    <aside class="navbar navbar-default navbar-fixed-' + this.placement + " fixed-" + this.placement + '" id="s-ui-cc-navbar" aria-label="' + this.aria_label + '">        <div id="s-ui-cc-main" class="container">            <div class="navbar-inner navbar-content-center" id="s-ui-cc-msg-container">                <div id="s-ui-cc-msg">' + this.consent_message + '<button id="' + this.close_button_id + '" type="button" class="btn btn-sm btn-default btn-light" data-dismiss="alert" aria-label="Close">' + t + "</button></div>            </div>        </div>    </aside></div>"
+springSpace.cookieConsent = springSpace.cookieConsent || {}, springSpace.cookieConsent.alert = function(config) {
+    this.setConfig = function(config) {
+        void 0 === config && (config = {});
+        var okayLabel = config.okay ? config.okay : "OK";
+        this.placement_opts = ["bottom", "top"], this.placement = -1 !== this.placement_opts.indexOf(config.placement) ? config.placement : "bottom", this.cookie_name = "springy_cookie_consent", this.cookie_notice_accepted = "ok", this.cookie_exp_days = config.cookie_exp_days ? config.cookie_exp_days : 180, this.read_more_callback = config.read_more_callback ? config.read_more_callback : function() {}, this.aria_label = config.aria_label || "User Privacy Alert", this.fade_in = 500, this.fade_out = 200, this.container_id = "s-ui-cc-container", this.close_button_id = "s-ui-cc-close-btn", this.read_more_elt_id = "s-ui-cc-read-more-link", this.consent_message = config.consent_message ? config.consent_message : "By using our website you are consenting to our use of cookies in accordance with our cookie policy.", this.content = '<div id="' + this.container_id + '" class="container" style="display: none;">    <aside class="navbar navbar-default navbar-fixed-' + this.placement + " fixed-" + this.placement + '" id="s-ui-cc-navbar" aria-label="' + this.aria_label + '">        <div id="s-ui-cc-main" class="container">            <div class="navbar-inner navbar-content-center" id="s-ui-cc-msg-container">                <div id="s-ui-cc-msg">' + this.consent_message + '<button id="' + this.close_button_id + '" type="button" class="btn btn-sm btn-default btn-light" data-dismiss="alert" aria-label="Close">' + okayLabel + "</button></div>            </div>        </div>    </aside></div>"
     }, this.consentCookieAccepted = function() {
         return this.getCookie(this.cookie_name) === this.cookie_notice_accepted
-    }, this.setCookie = function(e, t, i) {
-        var o = new Date;
-        o.setDate(o.getDate() + i);
-        var n = encodeURI(t) + (null === i ? "" : "; expires=" + o.toUTCString()),
-            s = "https:" === location.protocol ? "; secure" : "";
-        document.cookie = e + "=" + n + "; path=/; samesite=lax;" + s, jQuery("#" + this.container_id).hide("slow")
-    }, this.getCookie = function(e) {
-        var t, i, o, n = document.cookie.split(";");
-        for (t = 0; t < n.length; t++)
-            if (i = n[t].indexOf("="), n[t].substr(0, i).replace(/^\s+|\s+$/g, "") === e) return o = n[t].substr(i + 1), decodeURI(o);
+    }, this.setCookie = function(cookie_name, value, exdays) {
+        var exdate = new Date;
+        exdate.setDate(exdate.getDate() + exdays);
+        var cookie_value = encodeURI(value) + (null === exdays ? "" : "; expires=" + exdate.toUTCString()),
+            secureFlag = "https:" === location.protocol ? "; secure" : "";
+        document.cookie = cookie_name + "=" + cookie_value + "; path=/; samesite=lax;" + secureFlag, jQuery("#" + this.container_id).hide("slow")
+    }, this.getCookie = function(cookie_name) {
+        var i, index_of_equals, c_value, cookie_arr = document.cookie.split(";");
+        for (i = 0; i < cookie_arr.length; i++)
+            if (index_of_equals = cookie_arr[i].indexOf("="), cookie_arr[i].substr(0, index_of_equals).replace(/^\s+|\s+$/g, "") === cookie_name) return c_value = cookie_arr[i].substr(index_of_equals + 1), decodeURI(c_value);
         return null
     }, this.handleClose = function() {
         this.setCookie(this.cookie_name, this.cookie_notice_accepted, this.cookie_exp_days), jQuery("#" + this.container_id).fadeOut(this.fade_out)
     }, this.handleAlert = function() {
         this.consentCookieAccepted() || (jQuery("body").prepend(this.content), jQuery("#" + this.container_id).fadeIn(this.fade_in), jQuery("#" + this.close_button_id).on("click", this.handleClose.bind(this)), jQuery("#" + this.read_more_elt_id).attr("href", "#"), jQuery("#" + this.read_more_elt_id).on("click", this.read_more_callback.bind(this)))
-    }, this.setConfig(e), jQuery(document).ready(this.handleAlert.bind(this))
+    }, this.setConfig(config), jQuery(document).ready(this.handleAlert.bind(this))
 };
