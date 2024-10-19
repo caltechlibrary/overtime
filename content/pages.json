@@ -5964,7 +5964,7 @@
         "thumbnail_url": "",
         "type_id": 3,
         "type_label": "Subject Guide",
-        "updated": "2024-10-15 15:07:50",
+        "updated": "2024-10-18 22:02:25",
         "url": "https://library.caltech.edu/c.php?g=512630"
     },
     {
@@ -6078,7 +6078,7 @@
                 "url": "https://library.caltech.edu/c.php?g=512637&p=10419800"
             },
             {
-                "column_layout": "{\"1\":{\"span\":\"4\"},\"2\":{\"span\":\"4\"},\"3\":{\"span\":\"4\"}}",
+                "column_layout": "{\"1\":{\"span\":\"6\"},\"2\":{\"span\":\"6\"}}",
                 "created": "2024-07-12 17:16:34",
                 "description": "",
                 "enable_display": "1",
@@ -6087,14 +6087,14 @@
                 "friendly_url": "https://library.caltech.edu/pma/news",
                 "id": "10447415",
                 "name": "News & New Items",
-                "num_cols": "3",
+                "num_cols": "2",
                 "parent_id": "0",
                 "position": "2",
                 "redirect_url": "",
                 "slug_id": "3082124",
                 "source_id": "0",
                 "type_id": "1",
-                "updated": "2024-10-01 03:49:22",
+                "updated": "2024-10-18 22:10:32",
                 "url": "https://library.caltech.edu/c.php?g=512637&p=10447415"
             },
             {
@@ -6288,7 +6288,7 @@
         "thumbnail_url": "",
         "type_id": 3,
         "type_label": "Subject Guide",
-        "updated": "2024-10-15 15:01:15",
+        "updated": "2024-10-18 22:12:46",
         "url": "https://library.caltech.edu/c.php?g=512637"
     },
     {
@@ -15472,6 +15472,26 @@
                 "type_id": "1",
                 "updated": "2024-07-18 22:06:35",
                 "url": "https://library.caltech.edu/c.php?g=1411834&p=10456463"
+            },
+            {
+                "column_layout": "{\"1\":{\"span\":12}}",
+                "created": "2024-10-18 21:39:52",
+                "description": "",
+                "enable_display": "1",
+                "enable_newwin": "0",
+                "er_course_id": "0",
+                "friendly_url": "https://library.caltech.edu/crossing-over/catalog",
+                "id": "10635647",
+                "name": "Catalog",
+                "num_cols": "1",
+                "parent_id": "0",
+                "position": "8",
+                "redirect_url": "",
+                "slug_id": "3217909",
+                "source_id": "0",
+                "type_id": "1",
+                "updated": "2024-10-18 23:15:16",
+                "url": "https://library.caltech.edu/c.php?g=1411834&p=10635647"
             }
         ],
         "published": "2024-07-17 22:21:29",
@@ -15484,7 +15504,7 @@
         "thumbnail_url": "",
         "type_id": 1,
         "type_label": "General Purpose Guide",
-        "updated": "2024-09-28 06:39:58",
+        "updated": "2024-10-18 23:39:15",
         "url": "https://library.caltech.edu/c.php?g=1411834"
     },
     {
