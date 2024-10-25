@@ -2004,7 +2004,7 @@
         "thumbnail_url": "",
         "type_id": 2,
         "type_label": "Course Guide",
-        "updated": "2024-09-30 16:34:32",
+        "updated": "2024-10-24 18:31:36",
         "url": "https://library.caltech.edu/c.php?g=512705"
     },
     {
@@ -9680,7 +9680,7 @@
         "thumbnail_url": "",
         "type_id": 1,
         "type_label": "General Purpose Guide",
-        "updated": "2024-10-23 20:19:13",
+        "updated": "2024-10-25 00:01:43",
         "url": "https://library.caltech.edu/c.php?g=1228721"
     },
     {
@@ -14968,7 +14968,7 @@
         "thumbnail_url": "",
         "type_id": 4,
         "type_label": "Topic Guide",
-        "updated": "2024-10-23 21:26:43",
+        "updated": "2024-10-24 23:35:35",
         "url": "https://library.caltech.edu/c.php?g=1216793"
     },
     {
@@ -15492,6 +15492,26 @@
                 "type_id": "1",
                 "updated": "2024-10-18 23:15:16",
                 "url": "https://library.caltech.edu/c.php?g=1411834&p=10635647"
+            },
+            {
+                "column_layout": "{\"1\":{\"span\":12}}",
+                "created": "2024-10-24 18:34:52",
+                "description": "",
+                "enable_display": "1",
+                "enable_newwin": "0",
+                "er_course_id": "0",
+                "friendly_url": "https://library.caltech.edu/crossing-over/tours-events",
+                "id": "10646556",
+                "name": "Tours & Other Events",
+                "num_cols": "1",
+                "parent_id": "0",
+                "position": "9",
+                "redirect_url": "",
+                "slug_id": "3221239",
+                "source_id": "0",
+                "type_id": "1",
+                "updated": "2024-10-24 18:34:52",
+                "url": "https://library.caltech.edu/c.php?g=1411834&p=10646556"
             }
         ],
         "published": "2024-07-17 22:21:29",
@@ -15504,7 +15524,7 @@
         "thumbnail_url": "",
         "type_id": 1,
         "type_label": "General Purpose Guide",
-        "updated": "2024-10-23 21:20:14",
+        "updated": "2024-10-24 19:12:51",
         "url": "https://library.caltech.edu/c.php?g=1411834"
     },
     {
