@@ -1194,7 +1194,7 @@ function(t) {
             e && e.remove(), this.#h()
         }
     }
-    "undefined" != typeof module ? module.exports = new t({}) : window.suiNotify = new t({})
+    window.suiNotify = new t({})
 }! function(t) {
     var e = function(t) {
         if (void 0 === t && (t = {}), this.setConfig = function(t) {
@@ -1861,9 +1861,7 @@ const faqHit = function(t, e, i) {
     getDocHeight = function() {
         return Math.max(Math.max(document.body.scrollHeight, document.documentElement.scrollHeight), Math.max(document.body.offsetHeight, document.documentElement.offsetHeight), Math.max(document.body.clientHeight, document.documentElement.clientHeight))
     };
-! function(t) {
-    "function" == typeof define && define.amd ? define(t) : t()
-}((function() {
+(() => {
     "use strict";
     class t extends HTMLElement {
         static get props() {
@@ -1962,7 +1960,8 @@ const faqHit = function(t, e, i) {
             this[n] !== s && (this[n] = s)
         }
     }
-    class e extends t {
+    const e = t;
+    const i = class extends e {
         static get props() {
             return {
                 date: {
@@ -2049,7 +2048,7 @@ const faqHit = function(t, e, i) {
             })), this._output = document.createElement("input"), this._output.slot = "output", this._output.readOnly = !0, this._output.addEventListener("click", (() => {
                 this.openCalendar()
             })), this.appendChild(this._output), this.addEventListener("keyup", (t => {
-                if (" " === t.key) this.$.calendar.open || this.openCalendar()
+                if (t.stopPropagation(), "Enter" === t.key) this.$.calendar.open || this.openCalendar()
             })), this.$.calendar.addEventListener("change", (t => {
                 this.date = t.target.value.date, this.time = t.target.value.time, this.closeCalendar()
             })), this.$.calendar.addEventListener("clear", (() => {
@@ -2118,8 +2117,8 @@ const faqHit = function(t, e, i) {
                 !t.composedPath().some((t => t === this)) && this.closeCalendar(!0)
             }
         }
-    }
-    class i extends t {
+    };
+    const n = class extends e {
         static get props() {
             return {
                 value: {
@@ -2150,8 +2149,8 @@ const faqHit = function(t, e, i) {
                 bubbles: !0
             })), this.$.select.innerHTML = this.items.map((t => `<option value="${t.value}">${t.name}</option>`)).join(""), this.$.select.value = this.value
         }
-    }
-    class n extends t {
+    };
+    const s = class extends e {
         static get props() {
             return {
                 date: {
@@ -2213,7 +2212,7 @@ const faqHit = function(t, e, i) {
         }
         firstRendered() {
             this.addEventListener("keyup", (t => {
-                if ("Escape" === t.key) this.open = !1
+                if (t.stopPropagation(), "Escape" === t.key) this.open = !1
             })), this.$.year.addEventListener("change", (t => {
                 this.year = t.target.value
             })), this.$.month.addEventListener("change", (t => {
@@ -2335,9 +2334,9 @@ const faqHit = function(t, e, i) {
         formatAsTime(t, e) {
             return `${`${t}`.padStart(2,"0")}:${`${e}`.padStart(2,"0")}`
         }
-    }
-    customElements.get("aeon-select") || customElements.define("aeon-select", i), customElements.get("aeon-calendar") || customElements.define("aeon-calendar", n), customElements.get("aeon-datepicker") || customElements.define("aeon-datepicker", e)
-})),
+    };
+    customElements.get("aeon-select") || customElements.define("aeon-select", n), customElements.get("aeon-calendar") || customElements.define("aeon-calendar", s), customElements.get("aeon-datepicker") || customElements.define("aeon-datepicker", i)
+})(),
 function(t) {
     t.springSpace = t.springSpace || {}, t.springSpace.la = t.springSpace.la || {};
     t.springSpace.la.askform = function(e) {
@@ -2744,7 +2743,7 @@ class QueryLog {
                 r.checkerFunction = null;
                 var e, n, s, o = "",
                     l = Boolean(r.getHash());
-                return r.isInternetExplorer() ? ("historyjs-iframe", (e = i.createElement("iframe")).setAttribute("id", "historyjs-iframe"), e.setAttribute("src", "#"), e.style.display = "none", i.body.appendChild(e), e.contentWindow.document.open(), e.contentWindow.document.close(), n = "", s = !1, r.checkerFunction = function() {
+                return r.isInternetExplorer() ? ((e = i.createElement("iframe")).setAttribute("id", "historyjs-iframe"), e.setAttribute("src", "#"), e.style.display = "none", i.body.appendChild(e), e.contentWindow.document.open(), e.contentWindow.document.close(), n = "", s = !1, r.checkerFunction = function() {
                     if (s) return !1;
                     s = !0;
                     var i = r.getHash(),
