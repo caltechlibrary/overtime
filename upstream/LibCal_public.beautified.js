@@ -2247,7 +2247,7 @@ function loadBrowse(e, t) {
 }
 
 function datePickerAccessibilityFix(e) {
-    e.find(".datepicker-title").remove(), e.find("th.dow, th.next, th.prev, th.datepicker-switch").attr("scope", "col")
+    e.find(".datepicker-title").remove(), e.find("th.dow, th.next, th.prev, th.datepicker-switch").attr("scope", "col"), e.find("table").attr("aria-label", "Date Picker")
 }
 
 function addslashes(e) {
