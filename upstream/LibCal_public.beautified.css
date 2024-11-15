@@ -4974,6 +4974,17 @@ textarea {
     font-size: 12px
 }
 
+.bootstrap-select .popover-title {
+    font-size: 1em
+}
+
+.bootstrap-select>.dropdown-toggle.bs-placeholder,
+.bootstrap-select>.dropdown-toggle.bs-placeholder:active,
+.bootstrap-select>.dropdown-toggle.bs-placeholder:focus,
+.bootstrap-select>.dropdown-toggle.bs-placeholder:hover {
+    color: #555
+}
+
 .popover-content {
     padding: 5px 10px
 }
