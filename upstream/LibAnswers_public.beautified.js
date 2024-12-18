@@ -1237,7 +1237,7 @@ function(t) {
             this.returnfocus && void 0 !== this.opener && null !== this.opener && this.opener.focus(), null !== this.closeCallback && this.closeCallback(this), this.$el.off().removeData("bs.modal").find(".modal-content").html(""), jQuery("#" + this.id + " .modal-dialog").removeClass("modal-lg"), this.callback = null, this.closeCallback = null
         }, this.draw = function() {
             var t = '<div class="modal-content">';
-            "" !== this.title && (t += '<div class="modal-header"><button id="s-sui-modal-close" type="button" class="close" data-dismiss="modal" aria-label="&times; ' + this.transText.close + '">&times;</button><h4 class="modal-title" id="s-sui-modal-header">' + this.title + "</h4></div>");
+            "" !== this.title && (t += '<div class="modal-header"><button id="s-sui-modal-close" type="button" class="close" data-dismiss="modal" aria-label="&times; ' + this.transText.close + '">&times;</button><h2 class="modal-title" id="s-sui-modal-header">' + this.title + "</h2></div>");
             var e = "";
             "string" == typeof this.content && (e = this.content), t += '<div class="modal-body">' + e + "</div>", (this.footer || this.modal_buttons.length > 0) && (this.btn_callbacks = {}, t += '<div class="modal-footer">', 0 === this.modal_buttons.length ? t += '<button type="button" class="btn btn-default" data-dismiss="modal">' + this.transText.close + "</button>" : this.modal_buttons.forEach((function(e, i) {
                 e.links && e.links.length > 0 ? (e.gclass = e.gclass ? e.gclass : "", t += '<div class="btn-group ' + e.gclass + '">', e.bclass = e.bclass ? e.bclass : "btn-default", e.label = e.label ? e.label : "", "" !== e.label && (t += '<button type="button" class="btn ' + e.bclass + " btn-modal-" + i + '" >' + e.label + "</button>", e.callback && (this.btn_callbacks["btn-modal-" + i] = e.callback)), t += '<button type="button" class="btn ' + e.bclass + ' dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret"></span><span class="sr-only">' + this.transText.toggle + "</span></button>", t += '<ul class="dropdown-menu">', e.links.forEach((function(e, i) {
@@ -2423,7 +2423,7 @@ function(t) {
             return t.springSpace.queryAnalyzer ? e = t.springSpace.queryAnalyzer.qlog_id || 0 : t.springSpace.la.Page && t.springSpace.la.Page.qlog_id && (e = t.springSpace.la.Page.qlog_id), e > 0 && this.$form.find("input[name=qlog]").val(e), t.suiNotify.working(), !0
         }, this.createDismissableAlert = function(t, e) {
             const i = document.createElement("div");
-            i.classList.add("alert", `alert-${e}`, "alert-dismissable"), i.setAttribute("role", "alert");
+            i.classList.add("alert", `alert-${e}`, "alert-dismissable"), i.setAttribute("role", "alert"), i.setAttribute("aria-atomic", "true");
             const n = document.createElement("button");
             return n.type = "button", n.classList.add("close"), n.setAttribute("aria-label", "close"), n.innerHTML = '<span aria-hidden="true">&times;</span>', i.appendChild(n), i.insertAdjacentHTML("beforeend", t), n.addEventListener("click", (t => {
                 t.preventDefault(), i.remove()
