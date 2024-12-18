@@ -8523,7 +8523,7 @@ hr {
     border-bottom: 1px solid #fff;
     border-bottom-right-radius: 8px;
     transition: top 1s ease-out, background 1s linear;
-    z-index: 100
+    z-index: 2000
 }
 
 #s-la-admin-skiplink:focus,
@@ -8656,6 +8656,10 @@ h1#s-la-public-header-title {
     padding: 0 5px;
     color: #ccc;
     content: "/\00a0"
+}
+
+.s-la-breadcrumbs ol.list-inline li>a {
+    padding: 14px 2px
 }
 
 .breadcrumb>.active {
@@ -10031,6 +10035,14 @@ h1#s-la-admin-header-title {
     text-decoration: none
 }
 
+.nav-pills>li.active>a:focus {
+    color: #fff;
+    background-color: #286090;
+    border-color: #122b40;
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -3px
+}
+
 .nav-tabs li.active a {
     font-weight: 700
 }
@@ -10057,6 +10069,11 @@ h1#s-la-admin-header-title {
 
 #s-la-admin-main {
     padding: 10px
+}
+
+ul.s-la-admin-shortcuts>li>a {
+    line-height: 2.5;
+    padding: 14px 0
 }
 
 #s-la-filterform {
@@ -10536,19 +10553,19 @@ table.summary .totalcol {
 }
 
 table.s-la-queryanalyzer-table .qs_status0 {
-    color: #9eca08
+    color: #475c00
 }
 
 table.s-la-queryanalyzer-table .qs_status1 {
-    color: #f60
+    color: #783102
 }
 
 table.s-la-queryanalyzer-table .qs_status2 {
-    color: #0c83bc
+    color: #034d70
 }
 
 table.s-la-queryanalyzer-table .qs_status3 {
-    color: #e8c002
+    color: #715f02
 }
 
 .table .percent {
@@ -11040,11 +11057,11 @@ ol.pickupMsgThread li {
 }
 
 .text-green {
-    color: green
+    color: #036403
 }
 
 .text-red {
-    color: #c41339
+    color: #9d0e2d
 }
 
 .align-right {
@@ -11509,6 +11526,14 @@ table.table thead .sorting_desc:after {
     background-color: #525252
 }
 
+.btn-primary>i {
+    color: #fff
+}
+
+.btn-info>i {
+    color: #fff
+}
+
 a.btn-confirm {
     text-decoration: none
 }
@@ -11561,6 +11586,14 @@ a.btn-confirm>span:last-of-type {
     margin-top: 0;
     margin-bottom: 0;
     font-size: 12px
+}
+
+.s-srch-pagination .pagination a {
+    font-size: 100% !important
+}
+
+.pagination a {
+    padding: 5px 10px !important
 }
 
 .tab-content>.active {
@@ -11675,7 +11708,8 @@ input[type=checkbox][disabled]+span {
     background-color: #fed07a
 }
 
-.alert-danger {
+.alert-danger,
+.s-ui-notify.s-ui-notify-error {
     color: #8a1915;
     background-color: #f6e7e7
 }
@@ -11719,6 +11753,36 @@ input[type=checkbox][disabled]+span {
 
 .tab-pane:focus {
     outline: 0
+}
+
+.btn-danger {
+    background-color: #af1915
+}
+
+.modal-header .close {
+    color: #333;
+    opacity: .8;
+    margin-top: -12px;
+    margin-right: -8px;
+    padding: 12px 16px
+}
+
+.modal-title {
+    margin: 0;
+    font-size: 24px
+}
+
+.modal-header .close {
+    color: #333;
+    opacity: .8;
+    margin-top: -12px;
+    margin-right: -8px;
+    padding: 12px 16px
+}
+
+.modal-title {
+    margin: 0;
+    font-size: 24px
 }
 
 .dropdown-menu>.disabled.active>a {
@@ -12179,7 +12243,7 @@ legend.radio-label {
     border-bottom: 0
 }
 
-h3.form-header {
+.form-header {
     display: block;
     width: 100%;
     padding: 0;
