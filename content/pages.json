@@ -5880,7 +5880,7 @@
         "thumbnail_url": "",
         "type_id": 3,
         "type_label": "Subject Guide",
-        "updated": "2024-12-13 17:11:57",
+        "updated": "2024-12-17 21:39:54",
         "url": "https://library.caltech.edu/c.php?g=512630"
     },
     {
@@ -6192,26 +6192,6 @@
                 "type_id": "1",
                 "updated": "2024-09-06 23:36:54",
                 "url": "https://library.caltech.edu/c.php?g=512637&p=10551309"
-            },
-            {
-                "column_layout": "{\"1\":{\"span\":12}}",
-                "created": "2024-12-12 16:41:52",
-                "description": "",
-                "enable_display": "0",
-                "enable_newwin": "0",
-                "er_course_id": "0",
-                "friendly_url": null,
-                "id": "10715337",
-                "name": "Blog, News, Tips, etc.",
-                "num_cols": "1",
-                "parent_id": "0",
-                "position": "3",
-                "redirect_url": "",
-                "slug_id": "0",
-                "source_id": "0",
-                "type_id": "1",
-                "updated": "2024-12-12 16:46:24",
-                "url": "https://library.caltech.edu/c.php?g=512637&p=10715337"
             }
         ],
         "published": "2019-01-29 22:20:11",
@@ -6224,7 +6204,7 @@
         "thumbnail_url": "",
         "type_id": 3,
         "type_label": "Subject Guide",
-        "updated": "2024-12-13 17:08:34",
+        "updated": "2024-12-18 21:37:50",
         "url": "https://library.caltech.edu/c.php?g=512637"
     },
     {
