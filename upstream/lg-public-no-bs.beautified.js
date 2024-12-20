@@ -1785,6 +1785,21 @@ springSpace.util = {}, springSpace.common = {}, springSpace.validation = {}, spr
     }, UI.prototype.openTextEditorModal = function(config) {
         var rte_modal;
         if (springSpace.Util.setObjProp("content", "", config), jQuery.fn.modal.Constructor.prototype.enforceFocus = function() {}, !rte_modal) {
+            '<div class="modal-dialog" role="document">',
+            '<div class="modal-content">',
+            '<div class="modal-header">',
+            '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>',
+            '<h4 class="modal-title" id="rte-validation-title">Validation Failed</h4>',
+            "</div>",
+            '<div class="modal-body">',
+            "</div>",
+            '<div class="modal-footer">',
+            '<button id="s-lg-btn-save-code" type="button" class="btn btn-sm btn-default">Save Anyway</button>',
+            '<button type="button" class="btn btn-sm btn-primary" data-dismiss="modal">Cancel - I\'ll fix my code</button>',
+            "</div>",
+            "</div>\x3c!-- /.modal-content --\x3e",
+            "</div>\x3c!-- /.modal-dialog --\x3e",
+            "</div>\x3c!-- /.modal --\x3e",
             (rte_modal = jQuery('<div id="s-lib-rte-validation-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="rte-validation-title"><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title" id="rte-validation-title">Validation Failed</h4></div><div class="modal-body"></div><div class="modal-footer"><button id="s-lg-btn-save-code" type="button" class="btn btn-sm btn-default">Save Anyway</button><button type="button" class="btn btn-sm btn-primary" data-dismiss="modal">Cancel - I\'ll fix my code</button></div></div>\x3c!-- /.modal-content --\x3e</div>\x3c!-- /.modal-dialog --\x3e</div>\x3c!-- /.modal --\x3e')).appendTo("body")
         }
         jQuery("#s-lib-rte-validation-modal .modal-body").html(config.content), jQuery("#s-lib-rte-validation-modal").modal()
