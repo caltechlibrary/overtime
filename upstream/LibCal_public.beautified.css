@@ -2990,12 +2990,8 @@ a.s-lc-color-links:hover {
 }
 
 .s-lc-cancel-registration-message {
-    width: 830px;
-    margin: 100px auto;
-    padding: 80px 40px;
+    margin: 10px auto;
     text-align: center;
-    border: 1px solid #ddd;
-    border-radius: 4px;
     font-size: 18px
 }
 
