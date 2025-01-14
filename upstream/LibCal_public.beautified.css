@@ -3928,6 +3928,10 @@ h6 small {
     object-fit: contain
 }
 
+.s-lc-checkout-image {
+    object-fit: contain
+}
+
 .s-lc-catalog-item-details {
     text-align: center;
     text-decoration: none;
@@ -5445,4 +5449,8 @@ table.s-lc-export-table th {
     .s-lc-desktop-only-margin-bottom-lg {
         margin-bottom: 20px
     }
+}
+
+.s-lc-event-external {
+    cursor: default
 }
