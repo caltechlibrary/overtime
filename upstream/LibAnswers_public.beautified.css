@@ -8692,6 +8692,10 @@ h1#s-la-public-header-title {
     margin: 0 10px
 }
 
+ul:empty {
+    display: none
+}
+
 .s-la-color-header {
     background-color: #f9f9f9
 }
@@ -10190,7 +10194,7 @@ h5.s-la-filterform-title {
 }
 
 .s-la-queues-referer {
-    color: green
+    color: #035803
 }
 
 .s-la-queues-quicklook {
@@ -10360,7 +10364,7 @@ h4.s-la-rec-header {
     float: left;
     line-height: 20px;
     padding: 15px 5px 5px 0;
-    color: #777;
+    color: #535252;
     margin: 0
 }
 
@@ -10368,7 +10372,7 @@ h4.s-la-rec-header {
     float: left;
     line-height: 20px;
     padding: 15px 15px 5px 0;
-    color: #777;
+    color: #535252;
     margin: 0
 }
 
@@ -10810,6 +10814,10 @@ label.itemchecklabel {
     margin: 5px
 }
 
+ul.list-unstyled li:has(a) {
+    min-height: 24px
+}
+
 .input-group-addon label {
     margin: 0
 }
@@ -11083,7 +11091,8 @@ ol.pickupMsgThread li {
 }
 
 .label a {
-    color: inherit
+    color: inherit;
+    padding: 6px 3px
 }
 
 .cursor-click {
@@ -11418,11 +11427,14 @@ td.dataTables_empty {
     table-layout: fixed
 }
 
-.table a,
 .table td,
 .table th {
     word-wrap: break-all;
     word-wrap: break-word
+}
+
+.table a {
+    word-wrap: anywhere
 }
 
 .dataTable th.sorting,
@@ -11582,6 +11594,10 @@ a.btn-confirm>span:last-of-type {
     background-color: #356635
 }
 
+.text-muted {
+    color: #585757
+}
+
 .pagination {
     margin-top: 0;
     margin-bottom: 0;
@@ -11608,7 +11624,8 @@ a.btn-confirm>span:last-of-type {
 
 .label {
     font-size: 85%;
-    line-height: 2.5
+    line-height: 2.5;
+    padding: 6px 7px
 }
 
 .form-inline .form-group {
@@ -11719,7 +11736,7 @@ input[type=checkbox][disabled]+span {
 }
 
 .label-danger {
-    background-color: #d2322d
+    background-color: #a21d18
 }
 
 .alert.alert-introhelp {
