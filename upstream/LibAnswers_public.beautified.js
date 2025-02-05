@@ -1139,7 +1139,7 @@ function(t) {
         }
         #c() {
             let t = document.getElementById(this.#e);
-            return t || (t = document.createElement("DIV"), t.id = this.#e, t.setAttribute("role", "alert"), document.body.appendChild(t)), t
+            return t || (t = document.createElement("DIV"), t.id = this.#e, t.setAttribute("role", "alert"), t.setAttribute("aria-atomic", "true"), document.body.appendChild(t)), t
         }
         #d() {
             return this.#t || (this.#t = this.#c()), this.#t
@@ -1632,7 +1632,7 @@ var errorAlert = function(t = "") {
     },
     createDismissableAlert = function(t, e, i = "") {
         var n = document.createElement("div");
-        "" !== i && (n.id = i), n.classList.add("alert", "alert-" + e, "alert-dismissable", "mg-top"), n.setAttribute("role", "alert");
+        "" !== i && (n.id = i), n.classList.add("alert", "alert-" + e, "alert-dismissable", "mg-top"), n.setAttribute("role", "alert"), n.setAttribute("aria-atomic", "true");
         var s = document.createElement("button");
         return s.type = "button", s.classList.add("close"), s.setAttribute("aria-label", "close"), s.setAttribute("data-dismiss", "alert"), s.innerHTML = '<span aria-hidden="true">&times;</span>', n.appendChild(s), n.insertAdjacentHTML("beforeend", t), n
     },
