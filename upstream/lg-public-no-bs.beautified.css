@@ -479,17 +479,6 @@ div.slick-slide a:focus {
     outline: 5px auto Highlight
 }
 
-.label-info {
-    background-color: #286090
-}
-
-.label-info[href]:focus,
-.label-info[href]:hover {
-    background-color: #fff;
-    color: #286090;
-    border: 1px solid #286090
-}
-
 .btn-link {
     color: #2954d1
 }
@@ -1811,10 +1800,14 @@ div.has-error .select2-container .select2-choice {
     background-color: #286090
 }
 
-.label-info[href]:focus,
-.label-info[href]:hover {
-    background-color: #fff;
-    color: #286090;
+.s-lib-profile-email .label-info {
+    background-color: #286090
+}
+
+.s-lib-profile-email .label-info:focus,
+.s-lib-profile-email .label-info:hover {
+    color: #fff;
+    background-color: #084171;
     border: 1px solid #286090
 }
 
@@ -2559,17 +2552,6 @@ a:focus {
     color: #055160;
     background-color: #cff4fc;
     border-color: #b6effb
-}
-
-.label-info {
-    color: #fff;
-    background-color: #286090;
-    border-color: #b6effb
-}
-
-.label-info[href]:hover {
-    background: #084171;
-    color: #fff
 }
 
 .badge {
