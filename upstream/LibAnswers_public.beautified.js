@@ -899,218 +899,217 @@ function(t) {
 }(jQuery),
 function(t) {
     const e = {
-            input: null,
-            list: null,
-            listLabel: "Suggested results",
-            instructions: null,
-            throttle: null,
-            xhrSearch: null,
-            queryName: "",
-            queryProcessor: null,
-            dataProcessor: null,
-            selectCallback: null,
-            typedQuery: "",
-            resultLimit: 10,
-            queryData: {},
-            staticData: [],
-            preventSubmit: !1,
-            instructionsText: "{{count}} options available. Use up and down arrows to browse available options and enter to select one.",
-            showAllOnFocus: !1,
-            allowEmptySearch: !1,
-            selectNext: function() {
-                const t = this.list.querySelector("li[aria-selected=true]");
-                let e = null;
-                if (null === t) {
-                    if (e = this.list.querySelector("li:first-of-type"), null === e) return
-                } else {
-                    if (e = t.nextElementSibling, null === e) return;
-                    t.setAttribute("aria-selected", !1)
-                }
-                e.setAttribute("aria-selected", !0), this.input.value = e.textContent
-            },
-            selectPrevious: function() {
-                const t = this.list.querySelector("li[aria-selected=true]");
-                if (null === t) return;
-                const e = t.previousElementSibling;
-                null === e ? this.input.value = this.typedQuery : (e.setAttribute("aria-selected", !0), this.input.value = e.textContent), t.setAttribute("aria-selected", !1)
-            },
-            selectByClick: function(t) {
-                const e = this.list.querySelector("li[aria-selected=true]");
-                null !== e && e.setAttribute("aria-selected", !1), t.setAttribute("aria-selected", !0), this.selectOption(), this.showAllOnFocus || this.input.focus()
-            },
-            escapeRegExp: function(t) {
-                return t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
-            },
-            formatOption: function(t) {
-                let e = "";
-                if (t.display) e = t.display;
-                else {
-                    const i = new RegExp(`(${this.escapeRegExp(this.typedQuery)})`, "ig");
-                    e = t.label.replace(i, "<strong>$1</strong>")
-                }
-                if (!e) return null;
-                const i = document.createElement("li");
-                return i.setAttribute("aria-selected", !1), i.setAttribute("role", "option"), Object.keys(t).forEach((e => {
-                    "label" !== e && "display" !== e && (i.dataset[e] = t[e])
-                })), i.innerHTML = e, i
-            },
-            displayResults: function(t) {
-                if (0 === t.length) return void this.closeList();
-                let e = t.map(this.formatOption, this);
-                e.length > this.resultLimit && !this.allowEmptySearch && (e = e.slice(0, this.resultLimit)), this.list.innerHTML = "";
-                const i = document.createDocumentFragment();
-                e.forEach((t => {
-                    t && i.appendChild(t)
-                })), this.list.appendChild(i), this.updateInstructions(e.length), this.openList()
-            },
-            isListOpen: function() {
-                return !this.list.classList.contains("hidden")
-            },
-            isOptionSelected: function() {
-                return null !== this.list.querySelector("li[aria-selected=true]")
-            },
-            openList: function() {
-                this.list.style.left = `${this.input.offsetLeft}px`, this.list.style.top = `${this.input.offsetTop+this.input.offsetHeight}px`, this.list.style.minWidth = `${this.input.offsetWidth}px`, this.list.classList.remove("hidden"), this.input.setAttribute("aria-expanded", !0)
-            },
-            closeList: function() {
-                this.list.classList.add("hidden"), this.list.innerHTML = "", this.input.setAttribute("aria-expanded", !1), this.updateInstructions(0)
-            },
-            selectOption: function() {
-                const t = this.list.querySelector("li[aria-selected=true]");
-                this.input.dataset.oldvalue = this.input.value, this.input.value = t.textContent, null !== this.selectCallback && this.selectCallback(t), this.closeList()
-            },
-            processData: function(t) {
-                return null !== this.dataProcessor ? this.dataProcessor(t) : t
-            },
-            buildQueryString: function() {
-                const t = this.input.value,
-                    e = null !== this.queryProcessor ? this.queryProcessor(t) : t,
-                    i = new URLSearchParams;
-                i.append(this.queryName, e), i.append("limit", this.resultLimit);
-                return Object.keys(this.queryData).forEach((function(t) {
-                    const e = this.queryData[t];
-                    "function" != typeof e ? i.append(t, e) : i.append(t, e())
-                }), this), `?${i.toString()}`
-            },
-            xhrOnLoad: function() {
-                if (this.xhrSearch.status >= 200 && this.xhrSearch.status < 400) {
-                    const t = JSON.parse(this.xhrSearch.responseText),
-                        e = this.processData(t);
-                    this.displayResults(e)
-                } else console.log(this.xhrSearch.statusText)
-            },
-            xhrOnError: function() {
-                console.log(this.xhrSearch.statusText)
-            },
-            makeRequest: function() {
-                const t = this.buildQueryString();
-                this.xhrSearch = new XMLHttpRequest, this.xhrSearch.open("GET", this.queryUrl + t, !0), this.xhrSearch.setRequestHeader("Accept", "application/json"), this.xhrSearch.onload = this.xhrOnLoad.bind(this), this.xhrSearch.onerror = this.xhrOnError.bind(this), this.xhrSearch.send()
-            },
-            searchData: function() {
-                const t = this.input.value;
-                if ("" === t && !this.allowEmptySearch) return void this.closeList();
-                let e = null !== this.queryProcessor ? this.queryProcessor(t) : t;
-                if (e = e.toLowerCase(), "" === e) return void this.displayResults(this.staticData);
-                const i = this.staticData.filter((t => -1 !== t.label.toLowerCase().indexOf(e)));
-                this.displayResults(i)
-            },
-            getExactMatch: function() {
-                const t = this.input.value.trim().toLowerCase();
-                if ("" === t) return null;
-                const e = this.staticData.find((e => e.label.toLowerCase() === t));
-                return e || null
-            },
-            query: function() {
-                this.staticData.length > 0 ? this.searchData() : (this.throttle && clearTimeout(this.throttle), this.xhrSearch && this.xhrSearch.abort(), "" !== this.input.value || this.allowEmptySearch ? this.throttle = setTimeout(this.makeRequest.bind(this), 500) : this.closeList())
-            },
-            disable: function() {
-                this.list.parentNode.removeChild(this.list)
-            },
-            createList: function() {
-                this.list = document.createElement("ul"), this.list.id = this.getListId(), this.list.setAttribute("role", "listbox"), this.list.setAttribute("aria-label", this.listLabel), this.list.classList.add("s-ui-autocomplete-list"), this.list.classList.add("hidden"), this.input.parentNode.insertBefore(this.list, this.input.nextSibling)
-            },
-            getListId: function() {
-                return `${this.input.id}_list`
-            },
-            getInstructionsId: function() {
-                return `${this.input.id}_instructions`
-            },
-            formatInput: function() {
-                this.input.setAttribute("role", "combobox"), this.input.setAttribute("aria-autocomplete", "list"), this.input.setAttribute("aria-expanded", "false"), this.input.setAttribute("aria-controls", this.getListId()), this.input.setAttribute("aria-describedby", this.getInstructionsId()), this.input.setAttribute("autocomplete", "off"), this.queryName = this.input.getAttribute("name")
-            },
-            updateInstructions: function(t) {
-                this.instructions.innerHTML = this.instructionsText.replace("{{count}}", t)
-            },
-            handleTypingDown: function(t) {
-                const e = this.isListOpen();
-                switch (t.key) {
-                    case "Escape":
-                        e && this.closeList();
-                        break;
-                    case "ArrowDown":
-                        e ? (t.preventDefault(), this.selectNext()) : this.showAllOnFocus && "" === this.input.value && this.query();
-                        break;
-                    case "ArrowUp":
-                        e && (t.preventDefault(), this.selectPrevious());
-                        break;
-                    case "Enter":
-                        e && this.isOptionSelected() ? (t.preventDefault(), this.selectOption()) : this.preventSubmit && t.preventDefault();
-                        break;
-                    case "Tab":
-                        e && this.isOptionSelected() ? this.selectOption() : e && this.closeList()
-                }
-            },
-            handleTypingUp: function(t) {
-                switch (t.key) {
-                    case "Escape":
-                    case "ArrowDown":
-                    case "ArrowUp":
-                    case "ArrowLeft":
-                    case "ArrowRight":
-                    case "Enter":
-                    case "Tab":
-                        break;
-                    default:
-                        this.typedQuery = this.input.value, this.query()
-                }
-            },
-            handleClick: function(t) {
-                const e = t.target.closest("li[aria-selected=false]");
-                null !== e && this.selectByClick(e)
-            },
-            handleOutsideClick: function(t) {
-                const e = t.target;
-                null !== e.closest(`#${this.list.id}`) || null !== e.closest(`#${this.input.id}`) || this.closeList()
-            },
-            attachEvents: function() {
-                this.input.addEventListener("keydown", this.handleTypingDown.bind(this)), this.input.addEventListener("keyup", this.handleTypingUp.bind(this)), this.list.addEventListener("click", this.handleClick.bind(this)), document.body.addEventListener("click", this.handleOutsideClick.bind(this)), this.showAllOnFocus && this.input.addEventListener("focus", (() => {
-                    "" === this.input.value && this.query()
-                }))
-            },
-            addInstructions: function() {
-                this.instructions = document.createElement("div"), this.instructions.id = this.getInstructionsId(), this.instructions.setAttribute("aria-live", "polite"), this.instructions.classList.add("sr-only"), this.instructions.innerHTML = this.instructionsText.replace("{{count}}", 0), this.list.parentNode.insertBefore(this.instructions, this.list.nextSibling)
-            },
-            validateConfig: function(t) {
-                if (!t.inputSelector) throw new Error("Must set inputSelector.");
-                if (null === this.input) throw new Error(`${t.inputSelector} not found in the DOM.`);
-                if (!this.queryUrl && 0 === this.staticData.length) throw new Error("Must set queryUrl or staticData.")
-            },
-            setConfig: function(t) {
-                this.input = document.querySelector(t.inputSelector);
-                const e = ["queryUrl", "staticData", "queryProcessor", "dataProcessor", "selectCallback", "resultLimit", "queryData", "instructionsText", "preventSubmit", "listLabel", "showAllOnFocus", "allowEmptySearch"];
-                Object.keys(t).forEach((function(i) {
-                    -1 !== e.indexOf(i) && (this[i] = t[i])
-                }), this), this.showAllOnFocus && (this.allowEmptySearch = !0)
-            },
-            init: function(t) {
-                this.setConfig(t), this.validateConfig(t), this.formatInput(), this.createList(), this.addInstructions(), this.attachEvents()
+        input: null,
+        list: null,
+        listLabel: "Suggested results",
+        instructions: null,
+        throttle: null,
+        xhrSearch: null,
+        queryName: "",
+        queryProcessor: null,
+        dataProcessor: null,
+        selectCallback: null,
+        typedQuery: "",
+        resultLimit: 10,
+        queryData: {},
+        staticData: [],
+        preventSubmit: !1,
+        instructionsText: "{{count}} options available. Use up and down arrows to browse available options and enter to select one.",
+        showAllOnFocus: !1,
+        allowEmptySearch: !1,
+        selectNext: function() {
+            const t = this.list.querySelector("li[aria-selected=true]");
+            let e = null;
+            if (null === t) {
+                if (e = this.list.querySelector("li:first-of-type"), null === e) return
+            } else {
+                if (e = t.nextElementSibling, null === e) return;
+                t.setAttribute("aria-selected", !1)
+            }
+            e.setAttribute("aria-selected", !0), this.input.value = e.textContent
+        },
+        selectPrevious: function() {
+            const t = this.list.querySelector("li[aria-selected=true]");
+            if (null === t) return;
+            const e = t.previousElementSibling;
+            null === e ? this.input.value = this.typedQuery : (e.setAttribute("aria-selected", !0), this.input.value = e.textContent), t.setAttribute("aria-selected", !1)
+        },
+        selectByClick: function(t) {
+            const e = this.list.querySelector("li[aria-selected=true]");
+            null !== e && e.setAttribute("aria-selected", !1), t.setAttribute("aria-selected", !0), this.selectOption(), this.showAllOnFocus || this.input.focus()
+        },
+        escapeRegExp: function(t) {
+            return t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+        },
+        formatOption: function(t) {
+            let e = "";
+            if (t.display) e = t.display;
+            else {
+                const i = new RegExp(`(${this.escapeRegExp(this.typedQuery)})`, "ig");
+                e = t.label.replace(i, "<strong>$1</strong>")
+            }
+            if (!e) return null;
+            const i = document.createElement("li");
+            return i.setAttribute("aria-selected", !1), i.setAttribute("role", "option"), Object.keys(t).forEach((e => {
+                "label" !== e && "display" !== e && (i.dataset[e] = t[e])
+            })), i.innerHTML = e, i
+        },
+        displayResults: function(t) {
+            if (0 === t.length) return void this.closeList();
+            let e = t.map(this.formatOption, this);
+            e.length > this.resultLimit && !this.allowEmptySearch && (e = e.slice(0, this.resultLimit)), this.list.innerHTML = "";
+            const i = document.createDocumentFragment();
+            e.forEach((t => {
+                t && i.appendChild(t)
+            })), this.list.appendChild(i), this.updateInstructions(e.length), this.openList()
+        },
+        isListOpen: function() {
+            return !this.list.classList.contains("hidden")
+        },
+        isOptionSelected: function() {
+            return null !== this.list.querySelector("li[aria-selected=true]")
+        },
+        openList: function() {
+            this.list.style.left = `${this.input.offsetLeft}px`, this.list.style.top = `${this.input.offsetTop+this.input.offsetHeight}px`, this.list.style.minWidth = `${this.input.offsetWidth}px`, this.list.classList.remove("hidden"), this.input.setAttribute("aria-expanded", !0)
+        },
+        closeList: function() {
+            this.list.classList.add("hidden"), this.list.innerHTML = "", this.input.setAttribute("aria-expanded", !1), this.updateInstructions(0)
+        },
+        selectOption: function() {
+            const t = this.list.querySelector("li[aria-selected=true]");
+            this.input.dataset.oldvalue = this.input.value, this.input.value = t.textContent, null !== this.selectCallback && this.selectCallback(t), this.closeList()
+        },
+        processData: function(t) {
+            return null !== this.dataProcessor ? this.dataProcessor(t) : t
+        },
+        buildQueryString: function() {
+            const t = this.input.value,
+                e = null !== this.queryProcessor ? this.queryProcessor(t) : t,
+                i = new URLSearchParams;
+            i.append(this.queryName, e), i.append("limit", this.resultLimit);
+            return Object.keys(this.queryData).forEach((function(t) {
+                const e = this.queryData[t];
+                "function" != typeof e ? i.append(t, e) : i.append(t, e())
+            }), this), `?${i.toString()}`
+        },
+        xhrOnLoad: function() {
+            if (this.xhrSearch.status >= 200 && this.xhrSearch.status < 400) {
+                const t = JSON.parse(this.xhrSearch.responseText),
+                    e = this.processData(t);
+                this.displayResults(e)
+            } else console.log(this.xhrSearch.statusText)
+        },
+        xhrOnError: function() {
+            console.log(this.xhrSearch.statusText)
+        },
+        makeRequest: function() {
+            const t = this.buildQueryString();
+            this.xhrSearch = new XMLHttpRequest, this.xhrSearch.open("GET", this.queryUrl + t, !0), this.xhrSearch.setRequestHeader("Accept", "application/json"), this.xhrSearch.onload = this.xhrOnLoad.bind(this), this.xhrSearch.onerror = this.xhrOnError.bind(this), this.xhrSearch.send()
+        },
+        searchData: function() {
+            const t = this.input.value;
+            if ("" === t && !this.allowEmptySearch) return void this.closeList();
+            let e = null !== this.queryProcessor ? this.queryProcessor(t) : t;
+            if (e = e.toLowerCase(), "" === e) return void this.displayResults(this.staticData);
+            const i = this.staticData.filter((t => -1 !== t.label.toLowerCase().indexOf(e)));
+            this.displayResults(i)
+        },
+        getExactMatch: function() {
+            const t = this.input.value.trim().toLowerCase();
+            if ("" === t) return null;
+            const e = this.staticData.find((e => e.label.toLowerCase() === t));
+            return e || null
+        },
+        query: function() {
+            this.staticData.length > 0 ? this.searchData() : (this.throttle && clearTimeout(this.throttle), this.xhrSearch && this.xhrSearch.abort(), "" !== this.input.value || this.allowEmptySearch ? this.throttle = setTimeout(this.makeRequest.bind(this), 500) : this.closeList())
+        },
+        disable: function() {
+            this.list.parentNode.removeChild(this.list)
+        },
+        createList: function() {
+            this.list = document.createElement("ul"), this.list.id = this.getListId(), this.list.setAttribute("role", "listbox"), this.list.setAttribute("aria-label", this.listLabel), this.list.classList.add("s-ui-autocomplete-list"), this.list.classList.add("hidden"), this.input.parentNode.insertBefore(this.list, this.input.nextSibling)
+        },
+        getListId: function() {
+            return `${this.input.id}_list`
+        },
+        getInstructionsId: function() {
+            return `${this.input.id}_instructions`
+        },
+        formatInput: function() {
+            this.input.setAttribute("role", "combobox"), this.input.setAttribute("aria-autocomplete", "list"), this.input.setAttribute("aria-expanded", "false"), this.input.setAttribute("aria-controls", this.getListId()), this.input.setAttribute("aria-describedby", this.getInstructionsId()), this.input.setAttribute("autocomplete", "off"), this.queryName = this.input.getAttribute("name")
+        },
+        updateInstructions: function(t) {
+            this.instructions.innerHTML = this.instructionsText.replace("{{count}}", t)
+        },
+        handleTypingDown: function(t) {
+            const e = this.isListOpen();
+            switch (t.key) {
+                case "Escape":
+                    e && this.closeList();
+                    break;
+                case "ArrowDown":
+                    e ? (t.preventDefault(), this.selectNext()) : this.showAllOnFocus && "" === this.input.value && this.query();
+                    break;
+                case "ArrowUp":
+                    e && (t.preventDefault(), this.selectPrevious());
+                    break;
+                case "Enter":
+                    e && this.isOptionSelected() ? (t.preventDefault(), this.selectOption()) : this.preventSubmit && t.preventDefault();
+                    break;
+                case "Tab":
+                    e && this.isOptionSelected() ? this.selectOption() : e && this.closeList()
             }
         },
-        i = function(t) {
-            const i = Object.create(e);
-            return i.init(t), i
-        };
-    "undefined" != typeof module ? module.exports = e : (t.springSpace = t.springSpace || {}, t.springSpace.sui = t.springSpace.sui || {}, t.springSpace.sui.initAutocomplete = t.springSpace.sui.initAutocomplete || i)
+        handleTypingUp: function(t) {
+            switch (t.key) {
+                case "Escape":
+                case "ArrowDown":
+                case "ArrowUp":
+                case "ArrowLeft":
+                case "ArrowRight":
+                case "Enter":
+                case "Tab":
+                    break;
+                default:
+                    this.typedQuery = this.input.value, this.query()
+            }
+        },
+        handleClick: function(t) {
+            const e = t.target.closest("li[aria-selected=false]");
+            null !== e && this.selectByClick(e)
+        },
+        handleOutsideClick: function(t) {
+            const e = t.target;
+            null !== e.closest(`#${this.list.id}`) || null !== e.closest(`#${this.input.id}`) || this.closeList()
+        },
+        attachEvents: function() {
+            this.input.addEventListener("keydown", this.handleTypingDown.bind(this)), this.input.addEventListener("keyup", this.handleTypingUp.bind(this)), this.list.addEventListener("click", this.handleClick.bind(this)), document.body.addEventListener("click", this.handleOutsideClick.bind(this)), this.showAllOnFocus && this.input.addEventListener("focus", (() => {
+                "" === this.input.value && this.query()
+            }))
+        },
+        addInstructions: function() {
+            this.instructions = document.createElement("div"), this.instructions.id = this.getInstructionsId(), this.instructions.setAttribute("aria-live", "polite"), this.instructions.classList.add("sr-only"), this.instructions.innerHTML = this.instructionsText.replace("{{count}}", 0), this.list.parentNode.insertBefore(this.instructions, this.list.nextSibling)
+        },
+        validateConfig: function(t) {
+            if (!t.inputSelector) throw new Error("Must set inputSelector.");
+            if (null === this.input) throw new Error(`${t.inputSelector} not found in the DOM.`);
+            if (!this.queryUrl && 0 === this.staticData.length) throw new Error("Must set queryUrl or staticData.")
+        },
+        setConfig: function(t) {
+            this.input = document.querySelector(t.inputSelector);
+            const e = ["queryUrl", "staticData", "queryProcessor", "dataProcessor", "selectCallback", "resultLimit", "queryData", "instructionsText", "preventSubmit", "listLabel", "showAllOnFocus", "allowEmptySearch"];
+            Object.keys(t).forEach((function(i) {
+                -1 !== e.indexOf(i) && (this[i] = t[i])
+            }), this), this.showAllOnFocus && (this.allowEmptySearch = !0)
+        },
+        init: function(t) {
+            this.setConfig(t), this.validateConfig(t), this.formatInput(), this.createList(), this.addInstructions(), this.attachEvents()
+        }
+    };
+    t.springSpace = t.springSpace || {}, t.springSpace.sui = t.springSpace.sui || {}, t.springSpace.sui.initAutocomplete = t.springSpace.sui.initAutocomplete || function(t) {
+        const i = Object.create(e);
+        return i.init(t), i
+    }
 }(this);
 {
     class t {
@@ -2592,12 +2591,11 @@ class QueryLog {
             init: function(t) {
                 this.id = t.contentId, this.iid = t.iid, this.apiDomain = t.apiDomain, this.groupId = JSON.stringify(t.groupId), this.form = document.querySelector("#s-la-content-search-" + this.id + " form"), this.limit = t.limit ? t.limit : 10, this.enableAutocomplete()
             }
-        },
-        n = function(t) {
-            var e = Object.create(i);
-            return e.init(t), e
         };
-    "undefined" != typeof module ? module.exports = n : (t.springSpace = this.springSpace || {}, t.springSpace.la = this.springSpace.la || {}, t.springSpace.la.initFaqSearchForm = n)
+    t.springSpace = this.springSpace || {}, t.springSpace.la = this.springSpace.la || {}, t.springSpace.la.initFaqSearchForm = function(t) {
+        var e = Object.create(i);
+        return e.init(t), e
+    }
 }(this), "object" != typeof JSON && (JSON = {}),
     function() {
         "use strict";
