@@ -8472,6 +8472,11 @@ button.close {
     display: none
 }
 
+#s-ui-notifyarea:has(.s-ui-notify-success, .s-ui-notify-working) {
+    justify-content: flex-end;
+    align-items: flex-start
+}
+
 .s-ui-notify {
     background-color: rgba(0, 0, 0, .75);
     border-radius: 6px;
@@ -8499,7 +8504,7 @@ button.close {
     align-items: center
 }
 
-.s-ui-notify .btn {
+.s-ui-notify .btn:not(.btn-danger) {
     background: 0 0;
     border: none;
     font-weight: 700
