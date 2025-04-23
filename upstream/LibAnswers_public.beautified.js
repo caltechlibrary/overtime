@@ -1838,8 +1838,8 @@ const faqHit = function(t, e, i) {
             }))
         }))
     },
-    setUpAnswerPage = function(t, e, i) {
-        t <= 0 || (i || faqHit(t, e, 1), loadRelatedFAQs(t), fixMediaZindex(), faqVoteButtons(t))
+    setUpAnswerPage = function(t, e, i, n) {
+        t <= 0 || (i || faqHit(t, e, 1), n && n !== document.referrer && (window.location.href = n), loadRelatedFAQs(t), fixMediaZindex(), faqVoteButtons(t))
     },
     setUpPublicPage = function() {
         const t = new URL(window.location);
