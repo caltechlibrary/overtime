@@ -11609,6 +11609,10 @@ a.btn-confirm>span:last-of-type {
     font-size: 12px
 }
 
+.pagination:empty {
+    display: none
+}
+
 .s-srch-pagination .pagination a {
     font-size: 100% !important
 }
