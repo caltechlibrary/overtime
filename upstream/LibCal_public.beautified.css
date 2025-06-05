@@ -1,5 +1,3 @@
-@charset "UTF-8";
-
 :root {
     --dt-row-selected: 0, 136, 204;
     --dt-row-selected-text: 255, 255, 255;
@@ -93,8 +91,8 @@ table.dataTable thead>tr>th.dt-ordering-asc span.dt-column-order:before {
     position: absolute;
     display: block;
     bottom: 50%;
-    content: "â²";
-    content: "â²" /""
+    content: "\25B2";
+    content: "\25B2" /""
 }
 
 table.dataTable thead>tr>td.dt-orderable-desc span.dt-column-order:after,
@@ -104,20 +102,8 @@ table.dataTable thead>tr>th.dt-ordering-desc span.dt-column-order:after {
     position: absolute;
     display: block;
     top: 50%;
-    content: "â¼";
-    content: "â¼" /""
-}
-
-table.dataTable thead>tr>td.dt-orderable-asc,
-table.dataTable thead>tr>td.dt-orderable-desc,
-table.dataTable thead>tr>td.dt-ordering-asc,
-table.dataTable thead>tr>td.dt-ordering-desc,
-table.dataTable thead>tr>th.dt-orderable-asc,
-table.dataTable thead>tr>th.dt-orderable-desc,
-table.dataTable thead>tr>th.dt-ordering-asc,
-table.dataTable thead>tr>th.dt-ordering-desc {
-    position: relative;
-    padding-right: 30px
+    content: "\25BC";
+    content: "\25BC" /""
 }
 
 table.dataTable thead>tr>td.dt-orderable-asc span.dt-column-order,
@@ -128,11 +114,9 @@ table.dataTable thead>tr>th.dt-orderable-asc span.dt-column-order,
 table.dataTable thead>tr>th.dt-orderable-desc span.dt-column-order,
 table.dataTable thead>tr>th.dt-ordering-asc span.dt-column-order,
 table.dataTable thead>tr>th.dt-ordering-desc span.dt-column-order {
-    position: absolute;
-    right: 12px;
-    top: 0;
-    bottom: 0;
-    width: 12px
+    position: relative;
+    width: 12px;
+    height: 20px
 }
 
 table.dataTable thead>tr>td.dt-orderable-asc span.dt-column-order:after,
@@ -189,6 +173,42 @@ table.dataTable thead>tr>th.sorting_desc_disabled span.dt-column-order:after {
 table.dataTable thead>tr>td:active,
 table.dataTable thead>tr>th:active {
     outline: 0
+}
+
+table.dataTable tfoot>tr>td div.dt-column-footer,
+table.dataTable tfoot>tr>td div.dt-column-header,
+table.dataTable tfoot>tr>th div.dt-column-footer,
+table.dataTable tfoot>tr>th div.dt-column-header,
+table.dataTable thead>tr>td div.dt-column-footer,
+table.dataTable thead>tr>td div.dt-column-header,
+table.dataTable thead>tr>th div.dt-column-footer,
+table.dataTable thead>tr>th div.dt-column-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 4px
+}
+
+table.dataTable tfoot>tr>td div.dt-column-footer span.dt-column-title,
+table.dataTable tfoot>tr>td div.dt-column-header span.dt-column-title,
+table.dataTable tfoot>tr>th div.dt-column-footer span.dt-column-title,
+table.dataTable tfoot>tr>th div.dt-column-header span.dt-column-title,
+table.dataTable thead>tr>td div.dt-column-footer span.dt-column-title,
+table.dataTable thead>tr>td div.dt-column-header span.dt-column-title,
+table.dataTable thead>tr>th div.dt-column-footer span.dt-column-title,
+table.dataTable thead>tr>th div.dt-column-header span.dt-column-title {
+    flex-grow: 1
+}
+
+table.dataTable tfoot>tr>td div.dt-column-footer span.dt-column-title:empty,
+table.dataTable tfoot>tr>td div.dt-column-header span.dt-column-title:empty,
+table.dataTable tfoot>tr>th div.dt-column-footer span.dt-column-title:empty,
+table.dataTable tfoot>tr>th div.dt-column-header span.dt-column-title:empty,
+table.dataTable thead>tr>td div.dt-column-footer span.dt-column-title:empty,
+table.dataTable thead>tr>td div.dt-column-header span.dt-column-title:empty,
+table.dataTable thead>tr>th div.dt-column-footer span.dt-column-title:empty,
+table.dataTable thead>tr>th div.dt-column-header span.dt-column-title:empty {
+    display: none
 }
 
 div.dt-scroll-body>table.dataTable>thead>tr>td,
@@ -304,6 +324,17 @@ table.dataTable th.dt-type-numeric {
     text-align: right
 }
 
+table.dataTable td.dt-type-date div.dt-column-footer,
+table.dataTable td.dt-type-date div.dt-column-header,
+table.dataTable td.dt-type-numeric div.dt-column-footer,
+table.dataTable td.dt-type-numeric div.dt-column-header,
+table.dataTable th.dt-type-date div.dt-column-footer,
+table.dataTable th.dt-type-date div.dt-column-header,
+table.dataTable th.dt-type-numeric div.dt-column-footer,
+table.dataTable th.dt-type-numeric div.dt-column-header {
+    flex-direction: row-reverse
+}
+
 table.dataTable td.dt-left,
 table.dataTable th.dt-left {
     text-align: left
@@ -317,6 +348,13 @@ table.dataTable th.dt-center {
 table.dataTable td.dt-right,
 table.dataTable th.dt-right {
     text-align: right
+}
+
+table.dataTable td.dt-right div.dt-column-footer,
+table.dataTable td.dt-right div.dt-column-header,
+table.dataTable th.dt-right div.dt-column-footer,
+table.dataTable th.dt-right div.dt-column-header {
+    flex-direction: row-reverse
 }
 
 table.dataTable td.dt-justify,
@@ -361,6 +399,17 @@ table.dataTable tfoot th.dt-head-right,
 table.dataTable thead td.dt-head-right,
 table.dataTable thead th.dt-head-right {
     text-align: right
+}
+
+table.dataTable tfoot td.dt-head-right div.dt-column-footer,
+table.dataTable tfoot td.dt-head-right div.dt-column-header,
+table.dataTable tfoot th.dt-head-right div.dt-column-footer,
+table.dataTable tfoot th.dt-head-right div.dt-column-header,
+table.dataTable thead td.dt-head-right div.dt-column-footer,
+table.dataTable thead td.dt-head-right div.dt-column-header,
+table.dataTable thead th.dt-head-right div.dt-column-footer,
+table.dataTable thead th.dt-head-right div.dt-column-header {
+    flex-direction: row-reverse
 }
 
 table.dataTable tfoot td.dt-head-justify,
@@ -527,6 +576,10 @@ div.dt-container div.dt-layout-table>div {
     div.dt-container div.dt-layout-end>:not(:first-child) {
         margin-left: 0
     }
+}
+
+div.dt-container {
+    position: relative
 }
 
 div.dt-container div.dt-layout-row {
@@ -3289,6 +3342,7 @@ h6 small {
 }
 
 .s-lc-pass-closed,
+.s-lc-pass-not-yet-available,
 .s-lc-pass-unavailable {
     cursor: not-allowed
 }
@@ -3332,7 +3386,7 @@ h6 small {
 
 .s-lc-calendar-key {
     margin: 20px auto 50px auto;
-    width: 380px;
+    text-align: center;
     display: inherit
 }
 
