@@ -1409,8 +1409,10 @@ springSpace.util = {}, springSpace.common = {}, springSpace.validation = {}, spr
         elt_id.length > 0 && jQuery("#" + source_id).click((function(e) {
             e.stopPropagation(), jQuery("#" + elt_id).editable("toggle")
         }))
-    }, UI.prototype.initPopOvers = function() {
-        jQuery("[data-toggle='popover']").popover()
+    }, UI.prototype.initPopOvers = function(bs5 = !1) {
+        if (bs5) {
+            [...document.querySelectorAll('[data-bs-toggle="popover"]')].map((el => new bootstrap.Popover(el)))
+        } else jQuery("[data-toggle='popover']").popover()
     }, UI.prototype.initHelpPopOvers = function() {
         jQuery("[data-toggle='help-popover-info']").popover({
             container: "body",
@@ -1830,7 +1832,9 @@ springSpace.util = {}, springSpace.common = {}, springSpace.validation = {}, spr
     }, Validation.prototype.slug_unique = function(config) {
         this.allow_empty = springSpace.Util.setProp(config.allow_empty, !0), this.val = springSpace.Util.setProp(jQuery.trim(config.val), "");
         let friendly_id = springSpace.Util.setProp(jQuery.trim(config.friendly_id), 0),
-            prefix = springSpace.Util.setProp(jQuery.trim(config.prefix), "");
+            prefix = springSpace.Util.setProp(jQuery.trim(config.prefix), ""),
+            obj_id = springSpace.Util.setProp(jQuery.trim(config.obj_id), ""),
+            obj_type = springSpace.Util.setProp(jQuery.trim(config.obj_type), "");
         if (this.allow_empty && "" == this.val) return "";
         let err_msg = "";
         return jQuery.ajax({
@@ -1841,7 +1845,9 @@ springSpace.util = {}, springSpace.common = {}, springSpace.validation = {}, spr
             data: {
                 friendly_id: friendly_id,
                 slug: this.val,
-                prefix: prefix
+                prefix: prefix,
+                obj_id: obj_id,
+                obj_type: obj_type
             },
             success: function(response, textStatus, jqXHR) {
                 err_msg = response.data.err_msg
