@@ -1314,30 +1314,32 @@ var springSpace = springSpace || {};
 springSpace.sui = springSpace.sui || {}, springSpace.sui.filedrop = function(t) {
     if (void 0 === t) return !1;
     if (!t.selector || "" === t.selector) return !1;
-    var e;
+    let e = {
+        max_file_size: "Maximum file size",
+        invalidExtension: "File is not an allowed file type: "
+    };
+    var i;
     if (this.callback = t.callback ? t.callback : function() {}, this.error_callback = t.error_callback ? t.error_callback : function() {}, this.validate = t.validate ? t.validate : function() {
             return !0
-        }, this.max_files = t.max_files ? parseInt(t.max_files, 10) : 0, this.max_upload_size = t.max_upload_size ? parseInt(t.max_upload_size, 10) : 0, this.max_file_size = t.max_file_size ? parseInt(t.max_file_size, 10) : 0, this.batch_files = void 0 !== t.batch_files && !!t.batch_files, this.autoupload = void 0 === t.autoupload || !!t.autoupload, this.translations = t.translations ? t.translations : {
-            max_file_size: "Maximum file size"
-        }, this.allowedMimeTypes = t.allowedMimeTypes ? t.allowedMimeTypes : [], this.isAdvancedUpload = ("draggable" in (e = document.createElement("div")) || "ondragstart" in e && "ondrop" in e) && "FormData" in window && "FileReader" in window, this.$form = jQuery(t.selector), 0 === this.$form.length) return !1;
+        }, this.max_files = t.max_files ? parseInt(t.max_files, 10) : 0, this.max_upload_size = t.max_upload_size ? parseInt(t.max_upload_size, 10) : 0, this.max_file_size = t.max_file_size ? parseInt(t.max_file_size, 10) : 0, this.batch_files = void 0 !== t.batch_files && !!t.batch_files, this.autoupload = void 0 === t.autoupload || !!t.autoupload, this.translations = t.translations ? Object.assign(e, t.translations) : e, this.allowedMimeTypes = t.allowedMimeTypes ? t.allowedMimeTypes : [], this.allowedFileExtensions = t.allowedFileExtensions ? t.allowedFileExtensions : [], this.isAdvancedUpload = ("draggable" in (i = document.createElement("div")) || "ondragstart" in i && "ondrop" in i) && "FormData" in window && "FileReader" in window, this.$form = jQuery(t.selector), 0 === this.$form.length) return !1;
     this.$droparea = this.$form.find(".s-ui-filedrop"), this.droppedFiles = [], this.batchedFiles = [], this.batch = {
         current: 0,
         total: 0
     };
-    var i = this;
+    var n = this;
     if (this.$input = this.$droparea.find('input[type="file"]'), this.$label = this.$droparea.find("label"), this.$submitbutton = this.$form.find('button[type="submit"]'), this.$progress = null, this.showFiles = function() {
             if (0 !== this.$input.length) {
                 var t = this.$droparea[0].querySelector(".s-ui-filedrop-filenames"),
                     e = t.querySelector("ul");
                 if (this.isAdvancedUpload) {
-                    var n = [],
+                    var i = [],
                         s = 0;
                     this.droppedFiles.forEach((function(t) {
                         var e = document.createElement("li");
-                        e.innerText = t.name, n.push(e), s += t.size
-                    })), e.innerHTML = "", 0 === n.length ? t.classList.add("hidden") : (t.classList.remove("hidden"), n.forEach((function(t) {
+                        e.innerText = t.name, i.push(e), s += t.size
+                    })), e.innerHTML = "", 0 === i.length ? t.classList.add("hidden") : (t.classList.remove("hidden"), i.forEach((function(t) {
                         e.appendChild(t)
-                    }))), this.max_files > 0 && n.length > this.max_files && this.showError(i.max_files + " file uploads maximum."), !1 === this.batch_files && this.max_upload_size > 0 && s > this.max_upload_size && this.showError("Files total " + i.bytesToMB(s) + " MB which exceeds the maximum of " + i.bytesToMB(this.max_upload_size) + " MB at a time.")
+                    }))), this.max_files > 0 && i.length > this.max_files && this.showError(n.max_files + " file uploads maximum."), !1 === this.batch_files && this.max_upload_size > 0 && s > this.max_upload_size && this.showError("Files total " + n.bytesToMB(s) + " MB which exceeds the maximum of " + n.bytesToMB(this.max_upload_size) + " MB at a time.")
                 } else {
                     if ("" === this.$input.val()) return t.classList.add("hidden"), void(e.innerHTML = "");
                     t.classList.remove("hidden");
@@ -1346,9 +1348,9 @@ springSpace.sui = springSpace.sui || {}, springSpace.sui.filedrop = function(t) 
                 }
             }
         }, this.reset = function() {
-            i.$form[0].reset(), i.removeError(), i.droppedFiles = [], i.batch.current = 0, i.batch.total = 0, i.stopProgress(), i.showFiles(), i.$input.removeClass("has-focus")
+            n.$form[0].reset(), n.removeError(), n.droppedFiles = [], n.batch.current = 0, n.batch.total = 0, n.stopProgress(), n.showFiles(), n.$input.removeClass("has-focus")
         }, this.clearFiles = function() {
-            i.resetFileInput(), i.droppedFiles = [], i.batch.current = 0, i.batch.total = 0, i.showFiles()
+            n.resetFileInput(), n.droppedFiles = [], n.batch.current = 0, n.batch.total = 0, n.showFiles()
         }, this.resetFileInput = function() {
             if (0 !== this.$input.length) {
                 var t = jQuery("<form>"),
@@ -1392,52 +1394,59 @@ springSpace.sui = springSpace.sui || {}, springSpace.sui.filedrop = function(t) 
         }, this.bytesToMB = function(t) {
             return (parseInt(t, 10) / 1048576).toFixed(1)
         }, this.addFiles = function(t) {
-            if (i.max_files > 0 && i.countFiles() + t.length > i.max_files) return i.showError(i.max_files + " file uploads maximum."), !1;
+            if (n.max_files > 0 && n.countFiles() + t.length > n.max_files) return n.showError(n.max_files + " file uploads maximum."), !1;
             var e = 0;
-            i.droppedFiles.forEach((function(t) {
+            n.droppedFiles.forEach((function(t) {
                 e += t.size
             }));
-            for (var n = [], s = 0; s < t.length; s++) {
+            for (var i = [], s = 0; s < t.length; s++) {
                 var a = t[s];
-                if (i.droppedFiles.length > 0) {
+                if (n.droppedFiles.length > 0) {
                     var r = !1;
-                    if (i.droppedFiles.forEach((function(t) {
+                    if (n.droppedFiles.forEach((function(t) {
                             t.name === a.name && (r = !0)
                         })), r) {
-                        n.push(s);
+                        i.push(s);
                         continue
                     }
                 }
-                this.allowedMimeTypes.length > 0 && -1 === this.allowedMimeTypes.indexOf(a.type) ? (i.showError("File: " + a.name + " is not an allowed file type."), n.push(s)) : i.max_file_size > 0 && a.size > i.max_file_size ? (i.showError("File: " + a.name + " is greater than allowed file size of " + i.bytesToMB(i.max_file_size) + " MB."), n.push(s)) : !1 === i.batch_files && e + a.size > i.max_upload_size ? (i.showError("File: " + a.name + " causes files to go over maximum upload size of " + i.bytesToMB(i.max_upload_size) + " MB at a time."), n.push(s)) : e += a.size
+                if (this.allowedFileExtensions.length > 0) {
+                    let t = a.name.split(".").pop();
+                    if (-1 === this.allowedFileExtensions.indexOf(t)) {
+                        n.showError(this.translations.invalidExtension + a.name), i.push(s);
+                        continue
+                    }
+                }
+                this.allowedMimeTypes.length > 0 && -1 === this.allowedMimeTypes.indexOf(a.type) ? (n.showError("File: " + a.name + " is not an allowed file type."), i.push(s)) : n.max_file_size > 0 && a.size > n.max_file_size ? (n.showError("File: " + a.name + " is greater than allowed file size of " + n.bytesToMB(n.max_file_size) + " MB."), i.push(s)) : !1 === n.batch_files && e + a.size > n.max_upload_size ? (n.showError("File: " + a.name + " causes files to go over maximum upload size of " + n.bytesToMB(n.max_upload_size) + " MB at a time."), i.push(s)) : e += a.size
             }
-            if (!1 === i.batch_files && i.max_upload_size > 0 && e > i.max_upload_size) return i.showError("Files total " + e + " bytes which exceeds the maximum of " + i.bytesToMB(i.max_upload_size) + " MB at a time."), !1;
-            for (var o = 0; o < t.length; o++) - 1 === n.indexOf(o) && i.droppedFiles.push(t[o]);
-            return 0 !== i.droppedFiles.length
+            if (!1 === n.batch_files && n.max_upload_size > 0 && e > n.max_upload_size) return n.showError("Files total " + e + " bytes which exceeds the maximum of " + n.bytesToMB(n.max_upload_size) + " MB at a time."), !1;
+            for (var o = 0; o < t.length; o++) - 1 === i.indexOf(o) && n.droppedFiles.push(t[o]);
+            return 0 !== n.droppedFiles.length
         }, this.batchFiles = function() {
             var t = [],
                 e = [];
             if (!this.batch_files) return t.push(this.droppedFiles), t;
-            var n = 1;
+            var i = 1;
             return t.push([]), e.push(0), this.droppedFiles.forEach((function(s) {
                 var a = !1;
-                if (e.forEach((function(n, r) {
-                        !a && n + s.size < i.max_upload_size && (e[r] = n + s.size, t[r].push(s), a = !0)
+                if (e.forEach((function(i, r) {
+                        !a && i + s.size < n.max_upload_size && (e[r] = i + s.size, t[r].push(s), a = !0)
                     })), !a) {
-                    e.push(0), n++, t.push([]);
-                    var r = n - 1;
+                    e.push(0), i++, t.push([]);
+                    var r = i - 1;
                     e[r] = s.size, t[r].push(s)
                 }
             })), t
         }, this.isLastBatch = function() {
             return this.batch.current >= this.batch.total
         }, this.ajaxUpload = function() {
-            i.$form.find('input[name="batch_current"]').val(i.batch.current);
-            var t = new FormData(i.$form[0]);
-            "function" == typeof t.delete && t.delete(i.$input.attr("name")), i.batchedFiles[i.batch.current - 1].forEach((function(e) {
-                t.append(i.$input.attr("name"), e)
+            n.$form.find('input[name="batch_current"]').val(n.batch.current);
+            var t = new FormData(n.$form[0]);
+            "function" == typeof t.delete && t.delete(n.$input.attr("name")), n.batchedFiles[n.batch.current - 1].forEach((function(e) {
+                t.append(n.$input.attr("name"), e)
             })), jQuery.ajax({
-                url: i.$form.attr("action"),
-                type: i.$form.attr("method"),
+                url: n.$form.attr("action"),
+                type: n.$form.attr("method"),
                 data: t,
                 dataType: "json",
                 cache: !1,
@@ -1445,82 +1454,82 @@ springSpace.sui = springSpace.sui || {}, springSpace.sui.filedrop = function(t) 
                 contentType: !1,
                 processData: !1,
                 beforeSend: function() {
-                    i.countFiles() > 0 && i.startProgress()
+                    n.countFiles() > 0 && n.startProgress()
                 },
                 complete: function() {
-                    i.isLastBatch() ? (i.$form.removeClass("is-uploading"), i.$submitbutton.prop("disabled", !1), i.stopProgress()) : (i.batch.current++, i.ajaxUpload())
+                    n.isLastBatch() ? (n.$form.removeClass("is-uploading"), n.$submitbutton.prop("disabled", !1), n.stopProgress()) : (n.batch.current++, n.ajaxUpload())
                 },
                 success: function(t) {
-                    i.callback(t, i)
+                    n.callback(t, n)
                 },
                 xhr: function() {
                     var t = jQuery.ajaxSettings.xhr();
-                    return i.countFiles() > 0 && (t.upload.onprogress = function(t) {
-                        i.updateProgress(t.loaded, t.total)
+                    return n.countFiles() > 0 && (t.upload.onprogress = function(t) {
+                        n.updateProgress(t.loaded, t.total)
                     }), t
                 }
             }).fail((function(t) {
-                i.error_callback(t, i)
+                n.error_callback(t, n)
             }))
         }, this.isAdvancedUpload && this.$input.length > 0) {
         if (this.$droparea.addClass("has-advanced-upload"), this.batch_files) {
-            var n = jQuery("<input />").attr({
+            var s = jQuery("<input />").attr({
                     type: "hidden",
                     name: "batch_current"
                 }).val("0"),
-                s = jQuery("<input />").attr({
+                a = jQuery("<input />").attr({
                     type: "hidden",
                     name: "batch_total"
                 }).val("0");
-            this.$form.prepend([n, s])
+            this.$form.prepend([s, a])
         }
         this.$droparea.on("drag dragstart dragend dragover dragenter dragleave drop", (function(t) {
             t.preventDefault(), t.stopPropagation()
         })).on("dragover dragenter", (function() {
-            i.$droparea.addClass("is-dragover")
+            n.$droparea.addClass("is-dragover")
         })).on("dragleave dragend drop", (function() {
-            i.$droparea.removeClass("is-dragover")
+            n.$droparea.removeClass("is-dragover")
         })).on("drop", (function(t) {
-            var e = i.addFiles(t.originalEvent.dataTransfer.files);
-            i.showFiles(), !0 === e && i.autoupload && i.$form.submit()
+            var e = n.addFiles(t.originalEvent.dataTransfer.files);
+            n.showFiles(), !0 === e && n.autoupload && n.$form.submit()
         })).on("click", (function(t) {
-            var e = t.target.tagName; - 1 !== ["A", "I", "SPAN", "B", "STRONG", "BUTTON"].indexOf(e) && (jQuery(t.target).closest("a, button").hasClass("s-ui-filedrop-clear") && (i.clearFiles(), i.removeError()))
+            var e = t.target.tagName; - 1 !== ["A", "I", "SPAN", "B", "STRONG", "BUTTON"].indexOf(e) && (jQuery(t.target).closest("a, button").hasClass("s-ui-filedrop-clear") && (n.clearFiles(), n.removeError()))
         }))
     }
     if (this.isAdvancedUpload || (this.$input.remove(), this.$droparea.remove()), this.$input.length > 0 && (this.$input.on("change", (function(t) {
             if (t.target.files) {
-                if (i.isAdvancedUpload) {
-                    var e = i.addFiles(t.target.files);
-                    i.resetFileInput(), !0 === e && i.autoupload && i.$form.submit()
+                if (n.isAdvancedUpload) {
+                    var e = n.addFiles(t.target.files);
+                    n.resetFileInput(), !0 === e && n.autoupload && n.$form.submit()
                 }
-                i.$input.removeClass("has-focus"), i.showFiles()
+                n.$input.removeClass("has-focus"), n.showFiles()
             }
         })).on("focus", (function(t) {
             t.target.classList.add("has-focus")
         })).on("blur", (function(t) {
             t.target.classList.remove("has-focus")
         })), this.translations.max_file_size)) {
-        var a = document.createElement("p");
-        a.innerHTML = this.translations.max_file_size + ": " + this.bytesToMB(this.max_file_size) + " MB", this.$label.append(a)
+        var r = document.createElement("p");
+        r.innerHTML = this.translations.max_file_size + ": " + this.bytesToMB(this.max_file_size) + " MB", this.$label.append(r)
     }
     this.$form.on("submit", (function(t) {
-        if (i.$form.hasClass("is-uploading")) t.preventDefault();
+        if (n.$form.hasClass("is-uploading")) t.preventDefault();
         else {
-            if (i.$form.removeClass("is-error"), i.removeError(), i.max_files > 0 && i.countFiles() > i.max_files) return i.showError(i.max_files + " file uploads maximum."), void t.preventDefault();
-            if (!1 === i.validate(i)) return i.$form.addClass("is-error"), void t.preventDefault();
-            i.$form.addClass("is-uploading"), i.$submitbutton.prop("disabled", !0), i.isAdvancedUpload ? (t.preventDefault(), i.batch.current = 1, i.batchedFiles = i.batchFiles(), i.batch.total = i.batchedFiles.length, i.$form.find('input[name="batch_total"]').val(i.batch.total), i.ajaxUpload()) : (t.preventDefault(), jQuery.ajax({
-                url: i.$form.attr("action"),
-                type: i.$form.attr("method"),
-                data: i.$form.serialize(),
+            if (n.$form.removeClass("is-error"), n.removeError(), n.max_files > 0 && n.countFiles() > n.max_files) return n.showError(n.max_files + " file uploads maximum."), void t.preventDefault();
+            if (!1 === n.validate(n)) return n.$form.addClass("is-error"), void t.preventDefault();
+            n.$form.addClass("is-uploading"), n.$submitbutton.prop("disabled", !0), n.isAdvancedUpload ? (t.preventDefault(), n.batch.current = 1, n.batchedFiles = n.batchFiles(), n.batch.total = n.batchedFiles.length, n.$form.find('input[name="batch_total"]').val(n.batch.total), n.ajaxUpload()) : (t.preventDefault(), jQuery.ajax({
+                url: n.$form.attr("action"),
+                type: n.$form.attr("method"),
+                data: n.$form.serialize(),
                 dataType: "json",
                 complete: function() {
-                    i.$form.removeClass("is-uploading"), i.$submitbutton.prop("disabled", !1)
+                    n.$form.removeClass("is-uploading"), n.$submitbutton.prop("disabled", !1)
                 },
                 success: function(t) {
-                    i.callback(t, i)
+                    n.callback(t, n)
                 }
             }).fail((function(t) {
-                i.error_callback(t, i)
+                n.error_callback(t, n)
             })))
         }
     }))
