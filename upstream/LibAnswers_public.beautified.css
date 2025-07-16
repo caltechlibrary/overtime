@@ -8988,6 +8988,10 @@ li.s-la-faq-listing {
     font-size: 16px
 }
 
+.s-la-faq-listing-q>a {
+    padding: 3px 0
+}
+
 .s-la-faq-listing-meta .metalabel {
     font-weight: 700;
     padding-right: 10px
