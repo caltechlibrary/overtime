@@ -1669,6 +1669,10 @@ h1#s-lc-public-header-title {
     font-weight: 700
 }
 
+.s-lc-section-header:first-of-type {
+    margin-top: 0
+}
+
 .s-lc-color-bars {
     background-image: -webkit-linear-gradient(top, #f5f5f5, #ebebeb);
     background-image: linear-gradient(to bottom, #f5f5f5 0, #ebebeb 100%);
@@ -4926,6 +4930,10 @@ textarea {
 
 .margin-right-med {
     margin-right: 10px
+}
+
+.margin-right-lg {
+    margin-right: 25px
 }
 
 .link-pointer {
