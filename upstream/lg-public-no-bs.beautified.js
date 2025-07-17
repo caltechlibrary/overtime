@@ -1353,7 +1353,8 @@ springSpace.util = {}, springSpace.common = {}, springSpace.validation = {}, spr
             cache: !1,
             data: {
                 action: springSpace.Common.constant.PROCESSING.ACTION_DISPLAY_POLL,
-                content_id: response.data.html.content_id
+                content_id: response.data.html.content_id,
+                bs5: springSpace.Common.isBS5()
             },
             success: function(response, textStatus, jqXHR) {
                 jQuery("#s-lg-content-votes-" + response.data.content_id).html(response.data.content), obj_this.showPoll({
@@ -1380,6 +1381,11 @@ springSpace.util = {}, springSpace.common = {}, springSpace.validation = {}, spr
         })
     }, Common.prototype.showPoll = function(config) {
         return "votes" == config.pane ? (jQuery("#s-lg-content-poll-" + config.elt_id).hide(), jQuery("#s-lg-content-votes-" + config.elt_id).show(), jQuery("#s-lg-show-votes-" + config.elt_id).hide()) : "poll" == config.pane && (jQuery("#s-lg-content-poll-" + config.elt_id).show(), jQuery("#s-lg-content-votes-" + config.elt_id).hide(), jQuery("#s-lg-show-votes-" + config.elt_id).show(), jQuery("#s-lg-show-votes-" + config.elt_id + " button").removeAttr("disabled")), !1
+    }, Common.prototype.isBS5 = function() {
+        return 1 == springSpace.Util.getQSParam({
+            name: "bs5",
+            qs: location.search
+        }) ? 1 : 0
     }, this.Common = Common
 }, springSpace.common._construct(), springSpace.Common = new springSpace.common.Common, springSpace.ui._construct = function() {
     function UI() {
@@ -1413,8 +1419,16 @@ springSpace.util = {}, springSpace.common = {}, springSpace.validation = {}, spr
         if (bs5) {
             [...document.querySelectorAll('[data-bs-toggle="popover"]')].map((el => new bootstrap.Popover(el)))
         } else jQuery("[data-toggle='popover']").popover()
-    }, UI.prototype.initHelpPopOvers = function() {
-        jQuery("[data-toggle='help-popover-info']").popover({
+    }, UI.prototype.initHelpPopOvers = function(bs5 = !1) {
+        bs5 ? document.querySelectorAll('[data-toggle="help-popover-info"]').forEach((el => {
+            new bootstrap.Popover(el, {
+                container: "body",
+                placement: "auto",
+                trigger: "hover focus",
+                html: !0,
+                customClass: "s-lib-help-popover"
+            })
+        })) : jQuery('[data-toggle="help-popover-info"]').popover({
             container: "body",
             placement: "auto right",
             trigger: "hover focus",
@@ -1469,7 +1483,9 @@ springSpace.util = {}, springSpace.common = {}, springSpace.validation = {}, spr
             open: function() {
                 $buttonPane = jQuery(".ui-dialog-buttonset"), $buttonPane.children().addClass("btn").addClass("btn-sm").addClass("btn-default");
                 var first_button = $buttonPane.find("button:first");
-                first_button.attr("id", "s-lib-alert-btn-first"), button_class_ok && first_button.addClass(button_class_ok), $buttonPane.find("button").addClass("margin-right-med"), null !== load_callback && load_callback()
+                first_button.attr("id", "s-lib-alert-btn-first"), button_class_ok && first_button.addClass(button_class_ok);
+                var second_button = $buttonPane.find("button:eq(1)");
+                "Cancel" == second_button.text() && second_button.addClass("btn-light border"), $buttonPane.find("button").addClass("margin-right-med"), null !== load_callback && load_callback()
             },
             resize: function(evt, ui) {
                 jQuery("#s-lib-alert").dialog("option", "position", "center")
