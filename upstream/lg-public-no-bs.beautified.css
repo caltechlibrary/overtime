@@ -2419,7 +2419,7 @@ input.form-control.multiselect-search {
 }
 
 .ui-dialog {
-    z-index: 1001 !important
+    z-index: 2000 !important
 }
 
 div#s-lg-blog-content img {
@@ -2560,6 +2560,11 @@ a:focus {
 
 ul.multiselect-container li label {
     padding-left: 10px
+}
+
+.ui-dialog-content {
+    max-height: 75vh !important;
+    overflow-y: auto !important
 }
 
 .s-ui-helptip {
