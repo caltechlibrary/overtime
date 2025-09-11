@@ -232,7 +232,9 @@ springSpace.public = {}, springSpace.public._construct = function() {
                 springSpace.UI.error(errorThrown)
             }
         })
-    }, Public.prototype.loadAzList = function(config, handle_alpha_filter = !1, lazy_load = !1) {
+    };
+    let searchErrorThrown = "";
+    Public.prototype.loadAzList = function(config, handle_alpha_filter = !1, lazy_load = !1) {
         is_bootstrap || springSpace.UI.notify({
             mode: "load",
             duration: 3e4
@@ -279,8 +281,11 @@ springSpace.public = {}, springSpace.public._construct = function() {
                 sublist_id: springSpace.azList.az_sublist_id,
                 alpha: config.first
             },
-            success: function(response, textStatus) {
-                if (is_bootstrap || springSpace.UI.notifyStop(), history.pushState && 0 == springSpace.azList.is_widget && "back" !== config.action && "init" !== config.action && history.pushState({}, null, location.pathname + encodeURI(current_obj.buildAzQs(config))), springSpace.azList.historyEdited = !0, 200 == response.errCode)
+            complete: function(jqXHR, textStatus) {
+                if (is_bootstrap || springSpace.UI.notifyStop(), "" != searchErrorThrown) return void springSpace.UI.error(searchErrorThrown);
+                history.pushState && 0 == springSpace.azList.is_widget && "back" !== config.action && "init" !== config.action && history.pushState({}, null, location.pathname + encodeURI(current_obj.buildAzQs(config))), springSpace.azList.historyEdited = !0;
+                let response = jqXHR.responseJSON;
+                if (200 == response.errCode)
                     if (lazy_load) jQuery(".lazy-load-link").remove(), jQuery("#s-lg-az-results").append(response.data.html), jQuery("#s-lg-az-content").append(response.data.az_pager_html ?? "");
                     else {
                         jQuery("#s-lg-az-content").html(response.data.html), jQuery("#s-lg-az-content").append(response.data.az_pager_html ?? ""), response.data.az_index_html && jQuery("#s-lg-az-index").html(response.data.az_index_html), response.data.subjects_html && jQuery(".col-subjects").html(response.data.subjects_html), is_bootstrap && jQuery("#s-lg-az-filter-cols .s-lg-sel-subjects").select2({
@@ -307,7 +312,7 @@ springSpace.public = {}, springSpace.public._construct = function() {
                 })), is_bootstrap && (tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]'), tooltipList = [...tooltipTriggerList].map((tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl)))), 1 == springSpace.azList.is_widget && current_obj.transformAzLinks(), is_bootstrap && (current_obj.shortenAZBoxItems("s-lg-az-popular"), current_obj.shortenAZBoxItems("s-lg-az-trials"), current_obj.setReadMoreLink()), jQuery("#s-lg-az-trials-loading").toggle(!1), jQuery("#s-lg-az-trials").toggle(!0), jQuery("#s-lg-az-popular-loading").toggle(!1), jQuery("#s-lg-az-popular").toggle(!0)
             },
             error: function(jqXHR, textStatus, errorThrown) {
-                springSpace.UI.error(errorThrown)
+                searchErrorThrown = errorThrown
             }
         })
     }, Public.prototype.shortenAZBoxItems = function(id) {
@@ -1485,7 +1490,7 @@ springSpace.util = {}, springSpace.common = {}, springSpace.validation = {}, spr
                 var first_button = $buttonPane.find("button:first");
                 first_button.attr("id", "s-lib-alert-btn-first"), button_class_ok && first_button.addClass(button_class_ok);
                 var second_button = $buttonPane.find("button:eq(1)");
-                "Cancel" == second_button.text() && second_button.addClass("btn-light border"), $buttonPane.find("button").addClass("margin-right-med"), null !== load_callback && load_callback()
+                "Cancel" == second_button.text() && second_button.addClass("btn-light border"), $buttonPane.find("button").addClass("margin-right-med"), null !== load_callback && load_callback(), jQuery(this).parent().draggable("option", "containment", "window")
             },
             resize: function(evt, ui) {
                 jQuery("#s-lib-alert").dialog("option", "position", "center")
