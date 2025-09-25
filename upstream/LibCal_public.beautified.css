@@ -1,11 +1,12 @@
 :root {
     --dt-row-selected: 0, 136, 204;
     --dt-row-selected-text: 255, 255, 255;
-    --dt-row-selected-link: 9, 10, 11;
+    --dt-row-selected-link: 228, 228, 228;
     --dt-row-stripe: 0, 0, 0;
     --dt-row-hover: 0, 0, 0;
     --dt-column-ordering: 0, 0, 0;
     --dt-header-align-items: center;
+    --dt-header-vertical-align: middle;
     --dt-html-background: white
 }
 
@@ -164,8 +165,10 @@ table.dataTable thead>tr>th.dt-ordering-desc span.dt-column-order:after {
     opacity: .6
 }
 
+table.dataTable thead>tr>td.dt-orderable-none:not(.dt-ordering-asc, .dt-ordering-desc) span.dt-column-order:empty,
 table.dataTable thead>tr>td.sorting_asc_disabled span.dt-column-order:before,
 table.dataTable thead>tr>td.sorting_desc_disabled span.dt-column-order:after,
+table.dataTable thead>tr>th.dt-orderable-none:not(.dt-ordering-asc, .dt-ordering-desc) span.dt-column-order:empty,
 table.dataTable thead>tr>th.sorting_asc_disabled span.dt-column-order:before,
 table.dataTable thead>tr>th.sorting_desc_disabled span.dt-column-order:after {
     display: none
@@ -392,7 +395,8 @@ table.dataTable tfoot td,
 table.dataTable tfoot th,
 table.dataTable thead td,
 table.dataTable thead th {
-    text-align: left
+    text-align: left;
+    vertical-align: var(--dt-header-vertical-align)
 }
 
 table.dataTable tfoot td.dt-head-left,
@@ -488,10 +492,6 @@ table.dataTable tbody th.dt-body-nowrap {
     white-space: nowrap
 }
 
-:root {
-    --dt-header-align-items: flex-end
-}
-
 table.table.dataTable {
     clear: both;
     margin-top: 0;
@@ -515,7 +515,7 @@ table.table.dataTable>tbody>tr.selected>* {
 }
 
 table.table.dataTable>tbody>tr.selected a {
-    color: #090a0b;
+    color: #e4e4e4;
     color: rgb(var(--dt-row-selected-link))
 }
 
