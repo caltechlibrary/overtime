@@ -144,7 +144,7 @@ function(e, t) {
         var t, n, i = e._d && !isNaN(e._d.getTime());
         return i && (t = v(e), n = Q.call(t.parsedDateParts, function(e) {
             return null != e
-        }), i = t.overflow < 0 && !t.empty && !t.invalidEra && !t.invalidMonth && !t.invalidWeekday && !t.weekdayMismatch && !t.nullInput && !t.invalidFormat && !t.userInvalidated && (!t.meridiem || t.meridiem && n), e._strict) && (i = i && 0 === t.charsLeftOver && 0 === t.unusedTokens.length && void 0 === t.bigHour), null != Object.isFrozen && Object.isFrozen(e) ? i : (e._isValid = i, e._isValid)
+        }), i = t.overflow < 0 && !t.empty && !t.invalidEra && !t.invalidMonth && !t.invalidWeekday && !t.weekdayMismatch && !t.nullInput && !t.invalidFormat && !t.userInvalidated && (!t.meridiem || (t.meridiem, n)), e._strict) && (i = i && 0 === t.charsLeftOver && 0 === t.unusedTokens.length && void 0 === t.bigHour), null != Object.isFrozen && Object.isFrozen(e) ? i : (e._isValid = i, e._isValid)
     }
 
     function H(e) {
@@ -2035,7 +2035,7 @@ function(e, t) {
         return r.join("\n")
     }, e.prototype.renderPartial = function(e, t, n, i) {
         var r, a, s, o, l;
-        if (n) return r = this.getConfigTags(i), null != (a = d(n) ? n(e[1]) : n[e[1]]) ? (s = e[6], l = e[5], e = e[4], o = a, 0 == l && e && (o = this.indentPartial(a, e, s)), l = this.parse(o, r), this.renderTokens(l, t, n, o, i)) : void 0
+        if (n) return r = this.getConfigTags(i), null != (a = d(n) ? n(e[1]) : n[e[1]]) ? (s = e[6], o = e[4], l = a, 0 == e[5] && o && (l = this.indentPartial(a, o, s)), e = this.parse(l, r), this.renderTokens(e, t, n, l, i)) : void 0
     }, e.prototype.unescapedValue = function(e, t) {
         t = t.lookup(e[1]);
         if (null != t) return t
@@ -2148,6 +2148,7 @@ var $tablist = $(".nav-tabs, .nav-pills"),
         modalSizeSmall: 700,
         modalSizeMedium: 880,
         modalSizeLarge: 1100,
+        successLong: 5e3,
         fadeOutDuration: 3e3,
         nbspRegex: new RegExp(String.fromCharCode(160), "g"),
         getDateTimeFormat: function() {
@@ -2446,6 +2447,7 @@ function setupLanguageDropdown() {
 };
 var springyPublic = {
     lastFocusElement: null,
+    onTimezoneChangedFn: null,
     showTimezoneModal: function() {
         return ajaxModal("/timezone/list", 0)
     },
@@ -2472,7 +2474,10 @@ var springyPublic = {
         springyPublic.lastFocusElement = document.activeElement
     },
     restoreLastFocusElement: function() {
-        null !== springyPublic.lastFocusElement && springyPublic.lastFocusElement.focus(), springyPublic.lastFocusElement = null
+        null !== springyPublic.lastFocusElement && springyPublic.lastFocusElement.focus({
+            preventScroll: !0,
+            focusVisible: !0
+        }), springyPublic.lastFocusElement = null
     },
     goToSelectedUrl: function() {
         var e = jQuery(this).val();
@@ -2557,8 +2562,10 @@ function errorAlert(e) {
     return e.attr("role", "alert"), e.attr("aria-live", "assertive"), !1
 }
 
-function successAlert(e) {
-    void 0 !== e && 0 !== e.length || (e = "undefined" == typeof springyText ? "Success." : springyText.messages.success), jQuery.notification(e);
+function successAlert(e, t) {
+    void 0 !== e && 0 !== e.length || (e = "undefined" == typeof springyText ? "Success." : springyText.messages.success), void 0 === t && (t = 2e3), jQuery.notification(e, {
+        duration: t
+    });
     e = $("#jquery-notification");
     e.attr("role", "alert"), e.attr("aria-live", "assertive")
 }
