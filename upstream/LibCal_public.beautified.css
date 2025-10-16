@@ -5504,7 +5504,7 @@ textarea {
 
 .helptt,
 .poptt {
-    color: #ccc;
+    color: #919191;
     cursor: help
 }
 
@@ -5677,4 +5677,12 @@ table.s-lc-export-table th {
 
 div.dt-container div.dt-layout-row {
     margin: .75em -15px
+}
+
+.text-muted {
+    color: #757575
+}
+
+.label-default {
+    background-color: #757575
 }
