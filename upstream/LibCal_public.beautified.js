@@ -2476,7 +2476,7 @@ var springyPublic = {
     restoreLastFocusElement: function() {
         null !== springyPublic.lastFocusElement && springyPublic.lastFocusElement.focus({
             preventScroll: !0,
-            focusVisible: !0
+            focusVisible: !1
         }), springyPublic.lastFocusElement = null
     },
     goToSelectedUrl: function() {
