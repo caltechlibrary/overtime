@@ -3540,7 +3540,7 @@ h6 small {
 }
 
 .s-lc-close-list {
-    margin-bottom: 2px
+    margin-bottom: 3px
 }
 
 @media (max-width:530px) {
@@ -5496,6 +5496,10 @@ textarea {
     border-left: 0
 }
 
+h1.modal-title {
+    font-size: 19px
+}
+
 .modal-footer {
     border-top: 1px solid #eee;
     padding-top: 8px;
@@ -5504,7 +5508,7 @@ textarea {
 
 .helptt,
 .poptt {
-    color: #919191;
+    color: #757575;
     cursor: help
 }
 
