@@ -86,7 +86,7 @@ function(e, t) {
         return Object.prototype.hasOwnProperty.call(e, t)
     }
 
-    function $(e) {
+    function A(e) {
         if (Object.getOwnPropertyNames) return 0 === Object.getOwnPropertyNames(e).length;
         for (var t in e)
             if (h(e, t)) return;
@@ -101,16 +101,16 @@ function(e, t) {
         return "number" == typeof e || "[object Number]" === Object.prototype.toString.call(e)
     }
 
-    function A(e) {
+    function $(e) {
         return e instanceof Date || "[object Date]" === Object.prototype.toString.call(e)
     }
 
-    function W(e, t) {
+    function R(e, t) {
         for (var n = [], i = e.length, r = 0; r < i; ++r) n.push(t(e[r], r));
         return n
     }
 
-    function R(e, t) {
+    function W(e, t) {
         for (var n in t) h(t, n) && (e[n] = t[n]);
         return h(t, "toString") && (e.toString = t.toString), h(t, "valueOf") && (e.valueOf = t.valueOf), e
     }
@@ -149,7 +149,7 @@ function(e, t) {
 
     function H(e) {
         var t = u(NaN);
-        return null != e ? R(v(t), e) : v(t).userInvalidated = !0, t
+        return null != e ? W(v(t), e) : v(t).userInvalidated = !0, t
     }
     var Q = Array.prototype.some || function(e) {
             for (var t = Object(this), n = t.length >>> 0, i = 0; i < n; i++)
@@ -180,7 +180,7 @@ function(e, t) {
 
     function e(a, s) {
         var o = !0;
-        return R(function() {
+        return W(function() {
             if (null != p.deprecationHandler && p.deprecationHandler(null, a), o) {
                 for (var e, t, n = [], i = arguments.length, r = 0; r < i; r++) {
                     if (e = "", "object" == typeof arguments[r]) {
@@ -205,9 +205,9 @@ function(e, t) {
     }
 
     function X(e, t) {
-        var n, i = R({}, e);
-        for (n in t) h(t, n) && (L(e[n]) && L(t[n]) ? (i[n] = {}, R(i[n], e[n]), R(i[n], t[n])) : null != t[n] ? i[n] = t[n] : delete i[n]);
-        for (n in e) h(e, n) && !h(t, n) && L(e[n]) && (i[n] = R({}, i[n]));
+        var n, i = W({}, e);
+        for (n in t) h(t, n) && (L(e[n]) && L(t[n]) ? (i[n] = {}, W(i[n], e[n]), W(i[n], t[n])) : null != t[n] ? i[n] = t[n] : delete i[n]);
+        for (n in e) h(e, n) && !h(t, n) && L(e[n]) && (i[n] = W({}, i[n]));
         return i
     }
 
@@ -510,10 +510,10 @@ function(e, t) {
         null != i ? t[D] = i : v(n).invalidMonth = e
     });
     var Le = "January_February_March_April_May_June_July_August_September_October_November_December".split("_"),
-        $e = "Jan_Feb_Mar_Apr_May_Jun_Jul_Aug_Sep_Oct_Nov_Dec".split("_"),
-        Ae = /D[oD]?(\[[^\[\]]*\]|\s)+MMMM?/,
-        We = r,
-        Re = r;
+        Ae = "Jan_Feb_Mar_Apr_May_Jun_Jul_Aug_Sep_Oct_Nov_Dec".split("_"),
+        $e = /D[oD]?(\[[^\[\]]*\]|\s)+MMMM?/,
+        Re = r,
+        We = r;
 
     function Ie(e, t) {
         if (e.isValid()) {
@@ -700,7 +700,7 @@ function(e, t) {
                 yy: "%d years"
             },
             months: Le,
-            monthsShort: $e,
+            monthsShort: Ae,
             week: {
                 dow: 0,
                 doy: 6
@@ -860,7 +860,7 @@ function(e, t) {
                 if (e <= 999) return 1900 + e
             }
             return e
-        }(e), $e.indexOf(t), parseInt(n, 10), parseInt(i, 10), parseInt(r, 10)];
+        }(e), Ae.indexOf(t), parseInt(n, 10), parseInt(i, 10), parseInt(r, 10)];
         return a && e.push(parseInt(a, 10)), e
     }
 
@@ -905,7 +905,7 @@ function(e, t) {
             nullInput: !0
         });
         if ("string" == typeof r && (e._i = r = e._locale.preparse(r)), w(r)) return new B(pt(r));
-        if (A(r)) e._d = r;
+        if ($(r)) e._d = r;
         else if (g(a)) {
             var s, o, l, u, d, c, h = e,
                 f = !1,
@@ -913,13 +913,13 @@ function(e, t) {
             if (0 === m) v(h).invalidFormat = !0, h._d = new Date(NaN);
             else {
                 for (u = 0; u < m; u++) d = 0, c = !1, s = G({}, h), null != h._useUTC && (s._useUTC = h._useUTC), s._f = h._f[u], Ot(s), I(s) && (c = !0), d = (d += v(s).charsLeftOver) + 10 * v(s).unusedTokens.length, v(s).score = d, f ? d < l && (l = d, o = s) : (null == l || d < l || c) && (l = d, o = s, c) && (f = !0);
-                R(h, o || s)
+                W(h, o || s)
             }
         } else if (a) Ot(e);
         else if (y(a = (r = e)._i)) r._d = new Date(p.now());
-        else A(a) ? r._d = new Date(a.valueOf()) : "string" == typeof a ? (n = r, null !== (t = bt.exec(n._i)) ? n._d = new Date(+t[1]) : (Dt(n), !1 === n._isValid && (delete n._isValid, Mt(n), !1 === n._isValid) && (delete n._isValid, n._strict ? n._isValid = !1 : p.createFromInputFallback(n)))) : g(a) ? (r._a = W(a.slice(0), function(e) {
+        else $(a) ? r._d = new Date(a.valueOf()) : "string" == typeof a ? (n = r, null !== (t = bt.exec(n._i)) ? n._d = new Date(+t[1]) : (Dt(n), !1 === n._isValid && (delete n._isValid, Mt(n), !1 === n._isValid) && (delete n._isValid, n._strict ? n._isValid = !1 : p.createFromInputFallback(n)))) : g(a) ? (r._a = R(a.slice(0), function(e) {
             return parseInt(e, 10)
-        }), Yt(r)) : L(a) ? (t = r)._d || (i = void 0 === (n = le(t._i)).day ? n.date : n.day, t._a = W([n.year, n.month, i, n.hour, n.minute, n.second, n.millisecond], function(e) {
+        }), Yt(r)) : L(a) ? (t = r)._d || (i = void 0 === (n = le(t._i)).day ? n.date : n.day, t._a = R([n.year, n.month, i, n.hour, n.minute, n.second, n.millisecond], function(e) {
             return e && parseInt(e, 10)
         }), Yt(t)) : _(a) ? r._d = new Date(a) : p.createFromInputFallback(r);
         return I(e) || (e._d = null), e
@@ -927,7 +927,7 @@ function(e, t) {
 
     function Ft(e, t, n, i, r) {
         var a = {};
-        return !0 !== t && !1 !== t || (i = t, t = void 0), !0 !== n && !1 !== n || (i = n, n = void 0), (L(e) && $(e) || g(e) && 0 === e.length) && (e = void 0), a._isAMomentObject = !0, a._useUTC = a._isUTC = r, a._l = n, a._i = e, a._f = t, a._strict = i, (r = new B(pt(Ct(r = a))))._nextDay && (r.add(1, "d"), r._nextDay = void 0), r
+        return !0 !== t && !1 !== t || (i = t, t = void 0), !0 !== n && !1 !== n || (i = n, n = void 0), (L(e) && A(e) || g(e) && 0 === e.length) && (e = void 0), a._isAMomentObject = !0, a._useUTC = a._isUTC = r, a._l = n, a._i = e, a._f = t, a._strict = i, (r = new B(pt(Ct(r = a))))._nextDay && (r.add(1, "d"), r._nextDay = void 0), r
     }
 
     function P(e, t, n, i) {
@@ -992,21 +992,21 @@ function(e, t) {
         })
     }
     Lt("Z", ":"), Lt("ZZ", ""), c("Z", ke), c("ZZ", ke), k(["Z", "ZZ"], function(e, t, n) {
-        n._useUTC = !0, n._tzm = At(ke, e)
+        n._useUTC = !0, n._tzm = $t(ke, e)
     });
-    var $t = /([\+\-]|\d\d)/gi;
+    var At = /([\+\-]|\d\d)/gi;
 
-    function At(e, t) {
+    function $t(e, t) {
         var t = (t || "").match(e);
-        return null === t ? null : 0 === (t = 60 * (e = ((t[t.length - 1] || []) + "").match($t) || ["-", 0, 0])[1] + b(e[2])) ? 0 : "+" === e[0] ? t : -t
+        return null === t ? null : 0 === (t = 60 * (e = ((t[t.length - 1] || []) + "").match(At) || ["-", 0, 0])[1] + b(e[2])) ? 0 : "+" === e[0] ? t : -t
     }
 
-    function Wt(e, t) {
+    function Rt(e, t) {
         var n;
-        return t._isUTC ? (t = t.clone(), n = (w(e) || A(e) ? e : P(e)).valueOf() - t.valueOf(), t._d.setTime(t._d.valueOf() + n), p.updateOffset(t, !1), t) : P(e).local()
+        return t._isUTC ? (t = t.clone(), n = (w(e) || $(e) ? e : P(e)).valueOf() - t.valueOf(), t._d.setTime(t._d.valueOf() + n), p.updateOffset(t, !1), t) : P(e).local()
     }
 
-    function Rt(e) {
+    function Wt(e) {
         return -Math.round(e._d.getTimezoneOffset())
     }
 
@@ -1044,7 +1044,7 @@ function(e, t) {
                 milliseconds: 0,
                 months: 0
             };
-            t = Wt(t, e), e.isBefore(t) ? n = Vt(e, t) : ((n = Vt(t, e)).milliseconds = -n.milliseconds, n.months = -n.months);
+            t = Rt(t, e), e.isBefore(t) ? n = Vt(e, t) : ((n = Vt(t, e)).milliseconds = -n.milliseconds, n.months = -n.months);
             return n
         }(P(i.from), P(i.to)), (i = {}).ms = t.milliseconds, i.M = t.months), n = new Et(i), Nt(e) && h(e, "_locale") && (n._locale = e._locale), Nt(e) && h(e, "_isValid") && (n._isValid = e._isValid), n
     }
@@ -1082,7 +1082,7 @@ function(e, t) {
     }
 
     function Zt(e) {
-        return w(e) || A(e) || qt(e) || _(e) || function(t) {
+        return w(e) || $(e) || qt(e) || _(e) || function(t) {
             var e = g(t),
                 n = !1;
             e && (n = 0 === t.filter(function(e) {
@@ -1090,7 +1090,7 @@ function(e, t) {
             }).length);
             return e && n
         }(e) || function(e) {
-            var t, n, i = L(e) && !$(e),
+            var t, n, i = L(e) && !A(e),
                 r = !1,
                 a = ["years", "year", "y", "months", "month", "M", "days", "day", "d", "dates", "date", "D", "hours", "hour", "h", "minutes", "minute", "m", "seconds", "second", "s", "milliseconds", "millisecond", "ms"],
                 s = a.length;
@@ -1212,11 +1212,11 @@ function(e, t) {
     }
     l.add = Le, l.calendar = function(e, t) {
         1 === arguments.length && (arguments[0] ? Zt(arguments[0]) ? (e = arguments[0], t = void 0) : function(e) {
-            for (var t = L(e) && !$(e), n = !1, i = ["sameDay", "nextDay", "lastDay", "nextWeek", "lastWeek", "sameElse"], r = 0; r < i.length; r += 1) n = n || h(e, i[r]);
+            for (var t = L(e) && !A(e), n = !1, i = ["sameDay", "nextDay", "lastDay", "nextWeek", "lastWeek", "sameElse"], r = 0; r < i.length; r += 1) n = n || h(e, i[r]);
             return t && n
         }(arguments[0]) && (t = arguments[0], e = void 0) : t = e = void 0);
         var e = e || P(),
-            n = Wt(e, this).startOf("day"),
+            n = Rt(e, this).startOf("day"),
             n = p.calendarFormat(this, n) || "sameElse",
             t = t && (s(t[n]) ? t[n].call(this, e) : t[n]);
         return this.format(t || this.localeData().calendar(n, this, P(e)))
@@ -1225,7 +1225,7 @@ function(e, t) {
     }, l.diff = function(e, t, n) {
         var i, r, a;
         if (!this.isValid()) return NaN;
-        if (!(i = Wt(e, this)).isValid()) return NaN;
+        if (!(i = Rt(e, this)).isValid()) return NaN;
         switch (r = 6e4 * (i.utcOffset() - this.utcOffset()), t = o(t)) {
             case "year":
                 a = Jt(this, i) / 12;
@@ -1326,7 +1326,7 @@ function(e, t) {
     }, l.isValid = function() {
         return I(this)
     }, l.lang = Ke, l.locale = Xt, l.localeData = Kt, l.max = pe, l.min = me, l.parsingFlags = function() {
-        return R({}, v(this))
+        return W({}, v(this))
     }, l.set = function(e, t) {
         if ("object" == typeof e)
             for (var n = function(e) {
@@ -1479,18 +1479,18 @@ function(e, t) {
     }, l.hour = l.hours = r, l.minute = l.minutes = he, l.second = l.seconds = _e, l.millisecond = l.milliseconds = fe, l.utcOffset = function(e, t, n) {
         var i, r = this._offset || 0;
         if (!this.isValid()) return null != e ? this : NaN;
-        if (null == e) return this._isUTC ? r : Rt(this);
+        if (null == e) return this._isUTC ? r : Wt(this);
         if ("string" == typeof e) {
-            if (null === (e = At(ke, e))) return this
+            if (null === (e = $t(ke, e))) return this
         } else Math.abs(e) < 16 && !n && (e *= 60);
-        return !this._isUTC && t && (i = Rt(this)), this._offset = e, this._isUTC = !0, null != i && this.add(i, "m"), r !== e && (!t || this._changeInProgress ? Bt(this, E(e - r, "m"), 1, !1) : this._changeInProgress || (this._changeInProgress = !0, p.updateOffset(this, !0), this._changeInProgress = null)), this
+        return !this._isUTC && t && (i = Wt(this)), this._offset = e, this._isUTC = !0, null != i && this.add(i, "m"), r !== e && (!t || this._changeInProgress ? Bt(this, E(e - r, "m"), 1, !1) : this._changeInProgress || (this._changeInProgress = !0, p.updateOffset(this, !0), this._changeInProgress = null)), this
     }, l.utc = function(e) {
         return this.utcOffset(0, e)
     }, l.local = function(e) {
-        return this._isUTC && (this.utcOffset(0, e), this._isUTC = !1, e) && this.subtract(Rt(this), "m"), this
+        return this._isUTC && (this.utcOffset(0, e), this._isUTC = !1, e) && this.subtract(Wt(this), "m"), this
     }, l.parseZone = function() {
         var e;
-        return null != this._tzm ? this.utcOffset(this._tzm, !1, !0) : "string" == typeof this._i && (null != (e = At(be, this._i)) ? this.utcOffset(e) : this.utcOffset(0, !0)), this
+        return null != this._tzm ? this.utcOffset(this._tzm, !1, !0) : "string" == typeof this._i && (null != (e = $t(be, this._i)) ? this.utcOffset(e) : this.utcOffset(0, !0)), this
     }, l.hasAlignedHourOffset = function(e) {
         return !!this.isValid() && (e = e ? P(e).utcOffset() : 0, (this.utcOffset() - e) % 60 == 0)
     }, l.isDST = function() {
@@ -1590,9 +1590,9 @@ function(e, t) {
     }, d.erasNarrowRegex = function(e) {
         return h(this, "_erasNarrowRegex") || sn.call(this), e ? this._erasNarrowRegex : this._erasRegex
     }, d.months = function(e, t) {
-        return e ? (g(this._months) ? this._months : this._months[(this._months.isFormat || Ae).test(t) ? "format" : "standalone"])[e.month()] : g(this._months) ? this._months : this._months.standalone
+        return e ? (g(this._months) ? this._months : this._months[(this._months.isFormat || $e).test(t) ? "format" : "standalone"])[e.month()] : g(this._months) ? this._months : this._months.standalone
     }, d.monthsShort = function(e, t) {
-        return e ? (g(this._monthsShort) ? this._monthsShort : this._monthsShort[Ae.test(t) ? "format" : "standalone"])[e.month()] : g(this._monthsShort) ? this._monthsShort : this._monthsShort.standalone
+        return e ? (g(this._monthsShort) ? this._monthsShort : this._monthsShort[$e.test(t) ? "format" : "standalone"])[e.month()] : g(this._monthsShort) ? this._monthsShort : this._monthsShort.standalone
     }, d.monthsParse = function(e, t, n) {
         var i, r;
         if (this._monthsParseExact) return function(e, t, n) {
@@ -1607,9 +1607,9 @@ function(e, t) {
             if (!n && this._monthsParse[i].test(e)) return i
         }
     }, d.monthsRegex = function(e) {
-        return this._monthsParseExact ? (h(this, "_monthsRegex") || Qe.call(this), e ? this._monthsStrictRegex : this._monthsRegex) : (h(this, "_monthsRegex") || (this._monthsRegex = Re), this._monthsStrictRegex && e ? this._monthsStrictRegex : this._monthsRegex)
+        return this._monthsParseExact ? (h(this, "_monthsRegex") || Qe.call(this), e ? this._monthsStrictRegex : this._monthsRegex) : (h(this, "_monthsRegex") || (this._monthsRegex = We), this._monthsStrictRegex && e ? this._monthsStrictRegex : this._monthsRegex)
     }, d.monthsShortRegex = function(e) {
-        return this._monthsParseExact ? (h(this, "_monthsRegex") || Qe.call(this), e ? this._monthsShortStrictRegex : this._monthsShortRegex) : (h(this, "_monthsShortRegex") || (this._monthsShortRegex = We), this._monthsShortStrictRegex && e ? this._monthsShortStrictRegex : this._monthsShortRegex)
+        return this._monthsParseExact ? (h(this, "_monthsRegex") || Qe.call(this), e ? this._monthsShortStrictRegex : this._monthsShortRegex) : (h(this, "_monthsShortRegex") || (this._monthsShortRegex = Re), this._monthsShortStrictRegex && e ? this._monthsShortStrictRegex : this._monthsShortRegex)
     }, d.week = function(e) {
         return qe(e, this._week.dow, this._week.doy).week
     }, d.firstDayOfYear = function() {
@@ -1807,7 +1807,7 @@ function(e, t) {
         return P(1e3 * e)
     }, p.months = function(e, t) {
         return fn(e, t, "months")
-    }, p.isDate = A, p.locale = ft, p.invalid = H, p.duration = E, p.isMoment = w, p.weekdays = function(e, t, n) {
+    }, p.isDate = $, p.locale = ft, p.invalid = H, p.duration = E, p.isMoment = w, p.weekdays = function(e, t, n) {
         return mn(e, t, n, "weekdays")
     }, p.parseZone = function() {
         return P.apply(null, arguments).parseZone()
@@ -1880,7 +1880,7 @@ function(e, t) {
         N = /\s+/,
         U = /\s*=/,
         L = /\s*\}/,
-        $ = /#|\^|\/|>|\{|&|=|!/;
+        A = /#|\^|\/|>|\{|&|=|!/;
 
     function s(e, t) {
         if (!e) return [];
@@ -1904,12 +1904,12 @@ function(e, t) {
             if ("string" == typeof e && (e = e.split(N, 2)), !F(e) || 2 !== e.length) throw new Error("Invalid tags: " + e);
             n = new RegExp(j(e[0]) + "\\s*"), i = new RegExp("\\s*" + j(e[1])), r = new RegExp("\\s*" + j("}" + e[1]))
         }
-        m(t || W.tags);
-        for (var p, g, y, _, v, w, b = new A(e); !b.eos();) {
+        m(t || R.tags);
+        for (var p, g, y, _, v, w, b = new $(e); !b.eos();) {
             if (p = b.pos, y = b.scanUntil(n))
                 for (var k = 0, S = y.length; k < S; ++k) P(_ = y.charAt(k)) ? (l.push(o.length), c += _) : (a = d = !0, c += " "), o.push(["text", _, p, p + 1]), p += 1, "\n" === _ && (f(), c = "", h = 0, a = !1);
             if (!b.scan(n)) break;
-            if (u = !0, g = b.scan($) || "name", b.scan(E), "=" === g ? (y = b.scanUntil(U), b.scan(U), b.scanUntil(i)) : "{" === g ? (y = b.scanUntil(r), b.scan(L), b.scanUntil(i), g = "&") : y = b.scanUntil(i), !b.scan(i)) throw new Error("Unclosed tag at " + b.pos);
+            if (u = !0, g = b.scan(A) || "name", b.scan(E), "=" === g ? (y = b.scanUntil(U), b.scan(U), b.scanUntil(i)) : "{" === g ? (y = b.scanUntil(r), b.scan(L), b.scanUntil(i), g = "&") : y = b.scanUntil(i), !b.scan(i)) throw new Error("Unclosed tag at " + b.pos);
             if (v = ">" == g ? [g, y, p, b.pos, c, h, a] : [g, y, p, b.pos], h++, o.push(v), "#" === g || "^" === g) s.push(v);
             else if ("/" === g) {
                 if (!(w = s.pop())) throw new Error('Unopened section "' + y + '" at ' + p);
@@ -1934,7 +1934,7 @@ function(e, t) {
         return M
     }
 
-    function A(e) {
+    function $(e) {
         this.string = e, this.tail = e, this.pos = 0
     }
 
@@ -1958,12 +1958,12 @@ function(e, t) {
             }
         }
     }
-    A.prototype.eos = function() {
+    $.prototype.eos = function() {
         return "" === this.tail
-    }, A.prototype.scan = function(e) {
+    }, $.prototype.scan = function(e) {
         var e = this.tail.match(e);
         return e && 0 === e.index ? (e = e[0], this.tail = this.tail.substring(e.length), this.pos += e.length, e) : ""
-    }, A.prototype.scanUntil = function(e) {
+    }, $.prototype.scanUntil = function(e) {
         var t, n = this.tail.search(e);
         switch (n) {
             case -1:
@@ -1999,7 +1999,7 @@ function(e, t) {
         void 0 !== this.templateCache && this.templateCache.clear()
     }, e.prototype.parse = function(e, t) {
         var n = this.templateCache,
-            i = e + ":" + (t || W.tags).join(":"),
+            i = e + ":" + (t || R.tags).join(":"),
             r = void 0 !== n,
             a = r ? n.get(i) : void 0;
         return null == a && (a = s(e, t), r) && n.set(i, a), a
@@ -2040,8 +2040,8 @@ function(e, t) {
         t = t.lookup(e[1]);
         if (null != t) return t
     }, e.prototype.escapedValue = function(e, t, n) {
-        n = this.getConfigEscape(n) || W.escape, t = t.lookup(e[1]);
-        if (null != t) return ("number" == typeof t && n === W.escape ? String : n)(t)
+        n = this.getConfigEscape(n) || R.escape, t = t.lookup(e[1]);
+        if (null != t) return ("number" == typeof t && n === R.escape ? String : n)(t)
     }, e.prototype.rawValue = function(e) {
         return e[1]
     }, e.prototype.getConfigTags = function(e) {
@@ -2049,7 +2049,7 @@ function(e, t) {
     }, e.prototype.getConfigEscape = function(e) {
         if (e && "object" == typeof e && !F(e)) return e.escape
     };
-    var W = {
+    var R = {
             name: "mustache.js",
             version: "4.2.0",
             tags: ["{{", "}}"],
@@ -2068,19 +2068,19 @@ function(e, t) {
             }
         },
         o = new e;
-    return W.clearCache = function() {
+    return R.clearCache = function() {
         return o.clearCache()
-    }, W.parse = function(e, t) {
+    }, R.parse = function(e, t) {
         return o.parse(e, t)
-    }, W.render = function(e, t, n, i) {
+    }, R.render = function(e, t, n, i) {
         if ("string" != typeof e) throw new TypeError('Invalid template! Template should be a "string" but "' + (F(r = e) ? "array" : typeof r) + '" was given as the first argument for mustache#render(template, view, partials)');
         var r;
         return o.render(e, t, n, i)
-    }, W.escape = function(e) {
+    }, R.escape = function(e) {
         return String(e).replace(/[&<>"'`=\/]/g, function(e) {
             return r[e]
         })
-    }, W.Scanner = A, W.Context = a, W.Writer = e, W
+    }, R.Scanner = $, R.Context = a, R.Writer = e, R
 });
 var $tablist = $(".nav-tabs, .nav-pills"),
     $lis = $tablist.children("li"),
@@ -2133,11 +2133,9 @@ var $tablist = $(".nav-tabs, .nav-pills"),
         timeFormat: "h:mma",
         dateFormat: "dddd MMM Do",
         dateShortFormat: "ddd MMM Do YYYY",
-        dayOfWeekFormat: "ddd MMM Do",
         locale: "en-us",
         language: "en",
         currency: "USD",
-        currencySymbol: "$",
         defaultTimeFormat: "h:mm A",
         nativeTimeFormat: "HH:mm",
         phpDateFormat: "YYYY-MM-DD",
@@ -2166,7 +2164,11 @@ var $tablist = $(".nav-tabs, .nav-pills"),
             return !1 === t && (n.minimumFractionDigits = 0, n.maximumFractionDigits = 0), Number(e).toLocaleString(this.locale, n).replace(this.nbspRegex, "").replace(this.currency, "")
         },
         formatCurrency: function(e) {
-            return this.currencySymbol + this.formatNumber(e)
+            var t = {
+                style: "currency",
+                currency: this.currency
+            };
+            return Number(e).toLocaleString(this.locale, t)
         },
         formatDateTimePair: function(e, t) {
             var n = springSpace.getDateTimeFormat();
@@ -2211,7 +2213,7 @@ function enableButton(e, t) {
 function ajaxDialog(e, t, n, i, r) {
     r = void 0 !== r ? r : "Save", jQuery("#dialog").remove();
     var a = "s-lc-ajax-modal";
-    return jQuery('<div class="modal fade" id="dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"><div class="modal-dialog"' + (0 == i ? "" : ' style="width:' + i + 'px"') + '><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close">&times;</button><h4 class="modal-title" id="myModalLabel">' + n + '</h4></div><div class="modal-body" id="' + a + '"></div><div class="modal-footer"><button type="button" id="modalbtn" class="btn btn-primary pull-left">' + r + '</button> <button type="button" id="modalbtnc" class="btn btn-default pull-left" data-dismiss="modal">Close</button></div></div></div></div>').appendTo("body"), springyPublic.setLastFocusElement(), jQuery("#" + a).load(e + "?" + t, function() {
+    return jQuery('<div class="modal fade" id="dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"><div class="modal-dialog"' + (0 == i ? "" : ' style="width:' + i + 'px"') + '><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close">&times;</button><h1 class="modal-title" id="myModalLabel">' + n + '</h1></div><div class="modal-body" id="' + a + '"></div><div class="modal-footer"><button type="button" id="modalbtn" class="btn btn-primary pull-left">' + r + '</button> <button type="button" id="modalbtnc" class="btn btn-default pull-left" data-dismiss="modal">Close</button></div></div></div></div>').appendTo("body"), springyPublic.setLastFocusElement(), jQuery("#" + a).load(e + "?" + t, function() {
         jQuery("#dialog").modal(), jQuery("#dialog").on("hidden.bs.modal", function() {
             springyPublic.restoreLastFocusElement()
         })
@@ -2263,7 +2265,7 @@ function setupLanguageDropdown() {
 }(springSpace = springSpace || {}).cookieConsent = springSpace.cookieConsent || {}, springSpace.cookieConsent.alert = function(e) {
     this.setConfig = function(e) {
         var t = (e = void 0 === e ? {} : e).okay || "OK";
-        this.placement_opts = ["bottom", "top"], this.placement = -1 !== this.placement_opts.indexOf(e.placement) ? e.placement : "bottom", this.cookie_name = "springy_cookie_consent", this.cookie_notice_accepted = "ok", this.cookie_exp_days = e.cookie_exp_days || 180, this.read_more_callback = e.read_more_callback || function() {}, this.aria_label = e.aria_label || "User Privacy Alert", this.fade_in = 500, this.fade_out = 200, this.container_id = "s-ui-cc-container", this.close_button_id = "s-ui-cc-close-btn", this.read_more_elt_id = "s-ui-cc-read-more-link", this.consent_message = e.consent_message || "By using our website you are consenting to our use of cookies in accordance with our cookie policy.", this.content = '<div id="' + this.container_id + '" class="container" style="display: none;">    <aside class="navbar navbar-default navbar-fixed-' + this.placement + " fixed-" + this.placement + '" id="s-ui-cc-navbar" aria-label="' + this.aria_label + '">        <div id="s-ui-cc-main" class="container">            <div class="navbar-inner navbar-content-center" id="s-ui-cc-msg-container">                <div id="s-ui-cc-msg">' + this.consent_message + '<button id="' + this.close_button_id + '" type="button" class="btn btn-sm btn-default btn-light" data-dismiss="alert" aria-label="Close">' + t + "</button></div>            </div>        </div>    </aside></div>"
+        this.placement_opts = ["bottom", "top"], this.placement = -1 !== this.placement_opts.indexOf(e.placement) ? e.placement : "bottom", this.cookie_name = "springy_cookie_consent", this.cookie_notice_accepted = "ok", this.cookie_exp_days = e.cookie_exp_days || 180, this.read_more_callback = e.read_more_callback || function() {}, this.aria_label = e.aria_label || "User Privacy Alert", this.fade_in = 500, this.fade_out = 200, this.container_id = "s-ui-cc-container", this.close_button_id = "s-ui-cc-close-btn", this.read_more_elt_id = "s-ui-cc-read-more-link", this.consent_message = e.consent_message || "By using our website you are consenting to our use of cookies in accordance with our cookie policy.", this.content = '<div id="' + this.container_id + '" class="container" style="display: none;">    <aside class="navbar navbar-default navbar-fixed-' + this.placement + " fixed-" + this.placement + '" id="s-ui-cc-navbar" aria-label="' + this.aria_label + '">        <div id="s-ui-cc-main" class="container">            <div class="navbar-inner navbar-content-center" id="s-ui-cc-msg-container">                <div id="s-ui-cc-msg">' + this.consent_message + '<button id="' + this.close_button_id + '" type="button" class="btn btn-sm btn-default btn-light" data-dismiss="alert" aria-label="' + t + '">' + t + "</button></div>            </div>        </div>    </aside></div>"
     }, this.consentCookieAccepted = function() {
         return this.getCookie(this.cookie_name) === this.cookie_notice_accepted
     }, this.setCookie = function(e, t, n) {
@@ -2452,7 +2454,7 @@ var springyPublic = {
         return ajaxModal("/timezone/list", 0)
     },
     createModal: function(e, t) {
-        springyPublic.setLastFocusElement(), jQuery("#dialog").remove(), jQuery('<div class="modal fade" id="dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-describedby="myModalDescription"><div class="modal-dialog"' + t + '><div class="modal-content s-lc-public-modal-content">' + e + "</div></div></div>").appendTo("body").modal().on("hidden.bs.modal", function() {
+        return springyPublic.setLastFocusElement(), jQuery("#dialog").remove(), jQuery('<div class="modal fade" id="dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-describedby="myModalDescription"><div class="modal-dialog"' + t + '><div class="modal-content s-lc-public-modal-content">' + e + "</div></div></div>").appendTo("body").modal().on("hidden.bs.modal", function() {
             springyPublic.restoreLastFocusElement()
         })
     },
@@ -2832,7 +2834,7 @@ var springyCommon = {
     bindAccessibleKeyPress: function(e, t) {
         var n = [13, 32];
         e.off("keypress"), e.on("keypress", function(e) {
-            e = e.keyCode || e.which; - 1 !== n.indexOf(e) && t()
+            e = e.keyCode || e.which; - 1 !== n.indexOf(e) && t(this)
         })
     },
     parseInt: function(e, t) {
