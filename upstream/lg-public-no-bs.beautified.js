@@ -16,7 +16,8 @@ springSpace.public = {}, springSpace.public._construct = function() {
                 owner_id: owner_id,
                 group_id: group_id,
                 num_cols: springSpace.homepage.current_num_cols,
-                search: jQuery("#s-lg-guide-search").val()
+                search: jQuery("#s-lg-guide-search").val(),
+                bs5: is_bootstrap5 ? 1 : 0
             },
             type: "GET",
             dataType: "json",
@@ -372,6 +373,12 @@ springSpace.public = {}, springSpace.public._construct = function() {
             jQuery(this).hasClass("ddd-truncated") && jQuery(this).next(".az-description-view-more").removeClass("d-none")
         })), jQuery(".az-description-view-more-link").off("click").on("click", (function(event) {
             event.preventDefault(), jQuery(this).parent().prev().data("dotdotdot").restore(), jQuery(this).addClass("d-none")
+        }))
+    }, Public.prototype.loadBS5Preview = function(selectors) {
+        jQuery(document).on("click", selectors, (function(event) {
+            event.preventDefault();
+            let href = jQuery(this).attr("href");
+            console.log(href), href.includes("?") ? href.includes("bs5=") || (href += "&bs5=1") : href += "?bs5=1", window.location.href = href
         }))
     }, this.Public = Public
 }, springSpace.public._construct(), jQuery(document).ready((function() {
@@ -1672,6 +1679,35 @@ springSpace.util = {}, springSpace.common = {}, springSpace.validation = {}, spr
                 jQuery(".s-lib-popover").popover("hide")
             })), e.preventDefault()
         })), jQuery(".popclose").on("click", (function(e) {}))
+    }, UI.prototype.xhrPopoverBS5 = function() {
+        var $popoverContent = jQuery('<div id="s-lib-popover-content"></div>');
+        jQuery(".s-lib-popover").popover({
+            container: "body",
+            html: !0,
+            content: function() {
+                var content = "";
+                return jQuery.ajax({
+                    url: jQuery(this).data("ajload"),
+                    type: "get",
+                    dataType: "json",
+                    async: !1,
+                    success: function(response) {
+                        $popoverContent.html(response.data.content), content = $popoverContent.html()
+                    },
+                    error: function() {
+                        $popoverContent.html(""), content = $popoverContent.html()
+                    }
+                }), content
+            }
+        }).on("shown.bs.popover", (function() {
+            var $popover = jQuery(".popover:last");
+            0 === $popover.find(".btn-close").length && $popover.find(".popover-header").append('<button type="button" class="btn-close float-end" aria-label="Close"></button>'), $popover.find(".btn-close").on("click", (function() {
+                jQuery(".s-lib-popover").popover("hide")
+            }))
+        })).on("click", (function(e) {
+            var $this = jQuery(this);
+            jQuery(".s-lib-popover").not($this).popover("hide"), e.preventDefault()
+        }))
     }, UI.prototype.closeXhrPopover = function() {
         jQuery(".s-lib-popover").popover("hide")
     }, UI.prototype.scrollToTop = function(config) {
