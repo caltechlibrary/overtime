@@ -1709,6 +1709,10 @@ select {
     height: 24px
 }
 
+.panel-title {
+    font-weight: 500
+}
+
 .s-lc-header {
     padding: 20px 10px 10px 0
 }
@@ -5689,4 +5693,27 @@ div.dt-container div.dt-layout-row {
 
 .label-default {
     background-color: #757575
+}
+
+@media (min-width:769px) {
+
+    .s-lc-modal-large,
+    .s-lc-modal-medium,
+    .s-lc-modal-small {
+        width: 700px
+    }
+}
+
+@media (min-width:992px) {
+
+    .s-lc-modal-large,
+    .s-lc-modal-medium {
+        width: 880px
+    }
+}
+
+@media (min-width:1200px) {
+    .s-lc-modal-large {
+        width: 1100px
+    }
 }
