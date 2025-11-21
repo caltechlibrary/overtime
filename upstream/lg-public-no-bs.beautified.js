@@ -233,9 +233,7 @@ springSpace.public = {}, springSpace.public._construct = function() {
                 springSpace.UI.error(errorThrown)
             }
         })
-    };
-    let searchErrorThrown = "";
-    Public.prototype.loadAzList = function(config, handle_alpha_filter = !1, lazy_load = !1) {
+    }, Public.prototype.loadAzList = function(config, handle_alpha_filter = !1, lazy_load = !1) {
         is_bootstrap || springSpace.UI.notify({
             mode: "load",
             duration: 3e4
@@ -283,8 +281,7 @@ springSpace.public = {}, springSpace.public._construct = function() {
                 alpha: config.first
             },
             complete: function(jqXHR, textStatus) {
-                if (is_bootstrap || springSpace.UI.notifyStop(), "" != searchErrorThrown) return void springSpace.UI.error(searchErrorThrown);
-                history.pushState && 0 == springSpace.azList.is_widget && "back" !== config.action && "init" !== config.action && history.pushState({}, null, location.pathname + encodeURI(current_obj.buildAzQs(config))), springSpace.azList.historyEdited = !0;
+                is_bootstrap || springSpace.UI.notifyStop(), history.pushState && 0 == springSpace.azList.is_widget && "back" !== config.action && "init" !== config.action && history.pushState({}, null, location.pathname + encodeURI(current_obj.buildAzQs(config))), springSpace.azList.historyEdited = !0;
                 let response = jqXHR.responseJSON;
                 if (200 == response.errCode)
                     if (lazy_load) jQuery(".lazy-load-link").remove(), jQuery("#s-lg-az-results").append(response.data.html), jQuery("#s-lg-az-content").append(response.data.az_pager_html ?? "");
@@ -313,7 +310,7 @@ springSpace.public = {}, springSpace.public._construct = function() {
                 })), is_bootstrap && (tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]'), tooltipList = [...tooltipTriggerList].map((tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl)))), 1 == springSpace.azList.is_widget && current_obj.transformAzLinks(), is_bootstrap && (current_obj.shortenAZBoxItems("s-lg-az-popular"), current_obj.shortenAZBoxItems("s-lg-az-trials"), current_obj.setReadMoreLink()), jQuery("#s-lg-az-trials-loading").toggle(!1), jQuery("#s-lg-az-trials").toggle(!0), jQuery("#s-lg-az-popular-loading").toggle(!1), jQuery("#s-lg-az-popular").toggle(!0)
             },
             error: function(jqXHR, textStatus, errorThrown) {
-                searchErrorThrown = errorThrown
+                springSpace.UI.error(errorThrown)
             }
         })
     }, Public.prototype.shortenAZBoxItems = function(id) {
