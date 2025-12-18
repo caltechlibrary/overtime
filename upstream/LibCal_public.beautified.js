@@ -408,8 +408,8 @@ function(e, t) {
         T = 4,
         Y = 5,
         Ye = 6,
-        Ce = 7,
-        Oe = 8;
+        Oe = 7,
+        Ce = 8;
 
     function Fe(e) {
         return Te(e) ? 366 : 365
@@ -428,7 +428,7 @@ function(e, t) {
     }), p.parseTwoDigitYear = function(e) {
         return b(e) + (68 < b(e) ? 1900 : 2e3)
     };
-    var C, je = Pe("FullYear", !0);
+    var O, je = Pe("FullYear", !0);
 
     function Pe(t, n) {
         return function(e) {
@@ -489,7 +489,7 @@ function(e, t) {
         var n;
         return isNaN(e) || isNaN(t) ? NaN : (n = (t % (n = 12) + n) % n, e += (t - n) / 12, 1 == n ? Te(e) ? 29 : 28 : 31 - n % 7 % 2)
     }
-    C = Array.prototype.indexOf || function(e) {
+    O = Array.prototype.indexOf || function(e) {
         for (var t = 0; t < this.length; ++t)
             if (this[t] === e) return t;
         return -1
@@ -564,13 +564,13 @@ function(e, t) {
     function qe(e, t, n) {
         var i, r, a = Ge(e.year(), t, n),
             a = Math.floor((e.dayOfYear() - a - 1) / 7) + 1;
-        return a < 1 ? i = a + O(r = e.year() - 1, t, n) : a > O(e.year(), t, n) ? (i = a - O(e.year(), t, n), r = e.year() + 1) : (r = e.year(), i = a), {
+        return a < 1 ? i = a + C(r = e.year() - 1, t, n) : a > C(e.year(), t, n) ? (i = a - C(e.year(), t, n), r = e.year() + 1) : (r = e.year(), i = a), {
             week: i,
             year: r
         }
     }
 
-    function O(e, t, n) {
+    function C(e, t, n) {
         var i = Ge(e, t, n),
             t = Ge(e + 1, t, n);
         return (Fe(e) - i + t) / 7
@@ -776,7 +776,7 @@ function(e, t) {
 
     function pt(e) {
         var t = e._a;
-        return t && -2 === v(e).overflow && (t = t[D] < 0 || 11 < t[D] ? D : t[x] < 1 || t[x] > Ue(t[S], t[D]) ? x : t[M] < 0 || 24 < t[M] || 24 === t[M] && (0 !== t[T] || 0 !== t[Y] || 0 !== t[Ye]) ? M : t[T] < 0 || 59 < t[T] ? T : t[Y] < 0 || 59 < t[Y] ? Y : t[Ye] < 0 || 999 < t[Ye] ? Ye : -1, v(e)._overflowDayOfYear && (t < S || x < t) && (t = x), v(e)._overflowWeeks && -1 === t && (t = Ce), v(e)._overflowWeekday && -1 === t && (t = Oe), v(e).overflow = t), e
+        return t && -2 === v(e).overflow && (t = t[D] < 0 || 11 < t[D] ? D : t[x] < 1 || t[x] > Ue(t[S], t[D]) ? x : t[M] < 0 || 24 < t[M] || 24 === t[M] && (0 !== t[T] || 0 !== t[Y] || 0 !== t[Ye]) ? M : t[T] < 0 || 59 < t[T] ? T : t[Y] < 0 || 59 < t[Y] ? Y : t[Ye] < 0 || 999 < t[Ye] ? Ye : -1, v(e)._overflowDayOfYear && (t < S || x < t) && (t = x), v(e)._overflowWeeks && -1 === t && (t = Oe), v(e)._overflowWeekday && -1 === t && (t = Ce), v(e).overflow = t), e
     }
     var gt = /^\s*((?:[+-]\d{6}|\d{4})-(?:\d\d-\d\d|W\d\d-\d|W\d\d|\d\d\d|\d\d))(?:(T| )(\d\d(?::\d\d(?::\d\d(?:[.,]\d+)?)?)?)([+-]\d\d(?::?\d\d)?|\s*Z)?)?$/,
         yt = /^\s*((?:[+-]\d{6}|\d{4})(?:\d\d\d\d|W\d\d\d|W\d\d|\d\d\d|\d\d|))(?:(T| )(\d\d(?:\d\d(?:\d\d(?:[.,]\d+)?)?)?)([+-]\d\d(?::?\d\d)?|\s*Z)?)?$/,
@@ -846,7 +846,7 @@ function(e, t) {
                         if (!_t.exec(l[4])) return void(e._isValid = !1);
                         s = "Z"
                     }
-                    e._f = r + (a || "") + (s || ""), Ct(e)
+                    e._f = r + (a || "") + (s || ""), Ot(e)
                 } else e._isValid = !1
             }
         } else e._isValid = !1
@@ -879,13 +879,13 @@ function(e, t) {
     function Yt(e) {
         var t, n, i, r, a, s, o, l, u, d, c, h = [];
         if (!e._d) {
-            for (i = e, r = new Date(p.now()), n = i._useUTC ? [r.getUTCFullYear(), r.getUTCMonth(), r.getUTCDate()] : [r.getFullYear(), r.getMonth(), r.getDate()], e._w && null == e._a[x] && null == e._a[D] && (null != (r = (i = e)._w).GG || null != r.W || null != r.E ? (l = 1, u = 4, a = Tt(r.GG, i._a[S], qe(P(), 1, 4).year), s = Tt(r.W, 1), ((o = Tt(r.E, 1)) < 1 || 7 < o) && (d = !0)) : (l = i._locale._week.dow, u = i._locale._week.doy, c = qe(P(), l, u), a = Tt(r.gg, i._a[S], c.year), s = Tt(r.w, c.week), null != r.d ? ((o = r.d) < 0 || 6 < o) && (d = !0) : null != r.e ? (o = r.e + l, (r.e < 0 || 6 < r.e) && (d = !0)) : o = l), s < 1 || s > O(a, l, u) ? v(i)._overflowWeeks = !0 : null != d ? v(i)._overflowWeekday = !0 : (c = Be(a, s, o, l, u), i._a[S] = c.year, i._dayOfYear = c.dayOfYear)), null != e._dayOfYear && (r = Tt(e._a[S], n[S]), (e._dayOfYear > Fe(r) || 0 === e._dayOfYear) && (v(e)._overflowDayOfYear = !0), d = Ve(r, 0, e._dayOfYear), e._a[D] = d.getUTCMonth(), e._a[x] = d.getUTCDate()), t = 0; t < 3 && null == e._a[t]; ++t) e._a[t] = h[t] = n[t];
+            for (i = e, r = new Date(p.now()), n = i._useUTC ? [r.getUTCFullYear(), r.getUTCMonth(), r.getUTCDate()] : [r.getFullYear(), r.getMonth(), r.getDate()], e._w && null == e._a[x] && null == e._a[D] && (null != (r = (i = e)._w).GG || null != r.W || null != r.E ? (l = 1, u = 4, a = Tt(r.GG, i._a[S], qe(P(), 1, 4).year), s = Tt(r.W, 1), ((o = Tt(r.E, 1)) < 1 || 7 < o) && (d = !0)) : (l = i._locale._week.dow, u = i._locale._week.doy, c = qe(P(), l, u), a = Tt(r.gg, i._a[S], c.year), s = Tt(r.w, c.week), null != r.d ? ((o = r.d) < 0 || 6 < o) && (d = !0) : null != r.e ? (o = r.e + l, (r.e < 0 || 6 < r.e) && (d = !0)) : o = l), s < 1 || s > C(a, l, u) ? v(i)._overflowWeeks = !0 : null != d ? v(i)._overflowWeekday = !0 : (c = Be(a, s, o, l, u), i._a[S] = c.year, i._dayOfYear = c.dayOfYear)), null != e._dayOfYear && (r = Tt(e._a[S], n[S]), (e._dayOfYear > Fe(r) || 0 === e._dayOfYear) && (v(e)._overflowDayOfYear = !0), d = Ve(r, 0, e._dayOfYear), e._a[D] = d.getUTCMonth(), e._a[x] = d.getUTCDate()), t = 0; t < 3 && null == e._a[t]; ++t) e._a[t] = h[t] = n[t];
             for (; t < 7; t++) e._a[t] = h[t] = null == e._a[t] ? 2 === t ? 1 : 0 : e._a[t];
             24 === e._a[M] && 0 === e._a[T] && 0 === e._a[Y] && 0 === e._a[Ye] && (e._nextDay = !0, e._a[M] = 0), e._d = (e._useUTC ? Ve : ze).apply(null, h), a = e._useUTC ? e._d.getUTCDay() : e._d.getDay(), null != e._tzm && e._d.setUTCMinutes(e._d.getUTCMinutes() - e._tzm), e._nextDay && (e._a[M] = 24), e._w && void 0 !== e._w.d && e._w.d !== a && (v(e).weekdayMismatch = !0)
         }
     }
 
-    function Ct(e) {
+    function Ot(e) {
         if (e._f === p.ISO_8601) Dt(e);
         else if (e._f === p.RFC_2822) Mt(e);
         else {
@@ -898,7 +898,7 @@ function(e, t) {
         }
     }
 
-    function Ot(e) {
+    function Ct(e) {
         var t, n, i, r = e._i,
             a = e._f;
         if (e._locale = e._locale || j(e._l), null === r || void 0 === a && "" === r) return H({
@@ -912,10 +912,10 @@ function(e, t) {
                 m = h._f.length;
             if (0 === m) v(h).invalidFormat = !0, h._d = new Date(NaN);
             else {
-                for (u = 0; u < m; u++) d = 0, c = !1, s = G({}, h), null != h._useUTC && (s._useUTC = h._useUTC), s._f = h._f[u], Ct(s), I(s) && (c = !0), d = (d += v(s).charsLeftOver) + 10 * v(s).unusedTokens.length, v(s).score = d, f ? d < l && (l = d, o = s) : (null == l || d < l || c) && (l = d, o = s, c) && (f = !0);
+                for (u = 0; u < m; u++) d = 0, c = !1, s = G({}, h), null != h._useUTC && (s._useUTC = h._useUTC), s._f = h._f[u], Ot(s), I(s) && (c = !0), d = (d += v(s).charsLeftOver) + 10 * v(s).unusedTokens.length, v(s).score = d, f ? d < l && (l = d, o = s) : (null == l || d < l || c) && (l = d, o = s, c) && (f = !0);
                 W(h, o || s)
             }
-        } else if (a) Ct(e);
+        } else if (a) Ot(e);
         else if (y(a = (r = e)._i)) r._d = new Date(p.now());
         else $(a) ? r._d = new Date(a.valueOf()) : "string" == typeof a ? (n = r, null !== (t = bt.exec(n._i)) ? n._d = new Date(+t[1]) : (Dt(n), !1 === n._isValid && (delete n._isValid, Mt(n), !1 === n._isValid) && (delete n._isValid, n._strict ? n._isValid = !1 : p.createFromInputFallback(n)))) : g(a) ? (r._a = R(a.slice(0), function(e) {
             return parseInt(e, 10)
@@ -927,7 +927,7 @@ function(e, t) {
 
     function Ft(e, t, n, i, r) {
         var a = {};
-        return !0 !== t && !1 !== t || (i = t, t = void 0), !0 !== n && !1 !== n || (i = n, n = void 0), (L(e) && A(e) || g(e) && 0 === e.length) && (e = void 0), a._isAMomentObject = !0, a._useUTC = a._isUTC = r, a._l = n, a._i = e, a._f = t, a._strict = i, (r = new B(pt(Ot(r = a))))._nextDay && (r.add(1, "d"), r._nextDay = void 0), r
+        return !0 !== t && !1 !== t || (i = t, t = void 0), !0 !== n && !1 !== n || (i = n, n = void 0), (L(e) && A(e) || g(e) && 0 === e.length) && (e = void 0), a._isAMomentObject = !0, a._useUTC = a._isUTC = r, a._l = n, a._i = e, a._f = t, a._strict = i, (r = new B(pt(Ct(r = a))))._nextDay && (r.add(1, "d"), r._nextDay = void 0), r
     }
 
     function P(e, t, n, i) {
@@ -967,7 +967,7 @@ function(e, t) {
             var t, n, i = !1,
                 r = Pt.length;
             for (t in e)
-                if (h(e, t) && (-1 === C.call(Pt, t) || null != e[t] && isNaN(e[t]))) return !1;
+                if (h(e, t) && (-1 === O.call(Pt, t) || null != e[t] && isNaN(e[t]))) return !1;
             for (n = 0; n < r; ++n)
                 if (e[Pt[n]]) {
                     if (i) return !1;
@@ -1144,7 +1144,7 @@ function(e, t) {
 
     function ln(e, t, n, i, r) {
         var a;
-        return null == e ? qe(this, i, r).year : (a = O(e, i, r), function(e, t, n, i, r) {
+        return null == e ? qe(this, i, r).year : (a = C(e, i, r), function(e, t, n, i, r) {
             e = Be(e, t, n, i, r), t = Ve(e.year, 0, e.dayOfYear);
             return this.year(t.getUTCFullYear()), this.month(t.getUTCMonth()), this.date(t.getUTCDate()), this
         }.call(this, e, t = a < t ? a : t, n, i, r))
@@ -1456,14 +1456,14 @@ function(e, t) {
         return null == e ? t : this.add(7 * (e - t), "d")
     }, l.weeksInYear = function() {
         var e = this.localeData()._week;
-        return O(this.year(), e.dow, e.doy)
+        return C(this.year(), e.dow, e.doy)
     }, l.weeksInWeekYear = function() {
         var e = this.localeData()._week;
-        return O(this.weekYear(), e.dow, e.doy)
+        return C(this.weekYear(), e.dow, e.doy)
     }, l.isoWeeksInYear = function() {
-        return O(this.year(), 1, 4)
+        return C(this.year(), 1, 4)
     }, l.isoWeeksInISOWeekYear = function() {
-        return O(this.isoWeekYear(), 1, 4)
+        return C(this.isoWeekYear(), 1, 4)
     }, l.date = ye, l.day = l.days = function(e) {
         var t, n, i;
         return this.isValid() ? (t = Ee(this, "Day"), null != e ? (n = e, i = this.localeData(), e = "string" != typeof n ? n : isNaN(n) ? "number" == typeof(n = i.weekdaysParse(n)) ? n : null : parseInt(n, 10), this.add(e - t, "d")) : t) : null != e ? this : NaN
@@ -1507,7 +1507,7 @@ function(e, t) {
         return null != e ? (this.utcOffset(e = "string" != typeof e ? -e : e, t), this) : -this.utcOffset()
     }), l.isDSTShifted = e("isDSTShifted is deprecated. See http://momentjs.com/guides/#/warnings/dst-shifted/ for more information", function() {
         var e, t;
-        return y(this._isDSTShifted) && (G(e = {}, this), (e = Ot(e))._a ? (t = (e._isUTC ? u : P)(e._a), this._isDSTShifted = this.isValid() && 0 < function(e, t, n) {
+        return y(this._isDSTShifted) && (G(e = {}, this), (e = Ct(e))._a ? (t = (e._isUTC ? u : P)(e._a), this._isDSTShifted = this.isValid() && 0 < function(e, t, n) {
             for (var i = Math.min(e.length, t.length), r = Math.abs(e.length - t.length), a = 0, s = 0; s < i; s++)(n && e[s] !== t[s] || !n && b(e[s]) !== b(t[s])) && a++;
             return a + r
         }(e._a, t.toArray())) : this._isDSTShifted = !1), this._isDSTShifted
@@ -1599,7 +1599,7 @@ function(e, t) {
             var i, r, a, e = e.toLocaleLowerCase();
             if (!this._monthsParse)
                 for (this._monthsParse = [], this._longMonthsParse = [], this._shortMonthsParse = [], i = 0; i < 12; ++i) a = u([2e3, i]), this._shortMonthsParse[i] = this.monthsShort(a, "").toLocaleLowerCase(), this._longMonthsParse[i] = this.months(a, "").toLocaleLowerCase();
-            return n ? "MMM" === t ? -1 !== (r = C.call(this._shortMonthsParse, e)) ? r : null : -1 !== (r = C.call(this._longMonthsParse, e)) ? r : null : "MMM" === t ? -1 !== (r = C.call(this._shortMonthsParse, e)) || -1 !== (r = C.call(this._longMonthsParse, e)) ? r : null : -1 !== (r = C.call(this._longMonthsParse, e)) || -1 !== (r = C.call(this._shortMonthsParse, e)) ? r : null
+            return n ? "MMM" === t ? -1 !== (r = O.call(this._shortMonthsParse, e)) ? r : null : -1 !== (r = O.call(this._longMonthsParse, e)) ? r : null : "MMM" === t ? -1 !== (r = O.call(this._shortMonthsParse, e)) || -1 !== (r = O.call(this._longMonthsParse, e)) ? r : null : -1 !== (r = O.call(this._longMonthsParse, e)) || -1 !== (r = O.call(this._shortMonthsParse, e)) ? r : null
         }.call(this, e, t, n);
         for (this._monthsParse || (this._monthsParse = [], this._longMonthsParse = [], this._shortMonthsParse = []), i = 0; i < 12; i++) {
             if (r = u([2e3, i]), n && !this._longMonthsParse[i] && (this._longMonthsParse[i] = new RegExp("^" + this.months(r, "").replace(".", "") + "$", "i"), this._shortMonthsParse[i] = new RegExp("^" + this.monthsShort(r, "").replace(".", "") + "$", "i")), n || this._monthsParse[i] || (r = "^" + this.months(r, "") + "|^" + this.monthsShort(r, ""), this._monthsParse[i] = new RegExp(r.replace(".", ""), "i")), n && "MMMM" === t && this._longMonthsParse[i].test(e)) return i;
@@ -1628,7 +1628,7 @@ function(e, t) {
             var i, r, a, e = e.toLocaleLowerCase();
             if (!this._weekdaysParse)
                 for (this._weekdaysParse = [], this._shortWeekdaysParse = [], this._minWeekdaysParse = [], i = 0; i < 7; ++i) a = u([2e3, 1]).day(i), this._minWeekdaysParse[i] = this.weekdaysMin(a, "").toLocaleLowerCase(), this._shortWeekdaysParse[i] = this.weekdaysShort(a, "").toLocaleLowerCase(), this._weekdaysParse[i] = this.weekdays(a, "").toLocaleLowerCase();
-            return n ? "dddd" === t ? -1 !== (r = C.call(this._weekdaysParse, e)) ? r : null : "ddd" === t ? -1 !== (r = C.call(this._shortWeekdaysParse, e)) ? r : null : -1 !== (r = C.call(this._minWeekdaysParse, e)) ? r : null : "dddd" === t ? -1 !== (r = C.call(this._weekdaysParse, e)) || -1 !== (r = C.call(this._shortWeekdaysParse, e)) || -1 !== (r = C.call(this._minWeekdaysParse, e)) ? r : null : "ddd" === t ? -1 !== (r = C.call(this._shortWeekdaysParse, e)) || -1 !== (r = C.call(this._weekdaysParse, e)) || -1 !== (r = C.call(this._minWeekdaysParse, e)) ? r : null : -1 !== (r = C.call(this._minWeekdaysParse, e)) || -1 !== (r = C.call(this._weekdaysParse, e)) || -1 !== (r = C.call(this._shortWeekdaysParse, e)) ? r : null
+            return n ? "dddd" === t ? -1 !== (r = O.call(this._weekdaysParse, e)) ? r : null : "ddd" === t ? -1 !== (r = O.call(this._shortWeekdaysParse, e)) ? r : null : -1 !== (r = O.call(this._minWeekdaysParse, e)) ? r : null : "dddd" === t ? -1 !== (r = O.call(this._weekdaysParse, e)) || -1 !== (r = O.call(this._shortWeekdaysParse, e)) || -1 !== (r = O.call(this._minWeekdaysParse, e)) ? r : null : "ddd" === t ? -1 !== (r = O.call(this._shortWeekdaysParse, e)) || -1 !== (r = O.call(this._weekdaysParse, e)) || -1 !== (r = O.call(this._minWeekdaysParse, e)) ? r : null : -1 !== (r = O.call(this._minWeekdaysParse, e)) || -1 !== (r = O.call(this._weekdaysParse, e)) || -1 !== (r = O.call(this._shortWeekdaysParse, e)) ? r : null
         }.call(this, e, t, n);
         for (this._weekdaysParse || (this._weekdaysParse = [], this._minWeekdaysParse = [], this._shortWeekdaysParse = [], this._fullWeekdaysParse = []), i = 0; i < 7; i++) {
             if (r = u([2e3, 1]).day(i), n && !this._fullWeekdaysParse[i] && (this._fullWeekdaysParse[i] = new RegExp("^" + this.weekdays(r, "").replace(".", "\\.?") + "$", "i"), this._shortWeekdaysParse[i] = new RegExp("^" + this.weekdaysShort(r, "").replace(".", "\\.?") + "$", "i"), this._minWeekdaysParse[i] = new RegExp("^" + this.weekdaysMin(r, "").replace(".", "\\.?") + "$", "i")), this._weekdaysParse[i] || (r = "^" + this.weekdays(r, "") + "|^" + this.weekdaysShort(r, "") + "|^" + this.weekdaysMin(r, ""), this._weekdaysParse[i] = new RegExp(r.replace(".", ""), "i")), n && "dddd" === t && this._fullWeekdaysParse[i].test(e)) return i;
@@ -1738,7 +1738,7 @@ function(e, t) {
         return (0 < e) - (e < 0) || +e
     }
 
-    function Cn() {
+    function On() {
         var e, t, n, i, r, a, s, o, l, u, d;
         return this.isValid() ? (e = Tn(this._milliseconds) / 1e3, t = Tn(this._days), n = Tn(this._months), (o = this.asSeconds()) ? (i = m(e / 60), r = m(i / 60), e %= 60, i %= 60, a = m(n / 12), n %= 12, s = e ? e.toFixed(3).replace(/\.?0+$/, "") : "", l = Yn(this._months) !== Yn(o) ? "-" : "", u = Yn(this._days) !== Yn(o) ? "-" : "", d = Yn(this._milliseconds) !== Yn(o) ? "-" : "", (o < 0 ? "-" : "") + "P" + (a ? l + a + "Y" : "") + (n ? l + n + "M" : "") + (t ? u + t + "D" : "") + (r || i || e ? "T" : "") + (r ? d + r + "H" : "") + (i ? d + i + "M" : "") + (e ? d + s + "S" : "")) : "P0D") : this.localeData().invalidDate()
     }
@@ -1793,7 +1793,7 @@ function(e, t) {
     }, N.months = kn, N.years = Sn, N.humanize = function(e, t) {
         var n, i;
         return this.isValid() ? (n = !1, i = xn, "object" == typeof e && (t = e, e = !1), "boolean" == typeof e && (n = e), "object" == typeof t && (i = Object.assign({}, xn, t), null != t.s) && null == t.ss && (i.ss = t.s - 1), e = this.localeData(), t = Mn(this, !n, i, e), n && (t = e.pastFuture(+this, t)), e.postformat(t)) : this.localeData().invalidDate()
-    }, N.toISOString = Cn, N.toString = Cn, N.toJSON = Cn, N.locale = Xt, N.localeData = Kt, N.toIsoString = e("toIsoString() is deprecated. Please use toISOString() instead (notice the capitals)", Cn), N.lang = Ke, i("X", 0, 0, "unix"), i("x", 0, 0, "valueOf"), c("x", we), c("X", /[+-]?\d+(\.\d{1,3})?/), k("X", function(e, t, n) {
+    }, N.toISOString = On, N.toString = On, N.toJSON = On, N.locale = Xt, N.localeData = Kt, N.toIsoString = e("toIsoString() is deprecated. Please use toISOString() instead (notice the capitals)", On), N.lang = Ke, i("X", 0, 0, "unix"), i("x", 0, 0, "valueOf"), c("x", we), c("X", /[+-]?\d+(\.\d{1,3})?/), k("X", function(e, t, n) {
         n._d = new Date(1e3 * parseFloat(e))
     }), k("x", function(e, t, n) {
         n._d = new Date(b(e))
@@ -1920,7 +1920,7 @@ function(e, t) {
         for (var D, x = function(e) {
                 for (var t, n, i = [], r = 0, a = e.length; r < a; ++r)(t = e[r]) && ("text" === t[0] && n && "text" === n[0] ? (n[1] += t[1], n[3] = t[3]) : (i.push(t), n = t));
                 return i
-            }(o), M = [], T = M, Y = [], C = 0, O = x.length; C < O; ++C) switch ((D = x[C])[0]) {
+            }(o), M = [], T = M, Y = [], O = 0, C = x.length; O < C; ++O) switch ((D = x[O])[0]) {
             case "#":
             case "^":
                 T.push(D), Y.push(D), T = D[4] = [];
@@ -2263,7 +2263,7 @@ function setupLanguageDropdown() {
 }(springSpace = springSpace || {}).cookieConsent = springSpace.cookieConsent || {}, springSpace.cookieConsent.alert = function(e) {
     this.setConfig = function(e) {
         var t = (e = void 0 === e ? {} : e).okay || "OK";
-        this.placement_opts = ["bottom", "top"], this.placement = -1 !== this.placement_opts.indexOf(e.placement) ? e.placement : "bottom", this.cookie_name = "springy_cookie_consent", this.cookie_notice_accepted = "ok", this.cookie_exp_days = e.cookie_exp_days || 180, this.read_more_callback = e.read_more_callback || function() {}, this.aria_label = e.aria_label || "User Privacy Alert", this.fade_in = 500, this.fade_out = 200, this.container_id = "s-ui-cc-container", this.close_button_id = "s-ui-cc-close-btn", this.read_more_elt_id = "s-ui-cc-read-more-link", this.consent_message = e.consent_message || "By using our website you are consenting to our use of cookies in accordance with our cookie policy.", this.content = '<div id="' + this.container_id + '" class="container" style="display: none;">    <aside class="navbar navbar-default navbar-fixed-' + this.placement + " fixed-" + this.placement + '" id="s-ui-cc-navbar" aria-label="' + this.aria_label + '">        <div id="s-ui-cc-main" class="container">            <div class="navbar-inner navbar-content-center" id="s-ui-cc-msg-container">                <div id="s-ui-cc-msg">' + this.consent_message + '<button id="' + this.close_button_id + '" type="button" class="btn btn-sm btn-default btn-light" data-dismiss="alert" aria-label="' + t + '">' + t + "</button></div>            </div>        </div>    </aside></div>"
+        this.placement_opts = ["bottom", "top"], this.placement = -1 !== this.placement_opts.indexOf(e.placement) ? e.placement : "bottom", this.cookie_name = "springy_cookie_consent", this.cookie_notice_accepted = "ok", this.cookie_exp_days = e.cookie_exp_days || 180, this.read_more_callback = e.read_more_callback || function() {}, this.aria_label = e.aria_label || "User Privacy Alert", this.fade_in = 500, this.fade_out = 200, this.container_id = "s-ui-cc-container", this.close_button_id = "s-ui-cc-close-btn", this.read_more_elt_id = "s-ui-cc-read-more-link", this.consent_message = e.consent_message || "By using our website you are consenting to our use of cookies in accordance with our cookie policy.", this.content = '<div id="' + this.container_id + '" class="container" style="display: none;">    <aside class="navbar navbar-default navbar-fixed-' + this.placement + " fixed-" + this.placement + '" id="s-ui-cc-navbar" aria-label="' + this.aria_label + '">        <div id="s-ui-cc-main" class="container">            <div class="navbar-inner navbar-content-center" id="s-ui-cc-msg-container">                <div id="s-ui-cc-msg">' + this.consent_message + '<button id="' + this.close_button_id + '" type="button" class="btn btn-sm btn-default btn-light" data-dismiss="alert">' + t + "</button></div>            </div>        </div>    </aside></div>"
     }, this.consentCookieAccepted = function() {
         return this.getCookie(this.cookie_name) === this.cookie_notice_accepted
     }, this.setCookie = function(e, t, n) {
@@ -2834,9 +2834,9 @@ var springyCommon = {
         return e.replace(" ", "<br>").replace("\n", "<br>")
     },
     bindAccessibleKeyPress: function(e, t) {
-        var n = [13, 32];
-        e.off("keypress"), e.on("keypress", function(e) {
-            e = e.keyCode || e.which; - 1 !== n.indexOf(e) && t(this)
+        var n = ["Enter", " ", "Space", "Spacebar"];
+        e.off("keydown"), e.on("keydown", function(e) {
+            e = e.key || e.code || 0; - 1 !== n.indexOf(e) && t(this)
         })
     },
     parseInt: function(e, t) {
@@ -2924,5 +2924,8 @@ var springyCommon = {
     },
     getTrimmedValue: function(e) {
         return (jQuery(e).val() || "").trim()
+    },
+    focusOnElement: function(e) {
+        null !== e && e.focus()
     }
 };
