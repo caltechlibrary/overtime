@@ -31,11 +31,11 @@ function(t) {
     };
     var n = t.fn.alert;
     t.fn.alert = function(e) {
-        return this.each((function() {
+        return this.each(function() {
             var n = t(this),
                 s = n.data("bs.alert");
             s || n.data("bs.alert", s = new i(this)), "string" == typeof e && s[e].call(n)
-        }))
+        })
     }, t.fn.alert.Constructor = i, t.fn.alert.noConflict = function() {
         return t.fn.alert = n, this
     }, t(document).on("click.bs.alert.data-api", e, i.prototype.close)
@@ -55,14 +55,14 @@ function(t) {
     }
 
     function s(i) {
-        i && 3 === i.which || (t(".dropdown-backdrop").remove(), t(e).each((function() {
+        i && 3 === i.which || (t(".dropdown-backdrop").remove(), t(e).each(function() {
             var e = t(this),
                 s = n(e),
                 a = {
                     relatedTarget: this
                 };
             s.hasClass("open") && (i && "click" == i.type && /input|textarea/i.test(i.target.tagName) && t.contains(s[0], i.target) || (s.trigger(i = t.Event("hide.bs.dropdown", a)), i.isDefaultPrevented() || (e.attr("aria-expanded", "false"), s.removeClass("open").trigger(t.Event("hidden.bs.dropdown", a)))))
-        })))
+        }))
     }
     i.VERSION = "3.4.1", i.prototype.toggle = function(e) {
         var i = t(this);
@@ -96,32 +96,32 @@ function(t) {
     };
     var a = t.fn.dropdown;
     t.fn.dropdown = function(e) {
-        return this.each((function() {
+        return this.each(function() {
             var n = t(this),
                 s = n.data("bs.dropdown");
             s || n.data("bs.dropdown", s = new i(this)), "string" == typeof e && s[e].call(n)
-        }))
+        })
     }, t.fn.dropdown.Constructor = i, t.fn.dropdown.noConflict = function() {
         return t.fn.dropdown = a, this
-    }, t(document).on("click.bs.dropdown.data-api", s).on("click.bs.dropdown.data-api", ".dropdown form", (function(t) {
+    }, t(document).on("click.bs.dropdown.data-api", s).on("click.bs.dropdown.data-api", ".dropdown form", function(t) {
         t.stopPropagation()
-    })).on("click.bs.dropdown.data-api", e, i.prototype.toggle).on("keydown.bs.dropdown.data-api", e, i.prototype.keydown).on("keydown.bs.dropdown.data-api", ".dropdown-menu", i.prototype.keydown)
+    }).on("click.bs.dropdown.data-api", e, i.prototype.toggle).on("keydown.bs.dropdown.data-api", e, i.prototype.keydown).on("keydown.bs.dropdown.data-api", ".dropdown-menu", i.prototype.keydown)
 }(jQuery),
 function(t) {
     "use strict";
     var e = function(e, i) {
-        this.options = i, this.$body = t(document.body), this.$element = t(e), this.$dialog = this.$element.find(".modal-dialog"), this.$backdrop = null, this.isShown = null, this.originalBodyPad = null, this.scrollbarWidth = 0, this.ignoreBackdropClick = !1, this.fixedContent = ".navbar-fixed-top, .navbar-fixed-bottom", this.options.remote && this.$element.find(".modal-content").load(this.options.remote, t.proxy((function() {
+        this.options = i, this.$body = t(document.body), this.$element = t(e), this.$dialog = this.$element.find(".modal-dialog"), this.$backdrop = null, this.isShown = null, this.originalBodyPad = null, this.scrollbarWidth = 0, this.ignoreBackdropClick = !1, this.fixedContent = ".navbar-fixed-top, .navbar-fixed-bottom", this.options.remote && this.$element.find(".modal-content").load(this.options.remote, t.proxy(function() {
             this.$element.trigger("loaded.bs.modal")
-        }), this))
+        }, this))
     };
 
     function i(i, n) {
-        return this.each((function() {
+        return this.each(function() {
             var s = t(this),
                 a = s.data("bs.modal"),
                 r = t.extend({}, e.DEFAULTS, s.data(), "object" == typeof i && i);
             a || s.data("bs.modal", a = new e(this, r)), "string" == typeof i ? a[i](n) : r.show && a.show(n)
-        }))
+        })
     }
     e.VERSION = "3.4.1", e.TRANSITION_DURATION = 300, e.BACKDROP_TRANSITION_DURATION = 150, e.DEFAULTS = {
         backdrop: !0,
@@ -134,37 +134,37 @@ function(t) {
             s = t.Event("show.bs.modal", {
                 relatedTarget: i
             });
-        this.$element.trigger(s), this.isShown || s.isDefaultPrevented() || (this.isShown = !0, this.checkScrollbar(), this.setScrollbar(), this.$body.addClass("modal-open"), this.escape(), this.resize(), this.$element.on("click.dismiss.bs.modal", '[data-dismiss="modal"]', t.proxy(this.hide, this)), this.$dialog.on("mousedown.dismiss.bs.modal", (function() {
-            n.$element.one("mouseup.dismiss.bs.modal", (function(e) {
+        this.$element.trigger(s), this.isShown || s.isDefaultPrevented() || (this.isShown = !0, this.checkScrollbar(), this.setScrollbar(), this.$body.addClass("modal-open"), this.escape(), this.resize(), this.$element.on("click.dismiss.bs.modal", '[data-dismiss="modal"]', t.proxy(this.hide, this)), this.$dialog.on("mousedown.dismiss.bs.modal", function() {
+            n.$element.one("mouseup.dismiss.bs.modal", function(e) {
                 t(e.target).is(n.$element) && (n.ignoreBackdropClick = !0)
-            }))
-        })), this.backdrop((function() {
+            })
+        }), this.backdrop(function() {
             var s = t.support.transition && n.$element.hasClass("fade");
             n.$element.parent().length || n.$element.appendTo(n.$body), n.$element.show().scrollTop(0), n.adjustDialog(), s && n.$element[0].offsetWidth, n.$element.addClass("in"), n.enforceFocus();
             var a = t.Event("shown.bs.modal", {
                 relatedTarget: i
             });
-            s ? n.$dialog.one("bsTransitionEnd", (function() {
+            s ? n.$dialog.one("bsTransitionEnd", function() {
                 n.$element.trigger("focus").trigger(a)
-            })).emulateTransitionEnd(e.TRANSITION_DURATION) : n.$element.trigger("focus").trigger(a)
-        })))
+            }).emulateTransitionEnd(e.TRANSITION_DURATION) : n.$element.trigger("focus").trigger(a)
+        }))
     }, e.prototype.hide = function(i) {
         i && i.preventDefault(), i = t.Event("hide.bs.modal"), this.$element.trigger(i), this.isShown && !i.isDefaultPrevented() && (this.isShown = !1, this.escape(), this.resize(), t(document).off("focusin.bs.modal"), this.$element.removeClass("in").off("click.dismiss.bs.modal").off("mouseup.dismiss.bs.modal"), this.$dialog.off("mousedown.dismiss.bs.modal"), t.support.transition && this.$element.hasClass("fade") ? this.$element.one("bsTransitionEnd", t.proxy(this.hideModal, this)).emulateTransitionEnd(e.TRANSITION_DURATION) : this.hideModal())
     }, e.prototype.enforceFocus = function() {
-        t(document).off("focusin.bs.modal").on("focusin.bs.modal", t.proxy((function(t) {
+        t(document).off("focusin.bs.modal").on("focusin.bs.modal", t.proxy(function(t) {
             document === t.target || this.$element[0] === t.target || this.$element.has(t.target).length || this.$element.trigger("focus")
-        }), this))
+        }, this))
     }, e.prototype.escape = function() {
-        this.isShown && this.options.keyboard ? this.$element.on("keydown.dismiss.bs.modal", t.proxy((function(t) {
+        this.isShown && this.options.keyboard ? this.$element.on("keydown.dismiss.bs.modal", t.proxy(function(t) {
             27 == t.which && this.hide()
-        }), this)) : this.isShown || this.$element.off("keydown.dismiss.bs.modal")
+        }, this)) : this.isShown || this.$element.off("keydown.dismiss.bs.modal")
     }, e.prototype.resize = function() {
         this.isShown ? t(window).on("resize.bs.modal", t.proxy(this.handleUpdate, this)) : t(window).off("resize.bs.modal")
     }, e.prototype.hideModal = function() {
         var t = this;
-        this.$element.hide(), this.backdrop((function() {
+        this.$element.hide(), this.backdrop(function() {
             t.$body.removeClass("modal-open"), t.resetAdjustments(), t.resetScrollbar(), t.$element.trigger("hidden.bs.modal")
-        }))
+        })
     }, e.prototype.removeBackdrop = function() {
         this.$backdrop && this.$backdrop.remove(), this.$backdrop = null
     }, e.prototype.backdrop = function(i) {
@@ -172,9 +172,9 @@ function(t) {
             s = this.$element.hasClass("fade") ? "fade" : "";
         if (this.isShown && this.options.backdrop) {
             var a = t.support.transition && s;
-            if (this.$backdrop = t(document.createElement("div")).addClass("modal-backdrop " + s).appendTo(this.$body), this.$element.on("click.dismiss.bs.modal", t.proxy((function(t) {
+            if (this.$backdrop = t(document.createElement("div")).addClass("modal-backdrop " + s).appendTo(this.$body), this.$element.on("click.dismiss.bs.modal", t.proxy(function(t) {
                     this.ignoreBackdropClick ? this.ignoreBackdropClick = !1 : t.target === t.currentTarget && ("static" == this.options.backdrop ? this.$element[0].focus() : this.hide())
-                }), this)), a && this.$backdrop[0].offsetWidth, this.$backdrop.addClass("in"), !i) return;
+                }, this)), a && this.$backdrop[0].offsetWidth, this.$backdrop.addClass("in"), !i) return;
             a ? this.$backdrop.one("bsTransitionEnd", i).emulateTransitionEnd(e.BACKDROP_TRANSITION_DURATION) : i()
         } else if (!this.isShown && this.$backdrop) {
             this.$backdrop.removeClass("in");
@@ -207,16 +207,16 @@ function(t) {
         var e = parseInt(this.$body.css("padding-right") || 0, 10);
         this.originalBodyPad = document.body.style.paddingRight || "";
         var i = this.scrollbarWidth;
-        this.bodyIsOverflowing && (this.$body.css("padding-right", e + i), t(this.fixedContent).each((function(e, n) {
+        this.bodyIsOverflowing && (this.$body.css("padding-right", e + i), t(this.fixedContent).each(function(e, n) {
             var s = n.style.paddingRight,
                 a = t(n).css("padding-right");
             t(n).data("padding-right", s).css("padding-right", parseFloat(a) + i + "px")
-        })))
+        }))
     }, e.prototype.resetScrollbar = function() {
-        this.$body.css("padding-right", this.originalBodyPad), t(this.fixedContent).each((function(e, i) {
+        this.$body.css("padding-right", this.originalBodyPad), t(this.fixedContent).each(function(e, i) {
             var n = t(i).data("padding-right");
             t(i).removeData("padding-right"), i.style.paddingRight = n || ""
-        }))
+        })
     }, e.prototype.measureScrollbar = function() {
         var t = document.createElement("div");
         t.className = "modal-scrollbar-measure", this.$body.append(t);
@@ -226,7 +226,7 @@ function(t) {
     var n = t.fn.modal;
     t.fn.modal = i, t.fn.modal.Constructor = e, t.fn.modal.noConflict = function() {
         return t.fn.modal = n, this
-    }, t(document).on("click.bs.modal.data-api", '[data-toggle="modal"]', (function(e) {
+    }, t(document).on("click.bs.modal.data-api", '[data-toggle="modal"]', function(e) {
         var n = t(this),
             s = n.attr("href"),
             a = n.attr("data-target") || s && s.replace(/.*(?=#[^\s]+$)/, ""),
@@ -234,12 +234,12 @@ function(t) {
             o = r.data("bs.modal") ? "toggle" : t.extend({
                 remote: !/#/.test(s) && s
             }, r.data(), n.data());
-        n.is("a") && e.preventDefault(), r.one("show.bs.modal", (function(t) {
-            t.isDefaultPrevented() || r.one("hidden.bs.modal", (function() {
+        n.is("a") && e.preventDefault(), r.one("show.bs.modal", function(t) {
+            t.isDefaultPrevented() || r.one("hidden.bs.modal", function() {
                 n.is(":visible") && n.trigger("focus")
-            }))
-        })), i.call(r, o, this)
-    }))
+            })
+        }), i.call(r, o, this)
+    })
 }(jQuery),
 function(t) {
     "use strict";
@@ -283,9 +283,9 @@ function(t) {
     function r(e, n) {
         var r = e.nodeName.toLowerCase();
         if (-1 !== t.inArray(r, n)) return -1 === t.inArray(r, i) || Boolean(e.nodeValue.match(s) || e.nodeValue.match(a));
-        for (var o = t(n).filter((function(t, e) {
+        for (var o = t(n).filter(function(t, e) {
                 return e instanceof RegExp
-            })), l = 0, c = o.length; l < c; l++)
+            }), l = 0, c = o.length; l < c; l++)
             if (r.match(o[l])) return !0;
         return !1
     }
@@ -296,15 +296,15 @@ function(t) {
         if (!document.implementation || !document.implementation.createHTMLDocument) return e;
         var s = document.implementation.createHTMLDocument("sanitization");
         s.body.innerHTML = e;
-        for (var a = t.map(i, (function(t, e) {
+        for (var a = t.map(i, function(t, e) {
                 return e
-            })), o = t(s.body).find("*"), l = 0, c = o.length; l < c; l++) {
+            }), o = t(s.body).find("*"), l = 0, c = o.length; l < c; l++) {
             var d = o[l],
                 h = d.nodeName.toLowerCase();
             if (-1 !== t.inArray(h, a))
-                for (var u = t.map(d.attributes, (function(t) {
+                for (var u = t.map(d.attributes, function(t) {
                         return t
-                    })), p = [].concat(i["*"] || [], i[h] || []), f = 0, m = u.length; f < m; f++) r(u[f], p) || d.removeAttribute(u[f].nodeName);
+                    }), p = [].concat(i["*"] || [], i[h] || []), f = 0, m = u.length; f < m; f++) r(u[f], p) || d.removeAttribute(u[f].nodeName);
             else d.parentNode.removeChild(d)
         }
         return s.body.innerHTML
@@ -360,17 +360,17 @@ function(t) {
     }, l.prototype.getDelegateOptions = function() {
         var e = {},
             i = this.getDefaults();
-        return this._options && t.each(this._options, (function(t, n) {
+        return this._options && t.each(this._options, function(t, n) {
             i[t] != n && (e[t] = n)
-        })), e
+        }), e
     }, l.prototype.enter = function(e) {
         var i = e instanceof this.constructor ? e : t(e.currentTarget).data("bs." + this.type);
         if (i || (i = new this.constructor(e.currentTarget, this.getDelegateOptions()), t(e.currentTarget).data("bs." + this.type, i)), e instanceof t.Event && (i.inState["focusin" == e.type ? "focus" : "hover"] = !0), i.tip().hasClass("in") || "in" == i.hoverState) i.hoverState = "in";
         else {
             if (clearTimeout(i.timeout), i.hoverState = "in", !i.options.delay || !i.options.delay.show) return i.show();
-            i.timeout = setTimeout((function() {
+            i.timeout = setTimeout(function() {
                 "in" == i.hoverState && i.show()
-            }), i.options.delay.show)
+            }, i.options.delay.show)
         }
     }, l.prototype.isInStateTrue = function() {
         for (var t in this.inState)
@@ -380,9 +380,9 @@ function(t) {
         var i = e instanceof this.constructor ? e : t(e.currentTarget).data("bs." + this.type);
         if (i || (i = new this.constructor(e.currentTarget, this.getDelegateOptions()), t(e.currentTarget).data("bs." + this.type, i)), e instanceof t.Event && (i.inState["focusout" == e.type ? "focus" : "hover"] = !1), !i.isInStateTrue()) {
             if (clearTimeout(i.timeout), i.hoverState = "out", !i.options.delay || !i.options.delay.hide) return i.hide();
-            i.timeout = setTimeout((function() {
+            i.timeout = setTimeout(function() {
                 "out" == i.hoverState && i.hide()
-            }), i.options.delay.hide)
+            }, i.options.delay.hide)
         }
     }, l.prototype.show = function() {
         var e = t.Event("show.bs." + this.type);
@@ -539,20 +539,20 @@ function(t) {
         e && ((i = t(e.currentTarget).data("bs." + this.type)) || (i = new this.constructor(e.currentTarget, this.getDelegateOptions()), t(e.currentTarget).data("bs." + this.type, i))), e ? (i.inState.click = !i.inState.click, i.isInStateTrue() ? i.enter(i) : i.leave(i)) : i.tip().hasClass("in") ? i.leave(i) : i.enter(i)
     }, l.prototype.destroy = function() {
         var t = this;
-        clearTimeout(this.timeout), this.hide((function() {
+        clearTimeout(this.timeout), this.hide(function() {
             t.$element.off("." + t.type).removeData("bs." + t.type), t.$tip && t.$tip.detach(), t.$tip = null, t.$arrow = null, t.$viewport = null, t.$element = null
-        }))
+        })
     }, l.prototype.sanitizeHtml = function(t) {
         return o(t, this.options.whiteList, this.options.sanitizeFn)
     };
     var c = t.fn.tooltip;
     t.fn.tooltip = function(e) {
-        return this.each((function() {
+        return this.each(function() {
             var i = t(this),
                 n = i.data("bs.tooltip"),
                 s = "object" == typeof e && e;
             !n && /destroy|hide/.test(e) || (n || i.data("bs.tooltip", n = new l(this, s)), "string" == typeof e && n[e]())
-        }))
+        })
     }, t.fn.tooltip.Constructor = l, t.fn.tooltip.noConflict = function() {
         return t.fn.tooltip = c, this
     }
@@ -590,12 +590,12 @@ function(t) {
     };
     var i = t.fn.popover;
     t.fn.popover = function(i) {
-        return this.each((function() {
+        return this.each(function() {
             var n = t(this),
                 s = n.data("bs.popover"),
                 a = "object" == typeof i && i;
             !s && /destroy|hide/.test(i) || (s || n.data("bs.popover", s = new e(this, a)), "string" == typeof i && s[i]())
-        }))
+        })
     }, t.fn.popover.Constructor = e, t.fn.popover.noConflict = function() {
         return t.fn.popover = i, this
     }
@@ -607,11 +607,11 @@ function(t) {
     };
 
     function i(i) {
-        return this.each((function() {
+        return this.each(function() {
             var n = t(this),
                 s = n.data("bs.tab");
             s || n.data("bs.tab", s = new e(this)), "string" == typeof i && s[i]()
-        }))
+        })
     }
     e.VERSION = "3.4.1", e.TRANSITION_DURATION = 150, e.prototype.show = function() {
         var e = this.element,
@@ -627,7 +627,7 @@ function(t) {
                 });
             if (s.trigger(a), e.trigger(r), !r.isDefaultPrevented() && !a.isDefaultPrevented()) {
                 var o = t(document).find(n);
-                this.activate(e.closest("li"), i), this.activate(o, o.parent(), (function() {
+                this.activate(e.closest("li"), i), this.activate(o, o.parent(), function() {
                     s.trigger({
                         type: "hidden.bs.tab",
                         relatedTarget: e[0]
@@ -635,7 +635,7 @@ function(t) {
                         type: "shown.bs.tab",
                         relatedTarget: s[0]
                     })
-                }))
+                })
             }
         }
     }, e.prototype.activate = function(i, n, s) {
@@ -665,12 +665,12 @@ function(t) {
     };
 
     function i(i) {
-        return this.each((function() {
+        return this.each(function() {
             var n = t(this),
                 s = n.data("bs.affix"),
                 a = "object" == typeof i && i;
             s || n.data("bs.affix", s = new e(this, a)), "string" == typeof i && s[i]()
-        }))
+        })
     }
     e.VERSION = "3.4.1", e.RESET = "affix affix-top affix-bottom", e.DEFAULTS = {
         offset: 0,
@@ -716,13 +716,13 @@ function(t) {
     var n = t.fn.affix;
     t.fn.affix = i, t.fn.affix.Constructor = e, t.fn.affix.noConflict = function() {
         return t.fn.affix = n, this
-    }, t(window).on("load", (function() {
-        t('[data-spy="affix"]').each((function() {
+    }, t(window).on("load", function() {
+        t('[data-spy="affix"]').each(function() {
             var e = t(this),
                 n = e.data();
             n.offset = n.offset || {}, null != n.offsetBottom && (n.offset.bottom = n.offsetBottom), null != n.offsetTop && (n.offset.top = n.offsetTop), i.call(e, n)
-        }))
-    }))
+        })
+    })
 }(jQuery),
 function(t) {
     "use strict";
@@ -736,12 +736,12 @@ function(t) {
     }
 
     function n(i) {
-        return this.each((function() {
+        return this.each(function() {
             var n = t(this),
                 s = n.data("bs.collapse"),
                 a = t.extend({}, e.DEFAULTS, n.data(), "object" == typeof i && i);
             !s && a.toggle && /show|hide/.test(i) && (a.toggle = !1), s || n.data("bs.collapse", s = new e(this, a)), "string" == typeof i && s[i]()
-        }))
+        })
     }
     e.VERSION = "3.4.1", e.TRANSITION_DURATION = 350, e.DEFAULTS = {
         toggle: !0
@@ -781,10 +781,10 @@ function(t) {
     }, e.prototype.toggle = function() {
         this[this.$element.hasClass("in") ? "hide" : "show"]()
     }, e.prototype.getParent = function() {
-        return t(document).find(this.options.parent).find('[data-toggle="collapse"][data-parent="' + this.options.parent + '"]').each(t.proxy((function(e, n) {
+        return t(document).find(this.options.parent).find('[data-toggle="collapse"][data-parent="' + this.options.parent + '"]').each(t.proxy(function(e, n) {
             var s = t(n);
             this.addAriaAndCollapsedClass(i(s), s)
-        }), this)).end()
+        }, this)).end()
     }, e.prototype.addAriaAndCollapsedClass = function(t, e) {
         var i = t.hasClass("in");
         t.attr("aria-expanded", i), e.toggleClass("collapsed", !i).attr("aria-expanded", i)
@@ -792,13 +792,13 @@ function(t) {
     var s = t.fn.collapse;
     t.fn.collapse = n, t.fn.collapse.Constructor = e, t.fn.collapse.noConflict = function() {
         return t.fn.collapse = s, this
-    }, t(document).on("click.bs.collapse.data-api", '[data-toggle="collapse"]', (function(e) {
+    }, t(document).on("click.bs.collapse.data-api", '[data-toggle="collapse"]', function(e) {
         var s = t(this);
         s.attr("data-target") || e.preventDefault();
         var a = i(s),
             r = a.data("bs.collapse") ? "toggle" : s.data();
         n.call(a, r)
-    }))
+    })
 }(jQuery),
 function(t) {
     "use strict";
@@ -808,12 +808,12 @@ function(t) {
     }
 
     function i(i) {
-        return this.each((function() {
+        return this.each(function() {
             var n = t(this),
                 s = n.data("bs.scrollspy"),
                 a = "object" == typeof i && i;
             s || n.data("bs.scrollspy", s = new e(this, a)), "string" == typeof i && s[i]()
-        }))
+        })
     }
     e.VERSION = "3.4.1", e.DEFAULTS = {
         offset: 10
@@ -823,18 +823,18 @@ function(t) {
         var e = this,
             i = "offset",
             n = 0;
-        this.offsets = [], this.targets = [], this.scrollHeight = this.getScrollHeight(), t.isWindow(this.$scrollElement[0]) || (i = "position", n = this.$scrollElement.scrollTop()), this.$body.find(this.selector).map((function() {
+        this.offsets = [], this.targets = [], this.scrollHeight = this.getScrollHeight(), t.isWindow(this.$scrollElement[0]) || (i = "position", n = this.$scrollElement.scrollTop()), this.$body.find(this.selector).map(function() {
             var e = t(this),
                 s = e.data("target") || e.attr("href"),
                 a = /^#./.test(s) && t(s);
             return a && a.length && a.is(":visible") && [
                 [a[i]().top + n, s]
             ] || null
-        })).sort((function(t, e) {
+        }).sort(function(t, e) {
             return t[0] - e[0]
-        })).each((function() {
+        }).each(function() {
             e.offsets.push(this[0]), e.targets.push(this[1])
-        }))
+        })
     }, e.prototype.process = function() {
         var t, e = this.$scrollElement.scrollTop() + this.options.offset,
             i = this.getScrollHeight(),
@@ -856,25 +856,25 @@ function(t) {
     var n = t.fn.scrollspy;
     t.fn.scrollspy = i, t.fn.scrollspy.Constructor = e, t.fn.scrollspy.noConflict = function() {
         return t.fn.scrollspy = n, this
-    }, t(window).on("load.bs.scrollspy.data-api", (function() {
-        t('[data-spy="scroll"]').each((function() {
+    }, t(window).on("load.bs.scrollspy.data-api", function() {
+        t('[data-spy="scroll"]').each(function() {
             var e = t(this);
             i.call(e, e.data())
-        }))
-    }))
+        })
+    })
 }(jQuery),
 function(t) {
     "use strict";
     t.fn.emulateTransitionEnd = function(e) {
         var i = !1,
             n = this;
-        t(this).one("bsTransitionEnd", (function() {
+        t(this).one("bsTransitionEnd", function() {
             i = !0
-        }));
-        return setTimeout((function() {
+        });
+        return setTimeout(function() {
             i || t(n).trigger(t.support.transition.end)
-        }), e), this
-    }, t((function() {
+        }, e), this
+    }, t(function() {
         t.support.transition = function() {
             var t = document.createElement("bootstrap"),
                 e = {
@@ -895,7 +895,7 @@ function(t) {
                 if (t(e.target).is(this)) return e.handleObj.handler.apply(this, arguments)
             }
         })
-    }))
+    })
 }(jQuery),
 function(t) {
     const e = {
@@ -950,18 +950,18 @@ function(t) {
             }
             if (!e) return null;
             const i = document.createElement("li");
-            return i.setAttribute("aria-selected", !1), i.setAttribute("role", "option"), Object.keys(t).forEach((e => {
+            return i.setAttribute("aria-selected", !1), i.setAttribute("role", "option"), Object.keys(t).forEach(e => {
                 "label" !== e && "display" !== e && (i.dataset[e] = t[e])
-            })), i.innerHTML = e, i
+            }), i.innerHTML = e, i
         },
         displayResults: function(t) {
             if (0 === t.length) return void this.closeList();
             let e = t.map(this.formatOption, this);
             e.length > this.resultLimit && !this.allowEmptySearch && (e = e.slice(0, this.resultLimit)), this.list.innerHTML = "";
             const i = document.createDocumentFragment();
-            e.forEach((t => {
+            e.forEach(t => {
                 t && i.appendChild(t)
-            })), this.list.appendChild(i), this.updateInstructions(e.length), this.openList()
+            }), this.list.appendChild(i), this.updateInstructions(e.length), this.openList()
         },
         isListOpen: function() {
             return !this.list.classList.contains("hidden")
@@ -987,10 +987,10 @@ function(t) {
                 e = null !== this.queryProcessor ? this.queryProcessor(t) : t,
                 i = new URLSearchParams;
             i.append(this.queryName, e), i.append("limit", this.resultLimit);
-            return Object.keys(this.queryData).forEach((function(t) {
+            return Object.keys(this.queryData).forEach(function(t) {
                 const e = this.queryData[t];
                 "function" != typeof e ? i.append(t, e) : i.append(t, e())
-            }), this), `?${i.toString()}`
+            }, this), `?${i.toString()}`
         },
         xhrOnLoad: function() {
             if (this.xhrSearch.status >= 200 && this.xhrSearch.status < 400) {
@@ -1011,13 +1011,13 @@ function(t) {
             if ("" === t && !this.allowEmptySearch) return void this.closeList();
             let e = null !== this.queryProcessor ? this.queryProcessor(t) : t;
             if (e = e.toLowerCase(), "" === e) return void this.displayResults(this.staticData);
-            const i = this.staticData.filter((t => -1 !== t.label.toLowerCase().indexOf(e)));
+            const i = this.staticData.filter(t => -1 !== t.label.toLowerCase().indexOf(e));
             this.displayResults(i)
         },
         getExactMatch: function() {
             const t = this.input.value.trim().toLowerCase();
             if ("" === t) return null;
-            const e = this.staticData.find((e => e.label.toLowerCase() === t));
+            const e = this.staticData.find(e => e.label.toLowerCase() === t);
             return e || null
         },
         query: function() {
@@ -1083,9 +1083,9 @@ function(t) {
             null !== e.closest(`#${this.list.id}`) || null !== e.closest(`#${this.input.id}`) || this.closeList()
         },
         attachEvents: function() {
-            this.input.addEventListener("keydown", this.handleTypingDown.bind(this)), this.input.addEventListener("keyup", this.handleTypingUp.bind(this)), this.list.addEventListener("click", this.handleClick.bind(this)), document.body.addEventListener("click", this.handleOutsideClick.bind(this)), this.showAllOnFocus && this.input.addEventListener("focus", (() => {
+            this.input.addEventListener("keydown", this.handleTypingDown.bind(this)), this.input.addEventListener("keyup", this.handleTypingUp.bind(this)), this.list.addEventListener("click", this.handleClick.bind(this)), document.body.addEventListener("click", this.handleOutsideClick.bind(this)), this.showAllOnFocus && this.input.addEventListener("focus", () => {
                 "" === this.input.value && this.query()
-            }))
+            })
         },
         addInstructions: function() {
             this.instructions = document.createElement("div"), this.instructions.id = this.getInstructionsId(), this.instructions.setAttribute("aria-live", "polite"), this.instructions.classList.add("sr-only"), this.instructions.innerHTML = this.instructionsText.replace("{{count}}", 0), this.list.parentNode.insertBefore(this.instructions, this.list.nextSibling)
@@ -1098,9 +1098,9 @@ function(t) {
         setConfig: function(t) {
             this.input = document.querySelector(t.inputSelector);
             const e = ["queryUrl", "staticData", "queryProcessor", "dataProcessor", "selectCallback", "resultLimit", "queryData", "instructionsText", "preventSubmit", "listLabel", "showAllOnFocus", "allowEmptySearch"];
-            Object.keys(t).forEach((function(i) {
+            Object.keys(t).forEach(function(i) {
                 -1 !== e.indexOf(i) && (this[i] = t[i])
-            }), this), this.showAllOnFocus && (this.allowEmptySearch = !0)
+            }, this), this.showAllOnFocus && (this.allowEmptySearch = !0)
         },
         init: function(t) {
             this.setConfig(t), this.validateConfig(t), this.formatInput(), this.createList(), this.addInstructions(), this.attachEvents()
@@ -1170,19 +1170,19 @@ function(t) {
             if (!t) return null;
             let s = null;
             i ? (s = document.getElementById(i), s && s.remove()) : (this.#o++, i = `${this.#i}-${this.#o}`), s = document.createElement("DIV"), s.id = i, s.classList.add(this.#n), e && s.classList.add(e), s.innerHTML = `<div class="s-ui-notification-message">${t}</div><button class="btn" aria-label="${window?.springyText?.modal?.close||"Close"}">&times;</button>`;
-            return this.#d().appendChild(s), s.addEventListener("click", (t => {
-                t.preventDefault(), this.hide(t.currentTarget)
-            })), n > 0 && setTimeout((() => {
+            return this.#d().appendChild(s), s.addEventListener("click", t => {
+                this.hide(t.currentTarget)
+            }), n > 0 && setTimeout(() => {
                 this.hide(s)
-            }), n), null === this.#l && (this.#l = this.keyboardEvents.bind(this), document.addEventListener("keydown", this.#l, !0)), i
+            }, n), null === this.#l && (this.#l = this.keyboardEvents.bind(this), document.addEventListener("keydown", this.#l, !0)), i
         }
         hide(t = null) {
             t ? t.remove() : this.#t && (this.#t.innerHTML = ""), this.#h()
         }
         hideWorking() {
-            this.#t && (this.#t.querySelectorAll(`.${this.#s.className}`).forEach((t => {
+            this.#t && (this.#t.querySelectorAll(`.${this.#s.className}`).forEach(t => {
                 t.remove()
-            })), this.#h())
+            }), this.#h())
         }
         #h() {
             null === this.#l || !this.#t || this.#t.children.length > 0 || (document.removeEventListener("keydown", this.#l, !0), this.#l = null)
@@ -1238,14 +1238,14 @@ function(t) {
             var t = '<div class="modal-content">';
             "" !== this.title && (t += '<div class="modal-header"><button id="s-sui-modal-close" type="button" class="close" data-dismiss="modal" aria-label="&times; ' + this.transText.close + '">&times;</button><h2 class="modal-title" id="s-sui-modal-header">' + this.title + "</h2></div>");
             var e = "";
-            "string" == typeof this.content && (e = this.content), t += '<div class="modal-body">' + e + "</div>", (this.footer || this.modal_buttons.length > 0) && (this.btn_callbacks = {}, t += '<div class="modal-footer">', 0 === this.modal_buttons.length ? t += '<button type="button" class="btn btn-default" data-dismiss="modal">' + this.transText.close + "</button>" : this.modal_buttons.forEach((function(e, i) {
-                e.links && e.links.length > 0 ? (e.gclass = e.gclass ? e.gclass : "", t += '<div class="btn-group ' + e.gclass + '">', e.bclass = e.bclass ? e.bclass : "btn-default", e.label = e.label ? e.label : "", "" !== e.label && (t += '<button type="button" class="btn ' + e.bclass + " btn-modal-" + i + '" >' + e.label + "</button>", e.callback && (this.btn_callbacks["btn-modal-" + i] = e.callback)), t += '<button type="button" class="btn ' + e.bclass + ' dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret"></span><span class="sr-only">' + this.transText.toggle + "</span></button>", t += '<ul class="dropdown-menu">', e.links.forEach((function(e, i) {
+            "string" == typeof this.content && (e = this.content), t += '<div class="modal-body">' + e + "</div>", (this.footer || this.modal_buttons.length > 0) && (this.btn_callbacks = {}, t += '<div class="modal-footer">', 0 === this.modal_buttons.length ? t += '<button type="button" class="btn btn-default" data-dismiss="modal">' + this.transText.close + "</button>" : this.modal_buttons.forEach(function(e, i) {
+                e.links && e.links.length > 0 ? (e.gclass = e.gclass ? e.gclass : "", t += '<div class="btn-group ' + e.gclass + '">', e.bclass = e.bclass ? e.bclass : "btn-default", e.label = e.label ? e.label : "", "" !== e.label && (t += '<button type="button" class="btn ' + e.bclass + " btn-modal-" + i + '" >' + e.label + "</button>", e.callback && (this.btn_callbacks["btn-modal-" + i] = e.callback)), t += '<button type="button" class="btn ' + e.bclass + ' dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret"></span><span class="sr-only">' + this.transText.toggle + "</span></button>", t += '<ul class="dropdown-menu">', e.links.forEach(function(e, i) {
                     if (e.label = e.label ? e.label : "", "" !== e.label) {
                         var n = e.url ? e.url : "#";
                         t += '<li><a href="' + n + '" class="link-modal-' + i + '">' + e.label + "</a></li>", e.callback && (this.btn_callbacks["link-modal-" + i] = e.callback)
                     }
-                }), this), t += "</ul>", t += "</div>") : (e.bclass = e.bclass ? e.bclass : "btn-default", e.label = e.label ? e.label : "", "" !== e.label && (t += '<button type="button" class="btn ' + e.bclass + " btn-modal-" + i + '" >' + e.label + "</button>", e.callback && (this.btn_callbacks["btn-modal-" + i] = e.callback)))
-            }), this), t += "</div>"), t += "</div>";
+                }, this), t += "</ul>", t += "</div>") : (e.bclass = e.bclass ? e.bclass : "btn-default", e.label = e.label ? e.label : "", "" !== e.label && (t += '<button type="button" class="btn ' + e.bclass + " btn-modal-" + i + '" >' + e.label + "</button>", e.callback && (this.btn_callbacks["btn-modal-" + i] = e.callback)))
+            }, this), t += "</div>"), t += "</div>";
             var i = jQuery(t);
             if ("string" != typeof this.content && i.find(".modal-body").html(this.content), this.$el.find(".modal-content").replaceWith(i), this.modal_buttons.length > 0)
                 for (var n in this.btn_callbacks) this.btn_callbacks.hasOwnProperty(n) && "function" == typeof this.btn_callbacks[n] && this.$el.find("." + n).on("click", {
@@ -1263,53 +1263,6 @@ function(t) {
     };
     "undefined" != typeof module ? module.exports = e : (t.springSpace = t.springSpace || {}, t.springSpace.sui = t.springSpace.sui || {}, t.springSpace.sui.modal = t.springSpace.sui.modal || e)
 }(this);
-var springSpace = springSpace || {};
-springSpace.sui = springSpace.sui || {}, springSpace.sui.helptip = function(t) {
-    void 0 === t && (t = {});
-    if (this.parent = t.parent ? t.parent : "", this.selector = t.selector ? t.selector : "button.btn-help-popover", "" != this.selector) {
-        this.placement = t.placement ? t.placement : "bottom", -1 == ["bottom", "top", "right", "left"].indexOf(this.placement) && (this.placement = "bottom"), this.$el = null, "" !== this.parent ? this.$el = jQuery(this.parent + " " + this.selector) : this.$el = jQuery(this.selector), this.ajcontent = {};
-        var e = this;
-        this.$el.popover({
-            placement: this.placement,
-            html: !0,
-            content: function() {
-                var t = $(this).attr("data-ajload");
-                if (t) {
-                    if (void 0 === $(this).attr("data-loaded")) {
-                        $(this).attr("data-loaded", "true");
-                        return jQuery.ajax({
-                            url: t,
-                            type: "get",
-                            dataType: "json",
-                            async: !1,
-                            success: function(i) {
-                                i.data && i.data.content ? e.ajcontent[t] = i.data.content : i.content && (e.ajcontent[t] = i.content)
-                            }
-                        }).fail((function() {
-                            e.ajcontent[t] = "Sorry, an error occurred."
-                        })), e.ajcontent[t]
-                    }
-                    return e.ajcontent[t]
-                }
-                var i = $(this).attr("data-popover-text") ? "<p>" + $(this).attr("data-popover-text") + "</p>" : $("#" + $(this).attr("data-popover-id")).html();
-                return i += '<button type="button" class="btn btn-xs btn-link btn-close pull-right">close</button>'
-            },
-            title: function() {
-                var t = $(this).attr("data-title");
-                return t ? t += '<button type="button" class="btn btn-link btn-close pull-right" aria-label="Close"><i class="fa fa-close"></i></button>' : ""
-            }
-        }).on("shown.bs.popover", (function(t) {
-            var e = jQuery(this);
-            jQuery(this).attr("aria-pressed", !0).parent().find("div.popover button.btn-close").on("click keydown", (function(t) {
-                ("click" === t.type || "keydown" === t.type && 27 === t.which) && e.popover("hide")
-            })).attr("aria-controls", e.parent().find("div.popover").attr("id"))
-        })).on("hidden.bs.popover", (function(t) {
-            void 0 !== $(t.target).data("bs.popover").inState && ($(t.target).data("bs.popover").inState.click = !1), jQuery(this).attr("aria-pressed", !1)
-        })).on("keydown.dismiss.bs.popover", (function(t) {
-            27 == t.which && jQuery(this).popover("hide")
-        }))
-    }
-};
 var springSpace = springSpace || {};
 springSpace.sui = springSpace.sui || {}, springSpace.sui.filedrop = function(t) {
     if (void 0 === t) return !1;
@@ -1334,12 +1287,12 @@ springSpace.sui = springSpace.sui || {}, springSpace.sui.filedrop = function(t) 
                 if (this.isAdvancedUpload) {
                     var i = [],
                         s = 0;
-                    this.droppedFiles.forEach((function(t) {
+                    this.droppedFiles.forEach(function(t) {
                         var e = document.createElement("li");
                         e.innerText = t.name, i.push(e), s += t.size
-                    })), e.innerHTML = "", 0 === i.length ? t.classList.add("hidden") : (t.classList.remove("hidden"), i.forEach((function(t) {
+                    }), e.innerHTML = "", 0 === i.length ? t.classList.add("hidden") : (t.classList.remove("hidden"), i.forEach(function(t) {
                         e.appendChild(t)
-                    }))), this.max_files > 0 && i.length > this.max_files && this.showError(n.max_files + " file uploads maximum."), !1 === this.batch_files && this.max_upload_size > 0 && s > this.max_upload_size && this.showError("Files total " + n.bytesToMB(s) + " MB which exceeds the maximum of " + n.bytesToMB(this.max_upload_size) + " MB at a time.")
+                    })), this.max_files > 0 && i.length > this.max_files && this.showError(n.max_files + " file uploads maximum."), !1 === this.batch_files && this.max_upload_size > 0 && s > this.max_upload_size && this.showError("Files total " + n.bytesToMB(s) + " MB which exceeds the maximum of " + n.bytesToMB(this.max_upload_size) + " MB at a time.")
                 } else {
                     if ("" === this.$input.val()) return t.classList.add("hidden"), void(e.innerHTML = "");
                     t.classList.remove("hidden");
@@ -1396,16 +1349,16 @@ springSpace.sui = springSpace.sui || {}, springSpace.sui.filedrop = function(t) 
         }, this.addFiles = function(t) {
             if (n.max_files > 0 && n.countFiles() + t.length > n.max_files) return n.showError(n.max_files + " file uploads maximum."), !1;
             var e = 0;
-            n.droppedFiles.forEach((function(t) {
+            n.droppedFiles.forEach(function(t) {
                 e += t.size
-            }));
+            });
             for (var i = [], s = 0; s < t.length; s++) {
                 var a = t[s];
                 if (n.droppedFiles.length > 0) {
                     var r = !1;
-                    if (n.droppedFiles.forEach((function(t) {
+                    if (n.droppedFiles.forEach(function(t) {
                             t.name === a.name && (r = !0)
-                        })), r) {
+                        }), r) {
                         i.push(s);
                         continue
                     }
@@ -1427,24 +1380,24 @@ springSpace.sui = springSpace.sui || {}, springSpace.sui.filedrop = function(t) 
                 e = [];
             if (!this.batch_files) return t.push(this.droppedFiles), t;
             var i = 1;
-            return t.push([]), e.push(0), this.droppedFiles.forEach((function(s) {
+            return t.push([]), e.push(0), this.droppedFiles.forEach(function(s) {
                 var a = !1;
-                if (e.forEach((function(i, r) {
+                if (e.forEach(function(i, r) {
                         !a && i + s.size < n.max_upload_size && (e[r] = i + s.size, t[r].push(s), a = !0)
-                    })), !a) {
+                    }), !a) {
                     e.push(0), i++, t.push([]);
                     var r = i - 1;
                     e[r] = s.size, t[r].push(s)
                 }
-            })), t
+            }), t
         }, this.isLastBatch = function() {
             return this.batch.current >= this.batch.total
         }, this.ajaxUpload = function() {
             n.$form.find('input[name="batch_current"]').val(n.batch.current);
             var t = new FormData(n.$form[0]);
-            "function" == typeof t.delete && t.delete(n.$input.attr("name")), n.batchedFiles[n.batch.current - 1].forEach((function(e) {
+            "function" == typeof t.delete && t.delete(n.$input.attr("name")), n.batchedFiles[n.batch.current - 1].forEach(function(e) {
                 t.append(n.$input.attr("name"), e)
-            })), jQuery.ajax({
+            }), jQuery.ajax({
                 url: n.$form.attr("action"),
                 type: n.$form.attr("method"),
                 data: t,
@@ -1468,9 +1421,9 @@ springSpace.sui = springSpace.sui || {}, springSpace.sui.filedrop = function(t) 
                         n.updateProgress(t.loaded, t.total)
                     }), t
                 }
-            }).fail((function(t) {
+            }).fail(function(t) {
                 n.error_callback(t, n)
-            }))
+            })
         }, this.isAdvancedUpload && this.$input.length > 0) {
         if (this.$droparea.addClass("has-advanced-upload"), this.batch_files) {
             var s = jQuery("<input />").attr({
@@ -1483,20 +1436,20 @@ springSpace.sui = springSpace.sui || {}, springSpace.sui.filedrop = function(t) 
                 }).val("0");
             this.$form.prepend([s, a])
         }
-        this.$droparea.on("drag dragstart dragend dragover dragenter dragleave drop", (function(t) {
+        this.$droparea.on("drag dragstart dragend dragover dragenter dragleave drop", function(t) {
             t.preventDefault(), t.stopPropagation()
-        })).on("dragover dragenter", (function() {
+        }).on("dragover dragenter", function() {
             n.$droparea.addClass("is-dragover")
-        })).on("dragleave dragend drop", (function() {
+        }).on("dragleave dragend drop", function() {
             n.$droparea.removeClass("is-dragover")
-        })).on("drop", (function(t) {
+        }).on("drop", function(t) {
             var e = n.addFiles(t.originalEvent.dataTransfer.files);
             n.showFiles(), !0 === e && n.autoupload && n.$form.submit()
-        })).on("click", (function(t) {
+        }).on("click", function(t) {
             var e = t.target.tagName; - 1 !== ["A", "I", "SPAN", "B", "STRONG", "BUTTON"].indexOf(e) && (jQuery(t.target).closest("a, button").hasClass("s-ui-filedrop-clear") && (n.clearFiles(), n.removeError()))
-        }))
+        })
     }
-    if (this.isAdvancedUpload || (this.$input.remove(), this.$droparea.remove()), this.$input.length > 0 && (this.$input.on("change", (function(t) {
+    if (this.isAdvancedUpload || (this.$input.remove(), this.$droparea.remove()), this.$input.length > 0 && (this.$input.on("change", function(t) {
             if (t.target.files) {
                 if (n.isAdvancedUpload) {
                     var e = n.addFiles(t.target.files);
@@ -1504,15 +1457,15 @@ springSpace.sui = springSpace.sui || {}, springSpace.sui.filedrop = function(t) 
                 }
                 n.$input.removeClass("has-focus"), n.showFiles()
             }
-        })).on("focus", (function(t) {
+        }).on("focus", function(t) {
             t.target.classList.add("has-focus")
-        })).on("blur", (function(t) {
+        }).on("blur", function(t) {
             t.target.classList.remove("has-focus")
-        })), this.translations.max_file_size)) {
+        }), this.translations.max_file_size)) {
         var r = document.createElement("p");
         r.innerHTML = this.translations.max_file_size + ": " + this.bytesToMB(this.max_file_size) + " MB", this.$label.append(r)
     }
-    this.$form.on("submit", (function(t) {
+    this.$form.on("submit", function(t) {
         if (n.$form.hasClass("is-uploading")) t.preventDefault();
         else {
             if (n.$form.removeClass("is-error"), n.removeError(), n.max_files > 0 && n.countFiles() > n.max_files) return n.showError(n.max_files + " file uploads maximum."), void t.preventDefault();
@@ -1528,18 +1481,18 @@ springSpace.sui = springSpace.sui || {}, springSpace.sui.filedrop = function(t) 
                 success: function(t) {
                     n.callback(t, n)
                 }
-            }).fail((function(t) {
+            }).fail(function(t) {
                 n.error_callback(t, n)
-            })))
+            }))
         }
-    }))
+    })
 };
 var springSpace = springSpace || {};
 springSpace.cookieConsent = springSpace.cookieConsent || {}, springSpace.cookieConsent.alert = function(t) {
     this.setConfig = function(t) {
         void 0 === t && (t = {});
         var e = t.okay ? t.okay : "OK";
-        this.placement_opts = ["bottom", "top"], this.placement = -1 !== this.placement_opts.indexOf(t.placement) ? t.placement : "bottom", this.cookie_name = "springy_cookie_consent", this.cookie_notice_accepted = "ok", this.cookie_exp_days = t.cookie_exp_days ? t.cookie_exp_days : 180, this.read_more_callback = t.read_more_callback ? t.read_more_callback : function() {}, this.aria_label = t.aria_label || "User Privacy Alert", this.fade_in = 500, this.fade_out = 200, this.container_id = "s-ui-cc-container", this.close_button_id = "s-ui-cc-close-btn", this.read_more_elt_id = "s-ui-cc-read-more-link", this.consent_message = t.consent_message ? t.consent_message : "By using our website you are consenting to our use of cookies in accordance with our cookie policy.", this.content = '<div id="' + this.container_id + '" class="container" style="display: none;">    <aside class="navbar navbar-default navbar-fixed-' + this.placement + " fixed-" + this.placement + '" id="s-ui-cc-navbar" aria-label="' + this.aria_label + '">        <div id="s-ui-cc-main" class="container">            <div class="navbar-inner navbar-content-center" id="s-ui-cc-msg-container">                <div id="s-ui-cc-msg">' + this.consent_message + '<button id="' + this.close_button_id + '" type="button" class="btn btn-sm btn-default btn-light" data-dismiss="alert" aria-label="Close">' + e + "</button></div>            </div>        </div>    </aside></div>"
+        this.placement_opts = ["bottom", "top"], this.placement = -1 !== this.placement_opts.indexOf(t.placement) ? t.placement : "bottom", this.cookie_name = "springy_cookie_consent", this.cookie_notice_accepted = "ok", this.cookie_exp_days = t.cookie_exp_days ? t.cookie_exp_days : 180, this.read_more_callback = t.read_more_callback ? t.read_more_callback : function() {}, this.aria_label = t.aria_label || "User Privacy Alert", this.fade_in = 500, this.fade_out = 200, this.container_id = "s-ui-cc-container", this.close_button_id = "s-ui-cc-close-btn", this.read_more_elt_id = "s-ui-cc-read-more-link", this.consent_message = t.consent_message ? t.consent_message : "By using our website you are consenting to our use of cookies in accordance with our cookie policy.", this.content = '<div id="' + this.container_id + '" class="container" style="display: none;">    <aside class="navbar navbar-default navbar-fixed-' + this.placement + " fixed-" + this.placement + '" id="s-ui-cc-navbar" aria-label="' + this.aria_label + '">        <div id="s-ui-cc-main" class="container">            <div class="navbar-inner navbar-content-center" id="s-ui-cc-msg-container">                <div id="s-ui-cc-msg">' + this.consent_message + '<button id="' + this.close_button_id + '" type="button" class="btn btn-sm btn-default btn-light" data-dismiss="alert">' + e + "</button></div>            </div>        </div>    </aside></div>"
     }, this.consentCookieAccepted = function() {
         return this.getCookie(this.cookie_name) === this.cookie_notice_accepted
     }, this.setCookie = function(t, e, i) {
@@ -1560,12 +1513,47 @@ springSpace.cookieConsent = springSpace.cookieConsent || {}, springSpace.cookieC
     }, this.setConfig(t), jQuery(document).ready(this.handleAlert.bind(this))
 };
 var springSpace = springSpace || {};
+springSpace.la = springSpace.la || {}, springSpace.Util = {};
+{
+    const t = function(t) {
+            const e = window.getSelection(),
+                i = document.createRange();
+            i.selectNodeContents(t), e.removeAllRanges(), e.addRange(i)
+        },
+        e = function(t, e) {
+            t = t.replace(/^\?/, "");
+            for (var i = (t = decodeURIComponent(t)).split("&"), n = jQuery(`#${e}`), s = 0; s < i.length; s++) {
+                var a = decodeURIComponent(i[s]).split("="),
+                    r = a[0],
+                    o = a[1];
+                if (void 0 !== o)
+                    if (o = o.replace(/\+/g, " "), r.match(/\[.*?\]/)) {
+                        var l = r.replace(/\[.*?\]/, "[]"),
+                            c = n.find(`select[name="${l}"]`);
+                        void 0 === c.data("multiselect") ? c.find(`option[value="${o}"]`).prop("selected", !0) : c.multiselect("select", o)
+                    } else {
+                        var d = n.find(`*[name="${r}"]`);
+                        void 0 === d.data("multiselect") ? d.val(o) : d.multiselect("select", o)
+                    }
+            }
+        },
+        i = function(t, e) {
+            return t.replace(/%(\d+)/g, function(t, i) {
+                return e[--i]
+            })
+        };
+    springSpace.Util = {
+        selectText: t,
+        rePopForm: e,
+        stringFormat: i
+    }
+}
 
 function closeModal(t) {
     var e = null;
-    void 0 === t ? jQuery(".modal").each((function(t, i) {
+    void 0 === t ? jQuery(".modal").each(function(t, i) {
         "none" !== jQuery(i).css("display") && (e = jQuery(i))
-    })) : e = jQuery("#" + t), null !== e && e.modal("hide").removeData("bs.modal").find(".modal-content").html("")
+    }) : e = jQuery("#" + t), null !== e && e.modal("hide").removeData("bs.modal").find(".modal-content").html("")
 }
 
 function disableButton(t) {
@@ -1575,33 +1563,6 @@ function disableButton(t) {
 function enableButton(t) {
     t && (-1 === ["#", "."].indexOf(t.charAt(0)) && (t = "#" + t), jQuery(t).prop("disabled", !1))
 }
-springSpace.la = springSpace.la || {}, springSpace.util = {}, springSpace.ui = {}, springSpace.util._construct = function() {
-    function t() {}
-    t.prototype.stringFormat = function(t, e) {
-        return t.replace(/%(\d+)/g, (function(t, i) {
-            return e[--i]
-        }))
-    }, t.prototype.selectText = function(t) {
-        var e, i, n = t;
-        document.body.createTextRange ? ((e = document.body.createTextRange()).moveToElementText(n), e.select()) : window.getSelection && (i = window.getSelection(), (e = document.createRange()).selectNodeContents(n), i.removeAllRanges(), i.addRange(e))
-    }, t.prototype.rePopForm = function(t, e) {
-        t = t.replace(/^\?/, "");
-        for (var i = (t = decodeURIComponent(t)).split("&"), n = jQuery("#" + e), s = 0; s < i.length; s++) {
-            var a = decodeURIComponent(i[s]).split("="),
-                r = a[0],
-                o = a[1];
-            if (void 0 !== o)
-                if (o = o.replace(/\+/g, " "), r.match(/\[.*?\]/)) {
-                    var l = r.replace(/\[.*?\]/, "[]"),
-                        c = n.find('select[name="' + l + '"]');
-                    void 0 === c.data("multiselect") ? c.find("option[value=" + o + "]").prop("selected", !0) : c.multiselect("select", o)
-                } else {
-                    var d = n.find('*[name="' + r + '"]');
-                    void 0 === d.data("multiselect") ? d.val(o) : d.multiselect("select", o)
-                }
-        }
-    }, this.Util = t
-}, springSpace.util._construct(), springSpace.Util = new springSpace.util.Util;
 var errorAlert = function(t = "") {
         window.suiNotify.hideWorking(), window.suiNotify.error(t)
     },
@@ -1619,7 +1580,7 @@ var errorAlert = function(t = "") {
         if (t.responseText) try {
             const i = JSON.parse(t.responseText);
             i.error && (e = i.error)
-        } catch (t) {
+        } catch {
             e = "Invalid response received"
         }
         return e
@@ -1645,14 +1606,15 @@ var errorAlert = function(t = "") {
         return s.type = "button", s.classList.add("close"), s.setAttribute("aria-label", "close"), s.setAttribute("data-dismiss", "alert"), s.innerHTML = '<span aria-hidden="true">&times;</span>', n.appendChild(s), n.insertAdjacentHTML("beforeend", t), n
     },
     enableMultiSelect = function(t, e) {
-        if (0 !== t.length) {
-            var i = {};
-            springyText && springyText.bsMultiselect && Object.keys(springyText.bsMultiselect).forEach((function(t) {
-                i[t] = springyText.bsMultiselect[t]
-            })), Object.keys(e).forEach((function(t) {
-                i[t] = e[t]
-            })), t.multiselect(i)
-        }
+        if (0 !== t.length)
+            if ("function" == typeof t.multiselect) {
+                var i = {};
+                window.springyText && window.springyText.bsMultiselect && Object.keys(window.springyText.bsMultiselect).forEach(function(t) {
+                    i[t] = window.springyText.bsMultiselect[t]
+                }), Object.keys(e).forEach(function(t) {
+                    i[t] = e[t]
+                }), t.multiselect(i)
+            } else console.error("Multiselect called but not present, probably BS5 change")
     };
 const resetMultiSelect = function(t, e) {
     const i = jQuery(t);
@@ -1731,19 +1693,17 @@ springSpace.regex = {
                     case e.RULE_OPERATOR_NOTEQUALS:
                         return this.value.includes(t) ? this.oppositeAction : this.action;
                     case e.RULE_OPERATOR_INCLUDES:
-                        return Array.isArray(t) ? t.filter((t => this.value.includes(t))).length > 0 ? this.action : this.oppositeAction : e.RULE_ACTION_NONE;
+                        return Array.isArray(t) ? t.filter(t => this.value.includes(t)).length > 0 ? this.action : this.oppositeAction : e.RULE_ACTION_NONE;
                     case e.RULE_OPERATOR_INCLUDES_ALL:
-                        return Array.isArray(t) ? t.filter((t => this.value.includes(t))).length === this.value.length ? this.action : this.oppositeAction : e.RULE_ACTION_NONE
+                        return Array.isArray(t) ? t.filter(t => this.value.includes(t)).length === this.value.length ? this.action : this.oppositeAction : e.RULE_ACTION_NONE
                 }
                 return e.RULE_ACTION_NONE
             }
         }
-    }(window),
-    //!Idea Form
-    springSpace.la.ideaform = function(t) {
+    }(window), springSpace.la.ideaform = function(t) {
         this.$form = jQuery("#ideaform"), this.errormsg = t.errormsg;
         var e = this;
-        this.$form.on("submit", (function(t) {
+        this.$form.on("submit", function(t) {
             t.preventDefault(), e.$form.find("label .error-message").remove(), e.$form.find(".form-group").removeClass("has-error"), e.$form.find(".form-control").attr("aria-invalid", !1);
             var i = e.$form.find("input[name=title]");
             "" == i.val() && e.markError(i, e.errormsg.reqfields);
@@ -1755,21 +1715,19 @@ springSpace.regex = {
                 url: e.$form.attr("action"),
                 method: e.$form.attr("method"),
                 data: e.$form.serialize()
-            }).done((function() {
+            }).done(function() {
                 successAlert()
-            })).fail(jqAjaxFailCallback).always((function() {
+            }).fail(jqAjaxFailCallback).always(function() {
                 closeModal()
-            }))
-        })), this.markError = function(t, e) {
+            })
+        }), this.markError = function(t, e) {
             var i = jQuery('<div class="error-message"></div>').html(e);
             t.attr("aria-invalid", !0).parent().addClass("has-error").find("label").append(i)
         }
-    }
-    //!Idea Comment Form
-    , springSpace.la.ideacommentform = function(t) {
+    }, springSpace.la.ideacommentform = function(t) {
         this.$form = jQuery("#ideacommentform"), this.errormsg = t.errormsg;
         var e = this;
-        this.$form.on("submit", (function(t) {
+        this.$form.on("submit", function(t) {
             t.preventDefault(), e.$form.find("label .error-message").remove(), e.$form.find(".form-group").removeClass("has-error"), e.$form.find(".form-control").attr("aria-invalid", !1);
             var i = e.$form.find("input[name=email]");
             if (jQuery.trim(i.val()).match(springSpace.regex.email) || e.markError(i, e.errormsg.emailaddress), e.$form.find(".has-error").length > 0) return errorAlert(), e.$form.find("*[aria-invalid=true]:first").focus(), !1;
@@ -1777,7 +1735,7 @@ springSpace.regex = {
                 url: e.$form.attr("action"),
                 data: e.$form.serialize(),
                 method: e.$form.attr("method")
-            }).done((function(t) {
+            }).done(function(t) {
                 if (successAlert(), 1 == t.upvote) {
                     var e = jQuery("#product_idea_" + t.idea_id + " .s-la-idea-upvotes"),
                         i = parseInt(e.text(), 10) + 1;
@@ -1787,13 +1745,13 @@ springSpace.regex = {
                     e.text(i)
                 }
                 closeModal()
-            })).fail(jqAjaxFailCallback)
-        })), this.markError = function(t, e) {
+            }).fail(jqAjaxFailCallback)
+        }), this.markError = function(t, e) {
             var i = jQuery('<div class="error-message"></div>').html(e);
             t.attr("aria-invalid", !0).parent().addClass("has-error").find("label").append(i)
-        }, this.$form.find(".btn-cancel").on("click", (function(t) {
+        }, this.$form.find(".btn-cancel").on("click", function(t) {
             closeModal()
-        }))
+        })
     };
 const faqHit = function(t, e, i) {
         jQuery.ajax({
@@ -1813,11 +1771,11 @@ const faqHit = function(t, e, i) {
                 v: e
             },
             dataType: "json"
-        }).done((t => {
+        }).done(t => {
             if (!t.success) return;
             let e = null;
             1 === t.vote ? (e = jQuery("#s-la-vote-yes-ct"), e.html(parseInt(e.text()) + 1), jQuery("#s-la-vote-yes").addClass("voted")) : 0 === t.vote && (e = jQuery("#s-la-vote-no-ct"), e.html(parseInt(e.text()) + 1), jQuery("s-la-vote-no").addClass("voted")), jQuery("#s-la-vote button").attr("disabled", "true")
-        })).fail(jqAjaxFailCallback)
+        }).fail(jqAjaxFailCallback)
     },
     loadRelatedFAQs = function(t) {
         const e = document.getElementById("s-la-faq-relatedfaqs");
@@ -1825,34 +1783,34 @@ const faqHit = function(t, e, i) {
             method: "GET",
             url: `/faq/${t}/related`,
             dataType: "json"
-        }).done((t => {
+        }).done(t => {
             t.content && (e.innerHTML = t.content)
-        })).fail((() => {}))
+        }).fail(() => {})
     },
     fixMediaZindex = function() {
-        document.querySelectorAll(".s-la-faq-media-wrapper iframe").forEach((t => {
+        document.querySelectorAll(".s-la-faq-media-wrapper iframe").forEach(t => {
             const e = t.getAttribute("src"),
                 i = "wmode=transparent"; - 1 !== e.indexOf("?") ? t.setAttribute("src", `${e}&${i}`) : t.setAttribute("src", `${e}?${i}`)
-        }))
+        })
     },
     faqVoteButtons = function(t) {
-        document.querySelectorAll("#s-la-vote-no, #s-la-vote-yes").forEach((e => {
-            e.addEventListener("click", (e => {
+        document.querySelectorAll("#s-la-vote-no, #s-la-vote-yes").forEach(e => {
+            e.addEventListener("click", e => {
                 e.preventDefault();
                 const i = e.currentTarget,
                     n = i.dataset.warn;
                 if ("" !== n) return void alert(n);
                 const s = parseInt(i.dataset.vote, 10);
                 faqVote(t, s)
-            }))
-        }))
+            })
+        })
     },
     setUpAnswerPage = function(t, e, i, n) {
         t <= 0 || (i || faqHit(t, e, 1), n && n !== document.referrer && (window.location.href = n), loadRelatedFAQs(t), fixMediaZindex(), faqVoteButtons(t))
     },
     setUpPublicPage = function() {
         const t = new URL(window.location);
-        t.searchParams.has("token") && (t.searchParams.delete("token"), history.replaceState({}, "", t.toString())), document.body.addEventListener("click", (t => {
+        t.searchParams.has("token") && (t.searchParams.delete("token"), history.replaceState({}, "", t.toString())), document.body.addEventListener("click", t => {
             const e = t.target.tagName;
             if (-1 === ["A", "I", "SPAN", "B", "STRONG"].indexOf(e)) return;
             const i = t.target.closest("a");
@@ -1864,7 +1822,7 @@ const faqHit = function(t, e, i) {
             })) : i.classList.contains("modallink") && (t.preventDefault(), n = new springSpace.sui.modal({
                 url: i.getAttribute("href")
             }))
-        }))
+        })
     },
     getDocHeight = function() {
         return Math.max(Math.max(document.body.scrollHeight, document.documentElement.scrollHeight), Math.max(document.body.offsetHeight, document.documentElement.offsetHeight), Math.max(document.body.clientHeight, document.documentElement.clientHeight))
@@ -1876,26 +1834,26 @@ const faqHit = function(t, e, i) {
             return {}
         }
         static get observedAttributes() {
-            return Object.keys(this.props).map((t => this.attributeName(t)))
+            return Object.keys(this.props).map(t => this.attributeName(t))
         }
         static attributeName(t) {
             return t.replace(/([a-zA-Z])(?=[A-Z])/g, "$1-").toLowerCase()
         }
         constructor() {
-            super(), this.$ = {}, this.attrToProp = {}, this.propToAttr = {}, Object.keys(this.constructor.props).forEach((t => {
+            super(), this.$ = {}, this.attrToProp = {}, this.propToAttr = {}, Object.keys(this.constructor.props).forEach(t => {
                 const e = this.constructor.attributeName(t);
                 this.attrToProp[e] = t, this.propToAttr[t] = e
-            })), this.attachShadow({
+            }), this.attachShadow({
                 mode: "open"
             }), this._renderPromise = null, this._isConnected = !1, this._triggers = {}, this._props = {}
         }
         connectedCallback() {
             if (this._isConnected) return;
-            const t = Object.keys(this.constructor.props).reduce(((t, e) => ({
+            const t = Object.keys(this.constructor.props).reduce((t, e) => ({
                 ...t,
                 [e]: this[e]
-            })), {});
-            Object.keys(this.constructor.props).forEach((e => {
+            }), {});
+            Object.keys(this.constructor.props).forEach(e => {
                 const i = this.constructor.props[e],
                     n = this.propToAttr[e];
                 let s = this[e];
@@ -1908,23 +1866,23 @@ const faqHit = function(t, e, i) {
                     set: this.setter(e),
                     get: this.getter(e)
                 }), this[e] = s
-            })), this._isConnected = !0, this._render(!0, !0)
+            }), this._isConnected = !0, this._render(!0, !0)
         }
         disconnectedCallback() {
             this._isConnected = !1
         }
         _requestRender() {
-            this._renderPromise || (this._renderPromise = Promise.resolve().then((() => {
+            this._renderPromise || (this._renderPromise = Promise.resolve().then(() => {
                 this._render()
-            })))
+            }))
         }
         _render(t = !1, e = !1) {
-            (t || Object.keys(this._triggers).length) && (this._renderPromise = Promise.resolve().then((() => {
-                e && (this.firstRender(this.shadowRoot, this._triggers), this.$ = [...this.shadowRoot.querySelectorAll("[id]")].reduce(((t, e) => ({
+            (t || Object.keys(this._triggers).length) && (this._renderPromise = Promise.resolve().then(() => {
+                e && (this.firstRender(this.shadowRoot, this._triggers), this.$ = [...this.shadowRoot.querySelectorAll("[id]")].reduce((t, e) => ({
                     ...t,
                     [e.id]: e
-                })), {}), this.firstRendered(this.shadowRoot, this._triggers)), this.render(this.shadowRoot, this._triggers), this.rendered(this.shadowRoot, this._triggers), this._renderPromise = null, this._triggers = {}
-            })))
+                }), {}), this.firstRendered(this.shadowRoot, this._triggers)), this.render(this.shadowRoot, this._triggers), this.rendered(this.shadowRoot, this._triggers), this._renderPromise = null, this._triggers = {}
+            }))
         }
         forceRender() {
             this._render(!0)
@@ -2038,9 +1996,9 @@ const faqHit = function(t, e, i) {
             super.connectedCallback(), document.addEventListener("click", this.onClickOutside)
         }
         disconnectedCallback() {
-            super.disconnectedCallback(), this._dateInput && [...this._dateInput.labels || []].forEach((t => {
+            super.disconnectedCallback(), this._dateInput && [...this._dateInput.labels || []].forEach(t => {
                 t.removeEventListener("click", this.onLabelClick)
-            })), document.removeEventListener("click", this.onClickOutside)
+            }), document.removeEventListener("click", this.onClickOutside)
         }
         firstRender(t) {
             const e = document.createElement("template");
@@ -2048,22 +2006,22 @@ const faqHit = function(t, e, i) {
         }
         firstRendered(t) {
             const e = t.querySelector("slot");
-            e.addEventListener("slotchange", (() => {
-                const t = e.assignedNodes().filter((t => t.nodeType !== Node.TEXT_NODE));
-                this._dateInput = t.find((t => "date" === t.getAttribute("type"))), this._dateInput && (this._output.placeholder = this._dateInput.placeholder, (this._dateInput.labels || []).forEach((t => {
+            e.addEventListener("slotchange", () => {
+                const t = e.assignedNodes().filter(t => t.nodeType !== Node.TEXT_NODE);
+                this._dateInput = t.find(t => "date" === t.getAttribute("type")), this._dateInput && (this._output.placeholder = this._dateInput.placeholder, (this._dateInput.labels || []).forEach(t => {
                     t.addEventListener("click", this.onLabelClick)
-                })), this.date = this._dateInput.value), this._timeInput = t.find((t => "time" === t.getAttribute("type"))), this._timeInput && (this.showTime = !0, this.time = this._timeInput.value)
-            })), this._output = document.createElement("input"), this._output.slot = "output", this._output.readOnly = !0, this._output.addEventListener("click", (() => {
+                }), this.date = this._dateInput.value), this._timeInput = t.find(t => "time" === t.getAttribute("type")), this._timeInput && (this.showTime = !0, this.time = this._timeInput.value)
+            }), this._output = document.createElement("input"), this._output.slot = "output", this._output.readOnly = !0, this._output.addEventListener("click", () => {
                 this.openCalendar()
-            })), this.appendChild(this._output), this.addEventListener("keyup", (t => {
+            }), this.appendChild(this._output), this.addEventListener("keyup", t => {
                 if (t.stopPropagation(), "Enter" === t.key) this.$.calendar.open || this.openCalendar()
-            })), this.$.calendar.addEventListener("change", (t => {
+            }), this.$.calendar.addEventListener("change", t => {
                 this.date = t.target.value.date, this.time = t.target.value.time, this.closeCalendar()
-            })), this.$.calendar.addEventListener("clear", (() => {
+            }), this.$.calendar.addEventListener("clear", () => {
                 this.date = ""
-            })), this.$.calendar.addEventListener("close", (() => {
+            }), this.$.calendar.addEventListener("close", () => {
                 this._dontFocus || this._output.focus(), this._dontFocus = !1
-            }))
+            })
         }
         render(t, e) {
             ("date" in e || "time" in e) && (this.value = {
@@ -2122,7 +2080,7 @@ const faqHit = function(t, e, i) {
         }
         onClickOutside(t) {
             if (this.$.calendar.open) {
-                !t.composedPath().some((t => t === this)) && this.closeCalendar(!0)
+                !t.composedPath().some(t => t === this) && this.closeCalendar(!0)
             }
         }
     };
@@ -2148,14 +2106,14 @@ const faqHit = function(t, e, i) {
             this.$.select.focus()
         }
         firstRendered() {
-            this.$.select.addEventListener("change", (t => {
+            this.$.select.addEventListener("change", t => {
                 this.value = t.target.value
-            }))
+            })
         }
         render(t, e) {
             "value" in e && this.dispatchEvent(new Event("change", {
                 bubbles: !0
-            })), this.$.select.innerHTML = this.items.map((t => `<option value="${t.value}">${t.name}</option>`)).join(""), this.$.select.value = this.value
+            })), this.$.select.innerHTML = this.items.map(t => `<option value="${t.value}">${t.name}</option>`).join(""), this.$.select.value = this.value
         }
     };
     const s = class extends e {
@@ -2219,35 +2177,35 @@ const faqHit = function(t, e, i) {
             e.innerHTML = '\n      <style>\n        :host {\n          display: none;\n          flex-direction: column;\n          align-items: center;\n          justify-content: center;\n          position: relative;\n          z-index: 3;\n          padding: 0.2rem;\n          background-color: var(--bgColor);\n        }\n\n        :host([open]) {\n          display: flex;\n        }\n\n        .week {\n          display: flex;\n          align-items: center;\n          justify-content: center;\n        }\n\n        .day, .date, button {\n          color: var(--color);\n          background-color: transparent;\n          border: 0;\n          box-sizing: border-box;\n          width: 33px;\n          height: 33px;\n          padding: 0;\n          font-family: inherit;\n          font-size: calc(2.8em / 3);\n\n          text-transform: uppercase;\n\n          flex-grow: 0;\n          display: flex;\n          flex-direction: column;\n          align-items: center;\n          justify-content: center;\n          cursor: pointer;\n        }\n\n        .date {\n          border: 1px solid var(--hintColor);\n          border-width: 0 0 1px 1px;\n        }\n\n        .date:last-child {\n          border-right-width: 1px;\n        }\n\n        .date.last + .spacer {\n          border-left-width: 1px;\n        }\n\n        .week:nth-child(2) .date:not(.spacer) {\n          border-top-width: 1px;\n        }\n\n        .week:last-child .spacer {\n          border-right-width: 0;\n          border-bottom-width: 0;\n        }\n\n        .date.today {\n            font-weight: bold;\n            background-image: linear-gradient(to bottom, #0088cc, #0044cc);\n            background-repeat: repeat-x;\n            border-color: #0044cc #0044cc #002a80;\n            color: #fff;\n            font-size: 1.3rem;\n        }\n\n        .date.spacer {\n          border-left-width: 0;\n          pointer-events: none;\n        }\n\n        #buttons {\n          width: 100%;\n          display: flex;\n          justify-content: space-between;\n          margin-top: 0.5em;\n          padding-top: 0.5em;\n          border-top: 1px solid var(--hintColor);\n        }\n\n        #year-month, #hours-minutes {\n          display: flex;\n          width: 100%;\n        }\n\n        #year-month aeon-select {\n          width: 50%;\n        }\n\n        #year-month aeon-select + aeon-select {\n          margin-left: 0.5em;\n        }\n\n        #hours-minutes {\n          padding-top: 0.5em;\n          margin-top: 0.5em;\n          border-top: 1px solid var(--hintColor);\n          display: none;\n          justify-content: center;\n          align-items: center;\n        }\n\n        #hours-minutes aeon-select {\n          width: 3.5em;\n        }\n\n        #hours-minutes aeon-select#hours {\n          margin-right: 0.2em;\n        }\n\n        #hours-minutes aeon-select#minutes {\n          margin-left: 0.2em;\n        }\n\n        :host([show-time]) #hours-minutes {\n          display: flex;\n        }\n      </style>\n\n      <div id="container">\n        <div id="year-month">\n          <aeon-select id="month"></aeon-select>\n          <aeon-select id="year"></aeon-select>\n        </div>\n        <div id="calendar"></div>\n        <div id="hours-minutes">\n          <aeon-select id="hours"></aeon-select>:<aeon-select id="minutes"></aeon-select>\n        </div>\n        <div id="buttons">\n          <button id="confirm" title="Confirm">\n            <svg width="24" height="24">\n              <g><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path></g>\n            </svg>\n          </button>\n          <button id="clear" title=\'Clear\'>\n            Clear\n          </button>\n          <button id="cancel" title="Cancel">\n            <svg width="24" height="24">\n              <g><path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></g>\n            </svg>\n          </button>\n        </div>\n      </div>\n    ', t.appendChild(e.content.cloneNode(!0))
         }
         firstRendered() {
-            this.addEventListener("keyup", (t => {
+            this.addEventListener("keyup", t => {
                 if (t.stopPropagation(), "Escape" === t.key) this.open = !1
-            })), this.$.year.addEventListener("change", (t => {
+            }), this.$.year.addEventListener("change", t => {
                 this.year = t.target.value
-            })), this.$.month.addEventListener("change", (t => {
+            }), this.$.month.addEventListener("change", t => {
                 this.month = t.target.value
-            })), this.$.hours.items = [];
+            }), this.$.hours.items = [];
             for (let t = 0; t < 24; t++) this.$.hours.items.push({
                 name: `${t}`.padStart(2, "0"),
                 value: t
             });
-            this.$.hours.addEventListener("change", (t => {
+            this.$.hours.addEventListener("change", t => {
                 this.hours = t.target.value
-            })), this.$.minutes.items = [];
+            }), this.$.minutes.items = [];
             for (let t = 0; t < 60; t++) this.$.minutes.items.push({
                 name: `${t}`.padStart(2, "0"),
                 value: t
             });
-            this.$.minutes.addEventListener("change", (t => {
+            this.$.minutes.addEventListener("change", t => {
                 this.minutes = t.target.value
-            })), this.$.calendar.addEventListener("click", this.onDateClick.bind(this)), this.$.cancel.addEventListener("click", (() => {
+            }), this.$.calendar.addEventListener("click", this.onDateClick.bind(this)), this.$.cancel.addEventListener("click", () => {
                 this.open = !1
-            })), this.$.confirm.addEventListener("click", (() => {
+            }), this.$.confirm.addEventListener("click", () => {
                 this.confirm()
-            })), this.$.clear.addEventListener("click", (() => {
+            }), this.$.clear.addEventListener("click", () => {
                 this.dispatchEvent(new Event("clear", {
                     bubbles: !0
                 })), this.open = !1
-            }))
+            })
         }
         render(t, e) {
             "open" in e && !1 === this.open && !0 === e.open && this.dispatchEvent(new Event("close", {
@@ -2269,7 +2227,7 @@ const faqHit = function(t, e, i) {
                     })
                 }), i.setMonth(t + 1)
             }
-            this.$.month.items.sort(((t, e) => t.num - e.num)), i.setMonth(0), i.setDate(1);
+            this.$.month.items.sort((t, e) => t.num - e.num), i.setMonth(0), i.setDate(1);
             const n = [];
             for (let t = 0; t < 7; t++) {
                 const e = i.getDay();
@@ -2281,7 +2239,7 @@ const faqHit = function(t, e, i) {
                 }), i.setDate(t + 2)
             }
             const s = 7 - this.startDay;
-            n.sort(((t, e) => (t.num + s) % 7 - (e.num + s) % 7)), this.$.hours.value = this.hours, this.$.minutes.value = this.minutes;
+            n.sort((t, e) => (t.num + s) % 7 - (e.num + s) % 7), this.$.hours.value = this.hours, this.$.minutes.value = this.minutes;
             let a = new Date(this.year, this.month, 1, 12);
             const r = a.getDay();
             a.setMonth(a.getMonth() + 1), a.setDate(0);
@@ -2290,7 +2248,7 @@ const faqHit = function(t, e, i) {
             let l = !1,
                 c = !1,
                 d = 0;
-            this.$.calendar.innerHTML = `\n      <div class="week">\n        ${n.map((t=>`<div class="day">${t.name}</div>`)).join("")}\n      </div>\n\n      ${[0,1,2,3,4,5].map((()=>d>=o?null:`\n          <div class="week">\n            ${n.map((t=>{t.num%7===r&&(l=!0);let e="";l&&(d+=1,d<=o?(e=d,a.setDate(e)):c=!0);return`\n                  <button class="date ${d===this.day?"today":""} ${!l||c?"spacer":""} ${d===o?"last":""}" data-day="${d}" ${!l||c?'tabindex="-1" disabled':""}>${e}</button>\n              `})).join("")}\n          </div>\n         `)).join("")}\n    `;
+            this.$.calendar.innerHTML = `\n      <div class="week">\n        ${n.map(t=>`<div class="day">${t.name}</div>`).join("")}\n      </div>\n\n      ${[0,1,2,3,4,5].map(()=>d>=o?null:`\n          <div class="week">\n            ${n.map(t=>{t.num%7===r&&(l=!0);let e="";l&&(d+=1,d<=o?(e=d,a.setDate(e)):c=!0);return`\n                  <button class="date ${d===this.day?"today":""} ${!l||c?"spacer":""} ${d===o?"last":""}" data-day="${d}" ${!l||c?'tabindex="-1" disabled':""}>${e}</button>\n              `}).join("")}\n          </div>\n         `).join("")}\n    `;
             const h = t.querySelectorAll("button:not([disabled]), aeon-select");
             this._firstFocusableEl = h[0], this._lastFocusableEl = h[h.length - 1]
         }
@@ -2348,19 +2306,19 @@ const faqHit = function(t, e, i) {
 function(t) {
     t.springSpace = t.springSpace || {}, t.springSpace.la = t.springSpace.la || {};
     t.springSpace.la.askform = function(e) {
-        this.id = e.content_id, this.queue_id = e.queue_id, this.errormsg = e.errormsg, this.divselector = `#s-la-askform-${this.id}`, this.$form = jQuery(`${this.divselector} form`), this.translations = e.translations, this.form_action = e.form_action, this.libauth_enabled = e.libauth_enabled || !1, this.libauth_authed = e.libauth_authed || !1, this.autoReplySettings = new t.springSpace.la.FormAutoReply(e.autoReplySettings || {}), this.captcha_enabled = this.autoReplySettings.isCaptchaEnabled(), this.autoreply_enabled = this.autoReplySettings.isAutoReplyEnabled(), this.captchaDiv = this.$form[0].querySelector(".formlibcpt"), this.confirmEmailDiv = this.$form[0].querySelector(".confem_wrap"), this.autoreply_type = this.autoReplySettings.getAutoReplyType(), this.captcha_enabled && this.captchaDiv.classList.remove("hidden"), Array.isArray(e.rules) ? this.rules = e.rules.map((e => new t.springSpace.la.FormFieldRule(e))) : this.rules = [], this.handleRequiredCheckBoxes = function(t) {
+        this.id = e.content_id, this.queue_id = e.queue_id, this.errormsg = e.errormsg, this.divselector = `#s-la-askform-${this.id}`, this.$form = jQuery(`${this.divselector} form`), this.translations = e.translations, this.form_action = e.form_action, this.libauth_enabled = e.libauth_enabled || !1, this.libauth_authed = e.libauth_authed || !1, this.autoReplySettings = new t.springSpace.la.FormAutoReply(e.autoReplySettings || {}), this.captcha_enabled = this.autoReplySettings.isCaptchaEnabled(), this.autoreply_enabled = this.autoReplySettings.isAutoReplyEnabled(), this.captchaDiv = this.$form[0].querySelector(".formlibcpt"), this.confirmEmailDiv = this.$form[0].querySelector(".confem_wrap"), this.autoreply_type = this.autoReplySettings.getAutoReplyType(), this.captcha_enabled && this.captchaDiv.classList.remove("hidden"), Array.isArray(e.rules) ? this.rules = e.rules.map(e => new t.springSpace.la.FormFieldRule(e)) : this.rules = [], this.handleRequiredCheckBoxes = function(t) {
             const e = t.target.name;
             if (!0 === t.target.checked) {
                 const t = this.$form[0].querySelectorAll(`input[type=checkbox][name="${e}"]`);
-                return void(t.length > 0 && Array.prototype.forEach.call(t, (t => {
+                return void(t.length > 0 && Array.prototype.forEach.call(t, t => {
                     t.removeAttribute("required")
-                }), this))
+                }, this))
             }
             const i = t.target.closest("fieldset");
             if (null === i) return;
-            i.querySelectorAll("input[type=checkbox]:checked").length > 0 || Array.prototype.forEach.call(i.querySelectorAll("input[type=checkbox]"), (t => {
+            i.querySelectorAll("input[type=checkbox]:checked").length > 0 || Array.prototype.forEach.call(i.querySelectorAll("input[type=checkbox]"), t => {
                 t.setAttribute("required", "")
-            }), this)
+            }, this)
         }, this.markError = function(t, e) {
             if (!t) return;
             const i = document.createElement("div");
@@ -2381,7 +2339,7 @@ function(t) {
                     auto_type: this.autoReplySettings.type
                 },
                 dataType: "json"
-            }).done((({
+            }).done(({
                 html: t = "",
                 isNowOffHours: e = !1,
                 isCaptchaAlwaysOn: i = !1
@@ -2390,9 +2348,9 @@ function(t) {
                 this.captchaDiv.innerHTML = t, this.captchaDiv.classList.add("active"), this.captchaDiv.classList.remove("hidden");
                 const n = this.captchaDiv.querySelector(".btn-cptreload");
                 n && n.addEventListener("click", this.loadCaptcha.bind(this))
-            })).fail((() => {
+            }).fail(() => {
                 this.captchaDiv.classList.add("hidden")
-            }))
+            })
         }, this.validateField = function(t) {
             if (!t || t.disabled) return;
             if ("SELECT" === t.tagName) {
@@ -2413,35 +2371,35 @@ function(t) {
         }, this.validateFieldSet = function(t) {
             const e = t.querySelectorAll("input");
             let i = !0;
-            if (e.forEach((t => {
+            if (e.forEach(t => {
                     t.checkValidity() || (i = !1, t.setAttribute("aria-invalid", "true"))
-                })), i) return;
+                }), i) return;
             const n = document.createElement("div");
             n.classList.add("error-message"), n.innerHTML = this.errormsg.reqfields, t.classList.add("has-error");
             const s = t.querySelector("legend");
             s && s.appendChild(n)
         }, this.validate = function() {
             if (this.libauth_enabled && !this.libauth_authed) return !1;
-            if (this.$form.attr("action", this.form_action), this.$form.find("label .error-message, legend .error-message").remove(), this.$form.find(".form-group").removeClass("has-error"), this.$form.find(".form-control, input[type=radio], input[type=checkbox]").attr("aria-invalid", !1), Array.from(this.$form[0].querySelectorAll("[required]")).forEach((t => {
+            if (this.$form.attr("action", this.form_action), this.$form.find("label .error-message, legend .error-message").remove(), this.$form.find(".form-group").removeClass("has-error"), this.$form.find(".form-control, input[type=radio], input[type=checkbox]").attr("aria-invalid", !1), Array.from(this.$form[0].querySelectorAll("[required]")).forEach(t => {
                     this.validateField(t)
-                })), Array.from(this.$form[0].querySelectorAll("fieldset[data-required]")).forEach((t => {
+                }), Array.from(this.$form[0].querySelectorAll("fieldset[data-required]")).forEach(t => {
                     this.validateFieldSet(t)
-                })), this.$form.find(".has-error").length > 0) return this.$form.find("*[aria-invalid=true]:first").trigger("focus"), !1;
+                }), this.$form.find(".has-error").length > 0) return this.$form.find("*[aria-invalid=true]:first").trigger("focus"), !1;
             let e = 0;
             return t.springSpace.queryAnalyzer ? e = t.springSpace.queryAnalyzer.qlog_id || 0 : t.springSpace.la.Page && t.springSpace.la.Page.qlog_id && (e = t.springSpace.la.Page.qlog_id), e > 0 && this.$form.find("input[name=qlog]").val(e), t.suiNotify.working(), !0
         }, this.createDismissableAlert = function(t, e) {
             const i = document.createElement("div");
             i.classList.add("alert", `alert-${e}`, "alert-dismissable"), i.setAttribute("role", "alert"), i.setAttribute("aria-atomic", "true");
             const n = document.createElement("button");
-            return n.type = "button", n.classList.add("close"), n.setAttribute("aria-label", "close"), n.innerHTML = '<span aria-hidden="true">&times;</span>', i.appendChild(n), i.insertAdjacentHTML("beforeend", t), n.addEventListener("click", (t => {
+            return n.type = "button", n.classList.add("close"), n.setAttribute("aria-label", "close"), n.innerHTML = '<span aria-hidden="true">&times;</span>', i.appendChild(n), i.insertAdjacentHTML("beforeend", t), n.addEventListener("click", t => {
                 t.preventDefault(), i.remove()
-            })), i
+            }), i
         }, this.resetRules = function() {
-            this.rules.forEach((t => {
-                this.$form[0].querySelectorAll(`*[name="${t.field1}"], *[name="${t.field1}[]"]`).forEach((t => {
+            this.rules.forEach(t => {
+                this.$form[0].querySelectorAll(`*[name="${t.field1}"], *[name="${t.field1}[]"]`).forEach(t => {
                     t.dispatchEvent(new Event("change"))
-                }))
-            }))
+                })
+            })
         }, this.questionform = new t.springSpace.sui.filedrop({
             selector: `${this.divselector} form`,
             max_files: 5,
@@ -2473,38 +2431,38 @@ function(t) {
             },
             validate: this.validate.bind(this)
         }), this.showField = function(t) {
-            t.classList.remove("hidden"), t.querySelectorAll("select, input, textarea").forEach((t => {
+            t.classList.remove("hidden"), t.querySelectorAll("select, input, textarea").forEach(t => {
                 t.disabled = !1
-            }))
+            })
         }, this.hideField = function(t) {
-            t.classList.add("hidden"), t.querySelectorAll("select, input, textarea").forEach((t => {
+            t.classList.add("hidden"), t.querySelectorAll("select, input, textarea").forEach(t => {
                 ["checkbox", "radio"].includes(t.type) ? t.checked = !1 : t.value = "", t.dispatchEvent(new Event("change")), t.disabled = !0
-            }))
+            })
         }, this.getMultiCheckValue = function(t) {
             const e = new FormData(this.$form[0]);
-            return Array.from(e.getAll(t)).map((t => Number(t)))
+            return Array.from(e.getAll(t)).map(t => Number(t))
         }, this.getRadioValue = function(t) {
             const e = new FormData(this.$form[0]);
             return Number(e.get(t))
         }, this.setUpRules = function() {
-            this.rules.forEach((t => {
-                this.$form[0].querySelectorAll(`*[name="${t.field1}"], *[name="${t.field1}[]"]`).forEach((e => {
+            this.rules.forEach(t => {
+                this.$form[0].querySelectorAll(`*[name="${t.field1}"], *[name="${t.field1}[]"]`).forEach(e => {
                     const i = this.$form[0].querySelector(`.${t.field2}_wrap`);
-                    i && e.addEventListener("change", (e => {
+                    i && e.addEventListener("change", e => {
                         let n = Number(e.target.value);
                         "checkbox" === e.target.type ? n = this.getMultiCheckValue(e.target.name) : "radio" === e.target.type && (n = this.getRadioValue(e.target.name));
                         const s = t.getFieldAction(n);
                         0 === s ? this.showField(i) : 1 === s && this.hideField(i)
-                    }))
-                }))
-            }))
+                    })
+                })
+            })
         }, this.setUp = function() {
             if (this.libauth_enabled && !this.libauth_authed) {
-                if (this.questionform.$form[0].querySelectorAll("input,select,button,textarea").forEach((t => {
+                if (this.questionform.$form[0].querySelectorAll("input,select,button,textarea").forEach(t => {
                         t.disabled = !0
-                    })), this.questionform.$form[0].querySelectorAll('[tabindex="0"],a').forEach((t => {
+                    }), this.questionform.$form[0].querySelectorAll('[tabindex="0"],a').forEach(t => {
                         t.setAttribute("tabindex", "-1")
-                    })), this.questionform.$form[0].setAttribute("aria-hidden", "true"), window !== window.top) {
+                    }), this.questionform.$form[0].setAttribute("aria-hidden", "true"), window !== window.top) {
                     const t = document.querySelector(`${this.divselector} .btn-libauth`);
                     t && t.setAttribute("target", "_blank")
                 }
@@ -2512,9 +2470,9 @@ function(t) {
             }
             this.setUpRules();
             const t = this.questionform.$form[0].querySelectorAll("input[type=checkbox][required]");
-            t.length > 0 && Array.prototype.forEach.call(t, (function(t) {
+            t.length > 0 && Array.prototype.forEach.call(t, function(t) {
                 t.addEventListener("change", this.handleRequiredCheckBoxes.bind(this))
-            }), this), this.captcha_enabled && this.loadCaptcha(), this.autoreply_enabled && this.confirmEmailDiv && (this.confirmEmailDiv.querySelector('input[type="checkbox"]').disabled = !0, this.confirmEmailDiv.classList.add("hidden"))
+            }, this), this.captcha_enabled && this.loadCaptcha(), this.autoreply_enabled && this.confirmEmailDiv && (this.confirmEmailDiv.querySelector('input[type="checkbox"]').disabled = !0, this.confirmEmailDiv.classList.add("hidden"))
         }, this.setUp()
     }
 }(window);
@@ -2540,9 +2498,9 @@ class QueryLog {
                 query: t
             },
             dataType: "json"
-        }).done((t => {
+        }).done(t => {
             t.qlog_id && (this.qlog_id = t.qlog_id)
-        })))
+        }))
     }
     gotoFAQ({
         faqid: t = 0
@@ -2568,9 +2526,9 @@ class QueryLog {
             autocomplete: null,
             autcompleteDataFormatCb: function(t) {
                 var e = [];
-                return t.results.forEach((function(t) {
+                return t.results.forEach(function(t) {
                     t.label = t.question, e.push(t)
-                })), e
+                }), e
             },
             autocompleteSelectCb: function(t) {
                 let e = this.form.querySelector("input[name=originalq]");
@@ -2614,10 +2572,10 @@ class QueryLog {
         }
 
         function quote(t) {
-            return escapable.lastIndex = 0, escapable.test(t) ? '"' + t.replace(escapable, (function(t) {
+            return escapable.lastIndex = 0, escapable.test(t) ? '"' + t.replace(escapable, function(t) {
                 var e = meta[t];
                 return "string" == typeof e ? e : "\\u" + ("0000" + t.charCodeAt(0).toString(16)).slice(-4)
-            })) + '"' : '"' + t + '"'
+            }) + '"' : '"' + t + '"'
         }
 
         function str(t, e) {
@@ -2678,9 +2636,9 @@ class QueryLog {
                 return reviver.call(t, e, s)
             }
             var j;
-            if (text = String(text), cx.lastIndex = 0, cx.test(text) && (text = text.replace(cx, (function(t) {
+            if (text = String(text), cx.lastIndex = 0, cx.test(text) && (text = text.replace(cx, function(t) {
                     return "\\u" + ("0000" + t.charCodeAt(0).toString(16)).slice(-4)
-                }))), /^[\],:{}\s]*$/.test(text.replace(/\\(?:["\\\/bfnrt]|u[0-9a-fA-F]{4})/g, "@").replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, "]").replace(/(?:^|:|,)(?:\s*\[)+/g, ""))) return j = eval("(" + text + ")"), "function" == typeof reviver ? walk({
+                })), /^[\],:{}\s]*$/.test(text.replace(/\\(?:["\\\/bfnrt]|u[0-9a-fA-F]{4})/g, "@").replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, "]").replace(/(?:^|:|,)(?:\s*\[)+/g, ""))) return j = eval("(" + text + ")"), "function" == typeof reviver ? walk({
                 "": j
             }, "") : j;
             throw new SyntaxError("JSON.parse")
@@ -2796,9 +2754,9 @@ class QueryLog {
                     c = r.getHashByState(l),
                     d = r.getStateByIndex(-2);
                 return r.discardState(l, a, d), o === c ? (r.storeState(a), r.expectedStateId = a.id, r.recycleState(a), r.setTitle(a), r.saveState(a), r.Adapter.trigger(t, "statechange"), r.busy(!1)) : r.pushState(a.data, a.title, a.url, !1), !0
-            }), r.emulated.pushState && r.getHash() && !r.emulated.hashChange && r.Adapter.onDomLoad((function() {
+            }), r.emulated.pushState && r.getHash() && !r.emulated.hashChange && r.Adapter.onDomLoad(function() {
                 r.Adapter.trigger(t, "hashchange")
-            }))
+            })
         }, void 0 !== r.init && r.init()
     }(window),
     function(t, e) {
@@ -2881,13 +2839,13 @@ class QueryLog {
                     return u.getBaseHref() || u.getBasePageUrl() || u.getRootUrl()
                 }, u.getPageUrl = function() {
                     var t;
-                    return t = ((u.getState(!1, !1) || {}).url || u.getLocationHref()).replace(/\/+$/, "").replace(/[^\/]+$/, (function(t, e, i) {
+                    return t = ((u.getState(!1, !1) || {}).url || u.getLocationHref()).replace(/\/+$/, "").replace(/[^\/]+$/, function(t, e, i) {
                         return /\./.test(t) ? t : t + "/"
-                    })), t
+                    }), t
                 }, u.getBasePageUrl = function() {
-                    return u.getLocationHref().replace(/[#\?].*/, "").replace(/[^\/]+$/, (function(t, e, i) {
+                    return u.getLocationHref().replace(/[#\?].*/, "").replace(/[^\/]+$/, function(t, e, i) {
                         return /[^\/]$/.test(t) ? "" : t
-                    })).replace(/\/+$/, "") + "/"
+                    }).replace(/\/+$/, "") + "/"
                 }, u.getFullUrl = function(t, e) {
                     var i = t,
                         n = t.substring(0, 1);
@@ -3021,9 +2979,9 @@ class QueryLog {
                 }, u.doubleCheckClear = function() {
                     return u.doubleChecker && (o(u.doubleChecker), u.doubleChecker = !1), u
                 }, u.doubleCheck = function(t) {
-                    return u.stateChanged = !1, u.doubleCheckClear(), u.bugs.ieDoubleCheck && (u.doubleChecker = r((function() {
+                    return u.stateChanged = !1, u.doubleCheckClear(), u.bugs.ieDoubleCheck && (u.doubleChecker = r(function() {
                         return u.doubleCheckClear(), u.stateChanged || t(), !0
-                    }), u.options.doubleCheckInterval)), u
+                    }, u.options.doubleCheckInterval)), u
                 }, u.safariStatePoll = function() {
                     var e = u.extractState(u.getLocationHref());
                     if (!u.isLastSavedState(e)) return e || u.createStateObject(), u.Adapter.trigger(t, "popstate"), u
@@ -3033,18 +2991,18 @@ class QueryLog {
                         callback: u.back,
                         args: arguments,
                         queue: t
-                    }), !1) : (u.busy(!0), u.doubleCheck((function() {
+                    }), !1) : (u.busy(!0), u.doubleCheck(function() {
                         u.back(!1)
-                    })), p.go(-1), !0)
+                    }), p.go(-1), !0)
                 }, u.forward = function(t) {
                     return !1 !== t && u.busy() ? (u.pushQueue({
                         scope: u,
                         callback: u.forward,
                         args: arguments,
                         queue: t
-                    }), !1) : (u.busy(!0), u.doubleCheck((function() {
+                    }), !1) : (u.busy(!0), u.doubleCheck(function() {
                         u.forward(!1)
-                    })), p.go(1), !0)
+                    }), p.go(1), !0)
                 }, u.go = function(t, e) {
                     var i;
                     if (t > 0)
@@ -3109,11 +3067,11 @@ class QueryLog {
                     if (t.code !== DOMException.QUOTA_EXCEEDED_ERR) throw t;
                     a.length && (a.removeItem("History.store"), a.setItem("History.store", i))
                 }
-            }, u.intervalList.push(l(u.onUnload, u.options.storeInterval)), u.Adapter.bind(t, "beforeunload", u.onUnload), u.Adapter.bind(t, "unload", u.onUnload)), u.emulated.pushState || (u.bugs.safariPoll && u.intervalList.push(l(u.safariStatePoll, u.options.safariPollInterval)), "Apple Computer, Inc." !== s.vendor && "Mozilla" !== (s.appCodeName || "") || (u.Adapter.bind(t, "hashchange", (function() {
+            }, u.intervalList.push(l(u.onUnload, u.options.storeInterval)), u.Adapter.bind(t, "beforeunload", u.onUnload), u.Adapter.bind(t, "unload", u.onUnload)), u.emulated.pushState || (u.bugs.safariPoll && u.intervalList.push(l(u.safariStatePoll, u.options.safariPollInterval)), "Apple Computer, Inc." !== s.vendor && "Mozilla" !== (s.appCodeName || "") || (u.Adapter.bind(t, "hashchange", function() {
                 u.Adapter.trigger(t, "popstate")
-            })), u.getHash() && u.Adapter.onDomLoad((function() {
+            }), u.getHash() && u.Adapter.onDomLoad(function() {
                 u.Adapter.trigger(t, "hashchange")
-            }))))
+            })))
         }, (!u.options || !u.options.delayInit) && u.init()
     }(window);
 var springSpace = springSpace || {};
@@ -3124,7 +3082,7 @@ function accessibleIcons(t, e) {
 springSpace.sui = springSpace.sui || {}, springSpace.sui.icontip = function(t) {
     if (void 0 === t && (t = {}), t.parent) e = $(t.parent);
     else var e = $("body");
-    t.placement = t.placement ? t.placement : "top", e.find(".fa + .icon-label").each((function(e, i) {
+    t.placement = t.placement ? t.placement : "top", e.find(".fa + .icon-label").each(function(e, i) {
         var n = $(i),
             s = n.html();
         if ("" !== s) {
@@ -3138,8 +3096,8 @@ springSpace.sui = springSpace.sui || {}, springSpace.sui.icontip = function(t) {
                 })
             }
         }
-    }))
-}, jQuery(document).ready((function() {
+    })
+}, jQuery(document).ready(function() {
     var t, e = "[data-toggle=dropdown]";
     $(e).parent().find("ul").attr("role", "menu").find("li").attr("role", "presentation").find("a").attr({
         role: "menuitem",
@@ -3147,23 +3105,23 @@ springSpace.sui = springSpace.sui || {}, springSpace.sui.icontip = function(t) {
     }), $(e).attr({
         "aria-haspopup": "true",
         "aria-expanded": "false"
-    }), $(e).parent().on("shown.bs.dropdown", (function(i) {
+    }), $(e).parent().on("shown.bs.dropdown", function(i) {
         (t = $(this)).find(e).attr("aria-expanded", "true"), t.children("ul").attr("aria-hidden", !1)
-    })), $(e).parent().on("hidden.bs.dropdown", (function(i) {
+    }), $(e).parent().on("hidden.bs.dropdown", function(i) {
         (t = $(this)).find(e).attr("aria-expanded", "false"), t.children("ul").attr("aria-hidden", !0)
-    })), $.fn.dropdown.Constructor.prototype.keydown = function(t) {
+    }), $.fn.dropdown.Constructor.prototype.keydown = function(t) {
         /(32)/.test(t.keyCode) && ($(this).parent(), $(this).trigger("click"), t.preventDefault() && t.stopPropagation())
-    }, $(document).on("focusout.dropdown.data-api", ".dropdown-menu", (function(t) {
+    }, $(document).on("focusout.dropdown.data-api", ".dropdown-menu", function(t) {
         var e = $(this),
             i = this;
-        e.hasClass("multiselect-container") || setTimeout((function() {
+        e.hasClass("multiselect-container") || setTimeout(function() {
             $.contains(i, document.activeElement) || (e.parent().removeClass("open"), e.parent().find("[data-toggle=dropdown]").attr("aria-expanded", "false"))
-        }), 150)
-    })).on("keydown.bs.dropdown.data-api", e + ", [role=menu]", $.fn.dropdown.Constructor.prototype.keydown);
+        }, 150)
+    }).on("keydown.bs.dropdown.data-api", e + ", [role=menu]", $.fn.dropdown.Constructor.prototype.keydown);
     var i = $(".nav-tabs"),
         n = i.children("li"),
         s = i.find('[data-toggle="tab"], [data-toggle="pill"]');
-    s.length > 0 && (i.attr("role", "tablist"), n.attr("role", "presentation"), s.attr("role", "tab")), s.each((function(t) {
+    s.length > 0 && (i.attr("role", "tablist"), n.attr("role", "presentation"), s.attr("role", "tab")), s.each(function(t) {
         var e = $(this).attr("href"),
             i = "#" === e ? null : $(e),
             n = $(this),
@@ -3187,7 +3145,7 @@ springSpace.sui = springSpace.sui || {}, springSpace.sui.icontip = function(t) {
             "aria-hidden": "true",
             "aria-labelledby": s
         }))
-    })), $.fn.tab.Constructor.prototype.keydown = function(t) {
+    }), $.fn.tab.Constructor.prototype.keydown = function(t) {
         var e, i, n = $(this),
             s = n.closest("ul[role=tablist] "),
             a = t.which || t.keyCode;
@@ -3216,22 +3174,22 @@ springSpace.sui = springSpace.sui || {}, springSpace.sui.icontip = function(t) {
         }, springSpace.sui.icontip(), document.location.hash) {
         var r = document.location.hash;
         try {
-            $(r).attr("tabindex", -1).on("blur focusout", (function() {
+            $(r).attr("tabindex", -1).on("blur focusout", function() {
                 $(this).removeAttr("tabindex")
-            })).focus()
+            }).focus()
         } catch (t) {}
     }
-    $(window).bind("hashchange", (function() {
+    $(window).bind("hashchange", function() {
         var t = "#" + window.location.hash.replace(/^#/, "");
-        "#" != t ? $(t).attr("tabindex", -1).on("blur focusout", (function() {
+        "#" != t ? $(t).attr("tabindex", -1).on("blur focusout", function() {
             $(this).removeAttr("tabindex")
-        })).focus() : $("body").attr("tabindex", -1).on("blur focusout", (function() {
+        }).focus() : $("body").attr("tabindex", -1).on("blur focusout", function() {
             $(this).removeAttr("tabindex")
-        })).focus()
-    })), $.fn.modal.Constructor.prototype.enforceFocus = function() {
-        modal_this = this, $(document).off("focusin.bs.modal").on("focusin.bs.modal", (function(t) {
+        }).focus()
+    }), $.fn.modal.Constructor.prototype.enforceFocus = function() {
+        modal_this = this, $(document).off("focusin.bs.modal").on("focusin.bs.modal", function(t) {
             modal_this.$element[0] === t.target || modal_this.$element.has(t.target).length || $(t.target).closest(".cke_dialog, .cke").length || modal_this.$element.focus()
-        }))
+        })
     }
-}));
+});
 //# sourceMappingURL=maps/LibAnswers_public.min.js.map
