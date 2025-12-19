@@ -1959,11 +1959,11 @@ legend .s-lib-help-icon {
     position: absolute;
     top: calc(-100%);
     left: 0;
-    border-right: 1px solid #fff;
-    border-bottom: 1px solid #fff;
-    border-bottom-right-radius: 8px;
+    border: 2px solid #000;
+    border-radius: 4px;
     transition: top 1s ease-out, background 1s linear;
-    z-index: 100
+    z-index: 100;
+    background-color: #fff
 }
 
 #s-lg-public-skiplink:focus {
