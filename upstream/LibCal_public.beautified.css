@@ -3208,12 +3208,6 @@ a.s-lc-color-links:hover {
     margin-right: .75em
 }
 
-.s-lc-cancel-registration-message {
-    margin: 10px auto;
-    text-align: center;
-    font-size: 18px
-}
-
 .s-lc-eq-registration-result,
 .s-lc-event-registration-result {
     font-size: 14px
@@ -3547,11 +3541,39 @@ h6 small {
     margin-bottom: 3px
 }
 
+.s-lc-patron-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px
+}
+
+@media (max-width:1024px) {
+    .s-lc-patron-cards {
+        grid-template-columns: 1fr
+    }
+}
+
+.s-lc-patron-booking-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between
+}
+
+.s-lc-patron-booking-content {
+    margin-bottom: 8px
+}
+
 .s-lc-patron-booking-list {
     box-shadow: 0 4px 6px rgba(0, 0, 0, .1);
     border: 1px solid #ddd;
     border-radius: 4px;
     padding: 10px
+}
+
+.s-lc-patron-single-booking {
+    display: grid;
+    grid-template-columns: 74px 1fr;
+    margin-top: 10px
 }
 
 .s-lc-patron-booking-list h2 {
@@ -3560,12 +3582,12 @@ h6 small {
     border-bottom: 1px solid #efefef
 }
 
-.s-lc-patron-booking-list .media-object {
+.s-lc-patron-booking-image img {
     width: 64px;
     height: 64px
 }
 
-.s-lc-patron-booking-list .media-heading {
+.s-lc-patron-booking-details h3 {
     margin-top: 0;
     margin-bottom: 4px;
     font-size: 16px;
@@ -5288,11 +5310,8 @@ textarea {
 }
 
 .alert-danger {
-    color: #d2322d
-}
-
-.alert-danger:hover {
-    color: #a82824
+    color: #a94442;
+    background-color: #f2dede
 }
 
 .s-lc-footer {
@@ -5525,7 +5544,8 @@ textarea {
     border-left: 0
 }
 
-h1.modal-title {
+h1.modal-title,
+h2.modal-title {
     font-size: 19px
 }
 
