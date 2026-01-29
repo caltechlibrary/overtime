@@ -5555,6 +5555,14 @@ h2.modal-title {
     margin-top: 8px
 }
 
+.modal.fade.in {
+    opacity: 1
+}
+
+.modal-backdrop.fade.in {
+    opacity: .5
+}
+
 .helptt,
 .poptt {
     color: #757575;
