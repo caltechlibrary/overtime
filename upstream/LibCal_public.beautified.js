@@ -2828,7 +2828,7 @@ var springyCommon = {
     showModal: function(e) {
         springyCommon.setLastFocusElement();
         let t = jQuery("div, button").addClass("s-lc-do-not-print");
-        e.removeClass("s-lc-do-not-print"), e.find("div").removeClass("s-lc-do-not-print"), e.modal({
+        e.removeClass("s-lc-do-not-print"), e.find("div").removeClass("s-lc-do-not-print"), e.springshareModal({
             backdrop: "static"
         }), e.on("shown.bs.modal", springyCommon.onModalLoadedEarly), e.on("hidden.bs.modal", function() {
             closeDialog(), t.removeClass("s-lc-do-not-print"), springyCommon.restoreLastFocusElement()
